@@ -107,7 +107,7 @@ ProcessSourceDamageRate RVA0x22FE150：
 BattleRoleEvent.HPDiff getter，RVA0x2239144：return Convert.ToInt32(HitInfo.HPDiffValue)。
 System.Convert.ToInt32(float) RVA0x3B11968：转double，再调用ToInt32(double)0x3B10058。
 0x3B10058的原生分支明确是最近整数、.5到偶数（银行家舍入），正负数都如此。例如2.5=>2、3.5=>4、-2.5=>-2、-3.5=>-4。
-因此JS Math.round不等价。原生一路为float32运算，精确复刻应各算术步骤Math.fround，最后bankersRound。
+因此JS Math.round不等价。上述技能伤害标量链为float32运算，精确复刻应各算术步骤Math.fround，最后bankersRound。属性生成另有double容器与float32系数/读取交替，不可一概按float32或提前取整；2026-10-17[原生战斗样本](native_client_comparison.md)已据此修正。
 
 BattleStatusContainer.ProcessBattleRoleEvent RVA0x2382478：
 - 若DamageHit且角色Invincible(59)，标记event.NoDamage=true，返回0，先于护盾。

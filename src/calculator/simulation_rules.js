@@ -26,6 +26,7 @@ function install(S){const P=S.prototype,select0=P.select;
   }};
   ctx.resolveConditionRoles=c=>this.select(owner,c.TargetInfo,action,target);
   ctx.resolveProperty=(prop,r,id)=>{if(!r)return 0;switch(prop){
+   case'Attack':case'Defence':case'Speed':return r.runtimeStats?.[prop]??r.stats[prop];
    case'Round':return r.nowRound;case'NowTime':return r.progress;
    case'EventHPDiff':return event?.hpDiff||0;
    case'BuffValue':return id?(r.statuses.find(s=>s.id===id)?.value||0):(inst?.value||0);
@@ -41,13 +42,13 @@ function install(S){const P=S.prototype,select0=P.select;
   return ctx;
  };
  P.refresh=function(u,action=this.action){
-  const p={},lists=[];const add=(k,v)=>{if(Number.isFinite(Number(v)))p[k]=F((p[k]||0)+Number(v));else if(k==='AntiList')lists.push(...String(v).split('~'));};
+  const p={...(u.nativeImprintRates||{})},lists=[];const add=(k,v)=>{if(Number.isFinite(Number(v)))p[k]=(p[k]||0)+Number(v);else if(k==='AntiList')lists.push(...String(v).split('~'));};
   for(const f of u.global)if(f._property)add(f._property,f._value);
   for(const s of u.statuses){const r=C.nativeStatusProperties({...s,def:this.data.statuses[s.id]});for(const [k,v]of Object.entries(r.properties))add(k,v);lists.push(...r.immuneList);}
   u.props=p;u.stats={...u.base,...p};u.buffCount=u.statuses.filter(s=>this.statusType(s)==='Buff').length;u.debuffCount=u.statuses.filter(s=>this.statusType(s)==='DeBuff').length;u.hpRate=u.stats.MaxHP>0?u.hp/u.stats.MaxHP:0;
   const fs=this.functions(u).filter(f=>f.Trigger==='Property'&&f.Property);
   for(const f of fs){const ctx=this.context(u,u,action,'Property',f._status);if(f._auraSource)ctx.auraSource=this.locate(f._auraSource);if(this.condition(f,ctx)){const v=f.ValueConvert?this.value(f.ValueConvert,ctx):N(f.Value);add(f.Property,v);}}
-  for(const k of ['Attack','Defence','MaxHP','Speed']){const prefix=k==='MaxHP'?'HP':k;u.stats[k]=B.finalStat(u.base[k],p[prefix+'Rate']||0,p[prefix+'Value']||0,p[prefix+'FinalRate']||0,k);}
+  u.runtimeStats={};for(const k of ['Attack','Defence','MaxHP','Speed']){const prefix=k==='MaxHP'?'HP':k,base=u.nativeBase?.[k]??u.base[k],rate=p[prefix+'Rate']||0,value=p[prefix+'Value']||0,finalRate=p[prefix+'FinalRate']||0;u.runtimeStats[k]=B.statFloat(base,rate,value,finalRate);u.stats[k]=B.finalStat(base,rate,value,finalRate,k);}
   for(const k of ['CriticalRate','CriticalDamageRate','EffectHitRate','ResistanceRate','PinchRate','DodgeRate','HitRate'])u.stats[k]=F((u.base[k]||0)+(p[k]||0));
   u.stats.HP=u.stats.MaxHP;u.hpRate=u.stats.MaxHP>0?u.hp/u.stats.MaxHP:0;u.immuneList=[...new Set(lists)];u.noPinch=!!p.RoleNoPinch;u.NowTime=u.progress;return u;
  };

@@ -1,0 +1,348 @@
+{
+  "client": "1.0.1.014517",
+  "recorded": "2026-10-17",
+  "environment": "Original native battle calculations in MuMu; local account/data service, not an official-server account.",
+  "scene": "Trial_50",
+  "party": [
+    {
+      "cardId": "C02_SR_003",
+      "level": 80,
+      "imprint": 5,
+      "star": 8
+    }
+  ],
+  "loggedPrecisionTolerance": 0.005,
+  "samples": [
+    {
+      "time": "00:29:27.690",
+      "kind": "skill",
+      "loggedRaw": 4884.938,
+      "hitMultiplier": 1.0,
+      "params": {
+        "attack": 3376.0,
+        "attRate": 1.8,
+        "constAttack": 0.0,
+        "attackPowerRate": 1.871,
+        "pow": 1.0,
+        "conditionMultiplier": 1.0,
+        "conquerMultiplier": 1.0,
+        "defence": 2655.0,
+        "defenceRate": 1.0,
+        "penetrations": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "defenceConstant": 2000.0
+      }
+    },
+    {
+      "time": "00:29:39.218",
+      "kind": "skill",
+      "loggedRaw": 1381.358,
+      "hitMultiplier": 1.3,
+      "params": {
+        "attack": 1066.0,
+        "attRate": 1.24,
+        "constAttack": 0.0,
+        "attackPowerRate": 1.871,
+        "pow": 1.0,
+        "conditionMultiplier": 1.0,
+        "conquerMultiplier": 1.0,
+        "defence": 2655.0,
+        "defenceRate": 1.0,
+        "penetrations": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "defenceConstant": 2000.0
+      }
+    },
+    {
+      "time": "00:30:10.099",
+      "kind": "skill",
+      "loggedRaw": 1065.822,
+      "hitMultiplier": 1.0,
+      "params": {
+        "attack": 3509.0,
+        "attRate": 0.86,
+        "constAttack": 0.0,
+        "attackPowerRate": 1.871,
+        "pow": 1.0,
+        "conditionMultiplier": 1.0,
+        "conquerMultiplier": 1.0,
+        "defence": 8595.0,
+        "defenceRate": 1.0,
+        "penetrations": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "defenceConstant": 2000.0
+      }
+    },
+    {
+      "time": "00:30:10.128",
+      "kind": "skill",
+      "loggedRaw": 1604.446,
+      "hitMultiplier": 1.0,
+      "params": {
+        "attack": 3509.0,
+        "attRate": 0.86,
+        "constAttack": 0.0,
+        "attackPowerRate": 1.871,
+        "pow": 1.0,
+        "conditionMultiplier": 1.0,
+        "conquerMultiplier": 1.1,
+        "defence": 5742.0,
+        "defenceRate": 1.0,
+        "penetrations": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "defenceConstant": 2000.0
+      }
+    },
+    {
+      "time": "00:30:19.480",
+      "kind": "skill",
+      "loggedRaw": 2454.688,
+      "hitMultiplier": 1.0,
+      "params": {
+        "attack": 3817.0,
+        "attRate": 0.8,
+        "constAttack": 0.0,
+        "attackPowerRate": 1.871,
+        "pow": 1.0,
+        "conditionMultiplier": 1.0,
+        "conquerMultiplier": 1.0,
+        "defence": 2655.0,
+        "defenceRate": 1.0,
+        "penetrations": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "defenceConstant": 2000.0
+      }
+    },
+    {
+      "time": "00:30:26.064",
+      "kind": "skill",
+      "loggedRaw": 985.4604,
+      "hitMultiplier": 1.15,
+      "params": {
+        "attack": 1066.0,
+        "attRate": 1.0,
+        "constAttack": 0.0,
+        "attackPowerRate": 1.871,
+        "pow": 1.0,
+        "conditionMultiplier": 1.0,
+        "conquerMultiplier": 1.0,
+        "defence": 2655.0,
+        "defenceRate": 1.0,
+        "penetrations": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "defenceConstant": 2000.0
+      }
+    },
+    {
+      "time": "00:30:31.668",
+      "kind": "status",
+      "loggedRaw": 214.0146,
+      "hitMultiplier": 1,
+      "params": {
+        "attack": 0,
+        "attRate": 0,
+        "constAttack": 159.939,
+        "attackPowerRate": 1.871,
+        "pow": 1,
+        "defence": 2655.0,
+        "defenceRate": 0.3,
+        "defenceConstant": 2000.0
+      }
+    },
+    {
+      "time": "00:30:34.161",
+      "kind": "skill",
+      "loggedRaw": 1239.328,
+      "hitMultiplier": 1.0,
+      "params": {
+        "attack": 3509.0,
+        "attRate": 1.0,
+        "constAttack": 0.0,
+        "attackPowerRate": 1.871,
+        "pow": 1.0,
+        "conditionMultiplier": 1.0,
+        "conquerMultiplier": 1.0,
+        "defence": 8595.0,
+        "defenceRate": 1.0,
+        "penetrations": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "defenceConstant": 2000.0
+      }
+    },
+    {
+      "time": "00:30:41.136",
+      "kind": "skill",
+      "loggedRaw": 2737.649,
+      "hitMultiplier": 1.0,
+      "params": {
+        "attack": 4257.0,
+        "attRate": 0.8,
+        "constAttack": 0.0,
+        "attackPowerRate": 1.871,
+        "pow": 1.0,
+        "conditionMultiplier": 1.0,
+        "conquerMultiplier": 1.0,
+        "defence": 2655.0,
+        "defenceRate": 1.0,
+        "penetrations": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "defenceConstant": 2000.0
+      }
+    },
+    {
+      "time": "00:30:47.698",
+      "kind": "skill",
+      "loggedRaw": 642.6915,
+      "hitMultiplier": 0.75,
+      "params": {
+        "attack": 1066.0,
+        "attRate": 1.0,
+        "constAttack": 0.0,
+        "attackPowerRate": 1.871,
+        "pow": 1.0,
+        "conditionMultiplier": 1.0,
+        "conquerMultiplier": 1.0,
+        "defence": 2655.0,
+        "defenceRate": 1.0,
+        "penetrations": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "defenceConstant": 2000.0
+      }
+    },
+    {
+      "time": "00:30:51.967",
+      "kind": "status",
+      "loggedRaw": 214.0146,
+      "hitMultiplier": 1,
+      "params": {
+        "attack": 0,
+        "attRate": 0,
+        "constAttack": 159.939,
+        "attackPowerRate": 1.871,
+        "pow": 1,
+        "defence": 2655.0,
+        "defenceRate": 0.3,
+        "defenceConstant": 2000.0
+      }
+    },
+    {
+      "time": "00:30:54.454",
+      "kind": "skill",
+      "loggedRaw": 1611.126,
+      "hitMultiplier": 1.3,
+      "params": {
+        "attack": 3509.0,
+        "attRate": 1.0,
+        "constAttack": 0.0,
+        "attackPowerRate": 1.871,
+        "pow": 1.0,
+        "conditionMultiplier": 1.0,
+        "conquerMultiplier": 1.0,
+        "defence": 8595.0,
+        "defenceRate": 1.0,
+        "penetrations": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "defenceConstant": 2000.0
+      }
+    },
+    {
+      "time": "00:31:01.467",
+      "kind": "skill",
+      "loggedRaw": 3021.253,
+      "hitMultiplier": 1.0,
+      "params": {
+        "attack": 4698.0,
+        "attRate": 0.8,
+        "constAttack": 0.0,
+        "attackPowerRate": 1.871,
+        "pow": 1.0,
+        "conditionMultiplier": 1.0,
+        "conquerMultiplier": 1.0,
+        "defence": 2655.0,
+        "defenceRate": 1.0,
+        "penetrations": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "defenceConstant": 2000.0
+      }
+    },
+    {
+      "time": "00:31:01.537",
+      "kind": "skill",
+      "loggedRaw": 1132.97,
+      "hitMultiplier": 1.0,
+      "params": {
+        "attack": 4698.0,
+        "attRate": 0.3,
+        "constAttack": 0.0,
+        "attackPowerRate": 1.871,
+        "pow": 1.0,
+        "conditionMultiplier": 1.0,
+        "conquerMultiplier": 1.0,
+        "defence": 2655.0,
+        "defenceRate": 1.0,
+        "penetrations": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "defenceConstant": 2000.0
+      }
+    },
+    {
+      "time": "00:31:11.757",
+      "kind": "skill",
+      "loggedRaw": 8771.852,
+      "hitMultiplier": 1.0,
+      "params": {
+        "attack": 5138.0,
+        "attRate": 1.8,
+        "constAttack": 0.0,
+        "attackPowerRate": 1.871,
+        "pow": 1.0,
+        "conditionMultiplier": 1.179887,
+        "conquerMultiplier": 1.0,
+        "defence": 2655.0,
+        "defenceRate": 1.0,
+        "penetrations": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "defenceConstant": 2000.0
+      }
+    }
+  ]
+}

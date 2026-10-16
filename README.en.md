@@ -33,6 +33,8 @@ The two pages link to each other through their top navigation. Calculations run 
 | 🎲 Random simulations | Reproducible single battles or means over 32/128/256 independent battles |
 | 💾 Team management | Local browser saves, JSON import/export, and CSV damage-table export |
 | 💡 Help tooltips | Hover or focus the circled question marks beside calculation mode and seed |
+| 🧑‍🎨 Custom characters | Build independent stats, growth, active skills and conditional passives; save, edit, duplicate, and add them to a team |
+| 🎨 Five themes | Jade, mist blue, plum, warm sand, and midnight; consistent controls and dialogs with a remembered preference |
 
 ![Calculator](docs/assets/calculator-preview.jpg)
 
@@ -46,6 +48,12 @@ Damage totals use post-shield calculated damage and retain overkill. Actual HP l
 
 - **Trial Floor 50:** the level-80 boss 《烟光迷离》 and companion 《最佳调味》 are retained by default. The companion changes stealth targetability. It can be disabled for a boss-only comparison.
 - **Training dummy:** unlimited HP, no active attacks or newly applied effects, but it can receive statuses. Its reference maximum HP supports percentage-based skills while its HP ratio remains 100%. Speed controls its status-tick timing.
+
+### 🧑‍🎨 Custom characters
+
+Open **Custom characters** or create a character from the card picker. Base stats refer to a chosen reference level at zero stars, with optional per-level and per-star growth. Configure two active skills, attack/defence/HP scaling, targets, cooldowns, critical bonuses, penetration, and status/heal/shield/gauge/cleanse/dispel effects. Conditional passives can trigger at battle start, before/after a turn, after a skill, or after receiving one.
+
+Definitions stay in the current browser. Exported team plans include the custom characters they use, so they can be imported on another device. Conflicting definitions receive a new ID rather than replacing local characters. Custom characters use the existing combat resolver; unsupported configurations still stop with an explicit error.
 
 ### 🎲 Single battles, averages, and seeds
 

@@ -103,7 +103,7 @@ function install(S){const P=S.prototype,select0=P.select;
     if(ordinary&&damage>0)target.statuses=target.statuses.filter(s=>!flag(this.data.statuses[s.id]?.raw.HurtRemove));
    }
   }else if(shield){shield.value=settled.remainingShield;if(shield.value<=0)target.statuses=target.statuses.filter(s=>s!==shield);}
-  if(signed>0){const actual=target.unlimited?0:Math.max(0,Math.min(signed,target.stats.MaxHP-before));target.hp+=actual;this.refresh(target);this.log('heal',source,target,'伤害减免转为生命恢复',{heal:actual});this.trigger(target,'AfterEvent',action,{damage:ne.damageHit!==false,source:eventSource,target,hpDiff:actual});return {damage:false,target,source:eventSource,hpDiff:actual};}
+  if(signed>0){const actual=target.unlimited?0:Math.max(0,Math.min(signed,target.stats.MaxHP-before));target.hp+=actual;this.refresh(target);this.log('heal',source,target,'伤害减免转为生命恢复',{heal:actual,healAttempted:signed,overheal:Math.max(0,signed-actual),healingSource:source.uid});this.trigger(target,'AfterEvent',action,{damage:ne.damageHit!==false,source:eventSource,target,hpDiff:actual});return {damage:false,target,source:eventSource,hpDiff:actual};}
   if(!target.unlimited)target.hp=Math.max(0,target.hp-damage);
   if(target.hp<1&&(target.props.Immortal||action?.immortalRoles?.has(target.uid)))target.hp=1;
   const actual=target.unlimited?damage:Math.max(0,before-target.hp);this.refresh(target);

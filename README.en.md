@@ -3,15 +3,15 @@
 <img src="docs/assets/game-icon.png" width="88" alt="Godly Love">
 
 # 💚 Godly Love
-### Character & Event Catalog · Four-Member Team Damage Calculator
+### Character & Event Catalog Four-Member Team Damage Calculator
 
 [![GitHub Pages](https://img.shields.io/badge/GitHub_Pages-Open_website-193b34?logo=github)](https://milkcowmeow.github.io/godly-love-calculator/)
 ![Browser based](https://img.shields.io/badge/Runtime-Client_side-a1814a)
 ![Offline ready](https://img.shields.io/badge/Offline-Supported-678969)
 
-[简体中文](README.md) · **English**
+[简体中文](README.md) **English**
 
-[🧮 Damage Calculator](https://milkcowmeow.github.io/godly-love-calculator/) · [📖 Character Catalog](https://milkcowmeow.github.io/godly-love-calculator/catalog.html)
+[🧮 Damage Calculator](https://milkcowmeow.github.io/godly-love-calculator/) [📖 Character Catalog](https://milkcowmeow.github.io/godly-love-calculator/catalog.html)
 
 </div>
 
@@ -125,3 +125,11 @@ Please report issues through [GitHub Issues](https://github.com/MilkCowMeow/godl
 The team-selection/round-table layout was inspired by the [NU: Carnival damage calculator](https://linecross.github.io/nuCarnivalAttackCalculator/Main.html). Battle rules are implemented from Godly Love's own data and native methods.
 
 Game names, characters, artwork, and trademarks belong to their respective rights holders. This is an unofficial fan reference tool and is not affiliated with or endorsed by the game developers, publisher, or EROLABS.
+
+## Healing and combat reports
+
+The round table now switches between damage, skill/follow-up damage, status damage, effective healing, applied shields and actual HP damage taken. Click healing or shield values for recipient breakdowns. A source-to-recipient matrix separates effective recovery, overhealing and healing blocked by prevention effects. Periodic healing is attributed to its original status caster.
+
+Round snapshots show HP, healing received, HP damage taken, shield absorption and survival rates. Starting HP is configurable in member details. Eight independent charts are automatically generated for damage, HP damage taken, effective healing, healing received, shields applied, shields received, shield absorption and remaining HP. Filter metric groups, toggle individual characters, switch per-round/cumulative values, inspect points and expand numerical tables. HP remains an end-of-round snapshot. All chart data can be exported as CSV. Team-wide level, star and strategy settings, role filters, named saved teams and result snapshots are included.
+
+The accounting hooks do not draw random numbers or change combat state. Averages combine every independent sample, and completed battles retain their final HP state without generating later output. See the [feature comparison](evidence/calculator_feature_comparison.md).

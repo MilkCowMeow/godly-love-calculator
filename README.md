@@ -3,15 +3,15 @@
 <img src="docs/assets/game-icon.png" width="88" alt="神明恋爱放送中">
 
 # 💚 神明恋爱放送中
-### 角色与活动图鉴 · 四人配队伤害计算器
+### 角色与活动图鉴 四人配队伤害计算器
 
 [![GitHub Pages](https://img.shields.io/badge/GitHub_Pages-在线使用-193b34?logo=github)](https://milkcowmeow.github.io/godly-love-calculator/)
 ![浏览器运行](https://img.shields.io/badge/运行方式-纯前端-a1814a)
 ![离线使用](https://img.shields.io/badge/离线使用-支持-678969)
 
-**简体中文** · [English](README.en.md)
+**简体中文** [English](README.en.md)
 
-[🧮 打开伤害计算器](https://milkcowmeow.github.io/godly-love-calculator/) · [📖 打开角色图鉴](https://milkcowmeow.github.io/godly-love-calculator/catalog.html)
+[🧮 打开伤害计算器](https://milkcowmeow.github.io/godly-love-calculator/) [📖 打开角色图鉴](https://milkcowmeow.github.io/godly-love-calculator/catalog.html)
 
 </div>
 
@@ -37,6 +37,14 @@
 | 🎨 五套主题 | 松石、雾蓝、绛紫、暖砂、午夜；统一调整表格、控件与弹窗，记住个人选择 |
 
 ![计算器界面](docs/assets/calculator-preview.jpg)
+
+### 治疗、护盾与承伤
+
+“表格显示”可切换伤害、技能与追加伤害、状态伤害、有效治疗、施加护盾或实际受伤。治疗/护盾数字可点击查看逐目标去向；下方矩阵按来源和接受者展示全部轮次或指定轮次的结果。有效恢复、满血溢出、封愈阻止分别记录，持续恢复归属原始状态施加者。
+
+队伍生命面板显示每轮剩余生命、受到治疗、实际扣血、护盾吸收及均值模式的存活率。成员详情可设置初始生命比例。计算后自动生成每位成员的造成伤害、实际受伤、有效治疗、受到治疗、施加护盾、获得护盾、护盾吸收及剩余生命八类折线图。支持指标筛选、角色曲线显隐、每轮/累计切换、节点数值和完整数据表；生命图保留轮末状态。全部统计数据可导出CSV，主表CSV则按当前所选指标导出。
+
+全队快速设置支持等级、升星和行动策略。保存配队时可命名并记录当时的伤害、治疗与护盾结果，用于方案对照。定位筛选已加入选卡窗口。与参考站的完整[功能对照及验证说明](evidence/calculator_feature_comparison.md)另附。
 
 ### ⏱️ “一轮”如何定义
 

@@ -7,5 +7,6 @@ require('./native_complex_rules.js').install(T.Simulation);
 require('./simulation_rules.js').install(T.Simulation);
 if(fs.existsSync(__dirname+'/native_ai_rules.js'))require('./native_ai_rules.js').install(T.Simulation);
 if(fs.existsSync(__dirname+'/custom_characters.js'))require('./custom_characters.js').install(T.Simulation);
+require('./combat_reporting.js').install(T);
 const data=JSON.parse(fs.readFileSync(__dirname+'/simulation_data.json','utf8'));
 module.exports={T,data};

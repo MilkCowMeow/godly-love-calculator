@@ -76,7 +76,7 @@ const rules={
   const immediate=this._nativeStatusProperties(incoming).properties.AddTime;
   if(immediate!==undefined)target.progress=F(Math.max(0,F(target.progress+immediate)));
   this._nativeSyncStatusRounds(target);this.refresh(target);
-  this.log('status',owner,target,'附加 '+(def.name||id),{status:id,merged:!!old,stack:st.stack,value:st.value,until:st.until});
+  this.log('status',owner,target,'附加 '+(def.name||id),{status:id,merged:!!old,stack:st.stack,value:st.value,until:st.until,shieldGranted:id==='Shield'?Math.max(0,incoming.value):undefined});
   return true;
  },
 
@@ -149,7 +149,7 @@ const rules={
  heal(owner,target,value,action,provided,providedContext){
   const f=this._nativeStatusFunction(action,provided),ctx=providedContext||this.context(owner,target,action,f.Trigger||'AfterSkill',f._status);
   let amount=Math.trunc(F(finite(value,'生命变化')));
-  if(amount>0&&target.props.SealHeal){this.log('heal',owner,target,'封愈阻止治疗',{heal:0});return false;}
+  if(amount>0&&target.props.SealHeal){this.log('heal',owner,target,'封愈阻止治疗',{heal:0,healAttempted:amount,overheal:0,healBlocked:true,healingSource:f._status?.source||owner.uid,sourceSkill:action?.skill?.id});return false;}
   if(amount<0&&flag(f.CantAddToDie)&&amount+target.hp<0)amount=1-target.hp;
   const withInjury=f.Fun==='AddHPWithInjury';
   if(withInjury&&!this.nativeInjuryEvents)incomplete('AddHPWithInjury 的原生伤势回写尚未接入');
@@ -167,7 +167,7 @@ const rules={
   const actual=target.unlimited?0:Math.max(0,Math.min(amount,target.stats.MaxHP-target.hp));
   target.hp+=actual;this.refresh(target);
   if(owner.camp===0)this.row.members[owner.slot].heal+=actual;
-  this.log('heal',owner,target,'恢复生命',{heal:actual,hp:target.unlimited?null:target.hp});
+  this.log('heal',owner,target,'恢复生命',{heal:actual,healAttempted:amount,overheal:Math.max(0,amount-actual),healingSource:f._status?.source||owner.uid,sourceSkill:action?.skill?.id,hp:target.unlimited?null:target.hp});
   this.trigger(target,'AfterEvent',action,{...ev,hpDiff:actual});
   this._nativeSourceStatusEvent('SourceAfterEvent',owner,target,action,{...ev,hpDiff:actual});
   return true;

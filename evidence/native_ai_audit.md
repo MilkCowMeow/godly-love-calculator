@@ -82,5 +82,5 @@ target.NowHP
 ## 与 simulation_rules 的剩余集成观察
 
 - 原技能普通攻击判定已由父代理改为读取 originalSkill 的 IsNormalSkill 标记，符合 `0x2346940`。
-- 上下文中的 IsDamageSkill 应始终按原生技能 AttRate>0 判断；若用当前事件实际 damage 判断，闪避/零伤害/持续伤害会错。该条件仍由主上下文模块管理。
+- 2026-10-17 更正：IsDamageSkill 优先读取 param.RoleEvent.IsDamageHit；无 RoleEvent 才读 context.IsDamageHit（当前技能静态 IsDamageHit）。原建议“始终按 AttRate>0”错误，已撤回。证据：case11 `0x2348DF0..0x2348E08` → `BattleRoleEvent.get_IsDamageHit 0x2242A70`；空事件分支 `0x2349904..0x2349914` → `SkillProcessContext.get_IsDamageHit 0x226456C`。IsNoDamageSkill（case10 `0x2348C44`、空事件 `0x23498EC`）同路径取反。这里的 event.damage 必须代表事件类型标志，不能用实际扣血数值是否大于零代替；状态变动事件 false 应阻止该条件。
 - 通用选择器尚未被本模块全量重写；本模块只覆盖当前 AI 13 类与 Front/Back 桥。新的配置 Type、不可验证的属性、负 SP 费用缺少 NowSP 上下文均明确停止，不生成假结果。

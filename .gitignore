@@ -1,0 +1,9 @@
+node_modules/
+__pycache__/
+.tmp/
+.env
+.env.*
+*.log
+*.apk
+*.so
+*.dll

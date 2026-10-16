@@ -1,0 +1,118 @@
+<div align="center">
+
+<img src="docs/assets/game-icon.png" width="88" alt="Godly Love">
+
+# 💚 Godly Love
+### Character & Event Catalog · Four-Member Team Damage Calculator
+
+[![GitHub Pages](https://img.shields.io/badge/GitHub_Pages-Open_website-193b34?logo=github)](https://milkcowmeow.github.io/godly-love-calculator/)
+![Browser based](https://img.shields.io/badge/Runtime-Client_side-a1814a)
+![Offline ready](https://img.shields.io/badge/Offline-Supported-678969)
+
+[简体中文](README.md) · **English**
+
+[🧮 Damage Calculator](https://milkcowmeow.github.io/godly-love-calculator/) · [📖 Character Catalog](https://milkcowmeow.github.io/godly-love-calculator/catalog.html)
+
+</div>
+
+## ✨ About
+
+An unofficial reference and calculation project for **Godly Love** (《神明恋爱放送中》). It combines a readable character/event catalog with a continuous-battle calculator implemented from the local client's configurations and native methods.
+
+The two pages link to each other through their top navigation. Calculations run in your browser; no sign-in or installation is required. The application interface is currently in Simplified Chinese.
+
+## 🧮 Damage Calculator
+
+| Feature | Details |
+|---|---|
+| 👥 Four-member teams | Choose each card, level, star rank, and optional base-stat overrides; duplicate copies of the same card are disallowed |
+| 📊 Round table | Per-member damage, row subtotals, cumulative damage, and team totals |
+| 🎬 Event log | Inspect skills, assists, counters, statuses, and damage in execution order |
+| 🎯 Target presets | Trial Floor 50 with its boss and companion; an unlimited-HP training dummy |
+| 🕹️ Action policies | Game AI, basic only, ultimate priority, or wait; optional per-row overrides |
+| 🎲 Random simulations | Reproducible single battles or means over 32/128/256 independent battles |
+| 💾 Team management | Local browser saves, JSON import/export, and CSV damage-table export |
+| 💡 Help tooltips | Hover or focus the circled question marks beside calculation mode and seed |
+
+![Calculator](docs/assets/calculator-preview.jpg)
+
+### ⏱️ What does a table row mean?
+
+The game schedules individual actors using speed and action gauges. Each table row collects events until every surviving team member has completed at least one new main action. Faster members may act more than once. Assists, counters, and damage over time belong to the row in which they occur. Row boundaries do not reset statuses, cooldowns, or gauges.
+
+Damage totals use post-shield calculated damage and retain overkill. Actual HP loss is additionally constrained by remaining HP and survival effects. Rows after a battle ends do not generate more damage.
+
+### 🎯 Targets
+
+- **Trial Floor 50:** the level-80 boss 《烟光迷离》 and companion 《最佳调味》 are retained by default. The companion changes stealth targetability. It can be disabled for a boss-only comparison.
+- **Training dummy:** unlimited HP, no active attacks or newly applied effects, but it can receive statuses. Its reference maximum HP supports percentage-based skills while its HP ratio remains 100%. Speed controls its status-tick timing.
+
+### 🎲 Single battles, averages, and seeds
+
+- **Single battle:** samples a complete random battle.
+- **Multiple-battle mean:** maintains each battle independently, then averages its output. Fractional action counts are cross-battle means.
+- **Seed:** fixes the random sequence. The same setup, mode, sample count, and seed reproduce the same result.
+
+## 📖 Character & Event Catalog
+
+- 🖼️ Card art, thumbnails, and available future/pre-release artwork.
+- ⚔️ Skills, elements, roles, and contextual status explanations.
+- 🧑‍🤝‍🧑 Character portraits, full illustrations, and profiles.
+- 🎪 Event banners, related cards, and verifiable schedule information.
+- 🔎 Search and filters with desktop/mobile layouts.
+
+![Catalog](docs/assets/catalog-preview.jpg)
+
+## 🧪 Data & Verification
+
+| Item | Status |
+|---|---|
+| 📦 Client version | `1.0.1.014517` |
+| 🗓️ Data reviewed | `2026-10-16` |
+| 🃏 Calculator dataset | 192 cards, 584 related skills, 97 statuses |
+| 🧩 Unit checks | Scalar damage, configuration parsing, statuses, scheduling, complex effects, and AI |
+| 🔁 Continuous simulations | 288 mixed-team scenarios plus damage-total conservation checks |
+| 🖥️ Interface checks | Desktop, 390px mobile, cross-page navigation, and worker-based calculation |
+| 🎮 In-game comparison | A turn-by-turn comparison with the official game has not been completed; supplemental video evidence is under review |
+
+**Known configuration gap:** the future card 《誓约束缚》 (`C03_SSR_012S1`) references `RandomAddStatus`, which has no definition in the current client's status table. Execution stops with a clear message when this path is reached, instead of reporting an incomplete total. Future/pre-release entries are not confirmation of a live release.
+
+Native-method/configuration audit summaries are in [`evidence/`](evidence/). Configuration and simulation tests do not substitute for validation against the official server.
+
+## 🚀 Local Use & Development
+
+### 📂 Open directly
+
+Download the repository and open `docs/index.html` or `docs/catalog.html` in a modern browser. Both files embed their required data and visual assets for offline use.
+
+### 🛠️ Edit the calculator
+
+Use Python 3 to build and Node.js to run the checks. No frontend framework installation is needed.
+
+```bash
+python scripts/build_calculator.py
+python scripts/run_tests.py
+```
+
+The builder retains embedded data, images, and fonts from the published HTML and combines the modules in `src/calculator/`. Maintain the font resources when expanding their character coverage.
+
+```text
+docs/                 🌐 GitHub Pages site and offline HTML
+src/calculator/       🧮 Calculator UI and battle interpreter
+src/catalog/          📖 Catalog interface source
+scripts/              🛠️ Portable build and test helpers
+tests/                🧪 Mechanic and continuous-battle checks
+evidence/             🔬 Native-method audit summaries
+```
+
+### ☁️ GitHub Pages
+
+The publishing source is `/docs` on the `main` branch, with `.nojekyll` included. Subsequent pushes redeploy the site at the same public URLs.
+
+## 🤝 Feedback & Credits
+
+Please report issues through [GitHub Issues](https://github.com/MilkCowMeow/godly-love-calculator/issues). Mechanic reports are most useful with card IDs, levels/star ranks, both sides' stats, skill order, and observed damage. Exported calculator JSON helps reproduce a setup.
+
+The team-selection/round-table layout was inspired by the [NU: Carnival damage calculator](https://linecross.github.io/nuCarnivalAttackCalculator/Main.html). Battle rules are implemented from Godly Love's own data and native methods.
+
+Game names, characters, artwork, and trademarks belong to their respective rights holders. This is an unofficial fan reference tool and is not affiliated with or endorsed by the game developers, publisher, or EROLABS.

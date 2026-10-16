@@ -1,0 +1,10 @@
+const fs=require('node:fs');
+global.GLBattle=require('./battle_core.js');global.GLConfig=require('./config_engine.js');
+const T=require('./timeline_engine.js');
+require('./native_status_rules.js').install(T.Simulation);
+require('./native_turn_rules.js').install(T.Simulation);
+require('./native_complex_rules.js').install(T.Simulation);
+require('./simulation_rules.js').install(T.Simulation);
+if(fs.existsSync(__dirname+'/native_ai_rules.js'))require('./native_ai_rules.js').install(T.Simulation);
+const data=JSON.parse(fs.readFileSync(__dirname+'/simulation_data.json','utf8'));
+module.exports={T,data};

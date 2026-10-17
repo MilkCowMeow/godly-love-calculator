@@ -1,6 +1,6 @@
 /* Read-only accounting around the native event stream; never draws RNG or changes battle state. */
 (function(root){'use strict';
-const keys=['healing','attempted','overheal','blocked','shield','receivedHealing','receivedShield','damageTaken','absorbed'];
+const keys=['healing','attempted','overheal','blocked','shield','receivedHealing','receivedOverheal','receivedShield','damageTaken','absorbed'];
 function blank(){return {members:Array.from({length:4},()=>Object.fromEntries(keys.map(k=>[k,0]))),flows:[],snapshot:[]};}
 function flow(report,kind,source,target){let f=report.flows.find(f=>f.kind===kind&&f.source===source&&f.target===target);if(!f){f={kind,source,target,amount:0,attempted:0,overheal:0,blocked:0,count:0};report.flows.push(f);}return f;}
 function addEvent(report,kind,actor,target,extra){
@@ -9,7 +9,7 @@ function addEvent(report,kind,actor,target,extra){
   const actual=Math.max(0,Number(extra.heal)||0),attempt=Math.max(actual,Number(extra.healAttempted)||0),blocked=extra.healBlocked?attempt:0,overheal=extra.healBlocked?0:Math.max(0,Number(extra.overheal??(attempt-actual))||0);
   const f=flow(report,'healing',source,dest);f.amount+=actual;f.attempted+=attempt;f.overheal+=overheal;f.blocked+=blocked;f.count++;
   if(si>=0){const m=report.members[si];m.healing+=actual;m.attempted+=attempt;m.overheal+=overheal;m.blocked+=blocked;}
-  if(ti>=0)report.members[ti].receivedHealing+=actual;
+  if(ti>=0){report.members[ti].receivedHealing+=actual;report.members[ti].receivedOverheal+=overheal;}
  }
  if(kind==='status'&&extra.status==='Shield'&&Number.isFinite(extra.shieldGranted)){
   const amount=Math.max(0,extra.shieldGranted),f=flow(report,'shield',source,dest);f.amount+=amount;f.count++;
@@ -43,6 +43,18 @@ function install(T){
   result.report=totals(result);return result;
  };
 }
-function series(result,key){return (result.rows||[]).map(row=>({round:row.round,values:Array.from({length:4},(_,slot)=>key==='hp'?row.report?.snapshot.find(s=>s.slot===slot)?.hp??0:['damage','direct','dot'].includes(key)?row.members[slot]?.[key]||0:row.report?.members[slot]?.[key]||0)}));}
-const api={blank,keys,addEvent,totals,series,install};root.GLReports=api;if(typeof module!=='undefined'&&module.exports)module.exports=api;
+// Keep actual HP recovery separate from throughput, which also includes overhealing.
+// Prevented healing belongs only to `blocked`, never to either throughput value.
+function healingParts(report,slot,received=false){
+ const m=report?.members?.[slot],effective=m?.[received?'receivedHealing':'healing']||0,overheal=m?.[received?'receivedOverheal':'overheal']||0;
+ return {effective,overheal,total:effective+overheal};
+}
+function series(result,key){return (result.rows||[]).map(row=>{
+ if(key==='totalHealing'||key==='totalReceivedHealing'){
+  const parts=Array.from({length:4},(_,slot)=>healingParts(row.report,slot,key==='totalReceivedHealing'));
+  return {round:row.round,values:parts.map(p=>p.total),effectiveValues:parts.map(p=>p.effective),overhealValues:parts.map(p=>p.overheal)};
+ }
+ return {round:row.round,values:Array.from({length:4},(_,slot)=>key==='hp'?row.report?.snapshot.find(s=>s.slot===slot)?.hp??0:['damage','direct','dot'].includes(key)?row.members[slot]?.[key]||0:row.report?.members[slot]?.[key]||0)};
+});}
+const api={blank,keys,addEvent,totals,healingParts,series,install};root.GLReports=api;if(typeof module!=='undefined'&&module.exports)module.exports=api;
 })(typeof globalThis!=='undefined'?globalThis:this);

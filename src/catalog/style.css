@@ -12,3 +12,4 @@ main:focus{outline:none}.brand-mark{white-space:nowrap;flex-shrink:0}
 
 
 .game-brand-icon{object-fit:cover;border:0;border-radius:10px;flex:none}
+.filter-foot{flex-wrap:wrap;gap:12px 20px}.filter-foot #count{flex:1 1 180px}.r-visibility{display:inline-flex;align-items:center;gap:9px;font:13px var(--ui);color:var(--ink);cursor:pointer;white-space:nowrap}.r-visibility input{width:16px;height:16px;margin:0;accent-color:var(--ink)}

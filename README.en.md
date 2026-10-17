@@ -23,6 +23,8 @@ The two pages link to each other through their top navigation. Calculations run 
 
 Card credits and portraits follow each card's native character configuration, preserving both solo cards and two-character cards. Rebuild the catalog with `python scripts/build_catalog.py`; the [attribution audit](evidence/card_character_attribution.md) records the mapping.
 
+The catalog contains 192 cards, including 88 R cards hidden by default. Enable **显示 R 卡** or choose R in the rarity selector to reveal them. The selectors support SSR/SR/R and both individual characters and couples.
+
 ## 🧮 Damage Calculator
 
 | Feature | Details |

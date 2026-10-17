@@ -1,0 +1,42 @@
+'use strict';
+const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
+const {T,data:client}=require('./load_simulation.cjs');
+const data=JSON.parse(fs.readFileSync(__dirname+'/catalog_data.json','utf8'));
+const nodes=new Map();
+const node=selector=>{if(!nodes.has(selector))nodes.set(selector,{innerHTML:'',textContent:'',value:'',checked:false,focus(){},addEventListener(){}});return nodes.get(selector);};
+const context=vm.createContext({DATA:data,ASSETS:{},document:{querySelector:node,querySelectorAll:()=>[]}});
+const source=fs.readFileSync(__dirname+'/catalog_app.js','utf8');
+assert.match(source,/window\.addEventListener\('hashchange',route\);route\(\);\s*$/);
+vm.runInContext(source.replace(/window\.addEventListener\('hashchange',route\);route\(\);\s*$/,'')+`
+this.ui={state,renderCards,visibleCatalogCards};
+`,context);
+const {ui}=context;
+ui.renderCards();
+assert.equal(ui.state.showR,false,'R cards are hidden on a fresh page');
+assert.equal(ui.visibleCatalogCards().length,104);
+let markup=node('#main').innerHTML;
+const rarity=markup.match(/<select id="rarity">([\s\S]*?)<\/select>/)[1];
+for(const value of ['SSR','SR','R'])assert.ok(rarity.includes('<option value="'+value+'"'),'each rarity must be an actual option');
+const people=markup.match(/<select id="pair">([\s\S]*?)<\/select>/)[1];
+for(const name of ['旭 / 琉斗','塞恩 / 夏暮','渡司 / 稻彦','玄泽 / 柳生','旭','琉斗','塞恩','夏暮','渡司','稻彦','玄泽','柳生'])assert.ok(people.includes('>'+name+'</option>'));
+node('#rarity').onchange({target:{value:'R'}});
+assert.equal(ui.state.showR,true,'choosing R automatically enables the visibility switch');
+assert.equal(node('#show-r').checked,true);
+assert.equal(ui.visibleCatalogCards().length,192);
+assert.match(node('#count').textContent,/88/);
+ui.state.pair='琉斗';ui.renderCards();
+assert.match(node('#count').textContent,/11/);
+node('#show-r').onchange({target:{checked:false}});
+assert.equal(ui.state.rarity,'','turning off R clears an R-only rarity filter');
+assert.equal(ui.visibleCatalogCards().length,104);
+node('#reset').onclick();
+assert.equal(ui.state.showR,false);
+assert.equal(ui.state.pair,'');
+for(const card of data.cards.filter(c=>c.rarity==='R')){
+ const native=client.cards.find(c=>c.id===card.id);
+ assert.equal(card.characters.length,1);
+ assert.deepEqual(card.skills.map(s=>s.id),native.skills);
+ for(const row of card.stats){const expected=T.baseStats(native,Number(row.level),0);for(const key of ['HP','Attack','Defence','Speed'])assert.equal(row[key],expected[key],card.id+' '+row.level+' '+key);}
+ assert.equal(card.imprint.length,native.imprint.length);
+}
+console.log('通过：R卡默认隐藏、开关与稀有度联动、SSR/SR/R选项、单人与CP筛选、88张R卡的技能/成长/原生面板。');

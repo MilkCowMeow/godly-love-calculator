@@ -42,8 +42,9 @@ class CardCharactersTest(unittest.TestCase):
                 with self.subTest(cid=card['id']):
                     self.assertEqual(len(card['characters']), len(raw[card['id']].split('~')))
                     self.assertEqual(card['pair'], ' / '.join(names[key] for key in card['characters']))
-        self.assertEqual(sum(len(c['characters']) == 1 for c in self.catalog['cards']), 40)
+        self.assertEqual(sum(len(c['characters']) == 1 for c in self.catalog['cards']), 128)
         self.assertEqual(sum(len(c['characters']) == 1 for c in self.calculator['cards']), 128)
+        self.assertEqual({c['id'] for c in self.catalog['cards']}, {c['id'] for c in self.calculator['cards']})
 
     def test_unknown_native_tokens_are_not_guessed(self):
         with self.assertRaises(ValueError):

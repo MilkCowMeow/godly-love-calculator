@@ -79,6 +79,8 @@
 
 卡牌署名和头像按客户端逐卡的角色配置区分单人与双人，详见[署名核查](evidence/card_character_attribution.md)。修改图鉴界面后运行 `python scripts/build_catalog.py` 重建。
 
+图鉴共收录192张卡牌。88张R卡默认隐藏，可勾选“显示R卡”，或在稀有度下拉框选择R后显示；SSR、SR和R均可单独筛选，角色筛选同时包含单人和CP。
+
 ![角色图鉴界面](docs/assets/catalog-preview.jpg)
 
 ## 🧪 数据与验证状态

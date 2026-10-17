@@ -1,8 +1,10 @@
 from pathlib import Path
 import re,json
 from embedded import extract
+from card_characters import assign_characters
 ROOT=Path(__file__).resolve().parents[1];SRC=ROOT/'src/calculator';TARGET=ROOT/'docs/index.html'
 old=TARGET.read_text('utf8');data=extract(old,'DATA');assets=extract(old,'ASSETS')
+for card in data['cards']:assign_characters(card,card['raw']['Represents'],data['profiles'])
 fonts='\n'.join(re.findall(r'@font-face\{[^}]*\}',old))
 icon=re.search(r'<link rel="icon" href="([^"]+)"',old).group(1)
 read=lambda n:(SRC/n).read_text('utf8')

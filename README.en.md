@@ -21,6 +21,8 @@ An unofficial reference and calculation project for **Godly Love** (《神明恋
 
 The two pages link to each other through their top navigation. Calculations run in your browser; no sign-in or installation is required. The application interface is currently in Simplified Chinese.
 
+Card credits and portraits follow each card's native character configuration, preserving both solo cards and two-character cards. Rebuild the catalog with `python scripts/build_catalog.py`; the [attribution audit](evidence/card_character_attribution.md) records the mapping.
+
 ## 🧮 Damage Calculator
 
 | Feature | Details |

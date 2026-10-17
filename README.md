@@ -77,6 +77,8 @@
 - 🎪 活动横幅、关联卡牌与可核实的档期资料。
 - 🔎 搜索与筛选；支持桌面和手机阅读。
 
+卡牌署名和头像按客户端逐卡的角色配置区分单人与双人，详见[署名核查](evidence/card_character_attribution.md)。修改图鉴界面后运行 `python scripts/build_catalog.py` 重建。
+
 ![角色图鉴界面](docs/assets/catalog-preview.jpg)
 
 ## 🧪 数据与验证状态

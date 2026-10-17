@@ -35,6 +35,7 @@
 | 💡 释义提示 | 计算方式和随机种子旁的圈问号支持悬停及键盘聚焦 |
 | 🧑‍🎨 自定义角色 | 从零设置身份、面板、成长、主动技能与条件被动；保存、编辑、复制后可上阵 |
 | 🎨 五套主题 | 松石、雾蓝、绛紫、暖砂、午夜；统一调整表格、控件与弹窗，记住个人选择 |
+| 📐 计算机制 | 12个板块讲解面板、行动、穿透、命中、状态、治疗与统计；LaTeX公式离线显示 |
 
 ![计算器界面](docs/assets/calculator-preview.jpg)
 
@@ -79,7 +80,7 @@
 
 卡牌署名和头像按客户端逐卡的角色配置区分单人与双人，详见[署名核查](evidence/card_character_attribution.md)。修改图鉴界面后运行 `python scripts/build_catalog.py` 重建。
 
-图鉴共收录192张卡牌。88张R卡默认隐藏，可勾选“显示R卡”，或在稀有度下拉框选择R后显示；SSR、SR和R均可单独筛选，角色筛选同时包含单人和CP。
+图鉴与计算器同步收录192张卡牌及单人、双人署名。88张R卡中86张有可用图片；图鉴默认隐藏R卡，可勾选“显示R卡”，或在稀有度下拉框选择R后显示。SSR、SR和R均可单独筛选，角色筛选同时包含单人和CP。
 
 ![角色图鉴界面](docs/assets/catalog-preview.jpg)
 
@@ -108,14 +109,17 @@
 
 ### 🛠️ 修改计算器
 
-Python 3用于构建，Node.js用于运行检查；不需要安装前端框架。
+Python 3用于构建，Node.js用于预排版LaTeX公式和运行检查。KaTeX仅用于构建，发布页面内嵌排版结果与字体，不依赖CDN。
 
 ```bash
+npm ci --ignore-scripts
 python scripts/build_calculator.py
 python scripts/run_tests.py
 ```
 
 构建器从已发布HTML保留内嵌数据、图片和字体，再组合`src/calculator/`内的界面与模拟模块。修改字体字符集时，请同时维护对应字体资源。
+
+计算机制正文位于`src/calculator/mechanics.html`，逐段依据保存在[`evidence/mechanics_claims.json`](evidence/mechanics_claims.json)，不显示在网页正文。检查包括依据定位、公式编译、数值示例，以及两页卡牌与图片同步。
 
 ```text
 docs/                 🌐 GitHub Pages站点与离线HTML

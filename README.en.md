@@ -39,6 +39,7 @@ The catalog contains 192 cards, including 88 R cards hidden by default. Enable *
 | 💡 Help tooltips | Hover or focus the circled question marks beside calculation mode and seed |
 | 🧑‍🎨 Custom characters | Build independent stats, growth, active skills and conditional passives; save, edit, duplicate, and add them to a team |
 | 🎨 Five themes | Jade, mist blue, plum, warm sand, and midnight; consistent controls and dialogs with a remembered preference |
+| 📐 Combat mechanics | Twelve sections on stats, scheduling, penetration, hits, statuses, healing and reporting, with offline LaTeX formulas |
 
 ![Calculator](docs/assets/calculator-preview.jpg)
 
@@ -100,14 +101,17 @@ Download the repository and open `docs/index.html` or `docs/catalog.html` in a m
 
 ### 🛠️ Edit the calculator
 
-Use Python 3 to build and Node.js to run the checks. No frontend framework installation is needed.
+Use Python 3 to build and Node.js to pre-render LaTeX formulas and run checks. KaTeX is a build-time dependency; published pages embed the rendered formulas and fonts without a CDN dependency.
 
 ```bash
+npm ci --ignore-scripts
 python scripts/build_calculator.py
 python scripts/run_tests.py
 ```
 
 The builder retains embedded data, images, and fonts from the published HTML and combines the modules in `src/calculator/`. Maintain the font resources when expanding their character coverage.
+
+The mechanics text lives in `src/calculator/mechanics.html`. Its claim-by-claim evidence index, [`evidence/mechanics_claims.json`](evidence/mechanics_claims.json), stays in the repository rather than the page. Checks cover evidence anchors, formula compilation, numerical examples, and synchronization of card credits and images. Both tools contain 192 cards; usable images are synchronized for 86 of the 88 R cards.
 
 ```text
 docs/                 🌐 GitHub Pages site and offline HTML

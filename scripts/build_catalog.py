@@ -57,6 +57,21 @@ def r_art(card):
     return old_card.get('art') or asset(card.get('thumb'))
 
 
+def calculator_thumb(card):
+    if args.r_art_dir:
+        from PIL import Image
+        path = args.r_art_dir / (card['id'] + '_S_icon.png')
+        if path.exists():
+            with Image.open(path) as image:
+                out = io.BytesIO()
+                image.convert('RGBA').save(out, 'WEBP', quality=94, method=4)
+            raw = out.getvalue()
+            key = hashlib.sha256(raw).hexdigest()[:16]
+            assets[key] = 'data:image/webp;base64,' + base64.b64encode(raw).decode()
+            return key
+    return previous.get(card['id'], {}).get('calculatorThumb') or asset(card.get('thumb'))
+
+
 def base_stats(row):
     stats = dict(row['stats'])
     # Same zero-star float32 rounding used by the calculator's baseStats.
@@ -99,7 +114,7 @@ def make_r_card(card):
                 if base else '客户端已配置此卡，但未取得对应的开放公告或常驻池标签。',
             'item_tags': tags, 'version_gate': item['VersionControl'] or card['raw']['VersionControl'],
             'limited_kind': '常驻 R 卡' if base else 'R 卡', 'related_activities': [],
-            'art': art, 'thumb': art, 'artNote': '',
+            'art': art, 'thumb': art, 'calculatorThumb': calculator_thumb(card), 'artNote': '',
             'elementIcon': asset(client['elementIcons'][card['element']]),
             'jobIcon': asset(client['jobIcons'][card['job']]),
             'stats': [base_stats(row) for row in card['levelStats'] if row['level'] in levels],

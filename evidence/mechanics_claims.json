@@ -1,0 +1,662 @@
+{
+  "version": "1.0.1.014517",
+  "note": "大理石狐视频仅作检索与交叉核对线索；事实以客户端配置、原生逆向记录及代码/数值检查为依据。此索引不渲染到网页。",
+  "claims": {
+    "scope": [
+      {
+        "file": "scripts/build_calculator.py",
+        "anchors": [
+          "GLTimeline.run",
+          "GLTimeline.aggregate"
+        ]
+      },
+      {
+        "file": "src/calculator/timeline_engine.js",
+        "anchors": [
+          "constructor(data,plan,seed)"
+        ]
+      }
+    ],
+    "team": [
+      {
+        "file": "evidence/round_schedule_audit.md",
+        "anchors": [
+          "PVE",
+          "同 CP 的不同卡"
+        ]
+      },
+      {
+        "file": "src/calculator/table_app.js",
+        "anchors": [
+          "function validate()"
+        ]
+      },
+      {
+        "file": "scripts/card_characters.py",
+        "anchors": [
+          "Represents"
+        ]
+      }
+    ],
+    "stats": [
+      {
+        "file": "evidence/native_client_comparison.md",
+        "anchors": [
+          "PropertySetting",
+          "属性合并与取整"
+        ]
+      },
+      {
+        "file": "src/calculator/simulation_rules.js",
+        "anchors": [
+          "P.refresh=function",
+          "nativeImprintRates"
+        ]
+      },
+      {
+        "file": "src/calculator/battle_core.js",
+        "anchors": [
+          "function statFloat"
+        ]
+      },
+      {
+        "file": "src/calculator/timeline_engine.js",
+        "anchors": [
+          "function baseStats",
+          "EnhanceSkill"
+        ]
+      }
+    ],
+    "rounding": [
+      {
+        "file": "evidence/hit_defence_audit.md",
+        "anchors": [
+          "0x3B10058",
+          "2.5=>2"
+        ]
+      },
+      {
+        "file": "src/calculator/battle_core.js",
+        "anchors": [
+          "function roundEven",
+          "function finalStat"
+        ]
+      },
+      {
+        "file": "evidence/native_client_comparison.md",
+        "anchors": [
+          "159.939"
+        ]
+      }
+    ],
+    "overrides": [
+      {
+        "file": "src/calculator/timeline_engine.js",
+        "anchors": [
+          "nativeImprintRates[key]=0"
+        ]
+      },
+      {
+        "file": "src/calculator/simulation_rules.js",
+        "anchors": [
+          "base=u.nativeBase?.[k]"
+        ]
+      }
+    ],
+    "timeline": [
+      {
+        "file": "evidence/round_schedule_audit.md",
+        "anchors": [
+          "行动条"
+        ]
+      },
+      {
+        "file": "src/calculator/native_turn_rules.js",
+        "anchors": [
+          "P.nextActor=function",
+          "chosen.progress=0"
+        ]
+      },
+      {
+        "file": "src/calculator/timeline_engine.js",
+        "anchors": [
+          "this.random()*.05"
+        ]
+      }
+    ],
+    "row": [
+      {
+        "file": "src/calculator/native_turn_rules.js",
+        "anchors": [
+          "living.every",
+          "this.rowActions.add"
+        ]
+      },
+      {
+        "file": "src/calculator/timeline_engine.js",
+        "anchors": [
+          "finishRow()",
+          "this.row.events.length"
+        ]
+      }
+    ],
+    "cooldown": [
+      {
+        "file": "evidence/round_schedule_audit.md",
+        "anchors": [
+          "CD",
+          "额外回合"
+        ]
+      },
+      {
+        "file": "src/calculator/native_turn_rules.js",
+        "anchors": [
+          "const cd=N(u.cooldowns[id])-1"
+        ]
+      },
+      {
+        "file": "tests/test_timeline.cjs",
+        "anchors": [
+          "main[4]"
+        ]
+      }
+    ],
+    "skill-order": [
+      {
+        "file": "evidence/hit_defence_audit.md",
+        "anchors": [
+          "同一技能的施加先后顺序",
+          "攻击后减防"
+        ]
+      },
+      {
+        "file": "src/calculator/simulation_rules.js",
+        "anchors": [
+          "P.skillAction=function"
+        ]
+      }
+    ],
+    "damage": [
+      {
+        "file": "src/calculator/battle_core.js",
+        "anchors": [
+          "function rawSkillDamage",
+          "1.871",
+          "2000"
+        ]
+      },
+      {
+        "file": "src/calculator/simulation_rules.js",
+        "anchors": [
+          "P.hitParams=function",
+          "skillFinal",
+          "conditionMultiplier"
+        ]
+      },
+      {
+        "file": "evidence/community_video_review.md",
+        "anchors": [
+          "防御与伤害常数"
+        ]
+      }
+    ],
+    "penetration": [
+      {
+        "file": "src/calculator/battle_core.js",
+        "anchors": [
+          "const anti=",
+          "defence=f(defence*rem[2])"
+        ]
+      },
+      {
+        "file": "src/calculator/simulation_rules.js",
+        "anchors": [
+          "penetrations:[1,2,3]"
+        ]
+      }
+    ],
+    "elements": [
+      {
+        "file": "evidence/hit_defence_audit.md",
+        "anchors": [
+          "0x231C5C8",
+          "dodgeBonus",
+          "0.15"
+        ]
+      },
+      {
+        "file": "src/calculator/battle_core.js",
+        "anchors": [
+          "function relation",
+          "function hitChances"
+        ]
+      }
+    ],
+    "hit-types": [
+      {
+        "file": "evidence/hit_defence_audit.md",
+        "anchors": [
+          "命中类别互斥顺序",
+          "N=(1-d)"
+        ]
+      },
+      {
+        "file": "src/calculator/battle_core.js",
+        "anchors": [
+          "critical:(1-d)*c",
+          "big:(1-d)*(1-c)*b"
+        ]
+      },
+      {
+        "file": "evidence/community_video_review.md",
+        "anchors": [
+          "21.25%"
+        ]
+      }
+    ],
+    "hit-priority": [
+      {
+        "file": "evidence/hit_defence_audit.md",
+        "anchors": [
+          "MustDodge优先",
+          "强制暴击来源差异"
+        ]
+      },
+      {
+        "file": "src/calculator/timeline_engine.js",
+        "anchors": [
+          "rollHit("
+        ]
+      }
+    ],
+    "effect-chance": [
+      {
+        "file": "evidence/hit_defence_audit.md",
+        "anchors": [
+          "真实状态概率",
+          "P = clamp",
+          "0.85"
+        ]
+      },
+      {
+        "file": "src/calculator/battle_core.js",
+        "anchors": [
+          "function effectChance"
+        ]
+      },
+      {
+        "file": "src/calculator/simulation_rules.js",
+        "anchors": [
+          "P.effectResisted=function"
+        ]
+      }
+    ],
+    "effect-gates": [
+      {
+        "file": "evidence/hit_defence_audit.md",
+        "anchors": [
+          "负面状态的第二次判定",
+          "IgnoreResist条件成立"
+        ]
+      },
+      {
+        "file": "src/calculator/native_status_rules.js",
+        "anchors": [
+          "nativeEffectResisted"
+        ]
+      }
+    ],
+    "damage-modifiers": [
+      {
+        "file": "evidence/hit_defence_audit.md",
+        "anchors": [
+          "减伤/易伤与伤害增幅",
+          "没有clamp"
+        ]
+      },
+      {
+        "file": "src/calculator/battle_core.js",
+        "anchors": [
+          "function reduction",
+          "function settle"
+        ]
+      }
+    ],
+    "event-order": [
+      {
+        "file": "evidence/hit_defence_audit.md",
+        "anchors": [
+          "修改属性不会自动重算",
+          "NoDamage不能被简单推广"
+        ]
+      },
+      {
+        "file": "src/calculator/simulation_rules.js",
+        "anchors": [
+          "P.attack=function",
+          "P.applyDamage=function"
+        ]
+      }
+    ],
+    "shield": [
+      {
+        "file": "evidence/hit_defence_audit.md",
+        "anchors": [
+          "仅第一个盾",
+          "一个event只消耗第一个Shield"
+        ]
+      },
+      {
+        "file": "src/calculator/simulation_rules.js",
+        "anchors": [
+          "target.statuses.find"
+        ]
+      }
+    ],
+    "hp-loss": [
+      {
+        "file": "evidence/hit_defence_audit.md",
+        "anchors": [
+          "RealHPDiff",
+          "Immortal实际损99"
+        ]
+      },
+      {
+        "file": "src/calculator/simulation_rules.js",
+        "anchors": [
+          "hitLog.actual",
+          "target.props.Immortal"
+        ]
+      }
+    ],
+    "status-lifetime": [
+      {
+        "file": "evidence/status_turns_audit.md",
+        "anchors": [
+          "CanMerge=FALSE",
+          "到期"
+        ]
+      },
+      {
+        "file": "src/calculator/native_status_rules.js",
+        "anchors": [
+          "tickStatuses(u,action",
+          "MaxStack"
+        ]
+      }
+    ],
+    "dot": [
+      {
+        "file": "evidence/status_turns_audit.md",
+        "anchors": [
+          "0.30000001192092896",
+          "不暴击/格挡/闪避"
+        ]
+      },
+      {
+        "file": "src/calculator/native_status_rules.js",
+        "anchors": [
+          "buffAttack(owner,target",
+          "F(.3)"
+        ]
+      }
+    ],
+    "hp-change": [
+      {
+        "file": "evidence/status_turns_audit.md",
+        "anchors": [
+          "持有者最大HP的5%",
+          "持有者最大HP的6%",
+          "向零截断"
+        ]
+      },
+      {
+        "file": "src/calculator/native_status_rules.js",
+        "anchors": [
+          "heal(owner,target",
+          "bypassShield:true"
+        ]
+      }
+    ],
+    "healing": [
+      {
+        "file": "evidence/status_turns_audit.md",
+        "anchors": [
+          "AddHP路径",
+          "IsSealHeal"
+        ]
+      },
+      {
+        "file": "src/calculator/native_status_rules.js",
+        "anchors": [
+          "healAttempted",
+          "overheal:Math.max",
+          "healingSource"
+        ]
+      }
+    ],
+    "healing-report": [
+      {
+        "file": "src/calculator/combat_reporting.js",
+        "anchors": [
+          "function healingParts",
+          "totalHealing"
+        ]
+      },
+      {
+        "file": "src/calculator/reporting_ui.js",
+        "anchors": [
+          "有效治疗（溢出）",
+          "r.values[index]"
+        ]
+      },
+      {
+        "file": "tests/test_combat_reporting.cjs",
+        "anchors": [
+          "1440",
+          "effective:1000,overheal:440"
+        ]
+      }
+    ],
+    "ai": [
+      {
+        "file": "evidence/native_ai_audit.md",
+        "anchors": [
+          "普通 AI 全失败",
+          "固定",
+          "三轮尝试"
+        ]
+      },
+      {
+        "file": "src/calculator/native_ai_rules.js",
+        "anchors": [
+          "choose",
+          "if(u.props.Taunt)"
+        ]
+      }
+    ],
+    "followups": [
+      {
+        "file": "evidence/round_schedule_audit.md",
+        "anchors": [
+          "本批最多一个协战",
+          "反击"
+        ]
+      },
+      {
+        "file": "evidence/community_video_review.md",
+        "anchors": [
+          "玩家卡基础PinchRate均为3%"
+        ]
+      },
+      {
+        "file": "src/calculator/native_turn_rules.js",
+        "anchors": [
+          "P.processNaturalFollowups",
+          "P.followups"
+        ]
+      }
+    ],
+    "extra-turn": [
+      {
+        "file": "evidence/round_schedule_audit.md",
+        "anchors": [
+          "FIFO"
+        ]
+      },
+      {
+        "file": "src/calculator/native_turn_rules.js",
+        "anchors": [
+          "while(this.extraRounds.length)"
+        ]
+      }
+    ],
+    "tower": [
+      {
+        "file": "src/calculator/table_app.js",
+        "anchors": [
+          "DATA.tower50.enemies"
+        ]
+      },
+      {
+        "file": "evidence/native_client_comparison.md",
+        "anchors": [
+          "31826 / 12454"
+        ]
+      },
+      {
+        "file": "tests/test_timeline.cjs",
+        "anchors": [
+          "Boss自身回合叠攻击"
+        ]
+      },
+      {
+        "file": "src/calculator/native_ai_rules.js",
+        "anchors": [
+          "Stealth"
+        ]
+      }
+    ],
+    "dummy": [
+      {
+        "file": "src/calculator/timeline_engine.js",
+        "anchors": [
+          "u.unlimited=true",
+          "u.passiveDummy=true"
+        ]
+      },
+      {
+        "file": "src/calculator/native_turn_rules.js",
+        "anchors": [
+          "this.tickStatuses(u,generic)"
+        ]
+      },
+      {
+        "file": "src/calculator/native_ai_rules.js",
+        "anchors": [
+          "passiveDummy"
+        ]
+      }
+    ],
+    "seed": [
+      {
+        "file": "src/calculator/timeline_engine.js",
+        "anchors": [
+          "function rng(seed)"
+        ]
+      },
+      {
+        "file": "scripts/build_calculator.py",
+        "anchors": [
+          "Math.imul(i,2654435761)"
+        ]
+      },
+      {
+        "file": "tests/test_timeline.cjs",
+        "anchors": [
+          "assert.deepEqual(r.events,r2.events)"
+        ]
+      }
+    ],
+    "mean": [
+      {
+        "file": "scripts/build_calculator.py",
+        "anchors": [
+          "for(let i=0;i<samples;i++)"
+        ]
+      },
+      {
+        "file": "src/calculator/timeline_engine.js",
+        "anchors": [
+          "function aggregate",
+          "activeSamples"
+        ]
+      },
+      {
+        "file": "src/calculator/combat_reporting.js",
+        "anchors": [
+          "retains its final health state"
+        ]
+      }
+    ],
+    "standard-error": [
+      {
+        "file": "src/calculator/timeline_engine.js",
+        "anchors": [
+          "variance=",
+          "standardError:Math.sqrt(variance/n)"
+        ]
+      }
+    ],
+    "reporting": [
+      {
+        "file": "src/calculator/reporting_ui.js",
+        "anchors": [
+          "chartSpecs",
+          "function exportCharts",
+          "key!=='hp'"
+        ]
+      },
+      {
+        "file": "src/calculator/combat_reporting.js",
+        "anchors": [
+          "function addEvent",
+          "receivedOverheal"
+        ]
+      },
+      {
+        "file": "src/calculator/table_app.js",
+        "anchors": [
+          "第 1 场独立样本",
+          "状态伤害"
+        ]
+      }
+    ],
+    "custom": [
+      {
+        "file": "src/calculator/custom_characters.js",
+        "anchors": [
+          "withDefinitions"
+        ]
+      },
+      {
+        "file": "src/calculator/custom_ui.js",
+        "anchors": [
+          "snapshotPlan"
+        ]
+      },
+      {
+        "file": "src/calculator/table_app.js",
+        "anchors": [
+          "function showError"
+        ]
+      },
+      {
+        "file": "src/calculator/timeline_engine.js",
+        "anchors": [
+          "requireKnown"
+        ]
+      }
+    ]
+  }
+}

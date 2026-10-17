@@ -1,0 +1,160 @@
+<div class="rules-overview" data-claim="scope">
+  <p class="eyebrow">RESOLUTION PIPELINE</p>
+  <h2>从角色面板到逐轮结果</h2>
+  <p data-claim="scope">读取客户端 {{version}} 的卡牌、技能、状态及试炼配置。每场战斗独立推进角色行动、技能冷却、状态实例和生命变化，最后汇总为表格与曲线。</p>
+  <ol class="rules-pipeline"><li>角色面板</li><li>行动与选技</li><li>命中与效果</li><li>生命与状态</li><li>逐轮统计</li></ol>
+  <div class="rules-facts"><span><b>{{cards}}</b>张卡牌</span><span><b>{{skills}}</b>项技能</span><span><b>{{statuses}}</b>种状态</span></div>
+</div>
+<div class="rules-layout">
+<nav class="rules-toc" aria-label="计算机制目录">
+  <p>阅读目录</p>
+  <a href="#mechanics/stats">01　队伍与角色面板</a>
+  <a href="#mechanics/timeline">02　行动与技能冷却</a>
+  <a href="#mechanics/damage">03　技能伤害与穿透</a>
+  <a href="#mechanics/hits">04　属性与命中类别</a>
+  <a href="#mechanics/effects">05　效果命中与抗性</a>
+  <a href="#mechanics/settlement">06　减伤、护盾与损血</a>
+  <a href="#mechanics/statuses">07　状态与持续伤害</a>
+  <a href="#mechanics/healing">08　治疗与溢出</a>
+  <a href="#mechanics/ai">09　选敌与追加动作</a>
+  <a href="#mechanics/targets">10　对手预设</a>
+  <a href="#mechanics/random">11　随机与多场均值</a>
+  <a href="#mechanics/reports">12　读懂表格与统计图</a>
+</nav>
+<div class="rules-chapters">
+<article id="rule-stats" class="rules-chapter">
+  <header><span>01 / CHARACTER STATS</span><h2>队伍与角色面板</h2></header>
+  <div data-claim="team"><p>队伍最多放入四张卡，同一卡牌不能重复上阵；同一角色或同一组 CP 的不同卡牌可以同时编队。SSR、SR、R 按各自卡牌配置读取技能、成长和角色归属。</p></div>
+  <h3>基础值、百分比与固定值</h3>
+  <div data-claim="stats"><p>先读取等级基础表和卡牌系数，再把已经达到的升星阶段及战斗中的属性修正合并。对攻击、防御、最大生命和速度，数值关系如下：</p>
+    <script type="math/tex; mode=display">\widetilde X=f_{32}\!\left[\left(B_X\,f_{32}(1+f_{32}(r_X))+\operatorname{trunc}(v_X)\right)f_{32}(1+f_{32}(q_X))\right]</script>
+    <dl class="rules-symbols"><dt><var>B<sub>X</sub></var></dt><dd>当前等级对应的基准值。</dd><dt><var>r<sub>X</sub></var></dt><dd>同类百分比修正之和，包含对应的升星加成。</dd><dt><var>v<sub>X</sub></var></dt><dd>固定数值修正。</dd><dt><var>q<sub>X</sub></var></dt><dd>最终百分比修正。</dd></dl>
+    <p>同类百分比先合并，再进入对应乘区。只考虑 15% 和 20% 两个同类加成时，合计为 35%，不会逐项相乘。0 星不计入升星表的百分比；被动是否启用，由该卡的解锁字段决定。</p>
+  </div>
+  <div data-claim="rounding"><h3>精度与取整</h3><p>式中的 <var>f<sub>32</sub></var> 表示单精度浮点转换。属性基表与卡牌系数保留到合并阶段；读取攻击、防御时向零截断，最大生命和速度取最近整数，恰好为半数时取偶数。伤害事件的整数转换同样使用取偶数舍入。</p>
+    <script type="math/tex; mode=display">\operatorname{RN}_{\mathrm{even}}(2.5)=2,\qquad \operatorname{RN}_{\mathrm{even}}(3.5)=4</script>
+    <p>后文公式展示乘区关系，实际结算按对应步骤进行浮点转换与整数处理，不能在每个乘区提前四舍五入。</p>
+  </div>
+  <div data-claim="overrides"><h3>手动覆盖面板</h3><p>成员详情中的数值留空时沿用原始面板。覆盖攻击、生命或防御时，该项采用填写的基准值，并清除该项原有的升星百分比；战斗中获得的增减益继续计算。</p></div>
+</article>
+<article id="rule-timeline" class="rules-chapter">
+  <header><span>02 / ACTION TIMELINE</span><h2>行动与技能冷却</h2></header>
+  <div data-claim="timeline"><p>各角色按速度和行动条连续行动。开局分别抽取 0% 至 5% 区间的初始行动值。行动条未超过终点、速度为正时，到达终点所需的等待量为：</p>
+    <script type="math/tex; mode=display">\Delta t_i=\frac{1-g_i}{s_i},\qquad i_*=\arg\min_i\Delta t_i</script>
+    <p><var>g<sub>i</sub></var> 是行动条比例，<var>s<sub>i</sub></var> 是当前速度。最短等待量大于零时，所有存活角色按各自速度推进；被选中者的行动条清零。超过 100% 的行动值由调度器的超前分支优先比较。</p>
+  </div>
+  <div data-claim="row"><h3>表格的一轮</h3><p>表格每行从上一行结束后开始，汇总到所有仍存活的我方成员至少各完成一次新的角色行动为止。战斗提前结束时，最后一行汇总至结束时点。高速成员可能在同一行多动；额外回合、控制导致的跳过行动，也按实际流程推进。分行不会重置技能冷却、状态或行动条。</p></div>
+  <div data-claim="cooldown"><h3>技能冷却</h3><p>主行动施放技能时写入技能冷却，在该角色自己的行动结束阶段减一。带初始冷却的技能开局即写入相应数值。没有其他冷却变化时，CD 为 4 的技能若在第一次自身行动施放，下一次可用时间是第五次自身行动。</p>
+    <p>协战、反击和一般追加技能不会单独推进角色回合或统一扣减技能冷却。额外回合会完整经过角色回合的开始与结束阶段，因此会推进冷却。</p>
+  </div>
+  <div data-claim="skill-order"><h3>技能中的先后顺序</h3><p>显式配置的技能前效果先处理，随后逐目标完成基础命中，再执行技能后效果。未填写触发时点的动态技能效果默认属于技能后阶段。因此，攻击后才施加的减防不会增强同一次已经算完的基础命中。</p></div>
+</article>
+<article id="rule-damage" class="rules-chapter">
+  <header><span>03 / SKILL DAMAGE</span><h2>技能伤害与穿透</h2></header>
+  <div data-claim="damage"><p>普通技能伤害先由攻击、技能倍率和附加攻击量组成，再应用技能威力、条件乘区、克制及命中类别。下式给出目标减伤、护盾和实际损血之前的标量：</p>
+    <script type="math/tex; mode=display">D_0=\frac{(A\,m+A_{\mathrm{add}})\,(1.871\,w)\,K_{\mathrm{cond}}\,K_{\mathrm{elem}}\,K_{\mathrm{hit}}}{1+F_{\mathrm{eff}}/2000}</script>
+    <dl class="rules-symbols"><dt><var>A</var> / <var>m</var></dt><dd>伤害计算读取的整数攻击值 / 本次技能的攻击倍率。</dd><dt><var>A<sub>add</sub></var> / <var>w</var></dt><dd>配置提供的附加攻击量 / 技能威力参数。</dd><dt><var>K<sub>cond</sub></var></dt><dd>满足条件的伤害乘区，以及本次技能层的最终攻击修正。</dd><dt><var>K<sub>elem</sub></var> / <var>K<sub>hit</sub></var></dt><dd>属性克制倍率 / 本次命中类别倍率。</dd><dt><var>F<sub>eff</sub></var></dt><dd>本次伤害经过防御修正与穿透后的有效防御。</dd></dl>
+  </div>
+  <div data-claim="penetration"><h3>三条穿透链</h3><p>客户端分别配置三类穿透值。每一类与抗穿透交互后，形成独立的剩余防御倍率；三者依次相乘，不把不同类穿透直接相加。</p>
+    <script type="math/tex; mode=display">\alpha=\max(0,1-a),\qquad R_j=\max(0,1-p_j\alpha)</script>
+    <script type="math/tex; mode=display">F_{\mathrm{eff}}=F\,r_F\,R_1R_2R_3</script>
+    <p><var>a</var> 为抗穿透，<var>p<sub>j</sub></var> 为各类穿透，<var>r<sub>F</sub></var> 为本次防御倍率。同一类的来源先按配置合并。没有抗穿透且两条不同穿透各为 50% 时，剩余防御是原值的 25%。</p>
+  </div>
+</article>
+<article id="rule-hits" class="rules-chapter">
+  <header><span>04 / ELEMENTS & HIT TYPES</span><h2>属性与命中类别</h2></header>
+  <div data-claim="elements"><h3>克制关系</h3><p>基础属性环为蓝澈 → 红璇 → 绿琉 → 黄曜 → 蓝澈；光与暗相互克制。攻击方克制时，伤害倍率为 1.10，并为暴击阈值增加 15 个百分点。防守方克制攻击方时，非光暗防守者的闪避阈值增加 50 个百分点。强制克制、取消克制等效果按各自开关处理。</p></div>
+  <div data-claim="hit-types"><h3>四类命中互斥</h3><p>每次普通命中依次检查闪避、暴击、强击，前三者均未成功才属于普通命中。进入后一个分支前，必须先通过前面的判定。</p>
+    <div class="rules-table"><table><thead><tr><th>类别</th><th>伤害倍率</th><th>判定要点</th></tr></thead><tbody><tr><td>闪避</td><td>0.75</td><td>仍造成伤害。</td></tr><tr><td>暴击</td><td>本次读取的暴击伤害倍率</td><td>由暴击率、克制加成和目标抗暴共同决定。</td></tr><tr><td>强击</td><td>1.15</td><td>普通分支阈值为 25%。</td></tr><tr><td>普通</td><td>1.00</td><td>前述分支均未成功。</td></tr></tbody></table></div>
+    <script type="math/tex; mode=display">\begin{aligned}P_D&=d,&P_C&=(1-d)c,\\P_B&=(1-d)(1-c)b,&P_N&=(1-d)(1-c)(1-b)\end{aligned}</script>
+    <p><var>d</var>、<var>c</var>、<var>b</var> 为各分支在轮到自身检查时的有效阈值。基础暴击率 15%、无闪避且没有其他命中修正时，总强击概率为 21.25%，不是把 25% 直接作为最终概率。</p>
+  </div>
+  <div data-claim="hit-priority"><p>强制闪避优先于必中或禁止闪避；强制暴击优先于禁止暴击，但仍可能先遇到闪避。强制强击优先于禁止强击，却仍位于闪避和暴击之后。强制暴击分支读取角色运行时暴击伤害，普通暴击分支读取本次技能的暴击伤害参数。</p></div>
+</article>
+<article id="rule-effects" class="rules-chapter">
+  <header><span>05 / EFFECT APPLICATION</span><h2>效果命中与抗性</h2></header>
+  <div data-claim="effect-chance"><p>施加功能先检查配置中的基础概率。普通负面状态在通过这次抽样后，还会检查效果命中与目标抗性。没有其他免疫、闪避或忽略抗性条件时，单次施加概率为：</p>
+    <script type="math/tex; mode=display">P_{\mathrm{apply}}=\operatorname{clip}(p_0,0,1)\,\operatorname{clip}(1+h-r,0,0.85)</script>
+    <p><var>p<sub>0</sub></var> 是基础施加概率，<var>h</var> 是本次有效的效果命中修正，<var>r</var> 是目标效果抗性。clip 表示限制在给定的上下界内。通常存在 15% 的内置抵抗，因此后一项上限为 85%。目标具备取消内置抵抗的对应开关时，该上限改为 100%。</p>
+  </div>
+  <div data-claim="effect-gates"><p>负面效果还要经过免疫、同一技能事件中的闪避记录，以及逐状态加入限制。忽略抗性并不自动跳过免疫和闪避；是否跳过，要分别读取忽略免疫、忽略闪避的配置。正面状态不经过负面状态的效果抗性抽样，仍受自身加入和合并规则约束。</p></div>
+</article>
+<article id="rule-settlement" class="rules-chapter">
+  <header><span>06 / DAMAGE RESOLUTION</span><h2>减伤、护盾与实际损血</h2></header>
+  <div data-claim="damage-modifiers"><h3>来源增幅与目标减伤</h3><p>基础伤害先乘来源伤害增幅，再乘目标减伤倍率，随后处理技能伤害上限。来源伤害修正相加后，其倍率最低为零。</p>
+    <script type="math/tex; mode=display">K_{\mathrm{source}}=\max\!\left(0,1+\sum_k s_k\right),\qquad D_1=D_0K_{\mathrm{source}}K_{\mathrm{hurt}}</script>
+    <p>目标函数提供的非负减伤取最大值，负值修正分别累加；目标运行时减伤再按正负加入对应部分。忽略减伤只清除正减伤部分，保留负值造成的受伤加深。</p>
+    <script type="math/tex; mode=display">\begin{aligned}r_+&=\max(0,r_1,\ldots,r_m)+\max(r_{\mathrm{runtime}},0),\\r_-&=\sum_{r_k<0}r_k+\min(r_{\mathrm{runtime}},0),\\K_{\mathrm{hurt}}&=1-(r_++r_-)\end{aligned}</script>
+    <p>减伤倍率本身不强制截在零到一之间。技能若设置正的单次伤害上限，先限制该伤害，再进入事件及整数生命变化流程。</p>
+  </div>
+  <div data-claim="event-order"><h3>事件与免伤</h3><p>每个命中还会经过目标受击前、来源命中前等事件。直接改写生命差值的功能在此生效；仅改变属性不会让已经完成的基础伤害自动重算。无敌在伤害事件的护盾处理前拦截；技能伤害无效有自身的事件类型和受击移除规则，不能当作所有生命变化都无效。</p></div>
+  <div data-claim="shield"><h3>一次事件只处理第一个护盾</h3><p>一次伤害事件读取第一个有效护盾，不把全部护盾余额先相加。盾不足时，按取偶数舍入后的盾值抵扣本次整数伤害，再移除该盾；本次事件不会继续遍历下一个盾。盾足够时，本次生命伤害为零，并保留剩余盾值。</p></div>
+  <div data-claim="hp-loss"><h3>计算伤害与生命损失</h3><p>表格中的伤害保留盾后过量部分；实际受伤统计使用真实生命减少量。没有保命等其他事件改写时：</p>
+    <script type="math/tex; mode=display">L_{\mathrm{HP}}=\min(D_{\mathrm{after\ shield}},H_{\mathrm{before}})</script>
+    <p>例如剩余生命 100、盾后伤害 500，计算伤害为 500，实际损血为 100。有效保命将生命保留在 1 时，实际损血为 99。复活及特殊生命变化由各自事件继续处理。</p>
+  </div>
+</article>
+<article id="rule-statuses" class="rules-chapter">
+  <header><span>07 / STATUS INSTANCES</span><h2>状态与持续伤害</h2></header>
+  <div data-claim="status-lifetime"><p>状态以独立实例保存来源、存值和到期信息。是否合并、合并分组、层数上限和到期时点读取状态表；不能把所有同名状态统一当作“加一层”。当前中毒、续愈、灼燃和血绽配置禁止合并，多次成功附加会并存多个实例，逐份结算。</p>
+    <p>角色回合开始先处理对应状态回合效果，随后按配置清理行动前到期状态；行动结束再处理结束阶段到期状态。状态的持续时间沿角色自己的回合推进。</p>
+  </div>
+  <div data-claim="dot"><h3>灼燃与血绽</h3><p>通常的灼燃、血绽回合伤害读取状态中保存的数值 <var>V</var>，不在每次触发时重新读取原施加者攻击。其防御分母采用 0.3 系数：</p>
+    <script type="math/tex; mode=display">D_{\mathrm{status}}=\frac{1.871\,V}{1+0.3\,F\,r_F/2000}\,K_{\mathrm{hurt}}</script>
+    <p>此路径不抽取普通技能的暴击、强击或闪避类别，也不套用普通技能的三条穿透链。它仍处理目标减伤及相应伤害事件中的无敌、护盾等阶段。</p>
+  </div>
+  <div data-claim="hp-change"><h3>中毒与续愈</h3><p>当前中毒配置按持有者最大生命的 5% 产生负生命变化；续愈按持有者最大生命的 6% 产生正生命变化。二者读取持有者而非原施加者的最大生命，走生命变化功能，不代入普通技能的攻击、防御与命中公式。</p>
+    <script type="math/tex; mode=display">\Delta H_{\mathrm{poison}}=\operatorname{trunc}(-0.05H_{\max}),\qquad H_{\mathrm{regen}}=\operatorname{trunc}(0.06H_{\max})</script>
+  </div>
+</article>
+<article id="rule-healing" class="rules-chapter">
+  <header><span>08 / HEALING THROUGHPUT</span><h2>治疗与溢出</h2></header>
+  <div data-claim="healing"><p>治疗先由技能或状态的数值转换器得到数值，生命变化功能先向零截断；正治疗遇到封愈时被阻止。通过事件处理后，实际恢复不会超过当前可恢复的生命空间。</p>
+    <script type="math/tex; mode=display">\begin{aligned}H_{\mathrm{effective}}&=\max(0,\min(H,H_{\max}-H_{\mathrm{current}})),\\H_{\mathrm{over}}&=\max(0,H-H_{\mathrm{effective}}),\\H_{\mathrm{total}}&=H_{\mathrm{effective}}+H_{\mathrm{over}}\end{aligned}</script>
+    <p>这里的 <var>H</var> 为通过封愈及事件处理后的正治疗量。有效治疗、溢出治疗及封愈阻止分别保存。持续恢复的归属使用原状态来源。</p>
+  </div>
+  <div data-claim="healing-report"><h3>曲线与数字怎样阅读</h3><p>治疗量和受到治疗量曲线使用包含溢出的总治疗量。数字写作“有效治疗（溢出）”：总量 1440、有效 1000、溢出 440 时，显示 1000（440），曲线坐标取 1440。满血人偶测试中，纯溢出治疗也会形成曲线；封愈阻止不计入该总量。</p></div>
+</article>
+<article id="rule-ai" class="rules-chapter">
+  <header><span>09 / AI & FOLLOW-UP ACTIONS</span><h2>选敌与追加动作</h2></header>
+  <div data-claim="ai"><h3>自动策略</h3><p>自动选技按客户端 AI 组的优先级、技能可用性和条件依次检查，再按该规则寻找目标。普通 AI 全部失败时回退首个普攻技能。最低生命目标比较的是剩余生命比例；“前位”和“后位”读取固定站位 0 和 3。</p>
+    <p>目标规则还有无敌、潜影、克制和重试等筛选，因此某条目标规则的概率不等于最终攻击某个站位的概率。手动策略可指定仅用战技、终结优先或停手；嘲讽在普通手动策略之前处理。</p>
+  </div>
+  <div data-claim="followups"><h3>协战、反击和追加</h3><p>普通主行动施展对应普攻、且未禁止协战时，按队友顺序检查协战资格，取第一个合格者。玩家卡基础表的协战率为 3%，还会受状态、技能和禁止开关影响，不能把全队协战率直接相加。</p>
+    <p>反击需满足主动作、敌方伤害命中、反击者存活且可行动等条件，再检查反击率。待执行动作按批处理：连续动作 → 本批最高优先级的一个协战 → 反击 → 追加动作。执行过程中新增的动作进入后续批次。</p>
+  </div>
+  <div data-claim="extra-turn"><h3>额外回合</h3><p>额外回合进入先进先出的队列，优先于通常行动条选择；它不推进其他角色的行动条，也不清掉获得者原有行动条。与一般追加技能不同，额外回合完整执行角色回合阶段。</p></div>
+</article>
+<article id="rule-targets" class="rules-chapter">
+  <header><span>10 / ENCOUNTER PRESETS</span><h2>对手预设</h2></header>
+  <div data-claim="tower"><h3>试炼第 50 层</h3><p>默认保留 80 级《烟光迷离》和《最佳调味》双敌。以下为预设初始展示面板，战斗中的状态和被动会继续改变运行时数值。</p>
+    <div class="rules-table"><table><thead><tr><th>对手</th><th>生命</th><th>攻击</th><th>防御</th><th>速度</th></tr></thead><tbody><tr><td>烟光迷离</td><td>{{bossHP}}</td><td>{{bossAttack}}</td><td>{{bossDefence}}</td><td>{{bossSpeed}}</td></tr><tr><td>最佳调味</td><td>{{minionHP}}</td><td>{{minionAttack}}</td><td>{{minionDefence}}</td><td>{{minionSpeed}}</td></tr></tbody></table></div>
+    <p>Boss 在自身回合开始触发叠攻；战技包含封愈和低生命条件下的追加群攻，受击被动涉及潜影与行动值变化。随从会改变敌方可选目标及潜影环境，关闭随从得到的是单 Boss 对照场景。</p>
+  </div>
+  <div data-claim="dummy"><h3>战斗人偶</h3><p>人偶是本工具的对照目标，生命无上限，不主动攻击或施加效果，但可以承受状态。它的生命比例固定为 100%；“参考最大生命”供百分比技能与状态读取，不是可被打空的生命池。人偶自身回合仍推进其状态结算，因此调整速度也可能改变持续伤害的结算次数。</p></div>
+</article>
+<article id="rule-random" class="rules-chapter">
+  <header><span>11 / MONTE CARLO SAMPLING</span><h2>随机抽样与多场均值</h2></header>
+  <div data-claim="seed"><p>随机单场抽样一场完整战斗。固定种子用于复现本工具的随机过程；同一计算器版本中，相同数据、队伍、对手、策略、计算方式、场次与种子，得到相同结果。初始行动值、命中类别、效果施加和 AI 中的抽样均会影响后续战斗。</p></div>
+  <div data-claim="mean"><h3>逐场模拟，随后平均</h3><p>多场均值支持 32、128 或 256 场。每个样本从独立战场开始，使用不同的确定性派生种子；在单场内部保留整数状态实例和实际触发结果，最后按角色与统计行取平均。</p>
+    <script type="math/tex; mode=display">\overline D_r=\frac{1}{N}\sum_{j=1}^{N}D_{j,r},\qquad \overline D_{\mathrm{total}}=\frac{1}{N}\sum_{j=1}^{N}D_j</script>
+    <p>某场战斗提前结束时，后续统计行输出为零；生命曲线保留最终状态。均值中的小数伤害和小数出手次数属于跨场平均结果。</p>
+  </div>
+  <div data-claim="standard-error"><h3>均值标准误</h3><p>总伤害旁的“均值标准误”由各场总伤害的样本方差计算，用于描述本次抽样均值的波动尺度，不是伤害公式的误差百分比。</p>
+    <script type="math/tex; mode=display">s^2=\frac{\sum_{j=1}^{N}(D_j-\overline D)^2}{N-1},\qquad \operatorname{SE}(\overline D)=\sqrt{\frac{s^2}{N}}</script>
+  </div>
+</article>
+<article id="rule-reports" class="rules-chapter">
+  <header><span>12 / REPORTING</span><h2>读懂表格与统计图</h2></header>
+  <div data-claim="reporting"><div class="rules-table"><table><thead><tr><th>指标</th><th>统计口径</th></tr></thead><tbody>
+    <tr><td>造成伤害</td><td>归属于该成员的盾后计算伤害，保留过量部分；包含技能、追加及状态等输出。</td></tr>
+    <tr><td>技能与追加伤害 / 状态伤害</td><td>按事件路径分类；状态伤害视图也包含爆破及数值型伤害，不能用同一条持续伤害公式解释所有事件。</td></tr>
+    <tr><td>实际受伤</td><td>成员真实减少的生命，护盾吸收另列。</td></tr>
+    <tr><td>治疗量 / 受到治疗量</td><td>按施加者 / 接收者归属，曲线均含有效治疗和溢出。</td></tr>
+    <tr><td>施加护盾 / 获得护盾</td><td>成功施加的护盾实例数值；刷新或合并时，不等同于增加同量可吸收余额。</td></tr>
+    <tr><td>护盾吸收</td><td>伤害事件中实际由护盾抵扣的量。</td></tr>
+    <tr><td>剩余生命</td><td>轮末生命快照；选择累计口径时仍显示该时点生命，不累加历轮生命。</td></tr>
+  </tbody></table></div><p>每轮曲线显示该行结算，累计曲线累加截至该行的对应输出。多场均值模式对全部样本统计；行动明细则单独展示第一场样本。CSV 保留相应数值，治疗另外拆分有效、溢出与总量。</p></div>
+  <div data-claim="custom"><h3>自定义角色与配置处理</h3><p>自定义角色使用独立定义的基准面板、成长、主动技能及条件被动，并沿用相同战斗结算器；导出配队会携带所用定义。计算遇到缺失的引用、无法解释的配置或无效上下文时，会停止本次统计并指出具体原因。</p></div>
+</article>
+</div></div>

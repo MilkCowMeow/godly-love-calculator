@@ -1,0 +1,8 @@
+{
+  "name": "godly-love-calculator-tools",
+  "private": true,
+  "version": "1.0.0",
+  "devDependencies": {
+    "katex": "0.19.0"
+  }
+}

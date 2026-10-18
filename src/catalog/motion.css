@@ -1,0 +1,54 @@
+/* Finite, presentation-only motion shared with the Battle Lab's visual rhythm. */
+:root{--motion-out:cubic-bezier(.16,1,.3,1);--motion-snap:cubic-bezier(.2,.8,.2,1)}
+html{scroll-behavior:smooth}
+.chip,.pager button,.reset,.tools-row button,.text-link,.close,#top,.profile-index .avatar,.art-button>span,.portrait-button>span{
+ transition:transform 200ms var(--motion-out),background-color 180ms ease,border-color 180ms ease,color 180ms ease,opacity 180ms ease;
+}
+.tile,.event-tile,.related{transition:transform 260ms var(--motion-out),border-color 200ms ease,box-shadow 260ms ease}
+.tile-image::after{content:"";position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform 360ms var(--motion-out);pointer-events:none}
+.tile h3{text-decoration-color:transparent;transition:text-decoration-color 220ms ease,color 220ms ease}
+.tile:active,.event-tile:active,.related:active{transform:translateY(1px) scale(.992)}
+.chip:active,.pager button:active:not(:disabled),.reset:active,.tools-row button:active,#top:active{transform:translateY(1px) scale(.97)}
+.art-button>span,.portrait-button>span{transform:translateY(2px);opacity:.85}
+.mast nav a::after{position:absolute;content:"";height:2px;background:var(--ink);bottom:0;left:0;right:0;transform:scaleX(0);transform-origin:left;opacity:.55;transition:transform 260ms var(--motion-out),opacity 180ms ease}
+.mast nav a.active::after{transform:scaleX(1);opacity:1}
+details{box-sizing:border-box}
+summary{position:relative;padding-left:18px;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"";position:absolute;left:2px;top:50%;width:5px;height:5px;border-right:1.3px solid currentColor;border-bottom:1.3px solid currentColor;transform:translateY(-50%) rotate(-45deg);transition:transform 220ms var(--motion-out);pointer-events:none}
+details[open]:not([data-motion-closing])>summary::before{transform:translateY(-50%) rotate(45deg)}
+[data-catalog-pending]{opacity:0}
+dialog{
+ box-sizing:border-box;max-width:calc(100vw - 24px);
+ opacity:0;transform:translateY(10px) scale(.973);transform-origin:50% 42%;
+ transition:opacity 170ms ease,transform 250ms var(--motion-out),overlay 190ms allow-discrete,display 190ms allow-discrete;
+}
+dialog img{max-width:min(90vw,calc(100vw - 72px))}
+dialog[open]{opacity:1;transform:translateY(0) scale(1)}
+dialog::backdrop{opacity:0;transition:opacity 190ms ease,overlay 190ms allow-discrete,display 190ms allow-discrete}
+dialog[open]::backdrop{opacity:1}
+@starting-style{dialog[open]{opacity:0;transform:translateY(16px) scale(.973)}dialog[open]::backdrop{opacity:0}}
+@media(hover:hover) and (pointer:fine){
+ .tile:hover{transform:translateY(-5px)}
+ .tile:hover h3{text-decoration-color:var(--accent)}
+ .tile:hover .tile-image::after{transform:scaleX(1)}
+ .event-tile:hover{transform:translateY(-4px);border-color:var(--accent);box-shadow:0 8px 20px #253f390a}
+ .related:hover{transform:translateX(4px);border-color:var(--accent)}
+ .chip:hover:not(.selected),.pager button:hover:not(:disabled):not(.active){background:var(--soft);border-color:var(--accent)}
+ .profile-index a:hover .avatar{transform:translateY(-4px)}
+ .art-button:hover>span,.portrait-button:hover>span{transform:translateY(0);opacity:1}
+ .mast nav a:not(.active):hover::after{transform:scaleX(.45)}
+ .close:hover{transform:translateX(-2px)}
+ #top:hover{transform:translateY(-3px);border-color:var(--accent)}
+}
+@media(prefers-reduced-motion:reduce){
+ html{scroll-behavior:auto}
+ *,*::before,*::after{animation:none!important;transition:none!important}
+ [data-catalog-pending]{opacity:1}
+ .tile:hover,.event-tile:hover,.related:hover,.profile-index a:hover .avatar,.close:hover,#top:hover,dialog,dialog[open]{transform:none!important}
+}
+@media print{
+ *,*::before,*::after{animation:none!important;transition:none!important}
+ [data-catalog-pending]{opacity:1!important;transform:none!important}
+ .tile,.event-tile,.profile,.skill,.reader-hero,.intro{transform:none!important;opacity:1!important}
+}

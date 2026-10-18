@@ -146,9 +146,9 @@ if args.font_dir:
 safe = lambda value: json.dumps(value, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/')
 html = (SRC / 'template.html').read_text('utf8')
 for token, value in {
-    'STYLE': fonts + (SRC / 'style.css').read_text('utf8'),
+    'STYLE': fonts + (SRC / 'style.css').read_text('utf8') + (SRC / 'motion.css').read_text('utf8'),
     'DATA': 'const DATA=' + safe(data) + ';\nconst ASSETS=' + safe(assets) + ';',
-    'APP': (SRC / 'app.js').read_text('utf8'),
+    'APP': (SRC / 'app.js').read_text('utf8') + '\n' + (SRC / 'motion.js').read_text('utf8'),
 }.items():
     html = html.replace('/*' + token + '*/', value)
 TARGET.write_text(html, 'utf8')

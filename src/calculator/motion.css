@@ -1,0 +1,70 @@
+/* Presentation-only motion. Embedded by build_calculator.py. */
+:root{--motion-snap:cubic-bezier(.2,.8,.2,1);--motion-out:cubic-bezier(.16,1,.3,1)}
+html{scroll-behavior:smooth}
+button,a,input,select,summary{-webkit-tap-highlight-color:transparent}
+button,a,summary{touch-action:manipulation}
+.primary,.secondary,.icon-button,.close,.card-option,.card-pick,.text-button,#chart-legend button{
+ transition:transform 180ms var(--motion-out),background-color 180ms ease,border-color 180ms ease,color 180ms ease,box-shadow 180ms ease;
+}
+.primary{position:relative;isolation:isolate;overflow:hidden}
+.primary>span{transition:transform 240ms var(--motion-out)}
+.primary:active:not(:disabled),.secondary:active:not(:disabled),.icon-button:active:not(:disabled){transform:translateY(1px) scale(.975)}
+.primary:active>span{transform:translateX(4px)}
+.close:active{transform:scale(.9)}
+.card-option{position:relative;transform-origin:50% 70%}
+.card-option:active:not(:disabled){transform:translateY(1px) scale(.98)}
+.card-pick{position:relative;transform-origin:50% 85%;border-radius:5px;isolation:isolate}
+.card-pick>.thumb,.card-option-visual{transition:transform 260ms var(--motion-out)}
+.card-pick .chevron{transition:transform 220ms var(--motion-out)}
+.card-pick:active{transform:translateY(1px) scale(.98)}
+.card-pick:focus-visible{outline:2px solid var(--gold);outline-offset:5px}
+.card-pick.motion-seated::before,.card-pick.motion-seated::after{content:"";position:absolute;pointer-events:none;z-index:-1}
+.card-pick.motion-seated::before{inset:-7px -5px;border:1px solid var(--gold);border-radius:7px;animation:seat-ring 570ms ease-out both}
+.card-pick.motion-seated::after{height:2px;left:3px;right:3px;bottom:-8px;background:var(--gold);transform-origin:center;animation:seat-strike 510ms ease-out both}
+@keyframes seat-ring{0%,24%{opacity:0;transform:scale(1.055)}34%{opacity:.75;transform:scale(1)}100%{opacity:0;transform:scale(1.025)}}
+@keyframes seat-strike{0%,27%{opacity:0;transform:scaleX(.08)}38%{opacity:.8;transform:scaleX(.86)}100%{opacity:0;transform:scaleX(1.04)}}
+/* The active indicator moves independently of the labels, without layout work. */
+#target-switch{position:relative;isolation:isolate}
+#target-switch .motion-target-indicator{position:absolute;z-index:-1;left:0;top:0;background:var(--ink);border-radius:3px;box-shadow:0 2px 4px #0001;pointer-events:none;transform-origin:left top}
+#target-switch.motion-indicator-ready button.active{background:transparent;box-shadow:none}
+#target-switch button{transition:color 160ms ease,transform 160ms var(--motion-out)}
+#target-switch button:active{transform:scale(.96)}
+dialog{
+ opacity:0;transform:translateY(12px) scale(.985);transform-origin:50% 36%;
+ transition:opacity 160ms ease,transform 220ms var(--motion-out),overlay 180ms allow-discrete,display 180ms allow-discrete;
+}
+dialog[open]{opacity:1;transform:translateY(0) scale(1)}
+dialog::backdrop{opacity:0;transition:opacity 180ms ease,overlay 180ms allow-discrete,display 180ms allow-discrete}
+dialog[open]::backdrop{opacity:1}
+@starting-style{dialog[open]{opacity:0;transform:translateY(18px) scale(.985)}dialog[open]::backdrop{opacity:0}}
+.health-line{overflow:hidden}
+.health-line>span{transform-origin:left}
+.progress{overflow:hidden}
+.progress span{transition:width 200ms var(--motion-snap)}
+.stat-chart{transition:border-color 180ms ease,box-shadow 220ms ease}
+.stat-chart svg{overflow:visible}
+.stat-chart svg circle{transition:r 160ms var(--motion-out),stroke-width 160ms ease;stroke:var(--white);stroke-width:1.2px}
+.stat-chart svg circle:hover{r:5.5;stroke-width:2}
+.stat-chart[data-motion-pending]{opacity:0}
+#chart-legend button[aria-pressed="false"]{opacity:.48}
+#chart-legend button:active{transform:scale(.97)}
+#calculate-view,#mechanics-view{transform-origin:50% 0}
+@media(hover:hover) and (pointer:fine){
+ .primary:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 5px 13px var(--shadow)}
+ .primary:hover>span{transform:translateX(3px)}
+ .secondary:hover:not(:disabled){transform:translateY(-1px)}
+ .card-option:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 5px 12px var(--shadow)}
+ .card-option:hover:not(:disabled) .card-option-visual{transform:rotate(-1.5deg) scale(1.035)}
+ .card-pick:hover>.thumb{transform:translateY(-2px) rotate(-1deg)}
+ .card-pick:hover .chevron{transform:translateY(2px)}
+ .close:hover{transform:rotate(90deg)}
+ .stat-chart:hover{border-color:var(--gold)}
+}
+@media(max-width:720px){.card-pick.motion-seated::before{inset:-5px -3px}}
+@media(prefers-reduced-motion:reduce){
+ html{scroll-behavior:auto}
+ *,*::before,*::after{animation:none!important;transition:none!important}
+ dialog,dialog[open]{transform:none}
+ .stat-chart[data-motion-pending]{opacity:1}
+ .primary:hover,.secondary:hover,.card-option:hover,.card-pick:hover>.thumb,.card-option:hover .card-option-visual,.close:hover{transform:none!important}
+}

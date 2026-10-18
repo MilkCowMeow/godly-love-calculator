@@ -1,0 +1,60 @@
+{
+  "version": "1.0.1.014517",
+  "libil2cpp_sha256": "8dd87b18e1f32041faaa8f32366175afb8044772cbdf3d15ff04413595a75e35",
+  "skill_table_sha256": "7dd1f02b53b3e5767ac872ce708198b7d365315cfbe2e760bc65204a3de591d1",
+  "status_table_sha256": "1a189bcaed30a18e4fa7f7022cdd5464c29c3bb296d62aa3267750140528d647",
+  "skillID": "C03_SSR_012S1",
+  "rawConfig": "Fun#{Fun:\"AddStatus\",Rate:0.75,FID:\"RandomAddStatus\",FIDs:[\"Silence\",\"Unhealable\",\"ReduceAttack\",\"ReduceDef\"],StatusRound:1}",
+  "randomStatusDefinitionPresent": false,
+  "candidateDefinitions": {
+    "Silence": {
+      "ID": "Silence",
+      "RoundCount": "1",
+      "DynamicField1": "Silence#1"
+    },
+    "Unhealable": {
+      "ID": "Unhealable",
+      "RoundCount": "1",
+      "DynamicField1": "SealHeal#1"
+    },
+    "ReduceAttack": {
+      "ID": "ReduceAttack",
+      "RoundCount": "2",
+      "DynamicField1": "AttackFinalRate#-0.2"
+    },
+    "ReduceDef": {
+      "ID": "ReduceDef",
+      "RoundCount": "2",
+      "DynamicField1": "DefenceFinalRate#-0.2"
+    }
+  },
+  "original_binary_dispatches": [
+    {
+      "Fun": "AddStatus",
+      "enum": 1,
+      "entry": "0x235775c",
+      "forwardedFID": "0x10000200"
+    },
+    {
+      "Fun": "RandomAddStatus",
+      "enum": 22,
+      "entry": "0x235154c"
+    }
+  ],
+  "official_apk_confirmation": {
+    "name": "new_official_1014_2.apk",
+    "bytes": 372466495,
+    "tables": {
+      "skill": {
+        "bundle": "assets/aa/Android/firstbundlegroup_assets_assets/game/staticdata/skill.txt_1274c0a3c21e26f126167410d63a7207.bundle",
+        "matchesLocalTable": true
+      },
+      "status": {
+        "bundle": "assets/aa/Android/firstbundlegroup_assets_assets/game/staticdata/status.txt_1011cc8f3913efeeffb23591cc83ee4c.bundle",
+        "matchesLocalTable": true
+      }
+    },
+    "nativeBinaryMatches": true
+  },
+  "scope": "Original ARM64 dispatch executed in isolation, not a live game battle."
+}

@@ -143,7 +143,18 @@ function _convert(vc,ctx,defaultValue=0){
  return Math.fround(out);
 }
 function convert(vc,ctx={},defaultValue=0){const q={...ctx,_unsupported:[]};let value=_convert(vc,q,defaultValue);return {value,unsupported:[...new Set(q._unsupported)]};}
-function configFunctions(configs,origin){const out=[];for(const c of configs||[]){if(c.key==='Fun'&&typeof c.value==='object'){let v=clone(c.value);v._origin=origin;v._field=c.field;out.push(v);}else out.push({_property:c.key,_value:c.value,_origin:origin,_field:c.field});}return out;}
+function correctedFunction(value,origin,field){
+ const v=clone(value);
+ // User-approved correction of one malformed 014517 row. Keep the source data intact.
+ // Native dispatch and APK evidence: evidence/random_add_status_audit.md.
+ if(DATA?.version==='1.0.1.014517'&&!DATA.statuses?.RandomAddStatus&&origin==='C03_SSR_012S1'&&field==='DynamicField1'&&
+    Object.keys(v).length===5&&v.Fun==='AddStatus'&&v.FID==='RandomAddStatus'&&v.Rate===.75&&v.StatusRound===1&&
+    Array.isArray(v.FIDs)&&v.FIDs.join('~')==='Silence~Unhealable~ReduceAttack~ReduceDef'){
+  v.Fun='RandomAddStatus';delete v.FID;
+ }
+ return v;
+}
+function configFunctions(configs,origin){const out=[];for(const c of configs||[]){if(c.key==='Fun'&&typeof c.value==='object'){let v=correctedFunction(c.value,origin,c.field);v._origin=origin;v._field=c.field;out.push(v);}else out.push({_property:c.key,_value:c.value,_origin:origin,_field:c.field});}return out;}
 function normSkill(x){return x&&x.row&&!x.raw?{...x,raw:x.row}:x;}
 function resolveSkill(card,skillId,options={}){
  let skill=DATA&&DATA.skills[skillId]||(card.skills||[]).find(x=>typeof x==='object'&&x.id===skillId);skill=normSkill(skill);

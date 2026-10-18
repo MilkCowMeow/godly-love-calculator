@@ -89,7 +89,7 @@ Definitions stay in the current browser. Exported team plans include the custom 
 | 🎞️ Community video review | Key frames and old/new client configurations checked; [review notes in Chinese](evidence/community_video_review.md) |
 | 🎮 Native client comparison | MuMu Trial Floor 50: [15 damage samples plus stats, stacking, and DOT values checked](evidence/native_client_comparison.md), using a local data service |
 
-**Known configuration gap:** the future card 《誓约束缚》 (`C03_SSR_012S1`) references `RandomAddStatus`, which has no definition in the current client's status table. Execution stops with a clear message when this path is reached, instead of reporting an incomplete total. Future/pre-release entries are not confirmation of a live release.
+**One explicit configuration correction:** on 2026-10-18, the unmodified APK and native dispatch confirmed that 《誓约束缚》's basic skill places the random-application function name in its status-ID field. Following the user's explicit choice, the calculator corrects this exact row to use the existing random-application function, preserving the source data, 75% base probability, four candidates and one-turn duration. The card can now be simulated; see the [audit and correction rationale](evidence/random_add_status_audit.md). This does not imply that the unmodified client behaves identically, or that a pre-release card has launched.
 
 Native-method/configuration audit summaries are in [`evidence/`](evidence/). This client comparison exposed and fixed stat-precision and early-rounding issues. Full character-by-character, turn-by-turn verification using an official-server account has not been completed.
 

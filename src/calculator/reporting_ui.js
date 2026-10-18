@@ -20,15 +20,26 @@ function displayRows(rows,slot=null,key=view){
  return fmt(rows.reduce((sum,row)=>sum+(slot===null?plan.members.reduce((n,_,i)=>n+value(row,i,key),0):value(row,slot,key)),0),digits());
 }
 function header(){const th=$$('#roster-row th');if(th.length)th.at(-1).innerHTML='<b>累计'+views[view]+'</b><small>CUMULATIVE</small>';}
+function markDead(cell,round,slot,active){
+ const amount=cell.querySelector('.cell-damage'),detail=cell.querySelector('.cell-detail'),contribution=document.createElement('span');
+ cell.classList.add('member-dead');
+ if(active&&value(round,slot)>0){
+  contribution.className='cell-death-contribution';contribution.append('本轮'+views[view]+' ');
+  while(amount.firstChild)contribution.append(amount.firstChild);
+ }
+ amount.textContent='已死亡';
+ if(contribution.childNodes.length)detail.prepend(contribution);
+}
 function updateTable(){
- header();const rows=result?.ok?result.rows:[],by=new Map(rows.map(r=>[r.round,r])),processed=[];
+ header();const rows=result?.ok?result.rows:[],by=new Map(rows.map(r=>[r.round,r])),processed=[],snapshots=new Map();
  for(const tr of $$('#battle-body tr')){
   const round=Number(tr.querySelector('[data-log]')?.dataset.log),r=by.get(round),cells=[...tr.children];
-  if(!r||tr.classList.contains('ended')){if(result?.ok)cells[6].textContent=displayRows(processed);continue;}
+  for(const state of r?.report?.snapshot||r?.teamHP||[])snapshots.set(state.slot,state);
+  if(!r||tr.classList.contains('ended')){if(result?.ok){cells[6].textContent=displayRows(processed);for(let i=0;i<4;i++)if(plan.members[i].cardId&&Number(snapshots.get(i)?.alive)===0)markDead(cells[i+1],r,i,false);}continue;}
   processed.push(r);
   for(let i=0;i<4;i++){
    if(!plan.members[i].cardId)continue;
-   const cell=cells[i+1],n=value(r,i),stats=r.report?.members[i],snapshot=r.report?.snapshot.find(s=>s.slot===i),bits=[],amount=cell.querySelector('.cell-damage');
+   const cell=cells[i+1],n=value(r,i),stats=r.report?.members[i],snapshot=snapshots.get(i),bits=[],amount=cell.querySelector('.cell-damage');
    amount.textContent=fmt(n,digits());
    if(['healing','shield'].includes(view)){
     const b=document.createElement('button');b.className='cell-stat-button';
@@ -40,7 +51,8 @@ function updateTable(){
    else if(view==='shield')bits.push('获得 '+fmt(stats?.receivedShield||0,digits()));
    else if(view==='damageTaken'){const p=GLReports.healingParts(r.report,i,true);bits.push('护盾吸收 '+fmt(stats?.absorbed||0,digits()));bits.push('受到治疗 '+pair(p.effective,p.overheal));}
    else {const p=GLReports.healingParts(r.report,i);bits.push(fmt(mean()?r.members[i].actionCount:r.members[i].actions.length,digits())+' 次出手');if(p.total)bits.push('治疗 '+pair(p.effective,p.overheal));if(stats?.shield)bits.push('护盾 '+fmt(stats.shield,digits()));}
-   if(snapshot)bits.push((mean()?'平均余血 ':'余血 ')+fmt(snapshot.hp,digits()));cell.querySelector('.cell-detail').textContent=bits.join('，');
+   if(snapshot){bits.push((mean()?'平均余血 ':'余血 ')+fmt(snapshot.hp,digits()));if(mean()&&snapshot.alive>0&&snapshot.alive<1)bits.push('存活率 '+fmt(snapshot.alive*100,1)+'%');}cell.querySelector('.cell-detail').textContent=bits.join('，');
+   if(Number(snapshot?.alive)===0)markDead(cell,r,i,true);
   }
   cells[5].textContent=displayRows([r]);cells[6].textContent=displayRows(processed);
  }

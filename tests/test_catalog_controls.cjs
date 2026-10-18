@@ -8,9 +8,17 @@ const context=vm.createContext({DATA:data,ASSETS:{},document:{querySelector:node
 const source=fs.readFileSync(__dirname+'/catalog_app.js','utf8');
 assert.match(source,/window\.addEventListener\('hashchange',route\);route\(\);\s*$/);
 vm.runInContext(source.replace(/window\.addEventListener\('hashchange',route\);route\(\);\s*$/,'')+`
-this.ui={state,renderCards,visibleCatalogCards};
+this.ui={state,renderCards,visibleCatalogCards,config,skill};
 `,context);
 const {ui}=context;
+// Numeric parameters must never be translated through object-name aliases.
+const bleedSkill=data.cards.find(c=>c.id==='C04_SR_003').skills.find(s=>s.id==='C04_SR_003S1');
+const bleedMarkup=ui.skill(bleedSkill);
+assert.match(bleedMarkup,/<dt>持续回合<\/dt><dd>2<\/dd>/);
+assert.match(bleedMarkup,/<dt>威力系数（Pow）<\/dt><dd>1<\/dd>/);
+assert.match(bleedMarkup,/血绽/,'named status IDs must still resolve');
+assert.doesNotMatch(bleedMarkup,/木桩/,'numeric 1 and 2 must not become target names');
+for(const number of [1,2,'1','2',0.15,'-2','1e2'])assert.equal(ui.config(number),String(number));
 ui.renderCards();
 assert.equal(ui.state.showR,false,'R cards are hidden on a fresh page');
 assert.equal(ui.visibleCatalogCards().length,104);

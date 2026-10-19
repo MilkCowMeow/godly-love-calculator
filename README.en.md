@@ -32,7 +32,7 @@ The catalog contains 192 cards, including 88 R cards hidden by default. Enable *
 | 👥 Four-member teams | Choose each card, level, star rank, and optional base-stat overrides; duplicate copies of the same card are disallowed |
 | 📊 Round table | Per-member damage, row subtotals, cumulative damage, and team totals |
 | 🎬 Event log | Inspect skills, assists, counters, statuses, and damage in execution order |
-| 🎯 Target presets | Trial Floor 50 with its boss and companion; an unlimited-HP training dummy |
+| 🎯 Target presets | Original enemy setups for Trial Floors 1–50, defaulting to Floor 50; an unlimited-HP training dummy |
 | 🕹️ Action policies | Game AI, basic only, ultimate priority, or wait; optional per-row overrides |
 | 🎲 Random simulations | Reproducible single battles or means over 32/128/256 independent battles |
 | 💾 Team management | Local browser saves, JSON import/export, and CSV damage-table export |
@@ -51,7 +51,7 @@ Damage totals use post-shield calculated damage and retain overkill. Actual HP l
 
 ### 🎯 Targets
 
-- **Trial Floor 50:** the level-80 boss 《烟光迷离》 and companion 《最佳调味》 are retained by default. The companion changes stealth targetability. It can be disabled for a boss-only comparison.
+- **Trial Floors 1–50:** use the small arrow beside the Trial button to select a floor. Each floor loads its original enemy levels, boss, companions, skills, and AI. Floor 50 is the default, retaining 《烟光迷离》 and 《最佳调味》. Companions can be disabled for a boss-only comparison. Saved teams and exported plans retain the selected floor.
 - **Training dummy:** unlimited HP, no active attacks or newly applied effects, but it can receive statuses. Its reference maximum HP supports percentage-based skills while its HP ratio remains 100%. Speed controls its status-tick timing.
 
 ### 🧑‍🎨 Custom characters
@@ -82,7 +82,7 @@ Definitions stay in the current browser. Exported team plans include the custom 
 |---|---|
 | 📦 Client version | `1.0.1.014517` |
 | 🗓️ Data reviewed | `2026-10-16` |
-| 🃏 Calculator dataset | 192 cards, 584 related skills, 97 statuses |
+| 🃏 Calculator dataset | 192 cards, 586 related skills, 97 statuses, 50 Trial floors |
 | 🧩 Unit checks | Scalar damage, configuration parsing, statuses, scheduling, complex effects, and AI |
 | 🔁 Continuous simulations | 288 mixed-team scenarios plus damage-total conservation checks |
 | 🖥️ Interface checks | Desktop, 390px mobile, cross-page navigation, and worker-based calculation |

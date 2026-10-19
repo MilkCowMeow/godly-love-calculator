@@ -515,7 +515,7 @@
       {
         "file": "src/calculator/table_app.js",
         "anchors": [
-          "DATA.tower50.enemies"
+          "currentTrial().enemies"
         ]
       },
       {

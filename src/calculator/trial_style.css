@@ -1,0 +1,24 @@
+/* 两个对手选项保持原位，试炼层数由独立的小箭头展开。 */
+.target-panel{position:relative;z-index:30}
+.target-selector{position:relative;z-index:2}
+#target-detail{position:relative;z-index:0}
+#target-switch .trial-picker{position:relative;flex:1.3;min-width:0}
+.trial-split{display:flex;align-items:stretch;height:100%}
+#target-switch #trial-target{flex:1;min-width:0;padding-right:3px}
+#target-switch .trial-menu-toggle{display:flex;align-items:center;justify-content:center;flex:0 0 25px;padding:8px 5px 8px 3px;border:0;border-radius:0 3px 3px 0}
+#target-switch .trial-picker.active .trial-menu-toggle{color:var(--accent-contrast)}
+.trial-menu-toggle svg{transition:transform 180ms ease}
+.trial-menu-toggle[aria-expanded=true] svg{transform:rotate(180deg)}
+#target-switch .trial-menu{position:absolute;left:-4px;top:calc(100% + 12px);z-index:40;width:300px;max-width:calc(100vw - 54px);max-height:min(380px,52vh);overflow-y:auto;overscroll-behavior:contain;background:var(--white);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:6px;box-shadow:0 14px 40px #0002;scrollbar-width:thin;scrollbar-color:var(--line) transparent;animation:trial-menu-enter 170ms cubic-bezier(.16,1,.3,1)}
+#target-switch .trial-menu[hidden]{display:none}
+#target-switch .trial-menu.opens-up{top:auto;bottom:calc(100% + 12px)}
+#target-switch .trial-menu [role=option]{display:flex;align-items:center;gap:16px;justify-content:space-between;width:100%;padding:10px 12px;text-align:left;color:var(--ink);font-size:14px;border-radius:4px;line-height:1.5;background:transparent;white-space:normal}
+#target-switch .trial-menu [role=option]:hover,#target-switch .trial-menu [role=option]:focus-visible{background:var(--soft);outline:2px solid var(--gold);outline-offset:-2px}
+#target-switch .trial-menu [role=option][aria-selected=true]{background:var(--ink);color:var(--accent-contrast)}
+.trial-floor-number{font-variant-numeric:tabular-nums;flex:0 0 56px}
+.trial-floor-boss{font-size:12px;text-align:right;overflow-wrap:anywhere;opacity:.85}
+.trial-unit-detail+.trial-unit-detail{border-top:1px solid var(--line);margin-top:28px;padding-top:20px}
+.trial-unit-detail>h3 small{font-family:var(--body);font-size:12px;font-weight:400;color:var(--muted);margin-left:8px}
+@keyframes trial-menu-enter{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:720px){#target-switch .trial-menu{width:100%;max-width:none;min-width:280px}#target-switch .trial-menu-toggle{flex-basis:30px}}
+@media(prefers-reduced-motion:reduce){#target-switch .trial-menu{animation:none}.trial-menu-toggle svg{transition:none}}

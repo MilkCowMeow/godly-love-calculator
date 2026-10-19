@@ -71,7 +71,8 @@
  indicator.className='motion-target-indicator';indicator.setAttribute('aria-hidden','true');segment.append(indicator);
  function moveIndicator(){
   const button=segment.querySelector('button.active');if(!button)return;
-  const r={x:button.offsetLeft,y:button.offsetTop,w:button.offsetWidth,h:button.offsetHeight};
+  const element=button.dataset.target==='tower50'?button.closest('.trial-split'):button,bounds=element.getBoundingClientRect(),parent=segment.getBoundingClientRect();
+  const r={x:bounds.left-parent.left,y:bounds.top-parent.top,w:bounds.width,h:bounds.height};
   indicator.style.width=r.w+'px';indicator.style.height=r.h+'px';indicator.style.transform=`translate(${r.x}px,${r.y}px)`;
   if(indicatorAnimation){indicatorAnimation.cancel();indicatorAnimation=null;}
   if(indicatorRect)indicatorAnimation=animate(indicator,[{transform:`translate(${indicatorRect.x}px,${indicatorRect.y}px) scaleX(${indicatorRect.w/r.w})`},{transform:`translate(${r.x}px,${r.y}px) scaleX(1)`}],{duration:310,easing:snap});

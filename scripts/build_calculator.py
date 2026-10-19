@@ -2,6 +2,7 @@ from pathlib import Path
 import re,json,subprocess,html as html_lib
 from embedded import extract
 from card_characters import assign_characters
+from web_analytics import inject_analytics
 ROOT=Path(__file__).resolve().parents[1];SRC=ROOT/'src/calculator';TARGET=ROOT/'docs/index.html'
 old=TARGET.read_text('utf8');data=extract(old,'DATA');assets=extract(old,'ASSETS')
 for card in data['cards']:assign_characters(card,card['raw']['Represents'],data['profiles'])
@@ -31,4 +32,4 @@ safe=lambda x:json.dumps(x,ensure_ascii=False,separators=(',',':')).replace('</'
 app='const MECHANICS_HTML='+safe(mechanics_html)+';\nconst SIM_WORKER_SOURCE='+safe(worker)+';\n'+read('custom_ui.js')+'\n'+read('reporting_ui.js')+'\n'+read('table_app.js')+'\n'+read('motion.js')
 html=read('table_template.html')
 for token,value in {'ICON':icon,'STYLE':fonts+math['css']+read('table_style.css')+read('custom_style.css')+read('reporting_style.css')+read('mechanics_style.css')+read('motion.css'),'DATA':'const DATA='+safe(data)+';\nconst ASSETS='+safe(assets)+';','CORE':core,'CONFIG':config,'TIMELINE':timeline,'MODULES':modules,'APP':app}.items():html=html.replace('/*'+token+'*/',value)
-TARGET.write_text(html,'utf8');print('Built docs/index.html:',TARGET.stat().st_size,'bytes')
+TARGET.write_text(inject_analytics(html),'utf8');print('Built docs/index.html:',TARGET.stat().st_size,'bytes')

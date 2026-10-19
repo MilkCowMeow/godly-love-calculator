@@ -214,4 +214,16 @@ window.addEventListener('hashchange',route);route();
  window.addEventListener('beforeprint',()=>{printing=true;cancelAll();});window.addEventListener('afterprint',()=>{printing=false;});
  sceneEntry();
 })();
+</script><script id="production-web-analytics">
+(function () {
+  if (location.protocol !== 'https:' || location.hostname !== 'milkcowmeow.github.io' ||
+      !/^\/godly-love-calculator(?:\/|$)/.test(location.pathname) ||
+      document.getElementById('cloudflare-web-analytics')) return;
+  var beacon = document.createElement('script');
+  beacon.id = 'cloudflare-web-analytics';
+  beacon.defer = true;
+  beacon.src = 'https://static.cloudflareinsights.com/beacon.min.js';
+  beacon.setAttribute('data-cf-beacon', JSON.stringify({token: "6e57ca2edf5d436b95f5484c49d77bee"}));
+  document.head.appendChild(beacon);
+})();
 </script></body></html>

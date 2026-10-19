@@ -10,6 +10,7 @@ import math
 import struct
 from embedded import extract
 from card_characters import assign_characters
+from web_analytics import inject_analytics
 
 ROOT = Path(__file__).resolve().parents[1]
 SRC = ROOT / 'src/catalog'
@@ -151,6 +152,6 @@ for token, value in {
     'APP': (SRC / 'app.js').read_text('utf8') + '\n' + (SRC / 'motion.js').read_text('utf8'),
 }.items():
     html = html.replace('/*' + token + '*/', value)
-TARGET.write_text(html, 'utf8')
+TARGET.write_text(inject_analytics(html), 'utf8')
 print(f'Built docs/catalog.html: {len(data["cards"])} cards, '
       f'{sum(len(c["characters"]) == 1 for c in data["cards"])} solo cards')

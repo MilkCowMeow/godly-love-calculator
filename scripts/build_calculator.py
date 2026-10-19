@@ -1,9 +1,12 @@
 from pathlib import Path
-import re,json,subprocess,html as html_lib
+import re,json,subprocess,html as html_lib,argparse,base64,io
 from embedded import extract
 from card_characters import assign_characters
 from web_analytics import inject_analytics
 ROOT=Path(__file__).resolve().parents[1];SRC=ROOT/'src/calculator';TARGET=ROOT/'docs/index.html'
+parser=argparse.ArgumentParser()
+parser.add_argument('--font-dir',type=Path,help='字体源文件目录；需要新增内嵌字形时使用')
+args=parser.parse_args()
 old=TARGET.read_text('utf8');data=extract(old,'DATA');assets=extract(old,'ASSETS')
 trials=json.loads((SRC/'trials.json').read_text('utf8'))
 if set(trials['trials'])!={str(i) for i in range(1,51)}:raise ValueError('试炼数据须完整覆盖1至50层')
@@ -34,7 +37,15 @@ worker=core+'\n'+config+'\n'+timeline+'\n'+modules+'''
 self.onmessage=function(e){try{const {data,plan,samples,seed}=e.data,results=[];for(let i=0;i<samples;i++){const r=GLTimeline.run(data,plan,((seed>>>0)+Math.imul(i,2654435761))>>>0);if(!r.ok){postMessage({type:'result',result:r});return;}if(i){delete r.events;for(const row of r.rows)delete row.events;}results.push(r);if((i+1)%8===0)postMessage({type:'progress',done:i+1,total:samples});}postMessage({type:'result',result:samples===1?results[0]:GLTimeline.aggregate(results,plan.rounds)});}catch(err){postMessage({type:'error',error:err.message});}};
 '''
 safe=lambda x:json.dumps(x,ensure_ascii=False,separators=(',',':')).replace('</','<\\/')
-app='const MECHANICS_HTML='+safe(mechanics_html)+';\nconst SIM_WORKER_SOURCE='+safe(worker)+';\n'+read('custom_ui.js')+'\n'+read('reporting_ui.js')+'\n'+read('table_app.js')+'\n'+read('motion.js')
+app='const MECHANICS_HTML='+safe(mechanics_html)+';\nconst SIM_WORKER_SOURCE='+safe(worker)+';\n'+read('custom_ui.js')+'\n'+read('reporting_ui.js')+'\n'+read('trial_details.js')+'\n'+read('table_app.js')+'\n'+read('motion.js')
 html=read('table_template.html')
-for token,value in {'ICON':icon,'STYLE':fonts+math['css']+read('table_style.css')+read('custom_style.css')+read('reporting_style.css')+read('mechanics_style.css')+read('motion.css')+read('trial_style.css'),'DATA':'const DATA='+safe(data)+';\nconst ASSETS='+safe(assets)+';','CORE':core,'CONFIG':config,'TIMELINE':timeline,'MODULES':modules,'APP':app}.items():html=html.replace('/*'+token+'*/',value)
+if args.font_dir:
+ from fontTools import subset
+ from fontTools.ttLib import TTFont
+ characters=''.join(set(old+app+html+mechanics_html))
+ fonts=''
+ for family,filename in [('BookCN','STSONG.TTF'),('TitleCN','STZHONGS.TTF'),('BookEN','times.ttf')]:
+  font=TTFont(args.font_dir/filename);sub=subset.Subsetter(options=subset.Options());sub.populate(text=characters);sub.subset(font);font.flavor='woff2';out=io.BytesIO();font.save(out)
+  fonts+='@font-face{font-family:'+family+';src:url(data:font/woff2;base64,'+base64.b64encode(out.getvalue()).decode()+') format("woff2");font-display:swap;}\n'
+for token,value in {'ICON':icon,'STYLE':fonts+math['css']+read('table_style.css')+read('custom_style.css')+read('reporting_style.css')+read('mechanics_style.css')+read('motion.css')+read('trial_style.css')+read('trial_details_style.css'),'DATA':'const DATA='+safe(data)+';\nconst ASSETS='+safe(assets)+';','CORE':core,'CONFIG':config,'TIMELINE':timeline,'MODULES':modules,'APP':app}.items():html=html.replace('/*'+token+'*/',value)
 TARGET.write_text(inject_analytics(html),'utf8');print('Built docs/index.html:',TARGET.stat().st_size,'bytes')

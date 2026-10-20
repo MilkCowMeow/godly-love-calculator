@@ -67,3 +67,4 @@
  .trial-ai-rules ol{font-size:12px}.trial-fold-body{padding:11px}.trial-config>div,.trial-config .trial-config>div{display:block}.trial-config dt{margin:3px 0}.trial-config dd{padding-left:8px}.trial-config .trial-config{padding-left:8px}
  .trial-skill-notes{padding-left:26px;font-size:12px}
 }
+@media(max-width:360px){.trial-stat-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}

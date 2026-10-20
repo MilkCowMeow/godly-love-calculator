@@ -3,6 +3,7 @@ import re,json,subprocess,html as html_lib,argparse,base64,io
 from embedded import extract
 from card_characters import assign_characters
 from web_analytics import inject_analytics
+from client_text import validate_visible_text
 ROOT=Path(__file__).resolve().parents[1];SRC=ROOT/'src/calculator';TARGET=ROOT/'docs/index.html'
 parser=argparse.ArgumentParser()
 parser.add_argument('--font-dir',type=Path,help='字体源文件目录；需要新增内嵌字形时使用')
@@ -16,11 +17,18 @@ data['trials']=trials['trials']
 if data.get('catalog'):data['tower50']=trials['trials']['50']
 for sid,skill in trials['skills'].items():data['skills'].setdefault(sid,skill)
 for sid,status in trials['statuses'].items():data['statuses'].setdefault(sid,status)
+# 试炼闭包的展示文字与统一技能/状态库一致，数值和原始配置保持源表内容。
+for trial in data['trials'].values():
+ for collection in ['skills','statuses']:
+  for identifier,definition in trial[collection].items():
+   canonical=data[collection][identifier]
+   for field in ['name','description']:definition[field]=canonical[field]
 for card in data['cards']:assign_characters(card,card['raw']['Represents'],data['profiles'])
 catalog_html=(ROOT/'docs/catalog.html').read_text('utf8');catalog=extract(catalog_html,'DATA');catalog_assets=extract(catalog_html,'ASSETS');catalog_cards={c['id']:c for c in catalog['cards']}
 for card in data['cards']:
  source=catalog_cards.get(card['id'],{});thumb=source.get('calculatorThumb') if card['rarity']=='R' else source.get('thumb')
  if thumb:card['thumb']=thumb;assets[thumb]=catalog_assets[thumb]
+validate_visible_text(data)
 fonts='\n'.join(face for face in re.findall(r'@font-face\{[^}]*\}',old) if re.search(r'font-family:(?:BookCN|BookEN|TitleCN)(?:;|,)',face))
 if not fonts:raise ValueError('Missing embedded reading fonts')
 math=json.loads(subprocess.run(['node',str(ROOT/'scripts/render_mechanics.cjs')],cwd=ROOT,capture_output=True,text=True,encoding='utf8',check=True).stdout)

@@ -2,6 +2,7 @@
 from pathlib import Path
 import argparse,copy,csv,hashlib,json,re,struct,sys
 from embedded import extract
+from client_text import ClientText
 ROOT=Path(__file__).resolve().parents[1]
 parser=argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--tables',required=True,type=Path);parser.add_argument('--locale',required=True,type=Path)
@@ -15,13 +16,8 @@ convert=OpenCC('t2s').convert
 old=extract((ROOT/'docs/index.html').read_text('utf8'),'DATA');data=copy.deepcopy(old)
 def rows(name):
  with (args.tables/(name+'.txt')).open(encoding='utf-8-sig',newline='') as stream:return list(csv.DictReader(stream,delimiter='@',quoting=csv.QUOTE_NONE))
-locale={}
-for language in ['CHT','CHS']:
- for line in (args.locale/language).read_text('utf-8-sig').splitlines()[1:]:
-  if '@' in line:key,value=line.split('@',1);locale[key]=value
-def tr(text):
- text=re.sub(r'<[^>]+>','',locale.get(text,text)).replace('\\n','\n')
- return convert(re.sub(r'\[([^\[\]:]+):[^\[\]:]+:[^\[\]:]+\]',r'\1',text))
+tr=ClientText(args.locale,args.tables,convert)
+
 def configs(row,prefix='DynamicField'):
  out=[]
  for field,raw in row.items():
@@ -53,7 +49,7 @@ for sid,previous in list(data['skills'].items()):
  raw=skillrows.get(sid)
  if raw is None:raise ValueError('既有技能在新表中消失：'+sid)
  record={'id':sid,'name':tr(raw['NAME']),'description':tr(raw['Description']),'raw':raw,'configs':configs(raw)}
- if record['name'].startswith(('T_','UI_')):
+ if not record['name'] or record['name'].startswith(('T_','UI_')):
   old_name=previous.get('name','')
   record['name']=old_name if old_name and not old_name.startswith(('T_','UI_')) else {'T_Skill_NAME_C01_SSR_014S3':'全体攻击'}.get(raw['NAME'],'辅助技能')
  # 仅当原始坏配置逐字段未变时，继续保留用户批准的最小纠正。

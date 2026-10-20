@@ -2,9 +2,11 @@
 from pathlib import Path
 import argparse,base64,csv,hashlib,io,json,re,struct,sys
 from embedded import extract
+from client_text import ClientText
 ROOT=Path(__file__).resolve().parents[1]
 p=argparse.ArgumentParser(description=__doc__)
-for key in ['tables','locale','calculator-data','news','banner','output']:p.add_argument('--'+key,required=True,type=Path)
+for key in ['tables','locale','calculator-data','news','output']:p.add_argument('--'+key,required=True,type=Path)
+p.add_argument('--banner',type=Path,help='有新公告原图时传入；省略则保留当前已嵌入横幅')
 p.add_argument('--catalog',required=True);p.add_argument('--as-of',required=True);args=p.parse_args()
 sys.path.insert(0,r'D:\GodlyLove\_工作目录\角色活动图鉴\libs')
 from opencc import OpenCC
@@ -13,13 +15,8 @@ sc=OpenCC('t2s').convert
 page=(ROOT/'docs/catalog.html').read_text('utf8');data=extract(page,'DATA');assets=extract(page,'ASSETS');client=json.loads(args.calculator_data.read_text('utf8'));cards={c['id']:c for c in client['cards']}
 def rows(name):
  with (args.tables/(name+'.txt')).open(encoding='utf-8-sig',newline='') as f:return list(csv.DictReader(f,delimiter='@',quoting=csv.QUOTE_NONE))
-loc={}
-for lang in ['CHT','CHS']:
- for line in (args.locale/lang).read_text('utf-8-sig').splitlines()[1:]:
-  if '@' in line:k,v=line.split('@',1);loc[k]=v
-def tr(v):
- v=re.sub(r'<[^>]+>','',loc.get(v,v)).replace('\\n','\n')
- return sc(re.sub(r'\[([^\[\]:]+):[^\[\]:]+:[^\[\]:]+\]',r'\1',v))
+tr=ClientText(args.locale,args.tables,sc)
+
 def stats(row):
  d=dict(row['stats'])
  for k in ['HP','MaxHP','Attack','Defence','Speed']:
@@ -54,7 +51,11 @@ for event in data['events']:
 news=json.loads(args.news.read_text('utf8'))['data']['news'];notice=next(n for n in news if n['newsId']==3617)
 notice_id='news_3617';notice_record={'id':notice_id,'name':sc(notice['name']),'text':sc(notice['intro']).replace('·','').replace('・',''),'url':'https://game.ero-labs.services/api/v2/announcement/news?lang=zh&nowPage=1&count=20&hgameId=242&labelId=0'}
 data['notices']=[x for x in data['notices'] if x['id']!=notice_id]+[notice_record]
-im=Image.open(args.banner).convert('RGB');buf=io.BytesIO();im.save(buf,'WEBP',quality=96,method=4);blob=buf.getvalue();key=hashlib.sha256(blob).hexdigest()[:16];assets[key]='data:image/webp;base64,'+base64.b64encode(blob).decode()
+if args.banner:
+ im=Image.open(args.banner).convert('RGB');buf=io.BytesIO();im.save(buf,'WEBP',quality=96,method=4);blob=buf.getvalue();key=hashlib.sha256(blob).hexdigest()[:16];assets[key]='data:image/webp;base64,'+base64.b64encode(blob).decode()
+else:
+ key=next(e.get('art') for e in data['events'] if e['id']=='BranchC02_SSR_006')
+ if not key or key not in assets:raise ValueError('当前横幅缺失，请用--banner提供公告原图')
 for e in data['events']:
  if e['card']=='C02_SSR_006' and e['type'] in ['SideStory','SignIn','SummonPickUp']:
   e.update(officialId=notice_id,art=key,thumb=key)

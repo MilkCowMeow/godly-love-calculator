@@ -74,8 +74,8 @@
 <article id="rule-effects" class="rules-chapter">
   <header><span>05 / EFFECT APPLICATION</span><h2>效果命中与抗性</h2></header>
   <div data-claim="effect-chance"><p>施加功能先检查配置中的基础概率。普通负面状态在通过这次抽样后，还会检查效果命中与目标抗性。没有其他免疫、闪避或忽略抗性条件时，单次施加概率为：</p>
-    <script type="math/tex; mode=display">P_{\mathrm{apply}}=\operatorname{clip}(p_0,0,1)\,\operatorname{clip}(1+h-r,0,0.85)</script>
-    <p><var>p<sub>0</sub></var> 是基础施加概率，<var>h</var> 是本次有效的效果命中修正，<var>r</var> 是目标效果抗性。clip 表示限制在给定的上下界内。通常存在 15% 的内置抵抗，因此后一项上限为 85%。目标具备取消内置抵抗的对应开关时，该上限改为 100%。</p>
+    <script type="math/tex; mode=display">P_{\mathrm{apply}}=\operatorname{clip}(p_0,0,1)\,\operatorname{clip}(1+h-r,0,0.90)</script>
+    <p><var>p<sub>0</sub></var> 是基础施加概率，<var>h</var> 是本次有效的效果命中修正，<var>r</var> 是目标效果抗性。clip 表示限制在给定的上下界内。当前资源目录配置的内置抵抗为10%，因此后一项上限为90%。目标具备取消内置抵抗的对应开关时，该上限改为100%。</p>
   </div>
   <div data-claim="effect-gates"><p>负面效果还要经过免疫、同一技能事件中的闪避记录，以及逐状态加入限制。忽略抗性并不自动跳过免疫和闪避；是否跳过，要分别读取忽略免疫、忽略闪避的配置。正面状态不经过负面状态的效果抗性抽样，仍受自身加入和合并规则约束。</p></div>
 </article>

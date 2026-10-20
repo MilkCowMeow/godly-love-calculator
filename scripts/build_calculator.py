@@ -6,11 +6,14 @@ from web_analytics import inject_analytics
 ROOT=Path(__file__).resolve().parents[1];SRC=ROOT/'src/calculator';TARGET=ROOT/'docs/index.html'
 parser=argparse.ArgumentParser()
 parser.add_argument('--font-dir',type=Path,help='字体源文件目录；需要新增内嵌字形时使用')
+parser.add_argument('--data-json',type=Path,help='本轮从原始客户端表生成的完整数据')
 args=parser.parse_args()
 old=TARGET.read_text('utf8');data=extract(old,'DATA');assets=extract(old,'ASSETS')
+if args.data_json:data=json.loads(args.data_json.read_text('utf8'))
 trials=json.loads((SRC/'trials.json').read_text('utf8'))
 if set(trials['trials'])!={str(i) for i in range(1,51)}:raise ValueError('试炼数据须完整覆盖1至50层')
 data['trials']=trials['trials']
+if data.get('catalog'):data['tower50']=trials['trials']['50']
 for sid,skill in trials['skills'].items():data['skills'].setdefault(sid,skill)
 for sid,status in trials['statuses'].items():data['statuses'].setdefault(sid,status)
 for card in data['cards']:assign_characters(card,card['raw']['Represents'],data['profiles'])

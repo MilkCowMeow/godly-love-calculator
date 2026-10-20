@@ -6,7 +6,7 @@ const penetration=B.rawSkillDamage({attack:1000,defence:2000,attRate:1,penetrati
 assert.equal(penetration.effectiveDefence,500,'two separate 50% paths leave 25% defence');
 const hits=B.hitChances({sourceElement:'None',targetElement:'None',criticalRate:.15});
 assert.ok(Math.abs(hits.big-.2125)<1e-7,'25% is conditional after the critical branch');
-assert.ok(Math.abs(B.effectChance(.75,.2,.1)-.6375)<1e-6);
+assert.ok(Math.abs(B.effectChance(.75,.2,.1)-.675)<1e-6);
 const damage={attack:267,defence:0,attRate:1,currentHP:100};
 const ordinary=B.settle(damage,1),immortal=B.settle({...damage,immortal:true},1);
 assert.equal(ordinary.damage,500); // 267 × 1.871 rounds to 500 after float32 resolution.

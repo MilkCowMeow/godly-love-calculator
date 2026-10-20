@@ -1,15 +1,15 @@
 {
   "version": "1.0.1.014517",
   "sourceHashes": {
-    "scene.txt": "87a9ba64f33cca3b37a165bf8eef1ec31816727bb64660d61279a819efd97cb8",
+    "scene.txt": "7e82519f54ea0b2d318b4b066252697ae4ef5a83b767185360246ce27f74ab62",
     "chapter.txt": "84a54c58d54cea07c8ba65ba39231e0ef334ed991cf5f1bb773c773442aed446",
-    "role.txt": "0a33694320678286cdf6e56629fa6cc7c2bccefb42061b268203c08670bf85b9",
-    "roleproperty.txt": "d66a2d0185ba4414deae95cc4949ee1a3fd4ce92dfbe5ca84aadc8898b22f3b7",
-    "skill.txt": "7dd1f02b53b3e5767ac872ce708198b7d365315cfbe2e760bc65204a3de591d1",
+    "role.txt": "63a9eed0867b46f726ca93c6f0d49028c53707fba52946d21a9d56dfcbb79049",
+    "roleproperty.txt": "565576b694dc0cb11402caf789a84a9075306a565a9eb1c366d3d61337d13be1",
+    "skill.txt": "8602dca931a5ea68089b55db2af55c86a4a5516eed95bd111566ad9c3289d878",
     "status.txt": "1a189bcaed30a18e4fa7f7022cdd5464c29c3bb296d62aa3267750140528d647",
     "aiaction.txt": "4ac925f1f00ed9829a0010fc643c8be4f5879786e29efac8bd306a90a643edd6",
-    "locale/CHT": "931ccd666cfdac0bc52e33568251b377b8c0dcc3156b72dad02d4b1542d667d1",
-    "locale/CHS": "f083863358d4be7f8c372e1f40c0d846573efb420a4de8d4944e01d77c2f0d38"
+    "locale/CHT": "55720bda7bd8a52f2a897afa15344f3575c763ce5f0d70e89688d649e04a2ab2",
+    "locale/CHS": "0a81719e0ce5fa24b63f984cd8b67824f0718a734c90ecdc0150735b3e6b3f52"
   },
   "trials": {
     "1": {
@@ -143,7 +143,7 @@
                 "CriticalRate": 0.15,
                 "CriticalDamageRate": 1.3,
                 "EffectHitRate": 0.0,
-                "ResistanceRate": 0.2,
+                "ResistanceRate": 0.1,
                 "PinchRate": 0.0,
                 "MaxHP": 4500.100097537041
               },
@@ -157,7 +157,7 @@
                 "CriticalRate": "0.15",
                 "CriticalDamageRate": "1.3",
                 "EffectHitRate": "0",
-                "ResistanceRate": "0.2",
+                "ResistanceRate": "0.1",
                 "PinchRate": "0",
                 "DynamicFiEld1": ""
               }
@@ -171,7 +171,7 @@
             "CriticalRate": 0.15000000596046448,
             "CriticalDamageRate": 1.2999999523162842,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.20000000298023224,
+            "ResistanceRate": 0.10000000149011612,
             "PinchRate": 0.0,
             "MaxHP": 4500
           },
@@ -183,7 +183,7 @@
             "CriticalRate": 0.15,
             "CriticalDamageRate": 1.3,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.2,
+            "ResistanceRate": 0.1,
             "PinchRate": 0.0,
             "MaxHP": 4500.100097537041
           },
@@ -693,7 +693,8 @@
           ]
         }
       },
-      "unresolvedSkillIDs": []
+      "unresolvedSkillIDs": [],
+      "catalog": "catalog_014774"
     },
     "2": {
       "version": "1.0.1.014517",
@@ -826,7 +827,7 @@
                 "CriticalRate": 0.15,
                 "CriticalDamageRate": 1.3,
                 "EffectHitRate": 0.0,
-                "ResistanceRate": 0.2,
+                "ResistanceRate": 0.1,
                 "PinchRate": 0.0,
                 "MaxHP": 3242.4180903434753
               },
@@ -840,7 +841,7 @@
                 "CriticalRate": "0.15",
                 "CriticalDamageRate": "1.3",
                 "EffectHitRate": "0",
-                "ResistanceRate": "0.2",
+                "ResistanceRate": "0.1",
                 "PinchRate": "0",
                 "DynamicFiEld1": ""
               }
@@ -854,7 +855,7 @@
             "CriticalRate": 0.15000000596046448,
             "CriticalDamageRate": 1.2999999523162842,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.20000000298023224,
+            "ResistanceRate": 0.10000000149011612,
             "PinchRate": 0.0,
             "MaxHP": 3242
           },
@@ -866,7 +867,7 @@
             "CriticalRate": 0.15,
             "CriticalDamageRate": 1.3,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.2,
+            "ResistanceRate": 0.1,
             "PinchRate": 0.0,
             "MaxHP": 3242.4180903434753
           },
@@ -1425,7 +1426,8 @@
           ]
         }
       },
-      "unresolvedSkillIDs": []
+      "unresolvedSkillIDs": [],
+      "catalog": "catalog_014774"
     },
     "3": {
       "version": "1.0.1.014517",
@@ -1558,7 +1560,7 @@
                 "CriticalRate": 0.15,
                 "CriticalDamageRate": 1.3,
                 "EffectHitRate": 0.0,
-                "ResistanceRate": 0.2,
+                "ResistanceRate": 0.1,
                 "PinchRate": 0.0,
                 "MaxHP": 4747.049784421921
               },
@@ -1572,7 +1574,7 @@
                 "CriticalRate": "0.15",
                 "CriticalDamageRate": "1.3",
                 "EffectHitRate": "0",
-                "ResistanceRate": "0.2",
+                "ResistanceRate": "0.1",
                 "PinchRate": "0",
                 "DynamicFiEld1": ""
               }
@@ -1586,7 +1588,7 @@
             "CriticalRate": 0.15000000596046448,
             "CriticalDamageRate": 1.2999999523162842,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.20000000298023224,
+            "ResistanceRate": 0.10000000149011612,
             "PinchRate": 0.0,
             "MaxHP": 4747
           },
@@ -1598,7 +1600,7 @@
             "CriticalRate": 0.15,
             "CriticalDamageRate": 1.3,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.2,
+            "ResistanceRate": 0.1,
             "PinchRate": 0.0,
             "MaxHP": 4747.049784421921
           },
@@ -2094,7 +2096,8 @@
           ]
         }
       },
-      "unresolvedSkillIDs": []
+      "unresolvedSkillIDs": [],
+      "catalog": "catalog_014774"
     },
     "4": {
       "version": "1.0.1.014517",
@@ -2227,7 +2230,7 @@
                 "CriticalRate": 0.15,
                 "CriticalDamageRate": 1.3,
                 "EffectHitRate": 0.0,
-                "ResistanceRate": 0.2,
+                "ResistanceRate": 0.1,
                 "PinchRate": 0.0,
                 "MaxHP": 5209.600112915039
               },
@@ -2241,7 +2244,7 @@
                 "CriticalRate": "0.15",
                 "CriticalDamageRate": "1.3",
                 "EffectHitRate": "0",
-                "ResistanceRate": "0.2",
+                "ResistanceRate": "0.1",
                 "PinchRate": "0",
                 "DynamicFiEld1": ""
               }
@@ -2255,7 +2258,7 @@
             "CriticalRate": 0.15000000596046448,
             "CriticalDamageRate": 1.2999999523162842,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.20000000298023224,
+            "ResistanceRate": 0.10000000149011612,
             "PinchRate": 0.0,
             "MaxHP": 5210
           },
@@ -2267,7 +2270,7 @@
             "CriticalRate": 0.15,
             "CriticalDamageRate": 1.3,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.2,
+            "ResistanceRate": 0.1,
             "PinchRate": 0.0,
             "MaxHP": 5209.600112915039
           },
@@ -2821,7 +2824,8 @@
           ]
         }
       },
-      "unresolvedSkillIDs": []
+      "unresolvedSkillIDs": [],
+      "catalog": "catalog_014774"
     },
     "5": {
       "version": "1.0.1.014517",
@@ -2954,7 +2958,7 @@
                 "CriticalRate": 0.15,
                 "CriticalDamageRate": 1.3,
                 "EffectHitRate": 0.0,
-                "ResistanceRate": 0.2,
+                "ResistanceRate": 0.1,
                 "PinchRate": 0.0,
                 "MaxHP": 5447.20011806488
               },
@@ -2968,7 +2972,7 @@
                 "CriticalRate": "0.15",
                 "CriticalDamageRate": "1.3",
                 "EffectHitRate": "0",
-                "ResistanceRate": "0.2",
+                "ResistanceRate": "0.1",
                 "PinchRate": "0",
                 "DynamicFiEld1": ""
               }
@@ -2982,7 +2986,7 @@
             "CriticalRate": 0.15000000596046448,
             "CriticalDamageRate": 1.2999999523162842,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.20000000298023224,
+            "ResistanceRate": 0.10000000149011612,
             "PinchRate": 0.0,
             "MaxHP": 5447
           },
@@ -2994,7 +2998,7 @@
             "CriticalRate": 0.15,
             "CriticalDamageRate": 1.3,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.2,
+            "ResistanceRate": 0.1,
             "PinchRate": 0.0,
             "MaxHP": 5447.20011806488
           },
@@ -3467,7 +3471,8 @@
           ]
         }
       },
-      "unresolvedSkillIDs": []
+      "unresolvedSkillIDs": [],
+      "catalog": "catalog_014774"
     },
     "6": {
       "version": "1.0.1.014517",
@@ -3600,7 +3605,7 @@
                 "CriticalRate": 0.15,
                 "CriticalDamageRate": 1.3,
                 "EffectHitRate": 0.0,
-                "ResistanceRate": 0.2,
+                "ResistanceRate": 0.1,
                 "PinchRate": 0.0,
                 "MaxHP": 5296.17487680912
               },
@@ -3614,7 +3619,7 @@
                 "CriticalRate": "0.15",
                 "CriticalDamageRate": "1.3",
                 "EffectHitRate": "0",
-                "ResistanceRate": "0.2",
+                "ResistanceRate": "0.1",
                 "PinchRate": "0",
                 "DynamicFiEld1": ""
               }
@@ -3628,7 +3633,7 @@
             "CriticalRate": 0.15000000596046448,
             "CriticalDamageRate": 1.2999999523162842,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.20000000298023224,
+            "ResistanceRate": 0.10000000149011612,
             "PinchRate": 0.0,
             "MaxHP": 5296
           },
@@ -3640,7 +3645,7 @@
             "CriticalRate": 0.15,
             "CriticalDamageRate": 1.3,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.2,
+            "ResistanceRate": 0.1,
             "PinchRate": 0.0,
             "MaxHP": 5296.17487680912
           },
@@ -4185,7 +4190,8 @@
           ]
         }
       },
-      "unresolvedSkillIDs": []
+      "unresolvedSkillIDs": [],
+      "catalog": "catalog_014774"
     },
     "7": {
       "version": "1.0.1.014517",
@@ -4318,7 +4324,7 @@
                 "CriticalRate": 0.15,
                 "CriticalDamageRate": 1.3,
                 "EffectHitRate": 0.0,
-                "ResistanceRate": 0.2,
+                "ResistanceRate": 0.1,
                 "PinchRate": 0.0,
                 "MaxHP": 5785.6502566337585
               },
@@ -4332,7 +4338,7 @@
                 "CriticalRate": "0.15",
                 "CriticalDamageRate": "1.3",
                 "EffectHitRate": "0",
-                "ResistanceRate": "0.2",
+                "ResistanceRate": "0.1",
                 "PinchRate": "0",
                 "DynamicFiEld1": ""
               }
@@ -4346,7 +4352,7 @@
             "CriticalRate": 0.15000000596046448,
             "CriticalDamageRate": 1.2999999523162842,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.20000000298023224,
+            "ResistanceRate": 0.10000000149011612,
             "PinchRate": 0.0,
             "MaxHP": 5786
           },
@@ -4358,7 +4364,7 @@
             "CriticalRate": 0.15,
             "CriticalDamageRate": 1.3,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.2,
+            "ResistanceRate": 0.1,
             "PinchRate": 0.0,
             "MaxHP": 5785.6502566337585
           },
@@ -5037,7 +5043,8 @@
           ]
         }
       },
-      "unresolvedSkillIDs": []
+      "unresolvedSkillIDs": [],
+      "catalog": "catalog_014774"
     },
     "8": {
       "version": "1.0.1.014517",
@@ -5170,7 +5177,7 @@
                 "CriticalRate": 0.15,
                 "CriticalDamageRate": 1.3,
                 "EffectHitRate": 0.0,
-                "ResistanceRate": 0.2,
+                "ResistanceRate": 0.1,
                 "PinchRate": 0.0,
                 "MaxHP": 6458.0
               },
@@ -5184,7 +5191,7 @@
                 "CriticalRate": "0.15",
                 "CriticalDamageRate": "1.3",
                 "EffectHitRate": "0",
-                "ResistanceRate": "0.2",
+                "ResistanceRate": "0.1",
                 "PinchRate": "0",
                 "DynamicFiEld1": ""
               }
@@ -5198,7 +5205,7 @@
             "CriticalRate": 0.15000000596046448,
             "CriticalDamageRate": 1.2999999523162842,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.20000000298023224,
+            "ResistanceRate": 0.10000000149011612,
             "PinchRate": 0.0,
             "MaxHP": 6458
           },
@@ -5210,7 +5217,7 @@
             "CriticalRate": 0.15,
             "CriticalDamageRate": 1.3,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.2,
+            "ResistanceRate": 0.1,
             "PinchRate": 0.0,
             "MaxHP": 6458.0
           },
@@ -5778,7 +5785,8 @@
           ]
         }
       },
-      "unresolvedSkillIDs": []
+      "unresolvedSkillIDs": [],
+      "catalog": "catalog_014774"
     },
     "9": {
       "version": "1.0.1.014517",
@@ -5911,7 +5919,7 @@
                 "CriticalRate": 0.15,
                 "CriticalDamageRate": 1.3,
                 "EffectHitRate": 0.0,
-                "ResistanceRate": 0.2,
+                "ResistanceRate": 0.1,
                 "PinchRate": 0.0,
                 "MaxHP": 7377.700159907341
               },
@@ -5925,7 +5933,7 @@
                 "CriticalRate": "0.15",
                 "CriticalDamageRate": "1.3",
                 "EffectHitRate": "0",
-                "ResistanceRate": "0.2",
+                "ResistanceRate": "0.1",
                 "PinchRate": "0",
                 "DynamicFiEld1": ""
               }
@@ -5939,7 +5947,7 @@
             "CriticalRate": 0.15000000596046448,
             "CriticalDamageRate": 1.2999999523162842,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.20000000298023224,
+            "ResistanceRate": 0.10000000149011612,
             "PinchRate": 0.0,
             "MaxHP": 7378
           },
@@ -5951,7 +5959,7 @@
             "CriticalRate": 0.15,
             "CriticalDamageRate": 1.3,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.2,
+            "ResistanceRate": 0.1,
             "PinchRate": 0.0,
             "MaxHP": 7377.700159907341
           },
@@ -6629,7 +6637,8 @@
           ]
         }
       },
-      "unresolvedSkillIDs": []
+      "unresolvedSkillIDs": [],
+      "catalog": "catalog_014774"
     },
     "10": {
       "version": "1.0.1.014517",
@@ -6762,7 +6771,7 @@
                 "CriticalRate": 0.15,
                 "CriticalDamageRate": 1.3,
                 "EffectHitRate": 0.0,
-                "ResistanceRate": 0.2,
+                "ResistanceRate": 0.1,
                 "PinchRate": 0.0,
                 "MaxHP": 8777.37538933754
               },
@@ -6776,7 +6785,7 @@
                 "CriticalRate": "0.15",
                 "CriticalDamageRate": "1.3",
                 "EffectHitRate": "0",
-                "ResistanceRate": "0.2",
+                "ResistanceRate": "0.1",
                 "PinchRate": "0",
                 "DynamicFiEld1": ""
               }
@@ -6790,7 +6799,7 @@
             "CriticalRate": 0.15000000596046448,
             "CriticalDamageRate": 1.2999999523162842,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.20000000298023224,
+            "ResistanceRate": 0.10000000149011612,
             "PinchRate": 0.0,
             "MaxHP": 8777
           },
@@ -6802,7 +6811,7 @@
             "CriticalRate": 0.15,
             "CriticalDamageRate": 1.3,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.2,
+            "ResistanceRate": 0.1,
             "PinchRate": 0.0,
             "MaxHP": 8777.37538933754
           },
@@ -7339,7 +7348,8 @@
           ]
         }
       },
-      "unresolvedSkillIDs": []
+      "unresolvedSkillIDs": [],
+      "catalog": "catalog_014774"
     },
     "11": {
       "version": "1.0.1.014517",
@@ -7472,7 +7482,7 @@
                 "CriticalRate": 0.15,
                 "CriticalDamageRate": 1.3,
                 "EffectHitRate": 0.0,
-                "ResistanceRate": 0.2,
+                "ResistanceRate": 0.1,
                 "PinchRate": 0.0,
                 "MaxHP": 9935.799596786499
               },
@@ -7486,7 +7496,7 @@
                 "CriticalRate": "0.15",
                 "CriticalDamageRate": "1.3",
                 "EffectHitRate": "0",
-                "ResistanceRate": "0.2",
+                "ResistanceRate": "0.1",
                 "PinchRate": "0",
                 "DynamicFiEld1": ""
               }
@@ -7500,7 +7510,7 @@
             "CriticalRate": 0.15000000596046448,
             "CriticalDamageRate": 1.2999999523162842,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.20000000298023224,
+            "ResistanceRate": 0.10000000149011612,
             "PinchRate": 0.0,
             "MaxHP": 9936
           },
@@ -7512,7 +7522,7 @@
             "CriticalRate": 0.15,
             "CriticalDamageRate": 1.3,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.2,
+            "ResistanceRate": 0.1,
             "PinchRate": 0.0,
             "MaxHP": 9935.799596786499
           },
@@ -8130,7 +8140,8 @@
           ]
         }
       },
-      "unresolvedSkillIDs": []
+      "unresolvedSkillIDs": [],
+      "catalog": "catalog_014774"
     },
     "12": {
       "version": "1.0.1.014517",
@@ -8263,7 +8274,7 @@
                 "CriticalRate": 0.15,
                 "CriticalDamageRate": 1.3,
                 "EffectHitRate": 0.0,
-                "ResistanceRate": 0.2,
+                "ResistanceRate": 0.1,
                 "PinchRate": 0.0,
                 "MaxHP": 9404.100417137146
               },
@@ -8277,7 +8288,7 @@
                 "CriticalRate": "0.15",
                 "CriticalDamageRate": "1.3",
                 "EffectHitRate": "0",
-                "ResistanceRate": "0.2",
+                "ResistanceRate": "0.1",
                 "PinchRate": "0",
                 "DynamicFiEld1": ""
               }
@@ -8291,7 +8302,7 @@
             "CriticalRate": 0.15000000596046448,
             "CriticalDamageRate": 1.2999999523162842,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.20000000298023224,
+            "ResistanceRate": 0.10000000149011612,
             "PinchRate": 0.0,
             "MaxHP": 9404
           },
@@ -8303,7 +8314,7 @@
             "CriticalRate": 0.15,
             "CriticalDamageRate": 1.3,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.2,
+            "ResistanceRate": 0.1,
             "PinchRate": 0.0,
             "MaxHP": 9404.100417137146
           },
@@ -8847,7 +8858,8 @@
           ]
         }
       },
-      "unresolvedSkillIDs": []
+      "unresolvedSkillIDs": [],
+      "catalog": "catalog_014774"
     },
     "13": {
       "version": "1.0.1.014517",
@@ -8980,7 +8992,7 @@
                 "CriticalRate": 0.15,
                 "CriticalDamageRate": 1.3,
                 "EffectHitRate": 0.0,
-                "ResistanceRate": 0.2,
+                "ResistanceRate": 0.1,
                 "PinchRate": 0.0,
                 "MaxHP": 10170.0
               },
@@ -8994,7 +9006,7 @@
                 "CriticalRate": "0.15",
                 "CriticalDamageRate": "1.3",
                 "EffectHitRate": "0",
-                "ResistanceRate": "0.2",
+                "ResistanceRate": "0.1",
                 "PinchRate": "0",
                 "DynamicFiEld1": ""
               }
@@ -9008,7 +9020,7 @@
             "CriticalRate": 0.15000000596046448,
             "CriticalDamageRate": 1.2999999523162842,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.20000000298023224,
+            "ResistanceRate": 0.10000000149011612,
             "PinchRate": 0.0,
             "MaxHP": 10170
           },
@@ -9020,7 +9032,7 @@
             "CriticalRate": 0.15,
             "CriticalDamageRate": 1.3,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.2,
+            "ResistanceRate": 0.1,
             "PinchRate": 0.0,
             "MaxHP": 10170.0
           },
@@ -9492,7 +9504,8 @@
           ]
         }
       },
-      "unresolvedSkillIDs": []
+      "unresolvedSkillIDs": [],
+      "catalog": "catalog_014774"
     },
     "14": {
       "version": "1.0.1.014517",
@@ -9625,7 +9638,7 @@
                 "CriticalRate": 0.15,
                 "CriticalDamageRate": 1.3,
                 "EffectHitRate": 0.0,
-                "ResistanceRate": 0.2,
+                "ResistanceRate": 0.1,
                 "PinchRate": 0.0,
                 "MaxHP": 10264.100222468376
               },
@@ -9639,7 +9652,7 @@
                 "CriticalRate": "0.15",
                 "CriticalDamageRate": "1.3",
                 "EffectHitRate": "0",
-                "ResistanceRate": "0.2",
+                "ResistanceRate": "0.1",
                 "PinchRate": "0",
                 "DynamicFiEld1": ""
               }
@@ -9653,7 +9666,7 @@
             "CriticalRate": 0.15000000596046448,
             "CriticalDamageRate": 1.2999999523162842,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.20000000298023224,
+            "ResistanceRate": 0.10000000149011612,
             "PinchRate": 0.0,
             "MaxHP": 10264
           },
@@ -9665,7 +9678,7 @@
             "CriticalRate": 0.15,
             "CriticalDamageRate": 1.3,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.2,
+            "ResistanceRate": 0.1,
             "PinchRate": 0.0,
             "MaxHP": 10264.100222468376
           },
@@ -10233,7 +10246,8 @@
           ]
         }
       },
-      "unresolvedSkillIDs": []
+      "unresolvedSkillIDs": [],
+      "catalog": "catalog_014774"
     },
     "15": {
       "version": "1.0.1.014517",
@@ -10366,7 +10380,7 @@
                 "CriticalRate": 0.15,
                 "CriticalDamageRate": 1.3,
                 "EffectHitRate": 0.0,
-                "ResistanceRate": 0.2,
+                "ResistanceRate": 0.1,
                 "PinchRate": 0.0,
                 "MaxHP": 12349.700267672539
               },
@@ -10380,7 +10394,7 @@
                 "CriticalRate": "0.15",
                 "CriticalDamageRate": "1.3",
                 "EffectHitRate": "0",
-                "ResistanceRate": "0.2",
+                "ResistanceRate": "0.1",
                 "PinchRate": "0",
                 "DynamicFiEld1": ""
               }
@@ -10394,7 +10408,7 @@
             "CriticalRate": 0.15000000596046448,
             "CriticalDamageRate": 1.2999999523162842,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.20000000298023224,
+            "ResistanceRate": 0.10000000149011612,
             "PinchRate": 0.0,
             "MaxHP": 12350
           },
@@ -10406,7 +10420,7 @@
             "CriticalRate": 0.15,
             "CriticalDamageRate": 1.3,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.2,
+            "ResistanceRate": 0.1,
             "PinchRate": 0.0,
             "MaxHP": 12349.700267672539
           },
@@ -10940,7 +10954,8 @@
           ]
         }
       },
-      "unresolvedSkillIDs": []
+      "unresolvedSkillIDs": [],
+      "catalog": "catalog_014774"
     },
     "16": {
       "version": "1.0.1.014517",
@@ -11073,7 +11088,7 @@
                 "CriticalRate": 0.15,
                 "CriticalDamageRate": 1.3,
                 "EffectHitRate": 0.0,
-                "ResistanceRate": 0.2,
+                "ResistanceRate": 0.1,
                 "PinchRate": 0.0,
                 "MaxHP": 12145.34944844246
               },
@@ -11087,7 +11102,7 @@
                 "CriticalRate": "0.15",
                 "CriticalDamageRate": "1.3",
                 "EffectHitRate": "0",
-                "ResistanceRate": "0.2",
+                "ResistanceRate": "0.1",
                 "PinchRate": "0",
                 "DynamicFiEld1": ""
               }
@@ -11101,7 +11116,7 @@
             "CriticalRate": 0.15000000596046448,
             "CriticalDamageRate": 1.2999999523162842,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.20000000298023224,
+            "ResistanceRate": 0.10000000149011612,
             "PinchRate": 0.0,
             "MaxHP": 12145
           },
@@ -11113,7 +11128,7 @@
             "CriticalRate": 0.15,
             "CriticalDamageRate": 1.3,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.2,
+            "ResistanceRate": 0.1,
             "PinchRate": 0.0,
             "MaxHP": 12145.34944844246
           },
@@ -11741,7 +11756,8 @@
           ]
         }
       },
-      "unresolvedSkillIDs": []
+      "unresolvedSkillIDs": [],
+      "catalog": "catalog_014774"
     },
     "17": {
       "version": "1.0.1.014517",
@@ -11874,7 +11890,7 @@
                 "CriticalRate": 0.15,
                 "CriticalDamageRate": 1.3,
                 "EffectHitRate": 0.0,
-                "ResistanceRate": 0.2,
+                "ResistanceRate": 0.1,
                 "PinchRate": 0.0,
                 "MaxHP": 12800.025567770004
               },
@@ -11888,7 +11904,7 @@
                 "CriticalRate": "0.15",
                 "CriticalDamageRate": "1.3",
                 "EffectHitRate": "0",
-                "ResistanceRate": "0.2",
+                "ResistanceRate": "0.1",
                 "PinchRate": "0",
                 "DynamicFiEld1": ""
               }
@@ -11902,7 +11918,7 @@
             "CriticalRate": 0.15000000596046448,
             "CriticalDamageRate": 1.2999999523162842,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.20000000298023224,
+            "ResistanceRate": 0.10000000149011612,
             "PinchRate": 0.0,
             "MaxHP": 12800
           },
@@ -11914,7 +11930,7 @@
             "CriticalRate": 0.15,
             "CriticalDamageRate": 1.3,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.2,
+            "ResistanceRate": 0.1,
             "PinchRate": 0.0,
             "MaxHP": 12800.025567770004
           },
@@ -12505,7 +12521,8 @@
           ]
         }
       },
-      "unresolvedSkillIDs": []
+      "unresolvedSkillIDs": [],
+      "catalog": "catalog_014774"
     },
     "18": {
       "version": "1.0.1.014517",
@@ -12638,7 +12655,7 @@
                 "CriticalRate": 0.15,
                 "CriticalDamageRate": 1.3,
                 "EffectHitRate": 0.0,
-                "ResistanceRate": 0.2,
+                "ResistanceRate": 0.1,
                 "PinchRate": 0.0,
                 "MaxHP": 19681.20042657852
               },
@@ -12652,7 +12669,7 @@
                 "CriticalRate": "0.15",
                 "CriticalDamageRate": "1.3",
                 "EffectHitRate": "0",
-                "ResistanceRate": "0.2",
+                "ResistanceRate": "0.1",
                 "PinchRate": "0",
                 "DynamicFiEld1": ""
               }
@@ -12666,7 +12683,7 @@
             "CriticalRate": 0.15000000596046448,
             "CriticalDamageRate": 1.2999999523162842,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.20000000298023224,
+            "ResistanceRate": 0.10000000149011612,
             "PinchRate": 0.0,
             "MaxHP": 19681
           },
@@ -12678,7 +12695,7 @@
             "CriticalRate": 0.15,
             "CriticalDamageRate": 1.3,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.2,
+            "ResistanceRate": 0.1,
             "PinchRate": 0.0,
             "MaxHP": 19681.20042657852
           },
@@ -13230,7 +13247,8 @@
           ]
         }
       },
-      "unresolvedSkillIDs": []
+      "unresolvedSkillIDs": [],
+      "catalog": "catalog_014774"
     },
     "19": {
       "version": "1.0.1.014517",
@@ -13363,7 +13381,7 @@
                 "CriticalRate": 0.15,
                 "CriticalDamageRate": 1.3,
                 "EffectHitRate": 0.0,
-                "ResistanceRate": 0.2,
+                "ResistanceRate": 0.1,
                 "PinchRate": 0.0,
                 "MaxHP": 17842.544864952564
               },
@@ -13377,7 +13395,7 @@
                 "CriticalRate": "0.15",
                 "CriticalDamageRate": "1.3",
                 "EffectHitRate": "0",
-                "ResistanceRate": "0.2",
+                "ResistanceRate": "0.1",
                 "PinchRate": "0",
                 "DynamicFiEld1": ""
               }
@@ -13391,7 +13409,7 @@
             "CriticalRate": 0.15000000596046448,
             "CriticalDamageRate": 1.2999999523162842,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.20000000298023224,
+            "ResistanceRate": 0.10000000149011612,
             "PinchRate": 0.0,
             "MaxHP": 17843
           },
@@ -13403,7 +13421,7 @@
             "CriticalRate": 0.15,
             "CriticalDamageRate": 1.3,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.2,
+            "ResistanceRate": 0.1,
             "PinchRate": 0.0,
             "MaxHP": 17842.544864952564
           },
@@ -13974,7 +13992,8 @@
           ]
         }
       },
-      "unresolvedSkillIDs": []
+      "unresolvedSkillIDs": [],
+      "catalog": "catalog_014774"
     },
     "20": {
       "version": "1.0.1.014517",
@@ -14107,7 +14126,7 @@
                 "CriticalRate": 0.15,
                 "CriticalDamageRate": 1.3,
                 "EffectHitRate": 0.0,
-                "ResistanceRate": 0.2,
+                "ResistanceRate": 0.1,
                 "PinchRate": 0.0,
                 "MaxHP": 21115.832858085632
               },
@@ -14121,7 +14140,7 @@
                 "CriticalRate": "0.15",
                 "CriticalDamageRate": "1.3",
                 "EffectHitRate": "0",
-                "ResistanceRate": "0.2",
+                "ResistanceRate": "0.1",
                 "PinchRate": "0",
                 "DynamicFiEld1": ""
               }
@@ -14135,7 +14154,7 @@
             "CriticalRate": 0.15000000596046448,
             "CriticalDamageRate": 1.2999999523162842,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.20000000298023224,
+            "ResistanceRate": 0.10000000149011612,
             "PinchRate": 0.0,
             "MaxHP": 21116
           },
@@ -14147,7 +14166,7 @@
             "CriticalRate": 0.15,
             "CriticalDamageRate": 1.3,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.2,
+            "ResistanceRate": 0.1,
             "PinchRate": 0.0,
             "MaxHP": 21115.832858085632
           },
@@ -14763,7 +14782,8 @@
           ]
         }
       },
-      "unresolvedSkillIDs": []
+      "unresolvedSkillIDs": [],
+      "catalog": "catalog_014774"
     },
     "21": {
       "version": "1.0.1.014517",
@@ -14896,7 +14916,7 @@
                 "CriticalRate": 0.15,
                 "CriticalDamageRate": 1.3,
                 "EffectHitRate": 0.0,
-                "ResistanceRate": 0.2,
+                "ResistanceRate": 0.1,
                 "PinchRate": 0.0,
                 "MaxHP": 22803.224074602127
               },
@@ -14910,7 +14930,7 @@
                 "CriticalRate": "0.15",
                 "CriticalDamageRate": "1.3",
                 "EffectHitRate": "0",
-                "ResistanceRate": "0.2",
+                "ResistanceRate": "0.1",
                 "PinchRate": "0",
                 "DynamicFiEld1": ""
               }
@@ -14924,7 +14944,7 @@
             "CriticalRate": 0.15000000596046448,
             "CriticalDamageRate": 1.2999999523162842,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.20000000298023224,
+            "ResistanceRate": 0.10000000149011612,
             "PinchRate": 0.0,
             "MaxHP": 22803
           },
@@ -14936,7 +14956,7 @@
             "CriticalRate": 0.15,
             "CriticalDamageRate": 1.3,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.2,
+            "ResistanceRate": 0.1,
             "PinchRate": 0.0,
             "MaxHP": 22803.224074602127
           },
@@ -15604,7 +15624,8 @@
           ]
         }
       },
-      "unresolvedSkillIDs": []
+      "unresolvedSkillIDs": [],
+      "catalog": "catalog_014774"
     },
     "22": {
       "version": "1.0.1.014517",
@@ -15741,7 +15762,7 @@
                 "CriticalRate": 0.15,
                 "CriticalDamageRate": 1.3,
                 "EffectHitRate": 0.0,
-                "ResistanceRate": 0.2,
+                "ResistanceRate": 0.1,
                 "PinchRate": 0.0,
                 "MaxHP": 23266.06038105488
               },
@@ -15755,7 +15776,7 @@
                 "CriticalRate": "0.15",
                 "CriticalDamageRate": "1.3",
                 "EffectHitRate": "0",
-                "ResistanceRate": "0.2",
+                "ResistanceRate": "0.1",
                 "PinchRate": "0",
                 "DynamicFiEld1": ""
               }
@@ -15769,7 +15790,7 @@
             "CriticalRate": 0.15000000596046448,
             "CriticalDamageRate": 1.2999999523162842,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.20000000298023224,
+            "ResistanceRate": 0.10000000149011612,
             "PinchRate": 0.0,
             "MaxHP": 23266
           },
@@ -15781,7 +15802,7 @@
             "CriticalRate": 0.15,
             "CriticalDamageRate": 1.3,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.2,
+            "ResistanceRate": 0.1,
             "PinchRate": 0.0,
             "MaxHP": 23266.06038105488
           },
@@ -15931,7 +15952,7 @@
                 "CriticalRate": 0.15,
                 "CriticalDamageRate": 1.3,
                 "EffectHitRate": 0.0,
-                "ResistanceRate": 0.1,
+                "ResistanceRate": 0.05,
                 "PinchRate": 0.0,
                 "MaxHP": 12529.340208411217
               },
@@ -15945,7 +15966,7 @@
                 "CriticalRate": "0.15",
                 "CriticalDamageRate": "1.3",
                 "EffectHitRate": "0",
-                "ResistanceRate": "0.1",
+                "ResistanceRate": "0.05",
                 "PinchRate": "0",
                 "DynamicFiEld1": ""
               }
@@ -15959,7 +15980,7 @@
             "CriticalRate": 0.15000000596046448,
             "CriticalDamageRate": 1.2999999523162842,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.10000000149011612,
+            "ResistanceRate": 0.05000000074505806,
             "PinchRate": 0.0,
             "MaxHP": 12529
           },
@@ -15971,7 +15992,7 @@
             "CriticalRate": 0.15,
             "CriticalDamageRate": 1.3,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.1,
+            "ResistanceRate": 0.05,
             "PinchRate": 0.0,
             "MaxHP": 12529.340208411217
           },
@@ -16684,7 +16705,8 @@
           ]
         }
       },
-      "unresolvedSkillIDs": []
+      "unresolvedSkillIDs": [],
+      "catalog": "catalog_014774"
     },
     "23": {
       "version": "1.0.1.014517",
@@ -16817,7 +16839,7 @@
                 "CriticalRate": 0.15,
                 "CriticalDamageRate": 1.3,
                 "EffectHitRate": 0.0,
-                "ResistanceRate": 0.2,
+                "ResistanceRate": 0.1,
                 "PinchRate": 0.0,
                 "MaxHP": 20213.303694486618
               },
@@ -16831,7 +16853,7 @@
                 "CriticalRate": "0.15",
                 "CriticalDamageRate": "1.3",
                 "EffectHitRate": "0",
-                "ResistanceRate": "0.2",
+                "ResistanceRate": "0.1",
                 "PinchRate": "0",
                 "DynamicFiEld1": ""
               }
@@ -16845,7 +16867,7 @@
             "CriticalRate": 0.15000000596046448,
             "CriticalDamageRate": 1.2999999523162842,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.20000000298023224,
+            "ResistanceRate": 0.10000000149011612,
             "PinchRate": 0.0,
             "MaxHP": 20213
           },
@@ -16857,7 +16879,7 @@
             "CriticalRate": 0.15,
             "CriticalDamageRate": 1.3,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.2,
+            "ResistanceRate": 0.1,
             "PinchRate": 0.0,
             "MaxHP": 20213.303694486618
           },
@@ -17402,7 +17424,8 @@
           ]
         }
       },
-      "unresolvedSkillIDs": []
+      "unresolvedSkillIDs": [],
+      "catalog": "catalog_014774"
     },
     "24": {
       "version": "1.0.1.014517",
@@ -17539,7 +17562,7 @@
                 "CriticalRate": 0.15,
                 "CriticalDamageRate": 1.3,
                 "EffectHitRate": 0.0,
-                "ResistanceRate": 0.2,
+                "ResistanceRate": 0.1,
                 "PinchRate": 0.0,
                 "MaxHP": 16877.63988018036
               },
@@ -17553,7 +17576,7 @@
                 "CriticalRate": "0.15",
                 "CriticalDamageRate": "1.3",
                 "EffectHitRate": "0",
-                "ResistanceRate": "0.2",
+                "ResistanceRate": "0.1",
                 "PinchRate": "0",
                 "DynamicFiEld1": ""
               }
@@ -17567,7 +17590,7 @@
             "CriticalRate": 0.15000000596046448,
             "CriticalDamageRate": 1.2999999523162842,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.20000000298023224,
+            "ResistanceRate": 0.10000000149011612,
             "PinchRate": 0.0,
             "MaxHP": 16878
           },
@@ -17579,7 +17602,7 @@
             "CriticalRate": 0.15,
             "CriticalDamageRate": 1.3,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.2,
+            "ResistanceRate": 0.1,
             "PinchRate": 0.0,
             "MaxHP": 16877.63988018036
           },
@@ -17729,7 +17752,7 @@
                 "CriticalRate": 0.15,
                 "CriticalDamageRate": 1.3,
                 "EffectHitRate": 0.0,
-                "ResistanceRate": 0.1,
+                "ResistanceRate": 0.05,
                 "PinchRate": 0.0,
                 "MaxHP": 16452.70035660267
               },
@@ -17743,7 +17766,7 @@
                 "CriticalRate": "0.15",
                 "CriticalDamageRate": "1.3",
                 "EffectHitRate": "0",
-                "ResistanceRate": "0.1",
+                "ResistanceRate": "0.05",
                 "PinchRate": "0",
                 "DynamicFiEld1": ""
               }
@@ -17757,7 +17780,7 @@
             "CriticalRate": 0.15000000596046448,
             "CriticalDamageRate": 1.2999999523162842,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.10000000149011612,
+            "ResistanceRate": 0.05000000074505806,
             "PinchRate": 0.0,
             "MaxHP": 16453
           },
@@ -17769,7 +17792,7 @@
             "CriticalRate": 0.15,
             "CriticalDamageRate": 1.3,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.1,
+            "ResistanceRate": 0.05,
             "PinchRate": 0.0,
             "MaxHP": 16452.70035660267
           },
@@ -18695,7 +18718,8 @@
           ]
         }
       },
-      "unresolvedSkillIDs": []
+      "unresolvedSkillIDs": [],
+      "catalog": "catalog_014774"
     },
     "25": {
       "version": "1.0.1.014517",
@@ -18832,7 +18856,7 @@
                 "CriticalRate": 0.15,
                 "CriticalDamageRate": 1.3,
                 "EffectHitRate": 0.0,
-                "ResistanceRate": 0.2,
+                "ResistanceRate": 0.1,
                 "PinchRate": 0.0,
                 "MaxHP": 21742.29949426651
               },
@@ -18846,7 +18870,7 @@
                 "CriticalRate": "0.15",
                 "CriticalDamageRate": "1.3",
                 "EffectHitRate": "0",
-                "ResistanceRate": "0.2",
+                "ResistanceRate": "0.1",
                 "PinchRate": "0",
                 "DynamicFiEld1": ""
               }
@@ -18860,7 +18884,7 @@
             "CriticalRate": 0.15000000596046448,
             "CriticalDamageRate": 1.2999999523162842,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.20000000298023224,
+            "ResistanceRate": 0.10000000149011612,
             "PinchRate": 0.0,
             "MaxHP": 21742
           },
@@ -18872,7 +18896,7 @@
             "CriticalRate": 0.15,
             "CriticalDamageRate": 1.3,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.2,
+            "ResistanceRate": 0.1,
             "PinchRate": 0.0,
             "MaxHP": 21742.29949426651
           },
@@ -19022,7 +19046,7 @@
                 "CriticalRate": 0.15,
                 "CriticalDamageRate": 1.3,
                 "EffectHitRate": 0.0,
-                "ResistanceRate": 0.1,
+                "ResistanceRate": 0.05,
                 "PinchRate": 0.0,
                 "MaxHP": 15530.799638748169
               },
@@ -19036,7 +19060,7 @@
                 "CriticalRate": "0.15",
                 "CriticalDamageRate": "1.3",
                 "EffectHitRate": "0",
-                "ResistanceRate": "0.1",
+                "ResistanceRate": "0.05",
                 "PinchRate": "0",
                 "DynamicFiEld1": ""
               }
@@ -19050,7 +19074,7 @@
             "CriticalRate": 0.15000000596046448,
             "CriticalDamageRate": 1.2999999523162842,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.10000000149011612,
+            "ResistanceRate": 0.05000000074505806,
             "PinchRate": 0.0,
             "MaxHP": 15531
           },
@@ -19062,7 +19086,7 @@
             "CriticalRate": 0.15,
             "CriticalDamageRate": 1.3,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.1,
+            "ResistanceRate": 0.05,
             "PinchRate": 0.0,
             "MaxHP": 15530.799638748169
           },
@@ -20136,7 +20160,8 @@
           ]
         }
       },
-      "unresolvedSkillIDs": []
+      "unresolvedSkillIDs": [],
+      "catalog": "catalog_014774"
     },
     "26": {
       "version": "1.0.1.014517",
@@ -20273,7 +20298,7 @@
                 "CriticalRate": 0.15,
                 "CriticalDamageRate": 1.3,
                 "EffectHitRate": 0.0,
-                "ResistanceRate": 0.2,
+                "ResistanceRate": 0.1,
                 "PinchRate": 0.0,
                 "MaxHP": 23632.400512218475
               },
@@ -20287,7 +20312,7 @@
                 "CriticalRate": "0.15",
                 "CriticalDamageRate": "1.3",
                 "EffectHitRate": "0",
-                "ResistanceRate": "0.2",
+                "ResistanceRate": "0.1",
                 "PinchRate": "0",
                 "DynamicFiEld1": ""
               }
@@ -20301,7 +20326,7 @@
             "CriticalRate": 0.15000000596046448,
             "CriticalDamageRate": 1.2999999523162842,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.20000000298023224,
+            "ResistanceRate": 0.10000000149011612,
             "PinchRate": 0.0,
             "MaxHP": 23632
           },
@@ -20313,7 +20338,7 @@
             "CriticalRate": 0.15,
             "CriticalDamageRate": 1.3,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.2,
+            "ResistanceRate": 0.1,
             "PinchRate": 0.0,
             "MaxHP": 23632.400512218475
           },
@@ -20463,7 +20488,7 @@
                 "CriticalRate": 0.15,
                 "CriticalDamageRate": 1.3,
                 "EffectHitRate": 0.0,
-                "ResistanceRate": 0.1,
+                "ResistanceRate": 0.05,
                 "PinchRate": 0.0,
                 "MaxHP": 16880.60036587715
               },
@@ -20477,7 +20502,7 @@
                 "CriticalRate": "0.15",
                 "CriticalDamageRate": "1.3",
                 "EffectHitRate": "0",
-                "ResistanceRate": "0.1",
+                "ResistanceRate": "0.05",
                 "PinchRate": "0",
                 "DynamicFiEld1": ""
               }
@@ -20491,7 +20516,7 @@
             "CriticalRate": 0.15000000596046448,
             "CriticalDamageRate": 1.2999999523162842,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.10000000149011612,
+            "ResistanceRate": 0.05000000074505806,
             "PinchRate": 0.0,
             "MaxHP": 16881
           },
@@ -20503,7 +20528,7 @@
             "CriticalRate": 0.15,
             "CriticalDamageRate": 1.3,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.1,
+            "ResistanceRate": 0.05,
             "PinchRate": 0.0,
             "MaxHP": 16880.60036587715
           },
@@ -21524,7 +21549,8 @@
           ]
         }
       },
-      "unresolvedSkillIDs": []
+      "unresolvedSkillIDs": [],
+      "catalog": "catalog_014774"
     },
     "27": {
       "version": "1.0.1.014517",
@@ -21657,7 +21683,7 @@
                 "CriticalRate": 0.15,
                 "CriticalDamageRate": 1.3,
                 "EffectHitRate": 0.0,
-                "ResistanceRate": 0.2,
+                "ResistanceRate": 0.1,
                 "PinchRate": 0.0,
                 "MaxHP": 16404.86388015747
               },
@@ -21671,7 +21697,7 @@
                 "CriticalRate": "0.15",
                 "CriticalDamageRate": "1.3",
                 "EffectHitRate": "0",
-                "ResistanceRate": "0.2",
+                "ResistanceRate": "0.1",
                 "PinchRate": "0",
                 "DynamicFiEld1": ""
               }
@@ -21685,7 +21711,7 @@
             "CriticalRate": 0.15000000596046448,
             "CriticalDamageRate": 1.2999999523162842,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.20000000298023224,
+            "ResistanceRate": 0.10000000149011612,
             "PinchRate": 0.0,
             "MaxHP": 16405
           },
@@ -21697,7 +21723,7 @@
             "CriticalRate": 0.15,
             "CriticalDamageRate": 1.3,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.2,
+            "ResistanceRate": 0.1,
             "PinchRate": 0.0,
             "MaxHP": 16404.86388015747
           },
@@ -22238,7 +22264,8 @@
           ]
         }
       },
-      "unresolvedSkillIDs": []
+      "unresolvedSkillIDs": [],
+      "catalog": "catalog_014774"
     },
     "28": {
       "version": "1.0.1.014517",
@@ -22375,7 +22402,7 @@
                 "CriticalRate": 0.15,
                 "CriticalDamageRate": 1.3,
                 "EffectHitRate": 0.0,
-                "ResistanceRate": 0.2,
+                "ResistanceRate": 0.1,
                 "PinchRate": 0.0,
                 "MaxHP": 27326.25
               },
@@ -22389,7 +22416,7 @@
                 "CriticalRate": "0.15",
                 "CriticalDamageRate": "1.3",
                 "EffectHitRate": "0",
-                "ResistanceRate": "0.2",
+                "ResistanceRate": "0.1",
                 "PinchRate": "0",
                 "DynamicFiEld1": ""
               }
@@ -22403,7 +22430,7 @@
             "CriticalRate": 0.15000000596046448,
             "CriticalDamageRate": 1.2999999523162842,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.20000000298023224,
+            "ResistanceRate": 0.10000000149011612,
             "PinchRate": 0.0,
             "MaxHP": 27326
           },
@@ -22415,7 +22442,7 @@
             "CriticalRate": 0.15,
             "CriticalDamageRate": 1.3,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.2,
+            "ResistanceRate": 0.1,
             "PinchRate": 0.0,
             "MaxHP": 27326.25
           },
@@ -22565,7 +22592,7 @@
                 "CriticalRate": 0.15,
                 "CriticalDamageRate": 1.3,
                 "EffectHitRate": 0.0,
-                "ResistanceRate": 0.1,
+                "ResistanceRate": 0.05,
                 "PinchRate": 0.0,
                 "MaxHP": 17350.0
               },
@@ -22579,7 +22606,7 @@
                 "CriticalRate": "0.15",
                 "CriticalDamageRate": "1.3",
                 "EffectHitRate": "0",
-                "ResistanceRate": "0.1",
+                "ResistanceRate": "0.05",
                 "PinchRate": "0",
                 "DynamicFiEld1": ""
               }
@@ -22593,7 +22620,7 @@
             "CriticalRate": 0.15000000596046448,
             "CriticalDamageRate": 1.2999999523162842,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.10000000149011612,
+            "ResistanceRate": 0.05000000074505806,
             "PinchRate": 0.0,
             "MaxHP": 17350
           },
@@ -22605,7 +22632,7 @@
             "CriticalRate": 0.15,
             "CriticalDamageRate": 1.3,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.1,
+            "ResistanceRate": 0.05,
             "PinchRate": 0.0,
             "MaxHP": 17350.0
           },
@@ -23524,7 +23551,8 @@
           ]
         }
       },
-      "unresolvedSkillIDs": []
+      "unresolvedSkillIDs": [],
+      "catalog": "catalog_014774"
     },
     "29": {
       "version": "1.0.1.014517",
@@ -23657,7 +23685,7 @@
                 "CriticalRate": 0.15,
                 "CriticalDamageRate": 1.3,
                 "EffectHitRate": 0.0,
-                "ResistanceRate": 0.2,
+                "ResistanceRate": 0.1,
                 "PinchRate": 0.0,
                 "MaxHP": 25820.548827409744
               },
@@ -23671,7 +23699,7 @@
                 "CriticalRate": "0.15",
                 "CriticalDamageRate": "1.3",
                 "EffectHitRate": "0",
-                "ResistanceRate": "0.2",
+                "ResistanceRate": "0.1",
                 "PinchRate": "0",
                 "DynamicFiEld1": ""
               }
@@ -23685,7 +23713,7 @@
             "CriticalRate": 0.15000000596046448,
             "CriticalDamageRate": 1.2999999523162842,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.20000000298023224,
+            "ResistanceRate": 0.10000000149011612,
             "PinchRate": 0.0,
             "MaxHP": 25821
           },
@@ -23697,7 +23725,7 @@
             "CriticalRate": 0.15,
             "CriticalDamageRate": 1.3,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.2,
+            "ResistanceRate": 0.1,
             "PinchRate": 0.0,
             "MaxHP": 25820.548827409744
           },
@@ -24236,7 +24264,8 @@
           ]
         }
       },
-      "unresolvedSkillIDs": []
+      "unresolvedSkillIDs": [],
+      "catalog": "catalog_014774"
     },
     "30": {
       "version": "1.0.1.014517",
@@ -24373,7 +24402,7 @@
                 "CriticalRate": 0.15,
                 "CriticalDamageRate": 1.3,
                 "EffectHitRate": 0.0,
-                "ResistanceRate": 0.2,
+                "ResistanceRate": 0.1,
                 "PinchRate": 0.0,
                 "MaxHP": 22425.039878487587
               },
@@ -24387,7 +24416,7 @@
                 "CriticalRate": "0.15",
                 "CriticalDamageRate": "1.3",
                 "EffectHitRate": "0",
-                "ResistanceRate": "0.2",
+                "ResistanceRate": "0.1",
                 "PinchRate": "0",
                 "DynamicFiEld1": ""
               }
@@ -24401,7 +24430,7 @@
             "CriticalRate": 0.15000000596046448,
             "CriticalDamageRate": 1.2999999523162842,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.20000000298023224,
+            "ResistanceRate": 0.10000000149011612,
             "PinchRate": 0.0,
             "MaxHP": 22425
           },
@@ -24413,7 +24442,7 @@
             "CriticalRate": 0.15,
             "CriticalDamageRate": 1.3,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.2,
+            "ResistanceRate": 0.1,
             "PinchRate": 0.0,
             "MaxHP": 22425.039878487587
           },
@@ -24563,7 +24592,7 @@
                 "CriticalRate": 0.15,
                 "CriticalDamageRate": 1.3,
                 "EffectHitRate": 0.0,
-                "ResistanceRate": 0.1,
+                "ResistanceRate": 0.05,
                 "PinchRate": 0.0,
                 "MaxHP": 16381.799566030502
               },
@@ -24577,7 +24606,7 @@
                 "CriticalRate": "0.15",
                 "CriticalDamageRate": "1.3",
                 "EffectHitRate": "0",
-                "ResistanceRate": "0.1",
+                "ResistanceRate": "0.05",
                 "PinchRate": "0",
                 "DynamicFiEld1": ""
               }
@@ -24591,7 +24620,7 @@
             "CriticalRate": 0.15000000596046448,
             "CriticalDamageRate": 1.2999999523162842,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.10000000149011612,
+            "ResistanceRate": 0.05000000074505806,
             "PinchRate": 0.0,
             "MaxHP": 16382
           },
@@ -24603,7 +24632,7 @@
             "CriticalRate": 0.15,
             "CriticalDamageRate": 1.3,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.1,
+            "ResistanceRate": 0.05,
             "PinchRate": 0.0,
             "MaxHP": 16381.799566030502
           },
@@ -25365,7 +25394,8 @@
           ]
         }
       },
-      "unresolvedSkillIDs": []
+      "unresolvedSkillIDs": [],
+      "catalog": "catalog_014774"
     },
     "31": {
       "version": "1.0.1.014517",
@@ -25498,7 +25528,7 @@
                 "CriticalRate": 0.15,
                 "CriticalDamageRate": 1.3,
                 "EffectHitRate": 0.0,
-                "ResistanceRate": 0.2,
+                "ResistanceRate": 0.1,
                 "PinchRate": 0.0,
                 "MaxHP": 26433.724385142326
               },
@@ -25512,7 +25542,7 @@
                 "CriticalRate": "0.15",
                 "CriticalDamageRate": "1.3",
                 "EffectHitRate": "0",
-                "ResistanceRate": "0.2",
+                "ResistanceRate": "0.1",
                 "PinchRate": "0",
                 "DynamicFiEld1": ""
               }
@@ -25526,7 +25556,7 @@
             "CriticalRate": 0.15000000596046448,
             "CriticalDamageRate": 1.2999999523162842,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.20000000298023224,
+            "ResistanceRate": 0.10000000149011612,
             "PinchRate": 0.0,
             "MaxHP": 26434
           },
@@ -25538,7 +25568,7 @@
             "CriticalRate": 0.15,
             "CriticalDamageRate": 1.3,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.2,
+            "ResistanceRate": 0.1,
             "PinchRate": 0.0,
             "MaxHP": 26433.724385142326
           },
@@ -26144,7 +26174,8 @@
           ]
         }
       },
-      "unresolvedSkillIDs": []
+      "unresolvedSkillIDs": [],
+      "catalog": "catalog_014774"
     },
     "32": {
       "version": "1.0.1.014517",
@@ -26277,7 +26308,7 @@
                 "CriticalRate": 0.15,
                 "CriticalDamageRate": 1.3,
                 "EffectHitRate": 0.0,
-                "ResistanceRate": 0.2,
+                "ResistanceRate": 0.1,
                 "PinchRate": 0.0,
                 "MaxHP": 28372.47625851631
               },
@@ -26291,7 +26322,7 @@
                 "CriticalRate": "0.15",
                 "CriticalDamageRate": "1.3",
                 "EffectHitRate": "0",
-                "ResistanceRate": "0.2",
+                "ResistanceRate": "0.1",
                 "PinchRate": "0",
                 "DynamicFiEld1": ""
               }
@@ -26305,7 +26336,7 @@
             "CriticalRate": 0.15000000596046448,
             "CriticalDamageRate": 1.2999999523162842,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.20000000298023224,
+            "ResistanceRate": 0.10000000149011612,
             "PinchRate": 0.0,
             "MaxHP": 28372
           },
@@ -26317,7 +26348,7 @@
             "CriticalRate": 0.15,
             "CriticalDamageRate": 1.3,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.2,
+            "ResistanceRate": 0.1,
             "PinchRate": 0.0,
             "MaxHP": 28372.47625851631
           },
@@ -27036,7 +27067,8 @@
           ]
         }
       },
-      "unresolvedSkillIDs": []
+      "unresolvedSkillIDs": [],
+      "catalog": "catalog_014774"
     },
     "33": {
       "version": "1.0.1.014517",
@@ -27173,7 +27205,7 @@
                 "CriticalRate": 0.15,
                 "CriticalDamageRate": 1.3,
                 "EffectHitRate": 0.0,
-                "ResistanceRate": 0.2,
+                "ResistanceRate": 0.1,
                 "PinchRate": 0.0,
                 "MaxHP": 23498.639872670174
               },
@@ -27187,7 +27219,7 @@
                 "CriticalRate": "0.15",
                 "CriticalDamageRate": "1.3",
                 "EffectHitRate": "0",
-                "ResistanceRate": "0.2",
+                "ResistanceRate": "0.1",
                 "PinchRate": "0",
                 "DynamicFiEld1": ""
               }
@@ -27201,7 +27233,7 @@
             "CriticalRate": 0.15000000596046448,
             "CriticalDamageRate": 1.2999999523162842,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.20000000298023224,
+            "ResistanceRate": 0.10000000149011612,
             "PinchRate": 0.0,
             "MaxHP": 23499
           },
@@ -27213,7 +27245,7 @@
             "CriticalRate": 0.15,
             "CriticalDamageRate": 1.3,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.2,
+            "ResistanceRate": 0.1,
             "PinchRate": 0.0,
             "MaxHP": 23498.639872670174
           },
@@ -27363,7 +27395,7 @@
                 "CriticalRate": 0.15,
                 "CriticalDamageRate": 1.3,
                 "EffectHitRate": 0.0,
-                "ResistanceRate": 0.1,
+                "ResistanceRate": 0.05,
                 "PinchRate": 0.0,
                 "MaxHP": 14976.900249123573
               },
@@ -27377,7 +27409,7 @@
                 "CriticalRate": "0.15",
                 "CriticalDamageRate": "1.3",
                 "EffectHitRate": "0",
-                "ResistanceRate": "0.1",
+                "ResistanceRate": "0.05",
                 "PinchRate": "0",
                 "DynamicFiEld1": ""
               }
@@ -27391,7 +27423,7 @@
             "CriticalRate": 0.15000000596046448,
             "CriticalDamageRate": 1.2999999523162842,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.10000000149011612,
+            "ResistanceRate": 0.05000000074505806,
             "PinchRate": 0.0,
             "MaxHP": 14977
           },
@@ -27403,7 +27435,7 @@
             "CriticalRate": 0.15,
             "CriticalDamageRate": 1.3,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.1,
+            "ResistanceRate": 0.05,
             "PinchRate": 0.0,
             "MaxHP": 14976.900249123573
           },
@@ -28450,7 +28482,8 @@
           ]
         }
       },
-      "unresolvedSkillIDs": []
+      "unresolvedSkillIDs": [],
+      "catalog": "catalog_014774"
     },
     "34": {
       "version": "1.0.1.014517",
@@ -28583,7 +28616,7 @@
                 "CriticalRate": 0.15,
                 "CriticalDamageRate": 1.3,
                 "EffectHitRate": 0.0,
-                "ResistanceRate": 0.2,
+                "ResistanceRate": 0.1,
                 "PinchRate": 0.0,
                 "MaxHP": 31066.09935593605
               },
@@ -28597,7 +28630,7 @@
                 "CriticalRate": "0.15",
                 "CriticalDamageRate": "1.3",
                 "EffectHitRate": "0",
-                "ResistanceRate": "0.2",
+                "ResistanceRate": "0.1",
                 "PinchRate": "0",
                 "DynamicFiEld1": ""
               }
@@ -28611,7 +28644,7 @@
             "CriticalRate": 0.15000000596046448,
             "CriticalDamageRate": 1.2999999523162842,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.20000000298023224,
+            "ResistanceRate": 0.10000000149011612,
             "PinchRate": 0.0,
             "MaxHP": 31066
           },
@@ -28623,7 +28656,7 @@
             "CriticalRate": 0.15,
             "CriticalDamageRate": 1.3,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.2,
+            "ResistanceRate": 0.1,
             "PinchRate": 0.0,
             "MaxHP": 31066.09935593605
           },
@@ -29325,7 +29358,8 @@
           ]
         }
       },
-      "unresolvedSkillIDs": []
+      "unresolvedSkillIDs": [],
+      "catalog": "catalog_014774"
     },
     "35": {
       "version": "1.0.1.014517",
@@ -29462,7 +29496,7 @@
                 "CriticalRate": 0.15,
                 "CriticalDamageRate": 1.3,
                 "EffectHitRate": 0.0,
-                "ResistanceRate": 0.2,
+                "ResistanceRate": 0.1,
                 "PinchRate": 0.0,
                 "MaxHP": 26121.743192195892
               },
@@ -29476,7 +29510,7 @@
                 "CriticalRate": "0.15",
                 "CriticalDamageRate": "1.3",
                 "EffectHitRate": "0",
-                "ResistanceRate": "0.2",
+                "ResistanceRate": "0.1",
                 "PinchRate": "0",
                 "DynamicFiEld1": ""
               }
@@ -29490,7 +29524,7 @@
             "CriticalRate": 0.15000000596046448,
             "CriticalDamageRate": 1.2999999523162842,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.20000000298023224,
+            "ResistanceRate": 0.10000000149011612,
             "PinchRate": 0.0,
             "MaxHP": 26122
           },
@@ -29502,7 +29536,7 @@
             "CriticalRate": 0.15,
             "CriticalDamageRate": 1.3,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.2,
+            "ResistanceRate": 0.1,
             "PinchRate": 0.0,
             "MaxHP": 26121.743192195892
           },
@@ -29652,7 +29686,7 @@
                 "CriticalRate": 0.15,
                 "CriticalDamageRate": 1.3,
                 "EffectHitRate": 0.0,
-                "ResistanceRate": 0.1,
+                "ResistanceRate": 0.05,
                 "PinchRate": 0.0,
                 "MaxHP": 13721.399660110474
               },
@@ -29666,7 +29700,7 @@
                 "CriticalRate": "0.15",
                 "CriticalDamageRate": "1.3",
                 "EffectHitRate": "0",
-                "ResistanceRate": "0.1",
+                "ResistanceRate": "0.05",
                 "PinchRate": "0",
                 "DynamicFiEld1": ""
               }
@@ -29680,7 +29714,7 @@
             "CriticalRate": 0.15000000596046448,
             "CriticalDamageRate": 1.2999999523162842,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.10000000149011612,
+            "ResistanceRate": 0.05000000074505806,
             "PinchRate": 0.0,
             "MaxHP": 13721
           },
@@ -29692,7 +29726,7 @@
             "CriticalRate": 0.15,
             "CriticalDamageRate": 1.3,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.1,
+            "ResistanceRate": 0.05,
             "PinchRate": 0.0,
             "MaxHP": 13721.399660110474
           },
@@ -30590,7 +30624,8 @@
           ]
         }
       },
-      "unresolvedSkillIDs": []
+      "unresolvedSkillIDs": [],
+      "catalog": "catalog_014774"
     },
     "36": {
       "version": "1.0.1.014517",
@@ -30727,7 +30762,7 @@
                 "CriticalRate": 0.15,
                 "CriticalDamageRate": 1.3,
                 "EffectHitRate": 0.0,
-                "ResistanceRate": 0.2,
+                "ResistanceRate": 0.1,
                 "PinchRate": 0.0,
                 "MaxHP": 31089.375
               },
@@ -30741,7 +30776,7 @@
                 "CriticalRate": "0.15",
                 "CriticalDamageRate": "1.3",
                 "EffectHitRate": "0",
-                "ResistanceRate": "0.2",
+                "ResistanceRate": "0.1",
                 "PinchRate": "0",
                 "DynamicFiEld1": ""
               }
@@ -30755,7 +30790,7 @@
             "CriticalRate": 0.15000000596046448,
             "CriticalDamageRate": 1.2999999523162842,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.20000000298023224,
+            "ResistanceRate": 0.10000000149011612,
             "PinchRate": 0.0,
             "MaxHP": 31089
           },
@@ -30767,7 +30802,7 @@
             "CriticalRate": 0.15,
             "CriticalDamageRate": 1.3,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.2,
+            "ResistanceRate": 0.1,
             "PinchRate": 0.0,
             "MaxHP": 31089.375
           },
@@ -30917,7 +30952,7 @@
                 "CriticalRate": 0.15,
                 "CriticalDamageRate": 1.3,
                 "EffectHitRate": 0.0,
-                "ResistanceRate": 0.1,
+                "ResistanceRate": 0.05,
                 "PinchRate": 0.0,
                 "MaxHP": 21177.02414059639
               },
@@ -30931,7 +30966,7 @@
                 "CriticalRate": "0.15",
                 "CriticalDamageRate": "1.3",
                 "EffectHitRate": "0",
-                "ResistanceRate": "0.1",
+                "ResistanceRate": "0.05",
                 "PinchRate": "0",
                 "DynamicFiEld1": ""
               }
@@ -30945,7 +30980,7 @@
             "CriticalRate": 0.15000000596046448,
             "CriticalDamageRate": 1.2999999523162842,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.10000000149011612,
+            "ResistanceRate": 0.05000000074505806,
             "PinchRate": 0.0,
             "MaxHP": 21177
           },
@@ -30957,7 +30992,7 @@
             "CriticalRate": 0.15,
             "CriticalDamageRate": 1.3,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.1,
+            "ResistanceRate": 0.05,
             "PinchRate": 0.0,
             "MaxHP": 21177.02414059639
           },
@@ -32063,7 +32098,8 @@
           ]
         }
       },
-      "unresolvedSkillIDs": []
+      "unresolvedSkillIDs": [],
+      "catalog": "catalog_014774"
     },
     "37": {
       "version": "1.0.1.014517",
@@ -32196,7 +32232,7 @@
                 "CriticalRate": 0.15,
                 "CriticalDamageRate": 1.3,
                 "EffectHitRate": 0.0,
-                "ResistanceRate": 0.2,
+                "ResistanceRate": 0.1,
                 "PinchRate": 0.0,
                 "MaxHP": 30739.50066626072
               },
@@ -32210,7 +32246,7 @@
                 "CriticalRate": "0.15",
                 "CriticalDamageRate": "1.3",
                 "EffectHitRate": "0",
-                "ResistanceRate": "0.2",
+                "ResistanceRate": "0.1",
                 "PinchRate": "0",
                 "DynamicFiEld1": ""
               }
@@ -32224,7 +32260,7 @@
             "CriticalRate": 0.15000000596046448,
             "CriticalDamageRate": 1.2999999523162842,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.20000000298023224,
+            "ResistanceRate": 0.10000000149011612,
             "PinchRate": 0.0,
             "MaxHP": 30740
           },
@@ -32236,7 +32272,7 @@
             "CriticalRate": 0.15,
             "CriticalDamageRate": 1.3,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.2,
+            "ResistanceRate": 0.1,
             "PinchRate": 0.0,
             "MaxHP": 30739.50066626072
           },
@@ -32719,7 +32755,8 @@
           ]
         }
       },
-      "unresolvedSkillIDs": []
+      "unresolvedSkillIDs": [],
+      "catalog": "catalog_014774"
     },
     "38": {
       "version": "1.0.1.014517",
@@ -32856,7 +32893,7 @@
                 "CriticalRate": 0.15,
                 "CriticalDamageRate": 1.3,
                 "EffectHitRate": 0.0,
-                "ResistanceRate": 0.2,
+                "ResistanceRate": 0.1,
                 "PinchRate": 0.0,
                 "MaxHP": 25825.98328590393
               },
@@ -32870,7 +32907,7 @@
                 "CriticalRate": "0.15",
                 "CriticalDamageRate": "1.3",
                 "EffectHitRate": "0",
-                "ResistanceRate": "0.2",
+                "ResistanceRate": "0.1",
                 "PinchRate": "0",
                 "DynamicFiEld1": ""
               }
@@ -32884,7 +32921,7 @@
             "CriticalRate": 0.15000000596046448,
             "CriticalDamageRate": 1.2999999523162842,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.20000000298023224,
+            "ResistanceRate": 0.10000000149011612,
             "PinchRate": 0.0,
             "MaxHP": 25826
           },
@@ -32896,7 +32933,7 @@
             "CriticalRate": 0.15,
             "CriticalDamageRate": 1.3,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.2,
+            "ResistanceRate": 0.1,
             "PinchRate": 0.0,
             "MaxHP": 25825.98328590393
           },
@@ -33048,7 +33085,7 @@
                 "CriticalRate": 0.15,
                 "CriticalDamageRate": 1.3,
                 "EffectHitRate": 0.0,
-                "ResistanceRate": 0.1,
+                "ResistanceRate": 0.05,
                 "PinchRate": 0.0,
                 "MaxHP": 16235.06767487526
               },
@@ -33062,7 +33099,7 @@
                 "CriticalRate": "0.15",
                 "CriticalDamageRate": "1.3",
                 "EffectHitRate": "0",
-                "ResistanceRate": "0.1",
+                "ResistanceRate": "0.05",
                 "PinchRate": "0",
                 "DynamicFiEld1": ""
               }
@@ -33076,7 +33113,7 @@
             "CriticalRate": 0.15000000596046448,
             "CriticalDamageRate": 1.2999999523162842,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.10000000149011612,
+            "ResistanceRate": 0.05000000074505806,
             "PinchRate": 0.0,
             "MaxHP": 16235
           },
@@ -33088,7 +33125,7 @@
             "CriticalRate": 0.15,
             "CriticalDamageRate": 1.3,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.1,
+            "ResistanceRate": 0.05,
             "PinchRate": 0.0,
             "MaxHP": 16235.06767487526
           },
@@ -34109,7 +34146,8 @@
           ]
         }
       },
-      "unresolvedSkillIDs": []
+      "unresolvedSkillIDs": [],
+      "catalog": "catalog_014774"
     },
     "39": {
       "version": "1.0.1.014517",
@@ -34242,7 +34280,7 @@
                 "CriticalRate": 0.15,
                 "CriticalDamageRate": 1.3,
                 "EffectHitRate": 0.0,
-                "ResistanceRate": 0.2,
+                "ResistanceRate": 0.1,
                 "PinchRate": 0.0,
                 "MaxHP": 31422.600681066513
               },
@@ -34256,7 +34294,7 @@
                 "CriticalRate": "0.15",
                 "CriticalDamageRate": "1.3",
                 "EffectHitRate": "0",
-                "ResistanceRate": "0.2",
+                "ResistanceRate": "0.1",
                 "PinchRate": "0",
                 "DynamicFiEld1": ""
               }
@@ -34270,7 +34308,7 @@
             "CriticalRate": 0.15000000596046448,
             "CriticalDamageRate": 1.2999999523162842,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.20000000298023224,
+            "ResistanceRate": 0.10000000149011612,
             "PinchRate": 0.0,
             "MaxHP": 31423
           },
@@ -34282,7 +34320,7 @@
             "CriticalRate": 0.15,
             "CriticalDamageRate": 1.3,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.2,
+            "ResistanceRate": 0.1,
             "PinchRate": 0.0,
             "MaxHP": 31422.600681066513
           },
@@ -34888,7 +34926,8 @@
           ]
         }
       },
-      "unresolvedSkillIDs": []
+      "unresolvedSkillIDs": [],
+      "catalog": "catalog_014774"
     },
     "40": {
       "version": "1.0.1.014517",
@@ -35021,7 +35060,7 @@
                 "CriticalRate": 0.15,
                 "CriticalDamageRate": 1.3,
                 "EffectHitRate": 0.0,
-                "ResistanceRate": 0.2,
+                "ResistanceRate": 0.1,
                 "PinchRate": 0.0,
                 "MaxHP": 22206.412820994854
               },
@@ -35035,7 +35074,7 @@
                 "CriticalRate": "0.15",
                 "CriticalDamageRate": "1.3",
                 "EffectHitRate": "0",
-                "ResistanceRate": "0.2",
+                "ResistanceRate": "0.1",
                 "PinchRate": "0",
                 "DynamicFiEld1": ""
               }
@@ -35049,7 +35088,7 @@
             "CriticalRate": 0.15000000596046448,
             "CriticalDamageRate": 1.2999999523162842,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.20000000298023224,
+            "ResistanceRate": 0.10000000149011612,
             "PinchRate": 0.0,
             "MaxHP": 22206
           },
@@ -35061,7 +35100,7 @@
             "CriticalRate": 0.15,
             "CriticalDamageRate": 1.3,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.2,
+            "ResistanceRate": 0.1,
             "PinchRate": 0.0,
             "MaxHP": 22206.412820994854
           },
@@ -35623,7 +35662,8 @@
           ]
         }
       },
-      "unresolvedSkillIDs": []
+      "unresolvedSkillIDs": [],
+      "catalog": "catalog_014774"
     },
     "41": {
       "version": "1.0.1.014517",
@@ -35756,7 +35796,7 @@
                 "CriticalRate": 0.15,
                 "CriticalDamageRate": 1.3,
                 "EffectHitRate": 0.0,
-                "ResistanceRate": 0.2,
+                "ResistanceRate": 0.1,
                 "PinchRate": 0.0,
                 "MaxHP": 32105.700695872307
               },
@@ -35770,7 +35810,7 @@
                 "CriticalRate": "0.15",
                 "CriticalDamageRate": "1.3",
                 "EffectHitRate": "0",
-                "ResistanceRate": "0.2",
+                "ResistanceRate": "0.1",
                 "PinchRate": "0",
                 "DynamicFiEld1": ""
               }
@@ -35784,7 +35824,7 @@
             "CriticalRate": 0.15000000596046448,
             "CriticalDamageRate": 1.2999999523162842,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.20000000298023224,
+            "ResistanceRate": 0.10000000149011612,
             "PinchRate": 0.0,
             "MaxHP": 32106
           },
@@ -35796,7 +35836,7 @@
             "CriticalRate": 0.15,
             "CriticalDamageRate": 1.3,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.2,
+            "ResistanceRate": 0.1,
             "PinchRate": 0.0,
             "MaxHP": 32105.700695872307
           },
@@ -36505,7 +36545,8 @@
           ]
         }
       },
-      "unresolvedSkillIDs": []
+      "unresolvedSkillIDs": [],
+      "catalog": "catalog_014774"
     },
     "42": {
       "version": "1.0.1.014517",
@@ -36644,7 +36685,7 @@
                 "CriticalRate": 0.15,
                 "CriticalDamageRate": 1.3,
                 "EffectHitRate": 0.0,
-                "ResistanceRate": 0.2,
+                "ResistanceRate": 0.1,
                 "PinchRate": 0.0,
                 "MaxHP": 30235.449296712875
               },
@@ -36658,7 +36699,7 @@
                 "CriticalRate": "0.15",
                 "CriticalDamageRate": "1.3",
                 "EffectHitRate": "0",
-                "ResistanceRate": "0.2",
+                "ResistanceRate": "0.1",
                 "PinchRate": "0",
                 "DynamicFiEld1": ""
               }
@@ -36672,7 +36713,7 @@
             "CriticalRate": 0.15000000596046448,
             "CriticalDamageRate": 1.2999999523162842,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.20000000298023224,
+            "ResistanceRate": 0.10000000149011612,
             "PinchRate": 0.0,
             "MaxHP": 30235
           },
@@ -36684,7 +36725,7 @@
             "CriticalRate": 0.15,
             "CriticalDamageRate": 1.3,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.2,
+            "ResistanceRate": 0.1,
             "PinchRate": 0.0,
             "MaxHP": 30235.449296712875
           },
@@ -37305,7 +37346,8 @@
       },
       "unresolvedSkillIDs": [
         "C04_SR_003S4"
-      ]
+      ],
+      "catalog": "catalog_014774"
     },
     "43": {
       "version": "1.0.1.014517",
@@ -37438,7 +37480,7 @@
                 "CriticalRate": 0.15,
                 "CriticalDamageRate": 1.3,
                 "EffectHitRate": 0.0,
-                "ResistanceRate": 0.2,
+                "ResistanceRate": 0.1,
                 "PinchRate": 0.0,
                 "MaxHP": 37260.0
               },
@@ -37452,7 +37494,7 @@
                 "CriticalRate": "0.15",
                 "CriticalDamageRate": "1.3",
                 "EffectHitRate": "0",
-                "ResistanceRate": "0.2",
+                "ResistanceRate": "0.1",
                 "PinchRate": "0",
                 "DynamicFiEld1": ""
               }
@@ -37466,7 +37508,7 @@
             "CriticalRate": 0.15000000596046448,
             "CriticalDamageRate": 1.2999999523162842,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.20000000298023224,
+            "ResistanceRate": 0.10000000149011612,
             "PinchRate": 0.0,
             "MaxHP": 37260
           },
@@ -37478,7 +37520,7 @@
             "CriticalRate": 0.15,
             "CriticalDamageRate": 1.3,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.2,
+            "ResistanceRate": 0.1,
             "PinchRate": 0.0,
             "MaxHP": 37260.0
           },
@@ -38226,7 +38268,8 @@
           ]
         }
       },
-      "unresolvedSkillIDs": []
+      "unresolvedSkillIDs": [],
+      "catalog": "catalog_014774"
     },
     "44": {
       "version": "1.0.1.014517",
@@ -38363,7 +38406,7 @@
                 "CriticalRate": 0.15,
                 "CriticalDamageRate": 1.3,
                 "EffectHitRate": 0.0,
-                "ResistanceRate": 0.2,
+                "ResistanceRate": 0.1,
                 "PinchRate": 0.0,
                 "MaxHP": 30510.5473446846
               },
@@ -38377,7 +38420,7 @@
                 "CriticalRate": "0.15",
                 "CriticalDamageRate": "1.3",
                 "EffectHitRate": "0",
-                "ResistanceRate": "0.2",
+                "ResistanceRate": "0.1",
                 "PinchRate": "0",
                 "DynamicFiEld1": ""
               }
@@ -38391,7 +38434,7 @@
             "CriticalRate": 0.15000000596046448,
             "CriticalDamageRate": 1.2999999523162842,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.20000000298023224,
+            "ResistanceRate": 0.10000000149011612,
             "PinchRate": 0.0,
             "MaxHP": 30511
           },
@@ -38403,7 +38446,7 @@
             "CriticalRate": 0.15,
             "CriticalDamageRate": 1.3,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.2,
+            "ResistanceRate": 0.1,
             "PinchRate": 0.0,
             "MaxHP": 30510.5473446846
           },
@@ -38553,7 +38596,7 @@
                 "CriticalRate": 0.15,
                 "CriticalDamageRate": 1.3,
                 "EffectHitRate": 0.0,
-                "ResistanceRate": 0.1,
+                "ResistanceRate": 0.05,
                 "PinchRate": 0.0,
                 "MaxHP": 16107.259859502316
               },
@@ -38567,7 +38610,7 @@
                 "CriticalRate": "0.15",
                 "CriticalDamageRate": "1.3",
                 "EffectHitRate": "0",
-                "ResistanceRate": "0.1",
+                "ResistanceRate": "0.05",
                 "PinchRate": "0",
                 "DynamicFiEld1": ""
               }
@@ -38581,7 +38624,7 @@
             "CriticalRate": 0.15000000596046448,
             "CriticalDamageRate": 1.2999999523162842,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.10000000149011612,
+            "ResistanceRate": 0.05000000074505806,
             "PinchRate": 0.0,
             "MaxHP": 16107
           },
@@ -38593,7 +38636,7 @@
             "CriticalRate": 0.15,
             "CriticalDamageRate": 1.3,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.1,
+            "ResistanceRate": 0.05,
             "PinchRate": 0.0,
             "MaxHP": 16107.259859502316
           },
@@ -39576,7 +39619,8 @@
           ]
         }
       },
-      "unresolvedSkillIDs": []
+      "unresolvedSkillIDs": [],
+      "catalog": "catalog_014774"
     },
     "45": {
       "version": "1.0.1.014517",
@@ -39713,7 +39757,7 @@
                 "CriticalRate": 0.15,
                 "CriticalDamageRate": 1.3,
                 "EffectHitRate": 0.0,
-                "ResistanceRate": 0.2,
+                "ResistanceRate": 0.1,
                 "PinchRate": 0.0,
                 "MaxHP": 21300.299637258053
               },
@@ -39727,7 +39771,7 @@
                 "CriticalRate": "0.15",
                 "CriticalDamageRate": "1.3",
                 "EffectHitRate": "0",
-                "ResistanceRate": "0.2",
+                "ResistanceRate": "0.1",
                 "PinchRate": "0",
                 "DynamicFiEld1": ""
               }
@@ -39741,7 +39785,7 @@
             "CriticalRate": 0.15000000596046448,
             "CriticalDamageRate": 1.2999999523162842,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.20000000298023224,
+            "ResistanceRate": 0.10000000149011612,
             "PinchRate": 0.0,
             "MaxHP": 21300
           },
@@ -39753,7 +39797,7 @@
             "CriticalRate": 0.15,
             "CriticalDamageRate": 1.3,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.2,
+            "ResistanceRate": 0.1,
             "PinchRate": 0.0,
             "MaxHP": 21300.299637258053
           },
@@ -39903,7 +39947,7 @@
                 "CriticalRate": 0.15,
                 "CriticalDamageRate": 1.3,
                 "EffectHitRate": 0.0,
-                "ResistanceRate": 0.1,
+                "ResistanceRate": 0.05,
                 "PinchRate": 0.0,
                 "MaxHP": 17463.599905371666
               },
@@ -39917,7 +39961,7 @@
                 "CriticalRate": "0.15",
                 "CriticalDamageRate": "1.3",
                 "EffectHitRate": "0",
-                "ResistanceRate": "0.1",
+                "ResistanceRate": "0.05",
                 "PinchRate": "0",
                 "DynamicFiEld1": ""
               }
@@ -39931,7 +39975,7 @@
             "CriticalRate": 0.15000000596046448,
             "CriticalDamageRate": 1.2999999523162842,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.10000000149011612,
+            "ResistanceRate": 0.05000000074505806,
             "PinchRate": 0.0,
             "MaxHP": 17464
           },
@@ -39943,7 +39987,7 @@
             "CriticalRate": 0.15,
             "CriticalDamageRate": 1.3,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.1,
+            "ResistanceRate": 0.05,
             "PinchRate": 0.0,
             "MaxHP": 17463.599905371666
           },
@@ -40955,7 +40999,8 @@
           ]
         }
       },
-      "unresolvedSkillIDs": []
+      "unresolvedSkillIDs": [],
+      "catalog": "catalog_014774"
     },
     "46": {
       "version": "1.0.1.014517",
@@ -41088,7 +41133,7 @@
                 "CriticalRate": 0.15,
                 "CriticalDamageRate": 1.3,
                 "EffectHitRate": 0.0,
-                "ResistanceRate": 0.2,
+                "ResistanceRate": 0.1,
                 "PinchRate": 0.0,
                 "MaxHP": 34582.5
               },
@@ -41102,7 +41147,7 @@
                 "CriticalRate": "0.15",
                 "CriticalDamageRate": "1.3",
                 "EffectHitRate": "0",
-                "ResistanceRate": "0.2",
+                "ResistanceRate": "0.1",
                 "PinchRate": "0",
                 "DynamicFiEld1": ""
               }
@@ -41116,7 +41161,7 @@
             "CriticalRate": 0.15000000596046448,
             "CriticalDamageRate": 1.2999999523162842,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.20000000298023224,
+            "ResistanceRate": 0.10000000149011612,
             "PinchRate": 0.0,
             "MaxHP": 34582
           },
@@ -41128,7 +41173,7 @@
             "CriticalRate": 0.15,
             "CriticalDamageRate": 1.3,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.2,
+            "ResistanceRate": 0.1,
             "PinchRate": 0.0,
             "MaxHP": 34582.5
           },
@@ -41936,7 +41981,8 @@
           ]
         }
       },
-      "unresolvedSkillIDs": []
+      "unresolvedSkillIDs": [],
+      "catalog": "catalog_014774"
     },
     "47": {
       "version": "1.0.1.014517",
@@ -42069,7 +42115,7 @@
                 "CriticalRate": 0.15,
                 "CriticalDamageRate": 1.3,
                 "EffectHitRate": 0.0,
-                "ResistanceRate": 0.2,
+                "ResistanceRate": 0.1,
                 "PinchRate": 0.0,
                 "MaxHP": 33378.751480579376
               },
@@ -42083,7 +42129,7 @@
                 "CriticalRate": "0.15",
                 "CriticalDamageRate": "1.3",
                 "EffectHitRate": "0",
-                "ResistanceRate": "0.2",
+                "ResistanceRate": "0.1",
                 "PinchRate": "0",
                 "DynamicFiEld1": ""
               }
@@ -42097,7 +42143,7 @@
             "CriticalRate": 0.15000000596046448,
             "CriticalDamageRate": 1.2999999523162842,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.20000000298023224,
+            "ResistanceRate": 0.10000000149011612,
             "PinchRate": 0.0,
             "MaxHP": 33379
           },
@@ -42109,7 +42155,7 @@
             "CriticalRate": 0.15,
             "CriticalDamageRate": 1.3,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.2,
+            "ResistanceRate": 0.1,
             "PinchRate": 0.0,
             "MaxHP": 33378.751480579376
           },
@@ -42697,7 +42743,8 @@
           ]
         }
       },
-      "unresolvedSkillIDs": []
+      "unresolvedSkillIDs": [],
+      "catalog": "catalog_014774"
     },
     "48": {
       "version": "1.0.1.014517",
@@ -42834,7 +42881,7 @@
                 "CriticalRate": 0.15,
                 "CriticalDamageRate": 1.3,
                 "EffectHitRate": 0.0,
-                "ResistanceRate": 0.2,
+                "ResistanceRate": 0.1,
                 "PinchRate": 0.0,
                 "MaxHP": 31826.249259710312
               },
@@ -42848,7 +42895,7 @@
                 "CriticalRate": "0.15",
                 "CriticalDamageRate": "1.3",
                 "EffectHitRate": "0",
-                "ResistanceRate": "0.2",
+                "ResistanceRate": "0.1",
                 "PinchRate": "0",
                 "DynamicFiEld1": ""
               }
@@ -42862,7 +42909,7 @@
             "CriticalRate": 0.15000000596046448,
             "CriticalDamageRate": 1.2999999523162842,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.20000000298023224,
+            "ResistanceRate": 0.10000000149011612,
             "PinchRate": 0.0,
             "MaxHP": 31826
           },
@@ -42874,7 +42921,7 @@
             "CriticalRate": 0.15,
             "CriticalDamageRate": 1.3,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.2,
+            "ResistanceRate": 0.1,
             "PinchRate": 0.0,
             "MaxHP": 31826.249259710312
           },
@@ -43151,7 +43198,7 @@
         },
         "C02_SSR_001S3": {
           "id": "C02_SSR_001S3",
-          "name": "全体攻击",
+          "name": "T_Skill_NAME_C01_SSR_014S3",
           "description": "",
           "raw": {
             "ID": "C02_SSR_001S3",
@@ -43669,7 +43716,8 @@
           ]
         }
       },
-      "unresolvedSkillIDs": []
+      "unresolvedSkillIDs": [],
+      "catalog": "catalog_014774"
     },
     "49": {
       "version": "1.0.1.014517",
@@ -43802,7 +43850,7 @@
                 "CriticalRate": 0.15,
                 "CriticalDamageRate": 1.3,
                 "EffectHitRate": 0.0,
-                "ResistanceRate": 0.2,
+                "ResistanceRate": 0.1,
                 "PinchRate": 0.0,
                 "MaxHP": 32602.498519420624
               },
@@ -43816,7 +43864,7 @@
                 "CriticalRate": "0.15",
                 "CriticalDamageRate": "1.3",
                 "EffectHitRate": "0",
-                "ResistanceRate": "0.2",
+                "ResistanceRate": "0.1",
                 "PinchRate": "0",
                 "DynamicFiEld1": ""
               }
@@ -43830,7 +43878,7 @@
             "CriticalRate": 0.15000000596046448,
             "CriticalDamageRate": 1.2999999523162842,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.20000000298023224,
+            "ResistanceRate": 0.10000000149011612,
             "PinchRate": 0.0,
             "MaxHP": 32602
           },
@@ -43842,7 +43890,7 @@
             "CriticalRate": 0.15,
             "CriticalDamageRate": 1.3,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.2,
+            "ResistanceRate": 0.1,
             "PinchRate": 0.0,
             "MaxHP": 32602.498519420624
           },
@@ -44412,12 +44460,13 @@
           ]
         }
       },
-      "unresolvedSkillIDs": []
+      "unresolvedSkillIDs": [],
+      "catalog": "catalog_014774"
     },
     "50": {
       "version": "1.0.1.014517",
-      "asOf": "2026-10-16",
       "id": "Trial_50",
+      "floor": 50,
       "name": "试炼第50层",
       "chapterName": "综合试炼",
       "sceneName": "",
@@ -44516,6 +44565,7 @@
       "enemies": [
         {
           "id": "Trial_C04_SSR_002",
+          "baseCardId": "C04_SSR_002",
           "name": "烟光迷离",
           "level": 80,
           "element": "Ground",
@@ -44552,9 +44602,23 @@
                 "CriticalRate": 0.15,
                 "CriticalDamageRate": 1.3,
                 "EffectHitRate": 0.0,
-                "ResistanceRate": 0.2,
+                "ResistanceRate": 0.1,
                 "PinchRate": 0.0,
                 "MaxHP": 31826.249259710312
+              },
+              "raw": {
+                "ID": "Trial_Boss",
+                "LV": "80",
+                "HP": "31050",
+                "Attack": "4050",
+                "Defence": "10112",
+                "Speed": "3200",
+                "CriticalRate": "0.15",
+                "CriticalDamageRate": "1.3",
+                "EffectHitRate": "0",
+                "ResistanceRate": "0.1",
+                "PinchRate": "0",
+                "DynamicFiEld1": ""
               }
             }
           ],
@@ -44566,7 +44630,7 @@
             "CriticalRate": 0.15000000596046448,
             "CriticalDamageRate": 1.2999999523162842,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.20000000298023224,
+            "ResistanceRate": 0.10000000149011612,
             "PinchRate": 0.0,
             "MaxHP": 31826
           },
@@ -44578,7 +44642,7 @@
             "CriticalRate": 0.15,
             "CriticalDamageRate": 1.3,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.2,
+            "ResistanceRate": 0.1,
             "PinchRate": 0.0,
             "MaxHP": 31826.249259710312
           },
@@ -44693,11 +44757,11 @@
             }
           ],
           "imprint": [],
-          "ascend": [],
-          "baseCardId": "C04_SSR_002"
+          "ascend": []
         },
         {
           "id": "Trial_C04_SR_003_50",
+          "baseCardId": "C04_SR_003",
           "name": "最佳调味",
           "level": 80,
           "element": "Earth",
@@ -44734,9 +44798,23 @@
                 "CriticalRate": 0.15,
                 "CriticalDamageRate": 1.3,
                 "EffectHitRate": 0.0,
-                "ResistanceRate": 0.1,
+                "ResistanceRate": 0.05,
                 "PinchRate": 0.0,
                 "MaxHP": 12453.750193119049
+              },
+              "raw": {
+                "ID": "Trial_Elite",
+                "LV": "80",
+                "HP": "20250",
+                "Attack": "2734",
+                "Defence": "6952",
+                "Speed": "2700",
+                "CriticalRate": "0.15",
+                "CriticalDamageRate": "1.3",
+                "EffectHitRate": "0",
+                "ResistanceRate": "0.05",
+                "PinchRate": "0",
+                "DynamicFiEld1": ""
               }
             }
           ],
@@ -44748,7 +44826,7 @@
             "CriticalRate": 0.15000000596046448,
             "CriticalDamageRate": 1.2999999523162842,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.10000000149011612,
+            "ResistanceRate": 0.05000000074505806,
             "PinchRate": 0.0,
             "MaxHP": 12454
           },
@@ -44760,7 +44838,7 @@
             "CriticalRate": 0.15,
             "CriticalDamageRate": 1.3,
             "EffectHitRate": 0.0,
-            "ResistanceRate": 0.1,
+            "ResistanceRate": 0.05,
             "PinchRate": 0.0,
             "MaxHP": 12453.750193119049
           },
@@ -44875,8 +44953,7 @@
             }
           ],
           "imprint": [],
-          "ascend": [],
-          "baseCardId": "C04_SR_003"
+          "ascend": []
         }
       ],
       "skills": {
@@ -45029,7 +45106,7 @@
         },
         "C04_SSR_002S3": {
           "id": "C04_SSR_002S3",
-          "name": "全体攻击",
+          "name": "T_Skill_NAME_C01_SSR_014S3",
           "description": "",
           "raw": {
             "ID": "C04_SSR_002S3",
@@ -45738,7 +45815,7 @@
       "unresolvedSkillIDs": [
         "C04_SR_003S4"
       ],
-      "floor": 50
+      "catalog": "catalog_014774"
     }
   },
   "skills": {
@@ -50997,7 +51074,7 @@
     },
     "C02_SSR_001S3": {
       "id": "C02_SSR_001S3",
-      "name": "全体攻击",
+      "name": "T_Skill_NAME_C01_SSR_014S3",
       "description": "",
       "raw": {
         "ID": "C02_SSR_001S3",
@@ -57434,7 +57511,7 @@
     },
     "C04_SSR_002S3": {
       "id": "C04_SSR_002S3",
-      "name": "全体攻击",
+      "name": "T_Skill_NAME_C01_SSR_014S3",
       "description": "",
       "raw": {
         "ID": "C04_SSR_002S3",
@@ -59458,5 +59535,6 @@
   },
   "unresolvedSkillIDs": [
     "C04_SR_003S4"
-  ]
+  ],
+  "catalog": "catalog_014774"
 }

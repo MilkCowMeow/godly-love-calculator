@@ -22,7 +22,10 @@ client_assets = extract((ROOT / 'docs/index.html').read_text('utf8'), 'ASSETS')
 parser = argparse.ArgumentParser()
 parser.add_argument('--r-art-dir', type=Path, help='Optional local folder with the original R-card PNG sprites')
 parser.add_argument('--font-dir', type=Path, help='Optional font folder when new text needs an expanded embedded subset')
+parser.add_argument('--dataset-json', type=Path, help='本轮已同步的图鉴数据与原画字典')
 args = parser.parse_args()
+if args.dataset_json:
+    current=json.loads(args.dataset_json.read_text('utf8'));data,assets=current['data'],current['assets']
 item_rows = json.loads((SRC / 'r_card_items.json').read_text('utf8'))
 previous = {card['id']: card for card in data['cards']}
 elements = {'None':'无属性','Fire':'红璇','Ice':'蓝澈','Earth':'绿琉','Ground':'黄曜','Light':'光','Dark':'暗'}

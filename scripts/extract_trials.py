@@ -216,15 +216,15 @@ def generate(args):
             "unresolvedSkillIDs": missing,
         }
 
-    # 确认提取数值逐项一致后，完整继承已发布第 50 层的兼容字段。
+    # 同目录重建时核对旧50层；新资源目录更新时完全采用新表。
     generated_50 = trials["50"]
-    for old, new in zip(baseline_50["enemies"], generated_50["enemies"], strict=True):
+    for old, new in ([] if args.catalog else zip(baseline_50["enemies"], generated_50["enemies"], strict=True)):
         for key in ("id", "stats", "statsUnrounded", "raw", "configs", "skills", "ai", "aiRules"):
             if old[key] != new[key]:
                 raise ValueError(f"既有第50层与源表不一致：{new['id']}，字段 {key}")
         if old["levelStats"][0]["stats"] != new["levelStats"][0]["stats"]:
             raise ValueError(f"既有第50层未取整数值不一致：{new['id']}")
-    inherited_50 = copy.deepcopy(baseline_50)
+    inherited_50 = copy.deepcopy(generated_50 if args.catalog else baseline_50)
     inherited_50.update({"floor": 50, "name": "试炼第50层"})
     for old, new in zip(inherited_50["enemies"], generated_50["enemies"], strict=True):
         old["baseCardId"] = new["baseCardId"]
@@ -263,6 +263,9 @@ def generate(args):
         "skills": dict(sorted(all_skills.items())), "statuses": dict(sorted(all_statuses.items())),
         "unresolvedSkillIDs": sorted(all_missing),
     }
+    if args.catalog:
+        result['catalog']=args.catalog
+        for trial in trials.values():trial['catalog']=args.catalog
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     summary = {
@@ -289,7 +292,7 @@ def write_audit(path, result, summary, published):
         "- 第1至46层首领使用 Trial_AttackStack，每次自身行动前增加5%攻击加成。",
         "- 第47至50层首领使用 Trial_AttackStack_2，每次自身行动前增加15%攻击加成。",
         "- 第28层使用专属被动 Trial_C03_R_101S3。",
-        "- 第50层各敌方角色原配置、AI规则、显示属性及引擎未取整属性均与既有计算器逐项一致。",
+        "- 第50层各敌方角色原配置、AI规则、显示属性及引擎未取整属性均按本次源表重新生成。",
         "- C04_SR_003S4 在源技能表中缺失，保留悬空引用，未创建定义。",
         "- 全部敌方单位均保留玩家卡牌对应编号 baseCardId、原始配置、技能槽、隐藏技能、AI与属性。",
         "- HP与Speed先转float32再取偶数舍入，Attack与Defence先转float32再截断；levelStats.stats保留基表double乘float32系数的未取整数值。", "",
@@ -314,6 +317,7 @@ def main():
     parser.add_argument("--baseline-html", type=Path, default=REPO / "docs" / "index.html", help="含既有DATA.tower50的计算器HTML")
     parser.add_argument("--output", type=Path, default=REPO / "src" / "calculator" / "trials.json")
     parser.add_argument("--audit", type=Path, help="可选核查报告输出路径")
+    parser.add_argument("--catalog", help="更新资源目录时传入目录名，使用新表生成第50层")
     args = parser.parse_args()
     try:
         print(json.dumps(generate(args), ensure_ascii=False, indent=2))

@@ -19,6 +19,7 @@ assert.deepEqual([2.5,3.5,-2.5,-3.5].map(b.roundEven),[2,4,-2,-4]);
 assert.equal(b.finalStat(100.5,0,0,0,'Attack'),100);
 assert.equal(b.finalStat(100.5,0,0,0,'MaxHP'),100);
 assert.equal(b.finalStat(101.5,0,0,0,'MaxHP'),102);
-assert.ok(Math.abs(b.effectChance(.5,0,0)-.425)<1e-6);
+assert.ok(Math.abs(b.effectChance(.5,0,0)-.45)<1e-6);
+assert.ok(Math.abs(b.effectChance(.5,0,0,false,.15)-.425)<1e-6,'历史目录的15%内置抵抗仍可显式复现');
 assert.equal(b.effectChance(.5,0,2),0);
 console.log('通过：基础伤害、三路穿透与抗穿透、判定优先级、克制、减伤分量、无敌/护盾、不死、伤害与面板舍入、状态概率。');

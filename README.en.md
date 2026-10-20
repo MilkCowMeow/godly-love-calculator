@@ -25,6 +25,8 @@ Card credits and portraits follow each card's native character configuration, pr
 
 The catalog contains 192 cards, including 88 R cards hidden by default. Enable **显示 R 卡** or choose R in the rarity selector to reveal them. The selectors support SSR/SR/R and both individual characters and couples.
 
+Data synchronized on 20 October 2026 with `catalog_014774`: C02_SSR_006 heals for 8% of caster max HP and has a 4-turn ultimate cooldown. Built-in resistance is 10%; Trial boss/companion status resistance is 10%/5%. Current event dates and both pages are synchronized. See the [update audit](evidence/client_update_014774.md).
+
 ## 🧮 Damage Calculator
 
 | Feature | Details |

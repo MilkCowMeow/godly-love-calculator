@@ -271,6 +271,13 @@
     ],
     "effect-chance": [
       {
+        "file": "evidence/client_update_014774.md",
+        "anchors": [
+          "BuildinResistance",
+          "0.90"
+        ]
+      },
+      {
         "file": "evidence/hit_defence_audit.md",
         "anchors": [
           "真实状态概率",
@@ -658,5 +665,6 @@
         ]
       }
     ]
-  }
+  },
+  "catalog": "catalog_014774"
 }

@@ -1,0 +1,367 @@
+{
+  "catalog": "catalog_014774",
+  "catalogHash": "b30e4623e1c4ebbf645e725f0c90d5b4",
+  "asOf": "2026-10-20",
+  "validatedSources": [
+    {
+      "name": "accountlevel",
+      "sha256": "2d937af206bd5e6cce904a9d532c1029aac75e92097fce55501e7a20cd074e65",
+      "match": true
+    },
+    {
+      "name": "accountstagequest",
+      "sha256": "928816cba00af2db7beb24aa3d73685fcb8b77f939f9b47e96c43be32b60ee9f",
+      "match": true
+    },
+    {
+      "name": "activity",
+      "sha256": "52a0aaa312b16bf5922c3c5f2f73296b5bfb47429614ce691f25ba9712edea1a",
+      "match": true
+    },
+    {
+      "name": "aiaction",
+      "sha256": "4ac925f1f00ed9829a0010fc643c8be4f5879786e29efac8bd306a90a643edd6",
+      "match": true
+    },
+    {
+      "name": "artifact",
+      "sha256": "803cf7f4ad3194b42ecddfb795745230ee8da6fc563d3d18b476acd6d6aa21ed",
+      "match": true
+    },
+    {
+      "name": "artifactlvupcost",
+      "sha256": "b9d6b0306ec0ba9db7526c836bc166b6745baf0e0fc4f93da30a50585651d20d",
+      "match": true
+    },
+    {
+      "name": "autoaction",
+      "sha256": "1f9da00c7ac9af45b7adac83a3604b5ad626e7baef220ce3fd0a68dc88b550c6",
+      "match": true
+    },
+    {
+      "name": "banword",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "match": true
+    },
+    {
+      "name": "banwordforname",
+      "sha256": "653eab64a592fcb2aac5e476d0a56394a7897013c786085690f8d5fb347f8cc8",
+      "match": true
+    },
+    {
+      "name": "battlepass",
+      "sha256": "b4ecef6a6d5801b53170f36a48d393fc299c0ec103846683a75098d03dd278ee",
+      "match": true
+    },
+    {
+      "name": "battlepassrank",
+      "sha256": "36ebe5c2d6392f787d197051da1f2fffa31cd75f71f348b3609c7962f24dec57",
+      "match": true
+    },
+    {
+      "name": "chapter",
+      "sha256": "84a54c58d54cea07c8ba65ba39231e0ef334ed991cf5f1bb773c773442aed446",
+      "match": true
+    },
+    {
+      "name": "commodity",
+      "sha256": "0ab33c7b6512d2cf5f4d5dfdae5ef587d68fd5d09ff3ade220e7a3ecd16186e8",
+      "match": true
+    },
+    {
+      "name": "commodityquest",
+      "sha256": "3802b505292e219b928037b8d1e2b4bbfe2fb65a5068f22ac29c7e784867cc30",
+      "match": true
+    },
+    {
+      "name": "craft",
+      "sha256": "1645aa4393540dc0a75ef7e7914d1b5824064b4f67ff70288c9900c99458faa9",
+      "match": true
+    },
+    {
+      "name": "dialog",
+      "sha256": "ee63de8767b0b34a6d348ccfb5fbad18950a028f193c4a088e9e93640d29fc96",
+      "match": true
+    },
+    {
+      "name": "dispatchquest",
+      "sha256": "23efa89e31b2cd52adab13ac59c73ce3501bf2def9bb5e3d7716d8fb574704eb",
+      "match": true
+    },
+    {
+      "name": "drop",
+      "sha256": "cb61f748ceb7966f2f1346d9870696d6ec4ecf7ed195dbba3d62e67670eb3c08",
+      "match": true
+    },
+    {
+      "name": "episode",
+      "sha256": "531cd570c7a0f0ab2ee8efbef321f94dae2b3180f44f06d6e401a5d43563ab70",
+      "match": true
+    },
+    {
+      "name": "equipmainproperty",
+      "sha256": "e1dceeaccd8c890455d6f7b63df7696077c6103a12d20148b1fffb3fd8b6d99e",
+      "match": true
+    },
+    {
+      "name": "equipment",
+      "sha256": "3bbbbf5d196cebc39baa916a25c2a8741f31b6e6c75d90db32c736bb487d9f60",
+      "match": true
+    },
+    {
+      "name": "equipmentset",
+      "sha256": "851f1319c7987eeb49fd33cb93f5a49e11d532722667f5d6ed1a25fe79e98047",
+      "match": true
+    },
+    {
+      "name": "equipstrengthencost",
+      "sha256": "cc158bfb789ea944f1ab31f237c3d5131ddd23f447eb5a2fcdee56d0a4d7ad7f",
+      "match": true
+    },
+    {
+      "name": "equipsubproperty",
+      "sha256": "456d3a293ccc814882012cef8cc98a0aea550df6cb5c4613d1695074123305b3",
+      "match": true
+    },
+    {
+      "name": "fanclub",
+      "sha256": "6a995a384ad9d52274d0eceba39e29ecfda79d43044f1012b2cce9b34a2e40bc",
+      "match": true
+    },
+    {
+      "name": "fanclubdialog",
+      "sha256": "599c71a9bcdfc2628994aa6f1c4a07cb1fcf1ad26d165cbde9ae9f8f12ba7f67",
+      "match": true
+    },
+    {
+      "name": "fanclublevel",
+      "sha256": "82ec2c4f38ac639243272fbd3a636443fa0669e2e5c12084b772b9bf283fd256",
+      "match": true
+    },
+    {
+      "name": "fanclubpost",
+      "sha256": "8b70b9f6498da2295d1a4e63fb50bfff9d3dd81ffabb237c2743b4730a223815",
+      "match": true
+    },
+    {
+      "name": "fantasy",
+      "sha256": "b1d28b0958f7d56666dda00a337d23f6b4470d08454f7733be8084bc42b0ead5",
+      "match": true
+    },
+    {
+      "name": "guidedocument",
+      "sha256": "fb94f18d6ee1fa3faa1fb633558fa505469659cbfec6d25231507baaf247c3ba",
+      "match": true
+    },
+    {
+      "name": "guidepage",
+      "sha256": "1d24c5f954ad72ab5ce26e0521c5df66d096207972e11991f325f0ba188c7a5e",
+      "match": true
+    },
+    {
+      "name": "guildaiditem",
+      "sha256": "a97b2f770850b3d4f0577674888e667eb68a8990c63f49e47c954b5bf39c7dff",
+      "match": true
+    },
+    {
+      "name": "guildlevel",
+      "sha256": "1046ee50d06d6a700f80dfffad46fbf041e5199ec55db82c3ca8b9e807b86e90",
+      "match": true
+    },
+    {
+      "name": "item",
+      "sha256": "6e26dda970aa9fc8bdb9308bf8e8b85e1d5737374e3d614a1bae6358a98f4309",
+      "match": true
+    },
+    {
+      "name": "linedialog",
+      "sha256": "d0f312f3ff8567b4a5a206048aa66b38362d63ec5edacd8c4f7d7d9f50807336",
+      "match": true
+    },
+    {
+      "name": "linedrama",
+      "sha256": "30b01cc2bf9b4f8dcd1fcdcb180fc74f47ec2ba3f12b56e3cef16b33bde4872b",
+      "match": true
+    },
+    {
+      "name": "mail",
+      "sha256": "d434ee6c4c0be3577b64497033deb0a538c9306ee27906bacea8da4d5beeb663",
+      "match": true
+    },
+    {
+      "name": "publicvariable",
+      "sha256": "4c7d3bc9d3cb6dfa17c85f2a0be0cc1dbc7a01c474f46f557e9400429a30b783",
+      "match": true
+    },
+    {
+      "name": "pvplv",
+      "sha256": "9a8f3b72fdc36476c7ab72c2471e6b06f2ec933b8ed8129ea0b4e13dac2681f0",
+      "match": true
+    },
+    {
+      "name": "quest",
+      "sha256": "8a93c3b79a81c6693c27f46a1e2b7c23b40c24a9c9a39d35b731744588a4dd64",
+      "match": true
+    },
+    {
+      "name": "questgroup",
+      "sha256": "fded053c2edb07da6975b0beb418ab335c5afb4db3dc086e76bd6b37bdafb943",
+      "match": true
+    },
+    {
+      "name": "role",
+      "sha256": "63a9eed0867b46f726ca93c6f0d49028c53707fba52946d21a9d56dfcbb79049",
+      "match": true
+    },
+    {
+      "name": "roleascend",
+      "sha256": "5e10ff6b4b1589afdb6de0366f3a5755f6b90e3c8cace8922314e23baba97924",
+      "match": true
+    },
+    {
+      "name": "roleawaken",
+      "sha256": "becf56eaddb39a77bd762788e43af5b929f6687268a5ea9272bf93b922bc54fb",
+      "match": true
+    },
+    {
+      "name": "rolecollection",
+      "sha256": "ebeb0e83c369907517c2f926fca67d60f0cb982871d4b8a356ff7cfdafebbe7d",
+      "match": true
+    },
+    {
+      "name": "rolecomment",
+      "sha256": "202378d196d72653b28f6f8f3a266b760da34b8803ce8b067d95ec6c760160f6",
+      "match": true
+    },
+    {
+      "name": "roleimprint",
+      "sha256": "62870d659068e5579830da271a5c0ae9a932e89d4d6ca8189e0b5e735d309a22",
+      "match": true
+    },
+    {
+      "name": "rolelevelup",
+      "sha256": "c59520fd18d936d54058f25a0077be7c8d7158444bb8e6bdd092cf737615e552",
+      "match": true
+    },
+    {
+      "name": "roleproperty",
+      "sha256": "565576b694dc0cb11402caf789a84a9075306a565a9eb1c366d3d61337d13be1",
+      "match": true
+    },
+    {
+      "name": "rolesignature",
+      "sha256": "b62fe17b127f60fb512c0eda8f40718d309a45b86ec5fd69b34c034bad3ade10",
+      "match": true
+    },
+    {
+      "name": "roleupgrade",
+      "sha256": "5bc2415dc9b63ced01bd4ee7781922d258e156a88ad16a3eb50a69eb5c674e6c",
+      "match": true
+    },
+    {
+      "name": "scene",
+      "sha256": "7e82519f54ea0b2d318b4b066252697ae4ef5a83b767185360246ce27f74ab62",
+      "match": true
+    },
+    {
+      "name": "serverstatus",
+      "sha256": "689891309928c59a047ba670bf2bcfb7a2dd4703b04d0973bb386a0211134d54",
+      "match": true
+    },
+    {
+      "name": "signinreward",
+      "sha256": "0d1f0e19290970e21f91260de05e258d164cee6f9e5a166004852271e3a7b431",
+      "match": true
+    },
+    {
+      "name": "skill",
+      "sha256": "8602dca931a5ea68089b55db2af55c86a4a5516eed95bd111566ad9c3289d878",
+      "match": true
+    },
+    {
+      "name": "skilllevel",
+      "sha256": "05ac387c05b7ff72c371b377e506b8367ac180991399840235cd0062dd874d49",
+      "match": true
+    },
+    {
+      "name": "status",
+      "sha256": "1a189bcaed30a18e4fa7f7022cdd5464c29c3bb296d62aa3267750140528d647",
+      "match": true
+    },
+    {
+      "name": "store",
+      "sha256": "459473f26b6d719c3713b3422874a8fbb4977682a51005aed2ae84beb37d3ed9",
+      "match": true
+    },
+    {
+      "name": "supplydialog",
+      "sha256": "77118f79b81763894f4ed827ba73ca28657c2ef05a3599eb3612aef965bdc6cd",
+      "match": true
+    },
+    {
+      "name": "text_chs",
+      "sha256": "0a81719e0ce5fa24b63f984cd8b67824f0718a734c90ecdc0150735b3e6b3f52",
+      "match": true
+    },
+    {
+      "name": "text_cht",
+      "sha256": "55720bda7bd8a52f2a897afa15344f3575c763ce5f0d70e89688d649e04a2ab2",
+      "match": true
+    },
+    {
+      "name": "text_deu",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "match": true
+    },
+    {
+      "name": "text_eng",
+      "sha256": "1240cee29a56b77595d1fbb30cb3b7b8ad95d7298a2a8190facf235eb9a26105",
+      "match": true
+    },
+    {
+      "name": "text_fra",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "match": true
+    },
+    {
+      "name": "text_jpn",
+      "sha256": "f1761084a7d2bc82c706bfbfe018e102823ae1ebcdfa29ff978f7a4acb4739e6",
+      "match": true
+    },
+    {
+      "name": "text_kor",
+      "sha256": "60fc00ef91e45e570f583da9282a2f0585ac2a01ebdd986ed5c9a91c07fb9041",
+      "match": true
+    },
+    {
+      "name": "text_spa",
+      "sha256": "67d3f16580367e6900e8ec2e7871765c66658417ead39a564fbf23ae363f0a89",
+      "match": true
+    },
+    {
+      "name": "text_tha",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "match": true
+    },
+    {
+      "name": "text_vie",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "match": true
+    },
+    {
+      "name": "tutorial",
+      "sha256": "d0d9470d7185fed3efc908811390fe3322d528d09bee1ea020c02807757980be",
+      "match": true
+    },
+    {
+      "name": "tutorialstep",
+      "sha256": "9e8d8e6868ea9a04c253c2fafd6cafeb3b1ccff41b027d6581278df44b262e90",
+      "match": true
+    },
+    {
+      "name": "vip",
+      "sha256": "faf1d5f00b45e734fe998041859f942272eb01b05aa6e205d44c04c930f964e8",
+      "match": true
+    }
+  ]
+}

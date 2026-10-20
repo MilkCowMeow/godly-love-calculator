@@ -86,7 +86,7 @@ function install(S){const P=S.prototype,select0=P.select;
   if(!f.IgnoreDodge&&action?.hitTypes?.[target.uid]==='dodge')return true;
   if(f.NoResistCondition?this.condition({Condition:f.NoResistCondition},ctx):N(f.IgnoreResist)>0)return false;
   const fs=[...this.functions(owner),...(action?.actor===owner&&action.skill?.id?C.resolveSkill(owner.card,action.skill.id,{imprint:owner.imprint}).functions.filter(x=>x._origin!==owner.card.id):[])];
-  const a=this.numeric(fs,ctx,['EffectHit']);const chance=B.effectChance(1,F(owner.stats.EffectHitRate+(a.sums.EffectHit||0)),target.stats.ResistanceRate,!!target.props.IgnoreBuildinResist);
+  const a=this.numeric(fs,ctx,['EffectHit']);const chance=B.effectChance(1,F(owner.stats.EffectHitRate+(a.sums.EffectHit||0)),target.stats.ResistanceRate,!!target.props.IgnoreBuildinResist,N(this.data.publicVariables?.BuildinResistance,.1));
   const blocked=this.random()>chance;if(blocked)this.log('resist',owner,target,'抵抗效果',{effect:f.Fun});return blocked;
  };
  P.nativeEffectResisted=function(owner,target,f,a,c,opts={}){return this.effectResisted(owner,target,f,a,c,!!opts.ignoreImmune);};

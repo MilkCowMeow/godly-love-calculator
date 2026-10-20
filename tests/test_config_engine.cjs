@@ -17,7 +17,18 @@ const grouped=C.analyzeFunctions([{ConditionAttack:{Property:'ValueOne',Rate:.10
 assert.equal(grouped.conditionClasses.A,f(f(.10000003)+f(.20000003)));
 assert.equal(grouped.conditionMultiplier,f(f(1+grouped.conditionClasses.A)*f(1+grouped.conditionClasses.B)));
 assert.equal(C.evaluateCondition({Property:'NowHPRate',Comparer:'Lt',Value:.5},ctx).pass,true,'条件Who默认Source');
+// 原生 ValueCompare RVA 0x2340A70 的跳表依次为 Eq/Ne/Lt/Gt/Ltn/Gtn/Between。
+// Lt/Gt 包含等值，Ltn/Gtn 严格比较；每种比较覆盖阈值两侧及恰好相等。
+for(const [op,expected]of Object.entries({Lt:[true,true,false],Gt:[false,true,true],Ltn:[true,false,false],Gtn:[false,false,true],Eq:[false,true,false],Ne:[true,false,true]})){
+ for(const [i,hpRate]of [.49,.5,.51].entries())assert.equal(C.evaluateCondition({Property:'NowHPRate',Comparer:op,Value:.5},{...ctx,source:{...ctx.source,hpRate}}).pass,expected[i],op+' 在 '+hpRate+' 的原生边界');
+}
+for(const [low,high]of [[.4,.6],[.6,.4]])for(const [hpRate,pass]of [[.39,false],[.4,true],[.5,true],[.6,true],[.61,false]])assert.equal(C.evaluateCondition({Property:'NowHPRate',Comparer:'Between',Value:low,Value2:high},{...ctx,source:{...ctx.source,hpRate}}).pass,pass,'Between 对区间端点采用闭区间');
 assert.equal(C.evaluateCondition({CheckFun:'CheckSkillCooldown',CheckID:'missing'},ctx).pass,null);
+for(const [cooldown,uses]of [[0,0],[0,3],[2,0],[2,3]]){
+ const checkCtx={...ctx,skillCooldowns:{test:cooldown},skillUseCounts:{test:uses}};
+ assert.equal(C.evaluateCondition({CheckFun:'CheckSkillNoUse',CheckID:'test'},checkCtx).pass,cooldown>0,'CheckSkillNoUse 读取当前冷却 '+cooldown+'，已使用 '+uses+' 次');
+ assert.equal(C.evaluateCondition({CheckFun:'CheckSkillCooldown',CheckID:'test'},checkCtx).pass,cooldown<=0);
+}
 assert.equal(C.evaluateCondition({CheckFun:'UnverifiedFunction'},ctx).pass,null);
 let card=data.cards.find(c=>c.id==='C01_SSR_001');
 assert.equal(C.resolveSkill(card,card.skills[0],{imprint:0}).passiveFunctions.length,0,'刻印不足3不启用刻印解锁被动');
@@ -30,9 +41,41 @@ assert.equal(C.nativeStatusProperties({id:'Bleed'}).isDebuff,true,'状态空类�
 assert.equal(C.evaluateCondition({CheckFun:'Position',CheckID:'3'},{...ctx,source:{...ctx.source,campPosition:3}}).pass,true);
 assert.equal(C.evaluateCondition({CheckFun:'Position',CheckID:'3'},{...ctx,source:{...ctx.source,campPosition:2}}).pass,false,'Position不能自己加1');
 assert.equal(C.evaluateCondition({Property:'BuffGroupStack',Who:'Target',CheckID:'Taunt',Comparer:'Gt',Value:1},{...ctx,target:{...ctx.target,statuses:[{id:'Taunt',stack:1},{id:'TargetTaunt',stack:1}]}}).pass,true,'按Group而非ID累计状态层数');
+assert.equal(C.evaluateCondition({Property:'BuffGroupStack',Who:'Target',CheckID:'Taunt',Comparer:'Gt',Value:1},{...ctx,target:{...ctx.target,statuses:[{id:'Taunt',stack:1}]}}).pass,true,'Gt 在状态数量恰好等于1时成立');
 assert.equal(C.evaluateCondition({Property:'Taunt',Value:1},{...ctx,source:{...ctx.source,statuses:[{id:'Taunt'}]}}).pass,true);
 const anti=C.analyzeFunctions([{_property:'AntiList',_value:'AntiStun~AntiSleep'}],ctx);assert.deepEqual(anti.immuneList,['AntiStun','AntiSleep']);assert.equal(anti.unsupported.length,0);
 let fake={id:'fake',skills:[{id:'test',raw:{AttRate:'1'},configs:[{key:'Fun',value:{ID:'known',LV:1,PenetrateRate:{Property:'ValueOne',Rate:.3}}}]}],ascend:[{LV:'3',configs:[{key:'Fun',value:{ID:'known',LV:2,PenetrateRate:{Property:'ValueOne',Rate:.6}}}]}]};
 assert.equal(C.resolveSkill(fake,'test',{ascend:3}).functions[0].PenetrateRate.Rate,.6,'明确ID匹配按更高LV替换');
 for(const card of data.cards)for(const id of card.skills){const s=C.resolveSkill(card,id,{imprint:5,ascend:5});assert.ok(s.raw.ID,id);C.analyzeFunctions([...s.functions,...s.passiveFunctions],{...ctx,skill:{id,raw:s.raw}});}
+// 连续战斗通过对象上下文读取被检查角色的冷却，与独立配置解释器保持一致。
+const {T,data:simulationData}=require('./load_simulation.cjs');
+for(const [cardID,skillID]of [['C04_SSR_009','C04_SSR_009S1'],['C02_SR_002','C02_SR_002S2']]){
+ const sim=new T.Simulation(simulationData,{members:[{cardId:cardID,level:80,imprint:0}],target:'dummy',dummy:{referenceHP:100000,defence:0,speed:1,resistance:0},rounds:1},1),owner=sim.units[0],target=sim.units[1];
+ const conditions=simulationData.skills[skillID].configs.map(x=>x.value?.Condition).filter(x=>x?.CheckFun==='CheckSkillNoUse');assert.equal(conditions.length,1);
+ for(const [cooldown,uses]of [[0,0],[0,3],[2,0],[2,3]]){
+  const id=conditions[0].CheckID;owner.cooldowns[id]=cooldown;owner.uses[id]=uses;
+  const nativeCtx=sim.context(owner,target,{actor:owner,selected:target,skill:simulationData.skills[owner.normal]});
+  assert.equal(C.evaluateCondition(conditions[0],nativeCtx).pass,cooldown>0,cardID+' 的实际条件按冷却生效');
+ }
+}
+// Newtonsoft 对未知 EFunction 名称抛异常；客户端逐条捕获后跳过该 DynamicField。
+const invalidForceIDs=['C02_SSR_013S1','C02_SSR_013S2','C04_SSR_013S1','C04_SSR_013S2'];
+for(const skillID of invalidForceIDs){
+ const skill=simulationData.skills[skillID],cardID=skillID.slice(0,-2),card=simulationData.cards.find(c=>c.id===cardID),before=JSON.stringify(skill);
+ assert.equal(skill.configs.filter(c=>c.key==='Fun'&&c.value?.Fun==='ForceConquer').length,1);
+ const parsed=C.configFunctions(skill.configs,skillID);
+ assert.equal(parsed.length,skill.configs.length-1,'只丢弃非法枚举所在的一条配置');
+ assert.ok(parsed.every(f=>f.Fun!=='ForceConquer'));
+ const resolved=C.resolveSkill(card,skillID,{imprint:0});assert.equal(resolved.unsupported.length,0);
+ const sim=new T.Simulation(simulationData,{members:[{cardId:cardID,level:80,imprint:0}],target:'dummy',dummy:{referenceHP:100000,defence:0,speed:1,resistance:0},rounds:1},1),owner=sim.units[0],target=sim.units[1],action={actor:owner,selected:target,skill,normal:skillID===owner.normal};
+ assert.equal(sim.hitParams(owner,target,action).forceConquer,false,skillID+' 按原生忽略错误Fun别名');
+ assert.equal(JSON.stringify(skill),before,'原始配置保持完整');
+}
+const validForceID='C01_SR_002S2',validForce=simulationData.skills[validForceID];
+assert.ok(C.configFunctions(validForce.configs,validForceID).some(f=>f.Trigger==='ForceConquer'),'ETrigger.ForceConquer 保留有效');
+{
+ const sim=new T.Simulation(simulationData,{members:[{cardId:'C01_SR_002',level:80,imprint:0}],target:'dummy',dummy:{referenceHP:100000,defence:0,speed:1,resistance:0},rounds:1},1),owner=sim.units[0],target=sim.units[1];
+ assert.equal(sim.hitParams(owner,target,{actor:owner,selected:target,skill:validForce}).forceConquer,true,'正确Trigger字段仍触发强制克制');
+}
+assert.deepEqual(C.configFunctions([{key:'Fun',value:{Fun:'AddHP',Value:1,SubFuns:[{Fun:'ForceConquer'}]}}],'nested-invalid'),[],'嵌套非法枚举导致整条DynamicField丢弃');
 console.log('通过：默认对象、双重上限、条件默认、分组乘区、明确ID补丁、异常字段、刻印被动解锁，以及全部角色技能配置可解释性遍历。',data.cards.length,Object.keys(data.skills).length);

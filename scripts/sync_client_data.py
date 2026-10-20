@@ -3,6 +3,7 @@ from pathlib import Path
 import argparse,copy,csv,hashlib,json,re,struct,sys
 from embedded import extract
 from client_text import ClientText
+from client_presentation import enrich
 ROOT=Path(__file__).resolve().parents[1]
 parser=argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--tables',required=True,type=Path);parser.add_argument('--locale',required=True,type=Path)
@@ -64,5 +65,6 @@ for row in data['autoAI']:
  row['targets']=[json5.loads(row['TargetSetting'+str(i)]) for i in range(1,6) if row.get('TargetSetting'+str(i))]
 data['publicVariables']={r['ID']:float(r['VALUE']) if r['VALUE'] else r['SValue'] for r in rows('publicvariable')}
 data.update(roleProperties=properties,skillLevels=rows('skilllevel'),equipmentSets=rows('equipmentset'),catalog=args.catalog,asOf=args.as_of)
+enrich(data,tr)
 args.output.parent.mkdir(parents=True,exist_ok=True);args.output.write_text(json.dumps(data,ensure_ascii=False,separators=(',',':')),'utf8')
 print(json.dumps({'cards':len(data['cards']),'skills':len(data['skills']),'catalog':data['catalog'],'builtInResistance':data['publicVariables']['BuildinResistance'],'output':str(args.output)},ensure_ascii=False))

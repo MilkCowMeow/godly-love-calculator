@@ -1,5 +1,6 @@
 """验证中文表删条目、空简体条目及未来配置变化的发布保护。"""
 from pathlib import Path
+from copy import deepcopy
 import csv
 import json
 import sys
@@ -10,6 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'scripts'))
 from client_text import ClientText, TEXT_KEY, clean_text, fingerprint, validate_visible_text
 from embedded import extract
+from client_presentation import enrich
 
 
 class ClientTextTests(unittest.TestCase):
@@ -82,6 +84,34 @@ class ClientTextTests(unittest.TestCase):
         heal = next(config['value'] for config in calculator['skills']['C02_SSR_006S1']['configs']
                     if config['key'] == 'Fun' and config['value'].get('Fun') == 'AddHP')
         self.assertEqual(heal['ValueConvert']['Rate'], .08)
+
+    def test_verified_description_stops_on_source_change(self):
+        data = extract((ROOT / 'docs/index.html').read_text('utf8'), 'DATA')
+        sid = 'C04_SR_004S1'
+        correction = json.loads((ROOT / 'src/client_text_corrections.json').read_text('utf8'))['records'][sid]
+
+        class SourceText:
+            current = {}
+            def __init__(self, description): self.description = description
+            def __call__(self, key): return self.description
+            def source(self, key): return self.description
+
+        def sample():
+            skill = deepcopy(data['skills'][sid])
+            skill['description'] = correction['clientDescription']
+            return {'skills': {sid: skill}, 'statuses': data['statuses'], 'cards': []}
+
+        current = sample()
+        enrich(current, SourceText(correction['clientDescription']))
+        self.assertEqual(current['skills'][sid]['description'], correction['description'])
+        changed = sample()
+        changed['skills'][sid]['raw']['AttRate'] = '1.5'
+        enrich(changed, SourceText(correction['clientDescription']))
+        self.assertEqual(changed['skills'][sid]['description'], correction['clientDescription'])
+        updated = sample()
+        updated['skills'][sid]['description'] = '新版本官方说明'
+        enrich(updated, SourceText('新版本官方说明'))
+        self.assertEqual(updated['skills'][sid]['description'], '新版本官方说明')
 
 
 if __name__ == '__main__':

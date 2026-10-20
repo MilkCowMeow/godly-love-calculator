@@ -51,7 +51,8 @@ function property(prop,r,ctx,id){
 function compare(a,b,op,b2,ctx){
  if(a===null||b===null)return null;
  a=Math.fround(a);b=Math.fround(b);if(b2!==null)b2=Math.fround(b2);
- switch(op||'Eq'){case'Eq':return a===b;case'Ne':return a!==b;case'Lt':return a<b;case'Gt':return a>b;case'Ltn':return a<=b;case'Gtn':return a>=b;case'Between':return b2===null?problem(ctx,'Between缺少Value2'):a>=Math.min(b,b2)&&a<=Math.max(b,b2);default:return problem(ctx,'未知比较类型：'+op);}
+ // SkillCondition.ValueCompare (014517 RVA 0x2340A70): Lt/Gt include equality; Ltn/Gtn are strict.
+ switch(op||'Eq'){case'Eq':return a===b;case'Ne':return a!==b;case'Lt':return a<=b;case'Gt':return a>=b;case'Ltn':return a<b;case'Gtn':return a>b;case'Between':return b2===null?problem(ctx,'Between缺少Value2'):a>=Math.min(b,b2)&&a<=Math.max(b,b2);default:return problem(ctx,'未知比较类型：'+op);}
 }
 function all(vals){return vals.includes(false)?false:vals.includes(null)?null:true;}
 function checkFun(c,ctx,r){
@@ -70,7 +71,8 @@ function checkFun(c,ctx,r){
  case'NoBuff':return !statuses(r).some(x=>x.id===id);
  case'HasAnyBuff':return statuses(r).length>0;
  case'CheckSkillCooldown':return own(ctx.skillCooldowns,id)?num(ctx.skillCooldowns[id])<=0:problem(ctx,'缺少技能冷却：'+id);
- case'CheckSkillNoUse':return own(ctx.skillUseCounts,id)?num(ctx.skillUseCounts[id])===0:problem(ctx,'缺少技能使用次数：'+id);
+ // BattleRoleData.CheckSkillNoUse (RVA 0x2346754) checks GetNowSkillCoolDown(id) > 0.
+ case'CheckSkillNoUse':return own(ctx.skillCooldowns,id)?num(ctx.skillCooldowns[id])>0:problem(ctx,'缺少技能冷却：'+id);
  case'IsPinch':return own(ctx,'pinch')?!!ctx.pinch:problem(ctx,'缺少夹击标记');
  case'IsSkillNoPinch':return own(s,'noPinch')?!!s.noPinch:problem(ctx,'缺少技能禁止夹击标记');
  case'IsCounter':return own(ctx,'counter')?!!ctx.counter:problem(ctx,'缺少反击标记');
@@ -154,7 +156,15 @@ function correctedFunction(value,origin,field){
  }
  return v;
 }
-function configFunctions(configs,origin){const out=[];for(const c of configs||[]){if(c.key==='Fun'&&typeof c.value==='object'){let v=correctedFunction(c.value,origin,c.field);v._origin=origin;v._field=c.field;out.push(v);}else out.push({_property:c.key,_value:c.value,_origin:origin,_field:c.field});}return out;}
+function invalidNativeFunction(value){
+ if(Array.isArray(value))return value.some(invalidNativeFunction);
+ if(!value||typeof value!=='object')return false;
+ // EFunction has no ForceConquer member. Native JSON loading catches the enum
+ // deserialization error and discards this entire DynamicField, including nested effects.
+ if(value.Fun==='ForceConquer')return true;
+ return Object.values(value).some(invalidNativeFunction);
+}
+function configFunctions(configs,origin){const out=[];for(const c of configs||[]){if(c.key==='Fun'&&typeof c.value==='object'){if(invalidNativeFunction(c.value))continue;let v=correctedFunction(c.value,origin,c.field);v._origin=origin;v._field=c.field;out.push(v);}else out.push({_property:c.key,_value:c.value,_origin:origin,_field:c.field});}return out;}
 function normSkill(x){return x&&x.row&&!x.raw?{...x,raw:x.row}:x;}
 function resolveSkill(card,skillId,options={}){
  let skill=DATA&&DATA.skills[skillId]||(card.skills||[]).find(x=>typeof x==='object'&&x.id===skillId);skill=normSkill(skill);
@@ -214,7 +224,7 @@ function nativeStatusProperties(instance){
  let scale=1;
  if(truth('IsMergeProperty')){if(truth('IsStackMultiplyProp',true))scale=num(instance.stack===undefined?1:instance.stack);if(truth('IsValueMultiplyProp'))scale*=num(instance.value===undefined?raw.Value||0:instance.value);}
  const properties={},functions=[],lists={};const unsupported=[];
- for(const c of def.configs||[]){if(c.key==='Fun'){functions.push({...clone(c.value),_origin:instance.id,_status:instance});continue;}const n=num(c.value);if(n===null){lists[c.key]=String(c.value).split('~').filter(Boolean);if(c.key!=='AntiList')unsupported.push('状态字符串属性尚未解释：'+c.key);continue;}properties[c.key]=(properties[c.key]||0)+Math.fround(n*scale);}
+ for(const c of def.configs||[]){if(c.key==='Fun'){if(invalidNativeFunction(c.value))continue;functions.push({...clone(c.value),_origin:instance.id,_status:instance});continue;}const n=num(c.value);if(n===null){lists[c.key]=String(c.value).split('~').filter(Boolean);if(c.key!=='AntiList')unsupported.push('状态字符串属性尚未解释：'+c.key);continue;}properties[c.key]=(properties[c.key]||0)+Math.fround(n*scale);}
  const flags={shield:!!properties.Shield,noDamage:!!properties.NoDamage,immune:!!properties.Immune,invincible:!!properties.Invincible,immortal:!!properties.Immortal,sealHeal:!!properties.SealHeal,sealBuff:!!properties.SealBuff};
  return {id:instance.id,properties,functions,lists,immuneList:lists.AntiList||[],flags,scale,isBuff:stType({...instance,def})==='Buff',isDebuff:stType({...instance,def})==='DeBuff',unsupported};
 }

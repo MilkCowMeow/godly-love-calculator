@@ -8,7 +8,7 @@ const context=vm.createContext({DATA:data,ASSETS:{},document:{querySelector:node
 const source=fs.readFileSync(__dirname+'/catalog_app.js','utf8');
 assert.match(source,/window\.addEventListener\('hashchange',route\);route\(\);\s*$/);
 vm.runInContext(source.replace(/window\.addEventListener\('hashchange',route\);route\(\);\s*$/,'')+`
-this.ui={state,renderCards,visibleCatalogCards,config,skill};
+this.ui={state,renderCards,visibleCatalogCards,config,skill,stages,statusGlossary};
 `,context);
 const {ui}=context;
 // Numeric parameters must never be translated through object-name aliases.
@@ -18,6 +18,20 @@ assert.match(bleedMarkup,/<dt>持续回合<\/dt><dd>2<\/dd>/);
 assert.match(bleedMarkup,/<dt>威力系数（Pow）<\/dt><dd>1<\/dd>/);
 assert.match(bleedMarkup,/血绽/,'named status IDs must still resolve');
 assert.doesNotMatch(bleedMarkup,/木桩/,'numeric 1 and 2 must not become target names');
+const starCard=data.cards.find(c=>c.id==='C02_SSR_001');
+const starMarkup=ui.stages(starCard.imprint,starCard);
+assert.ok(starMarkup.includes(starCard.skills.find(s=>s.id==='C02_SSR_001S4').description.replace(/\n/g,'<br>')),'三星必须展示实际解锁S4的完整说明');
+assert.match(starMarkup,/累计属性加成/);
+assert.match(starMarkup,/生命 \+35%/,'二星累计15%+20%');
+const penetrator=data.cards.find(c=>c.statusIds.includes('Penetrate'));
+assert.match(ui.statusGlossary(penetrator),/穿透/);
+assert.match(ui.statusGlossary(penetrator),/无视防御/);
+for(const card of data.cards){
+ const glossary=ui.statusGlossary(card);
+ assert.doesNotMatch(glossary,/状态说明未获取|<h4><\/h4>/);
+ const gate=card.imprint.find(r=>r.EnhanceSkill);
+ if(gate){const unlocked=card.skills.find(s=>s.id===gate.EnhanceSkill);assert.ok(ui.stages(card.imprint,card).includes(unlocked.description.replace(/\n/g,'<br>')));assert.match(ui.skill(unlocked,card),/3 星解锁/);}
+}
 for(const number of [1,2,'1','2',0.15,'-2','1e2'])assert.equal(ui.config(number),String(number));
 ui.renderCards();
 assert.equal(ui.state.showR,false,'R cards are hidden on a fresh page');

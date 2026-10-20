@@ -23,13 +23,13 @@ for(let floor=1;floor<=50;floor++){
 assert.equal(enemies,63);
 const at=floor=>details.build(data,data.trials[floor]);
 const boss28=at(28).enemies[0];assert.ok(boss28.skills.some(s=>s.id==='Trial_C03_R_101S3'));assert.ok(!boss28.skills.some(s=>s.id==='C03_R_101S3'));assert.match(boss28.skills.find(s=>s.id==='Trial_C03_R_101S3').notes[0],/全队推进20%/);
-const boss47=at(47).enemies[0];assert.match(boss47.rules[0].conditions.join(''),/对面至少一名角色的弱化状态数量严格大于1/);
-const boss48=at(48).enemies[0],hidden48=boss48.skills.find(s=>s.id==='C02_SSR_001S3');assert.equal(hidden48.kind,'隐藏辅助技');assert.equal(hidden48.incoming[0].fun,'替换技能');assert.match(boss48.skills.find(s=>s.id==='C02_SSR_001S4').notes.join(''),/强化状态数量严格大于1/);
-const model50=at(50),boss50=model50.enemies[0],minion50=model50.enemies[1];assert.equal(boss50.immunities.length,6);assert.equal(minion50.immunities.length,1);assert.match(boss50.skills.find(s=>s.id==='C04_SSR_002S1').notes.join(''),/严格低于30%/);assert.match(boss50.skills.find(s=>s.id==='C04_SSR_002S2').notes.join(''),/0\.0022/);
+const boss47=at(47).enemies[0];assert.match(boss47.rules[0].conditions.join(''),/对面至少一名角色的弱化状态数量大于或等于1/);
+const boss48=at(48).enemies[0],hidden48=boss48.skills.find(s=>s.id==='C02_SSR_001S3');assert.equal(hidden48.kind,'隐藏辅助技');assert.equal(hidden48.incoming[0].fun,'替换技能');assert.match(boss48.skills.find(s=>s.id==='C02_SSR_001S4').notes.join(''),/强化状态数量达到1个及以上/);
+const model50=at(50),boss50=model50.enemies[0],minion50=model50.enemies[1];assert.equal(boss50.immunities.length,6);assert.equal(minion50.immunities.length,1);assert.match(boss50.skills.find(s=>s.id==='C04_SSR_002S1').notes.join(''),/30%及以下/);assert.match(boss50.skills.find(s=>s.id==='C04_SSR_002S2').notes.join(''),/0\.0022/);
 const hidden50=boss50.skills.find(s=>s.id==='C04_SSR_002S3');assert.equal(hidden50.kind,'隐藏辅助技');assert.match(hidden50.description,/30%/);assert.equal(hidden50.incoming[0].sourceID,'C04_SSR_002S1');assert.ok(!minion50.skills.some(s=>s.id==='C04_SR_003S4'));
 assert.match(boss50.states.find(s=>s.id==='Stealth').description,/减伤50%/);
 const healers=[];for(let f=1;f<=50;f++)for(const u of at(f).enemies)if(u.enemy.ai.includes('M_S1Att_S2Hea'))healers.push(u);
-assert.ok(healers.length);for(const u of healers){assert.equal(u.rules[0].targets[0],'优先选择技能目标阵营中的Boss');assert.match(u.rules[0].targets[1],/严格低于99%/);}
+assert.ok(healers.length);for(const u of healers){assert.equal(u.rules[0].targets[0],'优先选择技能目标阵营中的Boss');assert.match(u.rules[0].targets[1],/小于或等于99%/);}
 assert.match(at(22).enemies.find(u=>u.enemy.ai.includes('M_C04_R_007')).rules[0].conditions.join(''),/至少一名同伴有技能处于冷却/);
 assert.ok(at(5).enemies[0].skills.some(s=>s.configs.some(c=>c.key==='CriticalRate'&&c.value===.25)));
 assert.ok(at(45).enemies[0].skills.some(s=>s.configs.some(c=>c.key==='HPFinalRate'&&c.value===.15)));

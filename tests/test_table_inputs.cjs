@@ -11,9 +11,16 @@ assert.match(source,/\binit\(\);\s*$/,'test must only omit the automatic page st
 vm.runInContext(source.replace(/\binit\(\);\s*$/,'')+`
 dirty=()=>{};
 roster();
-this.ui={plan:()=>JSON.parse(JSON.stringify(plan)),stats:currentStats};
+this.ui={plan:()=>JSON.parse(JSON.stringify(plan)),stats:currentStats,skillsHTML,memberGrowthHTML,memberGlossaryHTML};
 `,context);
 function change(slot,key,value){const input=inputs.find(e=>e.dataset.member===String(slot)&&e.dataset.key===key);input.value=String(value);input.onchange();return context.ui.plan().members[slot][key];}
+const passiveCard=data.cards.find(c=>c.id==='C02_SSR_001');
+assert.match(context.ui.skillsHTML(passiveCard,0),/3 星解锁，当前未生效/);
+assert.match(context.ui.skillsHTML(passiveCard,3),/3 星已解锁/);
+assert.match(context.ui.skillsHTML(passiveCard,0),/全体攻击<\/h3>|全体攻击<span>辅助动作/);
+assert.ok(context.ui.memberGrowthHTML(passiveCard,3).includes(data.skills['C02_SSR_001S4'].description));
+assert.match(context.ui.memberGrowthHTML(passiveCard,2),/生命 \+35%/);
+assert.match(context.ui.memberGlossaryHTML(data.cards.find(c=>c.glossaryIds.includes('AddPinchSkill'))),/夹击/);
 for(let slot=0;slot<4;slot++){
  for(const stars of [5,0,1,2,3,4,5,0]){
   assert.equal(change(slot,'imprint',stars),stars,'selected star count must survive the roster redraw');

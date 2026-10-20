@@ -19,6 +19,11 @@ const bleed=run({...plain,skills:[{...plain.skills[0],effects:[{type:'status',ta
 assert.ok(bleed.rows.some(x=>x.members[0].dot>0),'附加状态真实产生持续伤害');
 const passive=run({...plain,passives:[{trigger:'StartBattle',condition:'always',effect:{type:'status',target:'self',status:'AddAttack',rounds:8,value:0}}]});
 assert.ok(passive.total>r.total,'条件被动必须实际进入状态与伤害结算');
+for(const [condition,comparer]of [['belowHP','Ltn'],['aboveHP','Gtn']]){
+ const built=Custom.compile({...plain,passives:[{trigger:'StartBattle',condition,threshold:50,effect:{type:'status',target:'self',status:'AddAttack',rounds:8,value:0}}]},data),check=built.skills[built.card.id+'P1'].configs[0].value.Condition;
+ assert.equal(check.Comparer,comparer,'自定义生命条件保持界面的严格低于或高于');
+ assert.equal(global.GLConfig.evaluateCondition(check,{source:{hpRate:.5}}).pass,false,'生命恰好等于阈值时不触发自定义严格比较');
+}
 const zero=run({...plain,stats:{...plain.stats,Attack:0}});assert.equal(zero.total,0,'零攻击不能继承其他角色的数值');
 const support=setup({...plain,skills:[{...plain.skills[0],multiplier:0,effects:[{type:'heal',target:'self',value:10,valueStat:'MaxHP'},{type:'shield',target:'self',rounds:2,value:20,valueStat:'MaxHP'}]},plain.skills[1]]});support.plan.members[0].hpRate=.3;const healed=T.run(support.dataset,support.plan,3);assert.ok(healed.ok,healed.error);assert.ok(healed.rows.some(r=>r.members[0].heal>0));assert.ok(healed.rows.some(r=>r.members[0].shield>0),'治疗与护盾须实际生效');
 const portable=JSON.parse(JSON.stringify({schemaVersion:2,customCharacters:[plain]}));

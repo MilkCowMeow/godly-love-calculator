@@ -96,7 +96,9 @@ def make_r_card(card):
         skills.append({'id': sid, 'name': source['name'], 'description': source['description'],
                        'hidden': sid in card.get('hiddenSkills', []),
                        'passive': source['raw']['SkillType'] == 'Passive',
-                       'row': source['raw'], 'configs': source['configs']})
+                       'row': source['raw'], 'configs': [
+                           {'field': x['field'], 'value': x['value'] if x['key']=='Fun' else {x['key']:x['value']}}
+                           for x in source['configs']]})
     status_ids = set()
 
     def collect(value):
@@ -112,6 +114,9 @@ def make_r_card(card):
     stages = [{**row, 'text': row.get('description', ''),
                'patches': [config['value'] for config in row.get('configs', [])]}
               for row in card['imprint']]
+    ascends = [{**row, 'text': row.get('description', ''),
+                'patches': [config['value'] for config in row.get('configs', [])]}
+               for row in card['ascend']]
     return {'id': card['id'], 'name': card['name'], 'rarity': 'R',
             'element': elements[card['element']], 'job': jobs[card['job']],
             'availability': 'current_base' if base else 'client_config',
@@ -123,11 +128,12 @@ def make_r_card(card):
             'elementIcon': asset(client['elementIcons'][card['element']]),
             'jobIcon': asset(client['jobIcons'][card['job']]),
             'stats': [base_stats(row) for row in card['levelStats'] if row['level'] in levels],
-            'skills': skills, 'imprint': stages, 'ascend': [], 'statusIds': sorted(status_ids)}
+            'skills': skills, 'imprint': stages, 'ascend': ascends, 'statusIds': card['glossaryIds']}
 
 
 data['cards'] = [card for card in data['cards'] if card['rarity'] != 'R'] + [
     make_r_card(card) for card in client['cards'] if card['rarity'] == 'R']
+data['glossary'] = client['glossary']
 roles = {card['id']: card['raw'] for card in client['cards']}
 for card in data['cards']:
     card['represents'] = roles[card['id']]['Represents']

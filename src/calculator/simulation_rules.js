@@ -20,7 +20,7 @@ function install(S){const P=S.prototype,select0=P.select;
    case'IsNormalSkill':return !!action?.normal;
    case'IsDamageSkill':return ctx.skill.damage;case'IsNoDamageSkill':return !ctx.skill.damage;
    case'CheckSkillCooldown':return N(r.cooldowns[id])<=0;
-   case'CheckSkillNoUse':return N(r.uses[id])===0;
+   case'CheckSkillNoUse':return N(r.cooldowns[id])>0;
    case'AllyHaveDeBuff':return this.alive(r.camp).some(x=>x.debuffCount>0);
    case'AnyAllyHaveCoolDown':return this.alive(r.camp).some(x=>Object.values(x.cooldowns).some(n=>n>0));
   }};
@@ -78,7 +78,7 @@ function install(S){const P=S.prototype,select0=P.select;
   this.refresh(source,action);this.refresh(target,action);const rr=C.resolveSkill(source.card,action.skill.id,{imprint:source.imprint,ascend:0}),fs=[...this.functions(source),...rr.functions.filter(f=>f._origin!==source.card.id)],ctx=this.context(source,target,action,'SkillProperty');
   const a=this.numeric(fs,ctx,['ConstAttack','AttRate','ConditionAttack','PenetrateRate','Penetrate2Rate','Penetrate3Rate','SourceDamageRate']),z=this.numeric(this.functions(target),this.context(target,target,action,'BeforeEvent'),['DefenceRate','HurtReduction','MaxSkillDamage']);
   const p=source.props,t=target.props,s=this.skillProperties(source,action,target),skillFinal=F((s.AttackFinalRate||0)-(p.AttackFinalRate||0));
-  const force=fs.some(f=>(f.Fun==='ForceConquer'||f.Trigger==='ForceConquer')&&this.condition(f,ctx));
+  const force=fs.some(f=>f.Trigger==='ForceConquer'&&this.condition(f,ctx));
   return {attack:source.stats.Attack,attRate:F(N(action.skill.raw.AttRate)+(a.sums.AttRate||0)+(s.SkillAttRate||0)),constAttack:a.sums.ConstAttack||0,pow:N(action.skill.raw.Pow,1),conditionMultiplier:F(F(1+skillFinal)*a.conditionMultiplier),sourceElement:source.card.element,targetElement:target.card.element,defence:target.stats.Defence,defenceRate:F(1+(z.sums.DefenceRate||0)),penetrations:[1,2,3].map(i=>F((s['Penetrate'+(i===1?'':i)+'Rate']||0)+(a.sums['Penetrate'+(i===1?'':i)+'Rate']||0))),antiPenetrate:t.DePenetrateRate||0,criticalRate:F(source.base.CriticalRate+(s.CriticalRate||0)),criticalDamageRate:F(source.base.CriticalDamageRate+(s.CriticalDamageRate||0)),forcedCriticalDamageRate:source.stats.CriticalDamageRate,deCriticalRate:t.DeCriticalRate||0,dodgeRate:target.stats.DodgeRate||0,hitRate:s.HitRate||0,sourceDamageRate:F((s.SourceDamageRate||0)+(a.sums.SourceDamageRate||0)),hurtReductions:z.valueLists.HurtReduction||[],runtimeHurtReduction:t.HurtReductionRate||0,shield:0,maxSkillDamage:z.sums.MaxSkillDamage||0,currentHP:target.unlimited?Infinity:target.hp,ignoreHurtReduction:!!s.IgnoreHurtReduction||!!t.IgnoreBeHurtReduction,forceConquer:force,noConquer:!!p.NoConquer,targetNoConquer:!!t.NoConquer,noDefenceConquer:!!t.NoDefenceConquer,mustDodge:t.MustDodge||0,noDodge:t.NoDodge||0,mustHit:s.MustHit||0,mustCritical:s.MustCritical||0,noCritical:s.NoCritical||0,mustBigHit:s.MustBigHit||0,noBigHit:s.NoBigHit||0};
  };
  P.effectResisted=function(owner,target,f,action,ctx,ignoreImmune=false){
@@ -158,7 +158,7 @@ function install(S){const P=S.prototype,select0=P.select;
      const val=f.ValueConvert?this.value(f.ValueConvert,ctx):N(f.Value);let success=true;
      const complex=this.executeComplex?.(owner,f,action,target,event,ctx,val);
      if(complex?.handled)success=complex.success;
-     else if(fun==='No'||fun==='ForceConquer'){}
+     else if(fun==='No'){}
      else if(fun==='AddStatus'||fun==='RandomAddStatus'){
       const id=fun==='AddStatus'?f.FID:(f.FIDs||[])[Math.floor(this.random()*(f.FIDs||[]).length)],def=this.data.statuses[id];if(!def)throw new T.Incomplete('《'+owner.card.name+'》的 '+(f._origin||'技能')+' 引用状态 '+id+'，当前客户端没有该定义。');
       const ty=def.raw.IsBuffType||'DeBuff',anti='Anti'+id;

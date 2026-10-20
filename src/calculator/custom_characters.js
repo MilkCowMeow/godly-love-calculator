@@ -62,7 +62,7 @@ function compile(definition,data){
   const value={...effectFunction(p.effect),Trigger:p.trigger};
   if(['basic','ultimate'].includes(p.condition))value.Condition={CheckFun:'SkillID',CheckID:slots[p.condition==='basic'?0:1]};
   if(p.condition==='critical')value.Condition={CheckFun:'IsCriticalHit'};
-  if(['belowHP','aboveHP'].includes(p.condition))value.Condition={Who:'Source',Property:'NowHPRate',Comparer:p.condition==='belowHP'?'Lt':'Gt',Value:p.threshold/100};
+  if(['belowHP','aboveHP'].includes(p.condition))value.Condition={Who:'Source',Property:'NowHPRate',Comparer:p.condition==='belowHP'?'Ltn':'Gtn',Value:p.threshold/100};
   return {key:'Fun',field:'CustomPassive'+i,value};
  });
  const passiveID=d.id+'P1';if(passiveConfigs.length)skills[passiveID]={id:passiveID,name:'条件被动',description:d.passives.map(p=>TRIGGERS[p.trigger]+' · '+({always:'无附加条件',basic:'使用战技',ultimate:'使用终结技',critical:'暴击时',belowHP:'生命低于 '+p.threshold+'%',aboveHP:'生命高于 '+p.threshold+'%'}[p.condition])).join('\n'),raw:{SkillType:'Passive',CoolDown:'0'},configs:passiveConfigs};

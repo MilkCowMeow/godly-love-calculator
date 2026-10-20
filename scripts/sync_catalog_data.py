@@ -38,10 +38,11 @@ for c in data['cards']:
   if sk is None:continue
   collect(sk['configs'],statuses)
   skilldata.append({'id':sid,'name':sk['name'],'description':sk['description'],'hidden':sid in src['hiddenSkills'],'passive':sk['raw']['SkillType']=='Passive','row':sk['raw'],'configs':[{'field':x['field'],'value':x['value'] if x['key']=='Fun' else {x['key']:x['value']}} for x in sk['configs']]})
- c.update(name=src['name'],skills=skilldata,stats=[stats(x) for x in src['levelStats'] if x['level'] in wanted],statusIds=sorted(statuses),represents=raw['Represents'],imprint=[{**x,'text':x['description'],'patches':[z['value'] for z in x['configs']]} for x in src['imprint']],ascend=[{**x,'text':x['description'],'patches':[z['value'] for z in x['configs']]} for x in src['ascend']])
+ c.update(name=src['name'],skills=skilldata,stats=[stats(x) for x in src['levelStats'] if x['level'] in wanted],statusIds=src['glossaryIds'],represents=raw['Represents'],imprint=[{**x,'text':x['description'],'patches':[z['value'] for z in x['configs']]} for x in src['imprint']],ascend=[{**x,'text':x['description'],'patches':[z['value'] for z in x['configs']]} for x in src['ascend']])
  item=items[c['id']];c['item_tags']=item['Tags'].split('~');c['version_gate']=raw['VersionControl'] or item['VersionControl']
  if c['rarity']=='R':c['availability']=src['availability'];c['availability_evidence']='角色与道具配置、常驻池标签已按当前资源目录核对。'
-data['glossary']=[{'id':sid,'name':st['name'],'description':st['description']} for sid,st in client['statuses'].items()]
+data['glossary']=client['glossary']
+data['values'].update(Gt='大于或等于',Gtn='严格大于',Lt='小于或等于',Ltn='严格小于',Between='闭区间',CheckSkillNoUse='指定技能处于冷却中')
 data['items']={r['ID']:tr(r['Name']) or r['ID'] for r in items.values()}
 commodities={r['ID']:r for r in rows('commodity')};scenes={r['ID']:r for r in rows('scene')};quests={r['ID']:r for r in rows('quest')}
 for event in data['events']:

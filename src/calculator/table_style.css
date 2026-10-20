@@ -11,3 +11,12 @@
 .card-option-visual>.role-icon>img{width:100%;height:100%;border-radius:0;object-fit:contain}
 .card-option-visual>.role-icon>img.job{width:63.16%;height:63.16%}
 @media(max-width:720px){.card-option-visual{flex-basis:42px;width:42px;height:53px}.card-option-visual>.role-icon{width:20px;height:20px;right:-2px;bottom:-2px}}
+.member-reference{margin-top:24px;border-top:1px solid var(--line);padding-top:16px}
+.member-reference>summary{cursor:pointer;font-size:18px;padding:8px 0}
+.member-reference>.table-scroll{overflow-x:auto;max-width:100%}
+.growth-table{width:100%;min-width:520px;border-collapse:collapse;font-size:15px;line-height:1.8;margin-top:16px}
+.growth-table th,.growth-table td{border-bottom:1px solid var(--line);padding:14px 12px;text-align:left;vertical-align:top}
+.growth-table th:first-child{width:72px;white-space:nowrap}
+.growth-table td:last-child{min-width:116px}
+.growth-table small,.growth-table strong{display:block}
+.growth-table p{margin:6px 0}

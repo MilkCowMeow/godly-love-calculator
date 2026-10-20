@@ -57,7 +57,11 @@ def load_chinese(directory):
 def clean_text(value, convert=lambda value: value):
     value = re.sub(r'<br\s*/?>', '\n', value or '', flags=re.I)
     value = re.sub(r'<[^>]+>', '', value).replace('\\n', '\n')
-    return convert(LINK.sub(r'\1', value))
+    value = LINK.sub(r'\1', value)
+    # 原表个别链接带有重复的右括号，链接解析后只清理无配对的残留。
+    if '[' not in value:
+        value = value.replace(']', '')
+    return convert(value)
 
 
 class ClientText:
@@ -81,17 +85,20 @@ class ClientText:
             } if path.exists() else {}
         return self.cached_tables[table].get(guard['key']) == guard['fingerprint']
 
-    def __call__(self, value):
+    def source(self, value):
         value = value or ''
         if not TEXT_KEY.search(value):
-            return clean_text(value, self.convert)
+            return value
         if value in self.current:
-            return clean_text(self.current[value], self.convert)
+            return self.current[value]
         if value in self.fallbacks:
             self.used_fallbacks.add(value)
-            return clean_text(self.fallbacks[value], self.convert)
+            return self.fallbacks[value]
         self.missing.add(value)
         return ''
+
+    def __call__(self, value):
+        return clean_text(self.source(value), self.convert)
 
 
 def validate_visible_text(data):
@@ -103,7 +110,7 @@ def validate_visible_text(data):
 
     def check(value, path):
         if isinstance(value, str):
-            if TEXT_KEY.search(value) or LINK.search(value):
+            if TEXT_KEY.search(value) or LINK.search(value) or '[' in value or ']' in value:
                 errors.append(path + ': ' + value[:100])
         elif isinstance(value, list):
             for index, item in enumerate(value):

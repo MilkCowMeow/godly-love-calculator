@@ -32,6 +32,7 @@ Data synchronized on 20 October 2026 with `catalog_014774`: C02_SSR_006 heals fo
 | Feature | Details |
 |---|---|
 | 👥 Four-member teams | Choose each card, level, star rank, and optional base-stat overrides; duplicate copies of the same card are disallowed |
+| ↔️ Swap positions | Drag a card or its position handle to swap two slots, carrying levels, stars, stat overrides and per-round policies; touch and keyboard supported |
 | 📊 Round table | Per-member damage, row subtotals, cumulative damage, and team totals |
 | 🎬 Event log | Inspect skills, assists, counters, statuses, and damage in execution order |
 | 🎯 Target presets | Original enemy setups for Trial Floors 1–50, defaulting to Floor 50; an unlimited-HP training dummy |

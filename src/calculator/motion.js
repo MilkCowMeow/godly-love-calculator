@@ -37,7 +37,7 @@
  roster=function(...args){
   const chosen=pendingSlot;pendingSlot=null;const changed=plan.members.map((m,i)=>m.cardId!==previousIds[i]?i:-1).filter(i=>i>=0);
   const value=oldRoster.apply(this,args);previousIds=plan.members.map(m=>m.cardId);
-  for(const i of new Set(chosen===null?changed:[...changed,chosen]))seat(i,i===chosen);
+  if(!GLFormation.isSwapping)for(const i of new Set(chosen===null?changed:[...changed,chosen]))seat(i,i===chosen);
   return value;
  };
  const oldList=renderCardList;

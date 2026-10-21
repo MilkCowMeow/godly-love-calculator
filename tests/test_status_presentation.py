@@ -141,8 +141,9 @@ class StatusPresentationAudit(unittest.TestCase):
 const ctx={DATA:input.data,document:{querySelector:()=>({})}};vm.createContext(ctx);vm.runInContext(input.code,ctx);
 process.stdout.write(JSON.stringify([ctx.config({Who:'Target'}),ctx.config({FID:'Target'}),ctx.config({StatusRound:2,Pow:1})]));'''
         process = subprocess.run(['node', '-e', script], input=json.dumps({'data': {
-            'keys': self.catalog['keys'], 'values': self.catalog['values'], 'cards': [], 'events': [],
-            'profiles': [], 'glossary': self.catalog['glossary']}, 'code': code}),
+            'keys': self.catalog['keys'], 'values': self.catalog['values'], 'enumLabels': self.catalog['enumLabels'], 'cards': [], 'events': [],
+            'profiles': [], 'glossary': self.catalog['glossary'],
+            'enumLabels': self.catalog.get('enumLabels', {})}, 'code': code}),
             cwd=ROOT, text=True, encoding='utf8', capture_output=True, check=True)
         who, status, numeric = json.loads(process.stdout)
         self.assertNotIn('破息', who)

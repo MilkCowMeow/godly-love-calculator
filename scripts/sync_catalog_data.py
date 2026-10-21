@@ -3,6 +3,7 @@ from pathlib import Path
 import argparse,base64,csv,hashlib,io,json,re,struct,sys
 from embedded import extract
 from client_text import ClientText
+from catalog_labels import apply_labels
 ROOT=Path(__file__).resolve().parents[1]
 p=argparse.ArgumentParser(description=__doc__)
 for key in ['tables','locale','calculator-data','news','output']:p.add_argument('--'+key,required=True,type=Path)
@@ -84,5 +85,6 @@ for c in data['cards']:
 data.update(asof=args.as_of,catalog=args.catalog,featuredCard='C02_SSR_006',featuredDescription='琴键之间，听见彼此同频的悸动。')
 data['eventDates']={'C04_SSR_006':'2026.10.06 活动开启后 — 10.20 14:00（已结束）','C01_SR_005':'2026.10.06 活动开启后 — 11.03 14:00','C03_SSR_001':'2026.10.13 活动开启后 — 10.27 05:00','C02_SSR_006':'2026.10.20 活动开启后 — 11.03 14:00'}
 data['currentEventIds']=['BranchC02_SSR_006','ActivitySummonC02_SSR_006','ActivitySignInC02_SSR_006','BattlePassC01_SR_005','ActivitySummonC03_SSR_001']
+apply_labels(data)
 args.output.write_text(json.dumps({'data':data,'assets':assets},ensure_ascii=False,separators=(',',':')),'utf8')
 print('catalog synchronized',len(data['cards']),'cards',len(data['events']),'events')

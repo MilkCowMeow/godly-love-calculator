@@ -11,6 +11,7 @@ subprocess.run([sys.executable,str(ROOT/'tests/test_build_integrity.py')],check=
 subprocess.run([sys.executable,str(ROOT/'tests/test_native_projection.py')],check=True)
 subprocess.run([sys.executable,str(ROOT/'tests/test_status_presentation.py')],check=True)
 subprocess.run([sys.executable,str(ROOT/'tests/test_catalog_integrity.py')],check=True)
+subprocess.run([sys.executable,str(ROOT/'tests/test_catalog_labels.py')],check=True)
 for p in (ROOT/'src/calculator').glob('*.js'):shutil.copy2(p,TMP/p.name)
 for p in (ROOT/'tests').glob('*.cjs'):shutil.copy2(p,TMP/p.name)
 for p in (ROOT/'tests').glob('*.json'):shutil.copy2(p,TMP/p.name)

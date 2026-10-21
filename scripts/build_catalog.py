@@ -12,6 +12,7 @@ from embedded import extract
 from card_characters import assign_characters
 from web_analytics import inject_analytics
 from client_text import validate_visible_text
+from catalog_labels import apply_labels
 
 ROOT = Path(__file__).resolve().parents[1]
 SRC = ROOT / 'src/catalog'
@@ -162,6 +163,7 @@ for card in data['cards']:
     card['represents'] = roles[card['id']]['Represents']
     assign_characters(card, card['represents'], data['profiles'])
 
+apply_labels(data)
 validate_visible_text(data)
 fonts = '\n'.join(re.findall(r'@font-face\{[^}]*\}', old))
 if args.font_dir:

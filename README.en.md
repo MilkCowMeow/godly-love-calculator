@@ -82,11 +82,11 @@ Definitions stay in the current browser. Exported team plans include the custom 
 
 | Item | Status |
 |---|---|
-| 📦 Client version | `1.0.1.014517` |
-| 🗓️ Data reviewed | `2026-10-16` |
-| 🃏 Calculator dataset | 192 cards, 586 related skills, 97 statuses, 50 Trial floors |
+| 📦 Client resource catalog | `catalog_014774`, paired native library `1.0.1.014517` |
+| 🗓️ Data reviewed | `2026-10-21`, data snapshot `2026-10-20` |
+| 🃏 Calculator dataset | 192 cards, 583 player skill references, 586 skill definitions, 97 statuses, 50 Trial floors |
 | 🧩 Unit checks | Scalar damage, configuration parsing, statuses, scheduling, complex effects, and AI |
-| 🔁 Continuous simulations | 288 mixed-team scenarios plus damage-total conservation checks |
+| 🔁 Continuous simulations | 300 cross-floor battles plus damage-total conservation checks |
 | 🖥️ Interface checks | Desktop, 390px mobile, cross-page navigation, and worker-based calculation |
 | 🎞️ Community video review | Key frames and old/new client configurations checked; [review notes in Chinese](evidence/community_video_review.md) |
 | 🎮 Native client comparison | MuMu Trial Floor 50: [15 damage samples plus stats, stacking, and DOT values checked](evidence/native_client_comparison.md), using a local data service |
@@ -113,7 +113,9 @@ python scripts/run_tests.py
 
 The builder retains embedded data, images, and fonts from the published HTML and combines the modules in `src/calculator/`. Maintain the font resources when expanding their character coverage.
 
-The mechanics text lives in `src/calculator/mechanics.html`. Its claim-by-claim evidence index, [`evidence/mechanics_claims.json`](evidence/mechanics_claims.json), stays in the repository rather than the page. Checks cover evidence anchors, formula compilation, numerical examples, and synchronization of card credits and images. Both tools contain 192 cards; usable images are synchronized for 86 of the 88 R cards.
+The mechanics text lives in `src/calculator/mechanics.html`. Its claim-by-claim evidence index, [`evidence/mechanics_claims.json`](evidence/mechanics_claims.json), stays in the repository. Checks cover evidence anchors, formula compilation, numerical examples, and synchronization of card credits and images. Both tools contain 192 cards; usable images are synchronized for all 88 R cards.
+
+Run `python scripts/verify_release.py` before publishing. With local client sources, add `--tables <tables> --locale <locale>` for independent source comparisons. The release checks validate every level row, catalog panels, readable descriptions, glossary and progression, event ownership, commodity rewards and prices, all detail renderers, embedded fonts, and source parity in both the published HTML and its simulation worker. A failed check exits with a nonzero status.
 
 ```text
 docs/                 🌐 GitHub Pages site and offline HTML
@@ -126,7 +128,7 @@ evidence/             🔬 Native-method audit summaries
 
 ### ☁️ GitHub Pages
 
-The publishing source is `/docs` on the `main` branch, with `.nojekyll` included. Subsequent pushes redeploy the site at the same public URLs.
+The website lives in `/docs` on the `main` branch, with `.nojekyll` included. The `Verified website release` workflow runs the complete validation suite before uploading and deploying those files. Failed validation stops deployment. The public URLs remain unchanged.
 
 ## 🤝 Feedback & Credits
 

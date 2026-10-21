@@ -33,6 +33,20 @@ for(const card of data.cards){
  if(gate){const unlocked=card.skills.find(s=>s.id===gate.EnhanceSkill);assert.ok(ui.stages(card.imprint,card).includes(unlocked.description.replace(/\n/g,'<br>')));assert.match(ui.skill(unlocked,card),/3 星解锁/);}
 }
 for(const number of [1,2,'1','2',0.15,'-2','1e2'])assert.equal(ui.config(number),String(number));
+const contextMarkup=ui.config({Who:'Target',FID:'Target',ValueConvert:{Who:'TriggerTarget',PropertyID:'Target'}});
+assert.match(contextMarkup,/<dd>效果目标<\/dd>/,'Who.Target按对象选择字段解释');
+assert.match(contextMarkup,/<dd>触发事件目标<\/dd>/,'转换器Who维持对象含义');
+assert.equal((contextMarkup.match(/<dd>破息<\/dd>/g)||[]).length,2,'FID与PropertyID中的Target仍是破息状态ID');
+assert.equal(ui.config('TRUE','IsInitCoolDown'),'是');assert.equal(ui.config('FALSE','IsInitCoolDown'),'否');
+const emptyDisplaySkill={...bleedSkill,displayConfigs:[],configs:[{field:'DynamicField1',value:{Fun:'ForceConquer'}}]};
+assert.doesNotMatch(ui.skill(emptyDisplaySkill),/ForceConquer/,'合法展示效果为空时，绝不回退被原生丢弃的源效果');
+const emptyDisplayStage={LV:'3',text:'',EnhanceSkill:'',patches:[{Fun:'ForceConquer'}],displayPatches:[]};
+assert.doesNotMatch(ui.stages([emptyDisplayStage],starCard),/ForceConquer/);
+for(const [cid,key,value]of [['C04_SSR_003','MustCritical',1],['C04_SR_005','PinchRate',.08]]){
+ const nativeCard=data.cards.find(c=>c.id===cid),stage=nativeCard.ascend.find(r=>r.LV==='3');
+ assert.deepEqual(stage.displayPatches.find(p=>Object.prototype.hasOwnProperty.call(p,key)),{[key]:value},cid+'非Fun预置强化保留属性名');
+ const markup=ui.stages([stage],nativeCard);assert.ok(markup.includes(data.keys[key]||key));assert.match(markup,/<dl>/,'属性强化须按键值展示');
+}
 ui.renderCards();
 assert.equal(ui.state.showR,false,'R cards are hidden on a fresh page');
 assert.equal(ui.visibleCatalogCards().length,104);

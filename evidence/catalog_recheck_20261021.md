@@ -79,7 +79,7 @@ Role.NAME 留空的卡仍可能在同 ID 的 Item.Name 中配置名称。同步�
 | SkillStaticData.get_SelectInfo | 0x234D74C，先读取 TargetSelectInfo，再使用基础目标字段 |
 | SkillData.GetSelectInfo | 0x234D4D4，继续应用 TargetTypeFun |
 | SkillContainer.GetCounterSkill | 0x2346BAC，缺省分支 0x2346D54..0x2346D68 回落 GetNormalSkill |
-| SkillStaticData.get_IsDamageHit | 0x235E838，Enemy 且 AttRate 非零时成立 |
+| SkillStaticData.get_IsDamageHit | 0x235E838，Enemy 且 Pow 非零时成立；后续独立偏移复核已纠正此前 AttRate 注释 |
 | SkillProcessContext.get_IsDamageHit | 0x226456C，读取当前技能 StaticData 的命中类别 |
 | BattleCalculator.ProcessSkillHit | 0x22FF150；0x22FF290 进入 NoHit，继续 ProcessEvent |
 | PropertySetting._AddNewPropertyToMap | 0x22E07C4，以原属性字符串存储 |

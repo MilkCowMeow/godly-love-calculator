@@ -126,7 +126,7 @@ function install(S){const P=S.prototype,select0=P.select;
   if(target.dead||!C.isDamageHit(action.skill))return;let p=this.hitParams(source,target,action);p.conquerMultiplier=B.relation(p.sourceElement,p.targetElement,p).multiplier;const [type,multiplier]=this.rollHit(p);action.hitType=type;action.hitTypes=action.hitTypes||{};action.hitTypes[target.uid]=type;action.hitTarget=target;
   p=this.hitParams(source,target,action);p.conquerMultiplier=B.relation(p.sourceElement,p.targetElement,p).multiplier;
   const raw=B.settle({...p,shield:0,invincible:false,noDamage:false},multiplier),ev={damage:true,target,source,hpDiff:F(-raw.floatBeforeShield),splits:[]};
-  this.trigger(target,'BeforeEvent',action,ev);this.trigger(source,'SourceBeforeEvent',action,ev);
+  this.trigger(target,'BeforeEvent',action,ev);if(this._nativeSourceStatusEvent)this._nativeSourceStatusEvent('SourceBeforeEvent',source,target,action,ev);
   let hpDiff=B.roundEven(F(ev.hpDiff));
   if(ev.splits?.length){const split=ev.splits.filter(x=>x.target&&!x.target.dead).sort((a,b)=>Math.abs(b.value)-Math.abs(a.value))[0];if(split){hpDiff=B.roundEven(F(ev.hpDiff-split.hpDiff));this.applyDamage(source,split.target,action,{damage:B.roundEven(split.value),nativeEvent:{eventFun:'SplitDamage',hitType:'SplitDamage',ordinaryHit:false,damageHit:true}},'direct');}}
   const result={...raw,damage:Math.max(0,-hpDiff),absorbed:0,nativeEvent:{ordinaryHit:true,damageHit:true,hpDiff}};
@@ -181,12 +181,19 @@ function install(S){const P=S.prototype,select0=P.select;
      else if(fun==='AddSkillCoolDown'||fun==='AddAllSkillCoolDown'){
       if(val>0&&this.effectResisted(owner,target,f,action,ctx))success=false;
       else {
-       const ids=fun==='AddSkillCoolDown'?[f.FID||action?.skill?.id]:target.skills.filter(id=>id!==target.normal);success=false;
-       for(const id of ids)if(id&&target.skills.includes(id)){target.cooldowns[id]=Math.max(0,N(target.cooldowns[id])+Math.trunc(val));success=true;}
+       const ids=fun==='AddSkillCoolDown'?[f.FID||action?.skill?.id]:this.nativeMainCooldownSkills(target);success=false;
+       const matched=ids.filter(id=>id&&target.skills.includes(id));
+       if(matched.length||fun==='AddAllSkillCoolDown'){this.processNoHitEvent(owner,target,action,{eventFun:fun,eventFunValue:fun==='AddSkillCoolDown'?18:21,nativeEvent:{cooldownDiff:Object.fromEntries(matched.map(id=>[id,Math.trunc(val)]))}},()=>{for(const id of matched)target.cooldowns[id]=Math.max(0,N(target.cooldowns[id])+Math.trunc(val));});success=true;}
       }
      }
      else if(fun==='AddAllBuffRound'||fun==='AddAllDeBuffRound'){
-      const ty=fun==='AddAllBuffRound'?'Buff':'DeBuff';for(const s of target.statuses){const raw=this.data.statuses[s.id].raw;if(this.statusType(s)!==ty||!flag(raw.CanUpdateRound,true)||f.FIDs?.length&&!f.FIDs.includes(s.id)||f.IgnFIDs?.includes(s.id))continue;s.until+=Math.trunc(val);}this.refresh(target);
+      if(owner.camp!==target.camp&&this.effectResisted(owner,target,f,action,ctx,fun==='AddAllBuffRound'))success=false;
+      else {
+       const ty=fun==='AddAllBuffRound'?'Buff':'DeBuff',selected=target.statuses.filter(s=>{const raw=this.data.statuses[s.id].raw;return this.statusType(s)===ty&&flag(raw.CanUpdateRound,true)&&(!f.FIDs?.length||f.FIDs.includes(s.id))&&!f.IgnFIDs?.includes(s.id);});
+       for(const s of selected)s.until+=Math.trunc(val);
+       const expired=selected.filter(s=>N(this.data.statuses[s.id].raw.RoundCount,1)>=0&&target.displayRound>=s.until);
+       this.processNoHitEvent(owner,target,action,{eventFun:fun,eventFunValue:fun==='AddAllBuffRound'?15:16,removedStatuses:expired,nativeEvent:{updatedStatuses:selected}},()=>{target.statuses=target.statuses.filter(s=>!expired.includes(s));if(this._nativeSyncStatusRounds)this._nativeSyncStatusRounds(target);});
+      }
      }
      else if(fun==='ImmortalAddHP'){target.hp=1;target.dead=false;action=action||{};action.immortalRoles=action.immortalRoles||new Set();action.immortalRoles.add(target.uid);this.refresh(target);this.log('revive',owner,target,'本技能内保留 1 生命');}
      else if(fun==='AdditionSkill'||fun==='CounterSkill'||fun==='AddPinchSkill'){
@@ -220,7 +227,7 @@ function install(S){const P=S.prototype,select0=P.select;
    const current=rr.functions.filter(f=>!f._property&&f._origin!==u.card.id&&f.Fun!=='ReplaceSkill'),phase=(name)=>{for(const f of current.filter(f=>(f.Trigger||'AfterSkill')===name).sort((a,b)=>N(a.ParamOrder)-N(b.ParamOrder)))this.execute(u,f,action,action.selected);this.trigger(u,name,action);};
    u.state='beforeSkill';phase('BeforeSkill');this.allTrigger('AnyOneBeforeSkill',action);action.skillProperties=this.skillProperties(u,action,action.selected);this.processNaturalFollowups(action,'beforeDamage');
    this.log('action',u,action.selected,action.skill.name,{skill:action.skill.id,kind:action.kind,ownTurn:u.mainCount+1});if(u.camp===0)this.row.members[u.slot].actions.push({skill:action.skill.id,name:action.skill.name,kind:action.kind,time:this.time,globalAction:this.actionNumber});
-   u.state='skilling';for(const target of action.directTargets)if(C.isDamageHit(action.skill))this.attack(u,target,action);
+   u.state='skilling';for(const target of action.directTargets)this.processSkillHit(u,target,action);
    u.state='afterSkill';phase('PreAfterSkill');phase('None');phase('AfterSkill');this.processNaturalFollowups(action,'afterDamage');
    for(const target of action.directTargets)this.trigger(target,'TargetAfterSkill',action);
    for(const other of this.units){if(other!==u&&other.camp===u.camp)this.trigger(other,'AnyAllyAfterSkill',action);if(other.camp!==u.camp)this.trigger(other,'AnyEnemyAfterSkill',action);if(action.main){if(other!==u&&other.camp===u.camp)this.trigger(other,'AnyAllyAfterMainSkill',action);if(other.camp!==u.camp)this.trigger(other,'AnyEnemyAfterMainSkill',action);}}

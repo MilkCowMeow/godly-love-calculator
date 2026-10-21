@@ -57,8 +57,8 @@ function compare(a,b,op,b2,ctx){
 function all(vals){return vals.includes(false)?false:vals.includes(null)?null:true;}
 function isDamageHit(skill){
  const raw=skill?.raw||skill?.row||skill||{},camp=raw.TargetCamp===undefined||raw.TargetCamp===null||raw.TargetCamp===''?'Enemy':raw.TargetCamp;
- // SkillStaticData.get_IsDamageHit RVA 0x235E838: Enemy target camp and nonzero float AttRate.
- return ['Enemy',2,'2'].includes(camp)&&Math.fround(num(raw.AttRate)||0)!==0;
+ // SkillStaticData.get_IsDamageHit RVA 0x235E838 reads Pow at +0x6C; AttRate is +0x68.
+ return ['Enemy',2,'2'].includes(camp)&&Math.fround(num(raw.Pow)||0)!==0;
 }
 function checkFun(c,ctx,r){
  if(ctx.nativeConditionCheck){const v=ctx.nativeConditionCheck(c,r);if(v!==undefined)return v;}
@@ -68,7 +68,7 @@ function checkFun(c,ctx,r){
  case'IsMainRound':return own(ctx,'mainRound')?!!ctx.mainRound:problem(ctx,'缺少主回合标记');
  case'IsNotMainRound':return own(ctx,'mainRound')?!ctx.mainRound:problem(ctx,'缺少主回合标记');
  case'IsNormalSkill':return own(s,'normal')?s.normal:/S1$/.test(s.id||'')?true:problem(ctx,'缺少原生普攻标记');
- case'IsDamageSkill':return own(s,'damage')?!!s.damage:own(raw,'AttRate')?isDamageHit(s):problem(ctx,'缺少技能伤害类型');
+ case'IsDamageSkill':return own(s,'damage')?!!s.damage:own(raw,'Pow')||own(raw,'AttRate')?isDamageHit(s):problem(ctx,'缺少技能伤害类型');
  case'IsNoDamageSkill':{let v=checkFun({CheckFun:'IsDamageSkill'},ctx,r);return v===null?null:!v;}
  case'SkillID':return c.CheckIDs?c.CheckIDs.includes(s.id):s.id===id;
  case'FunID':return own(ctx,'funId')?ctx.funId===id:problem(ctx,'缺少效果ID');

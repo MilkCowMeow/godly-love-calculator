@@ -36,24 +36,36 @@ def collect(v,out):
 items={r['ID']:r for r in rows('item')}
 element_names={'None':'无属性','Fire':'红璇','Ice':'蓝澈','Earth':'绿琉','Ground':'黄曜','Light':'光','Dark':'暗'}
 job_names={'Defender':'守护','Warrior':'戒律','Medic':'祈祷','Vanguard':'审判'}
+def shown_configs(configs):return [{'field':x['field'],'value':x['value'] if x['key']=='Fun' else {x['key']:x['value']}} for x in configs]
+def stage_rows(stages):return [{**x,'text':x['description'],'patches':[z['value'] if z['key']=='Fun' else {z['key']:z['value']} for z in x['configs']],'displayPatches':[z['value'] if z['key']=='Fun' else {z['key']:z['value']} for z in x.get('displayConfigs',x['configs'])]} for x in stages]
 for c in data['cards']:
  src=cards[c['id']];raw=src['raw'];wanted={int(x['level']) for x in c['stats']};statuses=set();skilldata=[]
  for sid in src['skills']:
   sk=client['skills'].get(sid)
   if sk is None:continue
   collect(sk['configs'],statuses)
-  skilldata.append({'id':sid,'name':sk['name'],'description':sk['description'],'damageTarget':sk['damageTarget'],'hidden':sid in src['hiddenSkills'],'passive':sk['raw']['SkillType']=='Passive','row':sk['raw'],'configs':[{'field':x['field'],'value':x['value'] if x['key']=='Fun' else {x['key']:x['value']}} for x in sk['configs']]})
- c.update(name=src['name'],rarity=src['rarity'],element=element_names[src['element']],job=job_names[src['job']],elementIcon=client['elementIcons'][src['element']],jobIcon=client['jobIcons'][src['job']],skills=skilldata,stats=[stats(x) for x in src['levelStats'] if x['level'] in wanted],statusIds=src['glossaryIds'],represents=raw['Represents'],imprint=[{**x,'text':x['description'],'patches':[z['value'] for z in x['configs']]} for x in src['imprint']],ascend=[{**x,'text':x['description'],'patches':[z['value'] for z in x['configs']]} for x in src['ascend']])
+  skilldata.append({'id':sid,'name':sk['name'],'description':sk['description'],'damageTarget':sk['damageTarget'],'hidden':sid in src['hiddenSkills'],'passive':sk['raw']['SkillType']=='Passive','row':sk['raw'],'configs':shown_configs(sk['configs']),'displayConfigs':shown_configs(sk.get('displayConfigs',sk['configs']))})
+ c.update(name=src['name'],rarity=src['rarity'],element=element_names[src['element']],job=job_names[src['job']],elementIcon=client['elementIcons'][src['element']],jobIcon=client['jobIcons'][src['job']],skills=skilldata,stats=[stats(x) for x in src['levelStats'] if x['level'] in wanted],statusIds=src['glossaryIds'],represents=raw['Represents'],imprint=stage_rows(src['imprint']),ascend=stage_rows(src['ascend']))
  item=items[c['id']];c['item_tags']=item['Tags'].split('~');c['version_gate']=raw['VersionControl'] or item['VersionControl']
  if c['rarity']=='R':c['availability']=src['availability'];c['availability_evidence']='角色与道具配置、常驻池标签已按当前资源目录核对。'
 data['glossary']=client['glossary']
 data['values'].update(Gt='大于或等于',Gtn='严格大于',Lt='小于或等于',Ltn='严格小于',Between='闭区间',CheckSkillNoUse='指定技能处于冷却中')
 data['items']={r['ID']:tr(r['Name']) or r['ID'] for r in items.values()}
-commodities={r['ID']:r for r in rows('commodity')};scenes={r['ID']:r for r in rows('scene')};quests={r['ID']:r for r in rows('quest')}
+commodity_rows=rows('commodity');scene_rows=rows('scene');quest_rows=rows('quest');store_rows=rows('store');sign_rows=rows('signinreward');pass_rows=rows('battlepass');drop_rows=rows('drop')
+def belongs(row,identifier):return identifier in (row.get('ActivityID','')+'~'+row.get('ActivityIDs','')).split('~')
+data['dropLabels']={r['ShowRateName']:tr(r['ShowRateName']) for r in drop_rows if r.get('ShowRateName') and tr(r['ShowRateName'])}
+data['drops']={identifier:[r for r in drop_rows if r['DropID']==identifier] for identifier in dict.fromkeys(r['DropID'] for r in drop_rows)}
 for event in data['events']:
- for scene in event['scenes']:
-  raw=scenes[scene['id']];scene.update(name=tr(raw['Name']) or '战斗关卡',energy=raw['Energy'],level=raw['RecommendedLevel'],first_drop=raw['FirstDrop'],reward=raw['RewardItems'])
- event['commodities']=[commodities[x['ID']] for x in event['commodities'] if x['ID'] in commodities and commodities[x['ID']]['OutList']!='TRUE']
+ # 同卡心选/签到与纪事分属不同活动；以Scene.Chapter直接归属关卡。
+ event['scenes']=[{'id':raw['ID'],'chapter':raw['Chapter'],'name':tr(raw['Name']) or ('剧情关卡' if not any(raw.get(k) for k in ['WaveInfoJsonString','WaveInfo2JsonString','WaveInfo3JsonString']) else '战斗关卡'),'energy':raw['Energy'],'level':raw['RecommendedLevel'],'first_drop':raw['FirstDrop'],'reward':raw['RewardItems']} for raw in scene_rows if raw['Chapter']==event['id']]
+ event_quests=[r for r in quest_rows if belongs(r,event['id'])]
+ event_stores=[r for r in store_rows if belongs(r,event['id'])]
+ event.update(quest_count=len(event_quests),questIds=[r['ID'] for r in event_quests],quest_names=[tr(r['Name']) for r in event_quests if tr(r['Name'])],storeIds=[r['ID'] for r in event_stores],stores=[tr(r['Name']) or r['ID'] for r in event_stores],sign_in_rows=[r for r in sign_rows if r['ActivityID']==event['id']],pass_rewards=[r for r in pass_rows if r['ActivityID']==event['id']])
+ event['pass_ranks']=len(event['pass_rewards'])
+ event['commodities']=[]
+ for raw in commodity_rows:
+  if belongs(raw,event['id']) and raw['OutList']!='TRUE':
+   event['commodities'].append({**raw,'displayName':tr(raw['Name']) or data['items'].get(raw.get('ItemID',''),'') or raw['ID']})
 news=json.loads(args.news.read_text('utf8'))['data']['news'];notice=next(n for n in news if n['newsId']==3617)
 notice_id='news_3617';notice_record={'id':notice_id,'name':sc(notice['name']),'text':sc(notice['intro']).replace('·','').replace('・',''),'url':'https://game.ero-labs.services/api/v2/announcement/news?lang=zh&nowPage=1&count=20&hgameId=242&labelId=0'}
 data['notices']=[x for x in data['notices'] if x['id']!=notice_id]+[notice_record]

@@ -53,7 +53,7 @@ html=read('table_template.html')
 if args.font_dir:
  from fontTools import subset
  from fontTools.ttLib import TTFont
- characters=''.join(set(old+app+html+mechanics_html))
+ characters=''.join(set(old+app+html+mechanics_html+json.dumps(data,ensure_ascii=False)))
  fonts=''
  for family,filename in [('BookCN','STSONG.TTF'),('TitleCN','STZHONGS.TTF'),('BookEN','times.ttf')]:
   font=TTFont(args.font_dir/filename);sub=subset.Subsetter(options=subset.Options());sub.populate(text=characters);sub.subset(font);font.flavor='woff2';out=io.BytesIO();font.save(out)

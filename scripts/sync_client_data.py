@@ -42,7 +42,7 @@ for card in data['cards']:
   levels.append({'level':int(base['LV']),'stats':stats,'raw':base})
  item=items.get(card['id'],{})
  name=tr(raw['NAME']) or tr(item.get('Name',''));previous_name=card.get('name') or '卡名缺失';name=name if name and not name.startswith(('T_','UI_')) else previous_name
- card.update(name=name,element=raw['Element'],job=raw['Job'],rarity={'3':'R','4':'SR','5':'SSR'}[raw['RarityLV']],raw=raw,configs=configs(raw),skills=slots,skillSlots=slots[:],hiddenSkills=[v.split(':')[0] for v in raw['SkillIDs'].split('~') if ':Hide' in v],levelStats=levels,imprint=stage(imprints,card['id']),ascend=stage(ascends,card['id']),ai=raw['AIs'].split('~') if raw['AIs'] else [])
+ card.update(name=name,element=raw['Element'],job=raw['Job'],rarity={'3':'R','4':'SR','5':'SSR'}[raw['RarityLV']],raw=raw,itemRaw=item,configs=configs(raw),skills=slots,skillSlots=slots[:],hiddenSkills=[v.split(':')[0] for v in raw['SkillIDs'].split('~') if ':Hide' in v],levelStats=levels,imprint=stage(imprints,card['id']),ascend=stage(ascends,card['id']),ai=raw['AIs'].split('~') if raw['AIs'] else [])
  if card['rarity']=='R':card['availability']='current_base' if not raw['VersionControl'] and not item.get('VersionControl') and 'NormalR' in item.get('Tags','').split('~') else 'client_config'
  if card['id']=='C02_SSR_006':card['availability']='current_announced'
  if card['id']=='C04_SSR_006':card['availability']='past_announced'

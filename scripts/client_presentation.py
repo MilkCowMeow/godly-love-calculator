@@ -1,5 +1,6 @@
 """以客户端原文链接和效果引用生成两站共用的技能阅读数据。"""
 import json
+from copy import deepcopy
 from pathlib import Path
 import re
 from client_text import fingerprint
@@ -10,27 +11,69 @@ REFERENCE_FIELDS = {'FID', 'FIDs', 'CheckID', 'PropertyID', 'GroupID'}
 NATIVE_SCHEMA = extract((Path(__file__).resolve().parents[1] / 'src/calculator/config_engine.js').read_text('utf8'), 'NATIVE_FUNCTION_SCHEMA')
 
 
-def valid_native_value(value, typename='SkillFunctionInfo'):
-    """与运行引擎共用声明结构，词典只收录原生可装载函数的引用。"""
+def project_native_value(value, typename='SkillFunctionInfo'):
+    """按同一声明结构生成原生装载后的展示值，原始配置保留原样。"""
     if typename in NATIVE_SCHEMA['enums']:
         members = NATIVE_SCHEMA['enums'][typename]
         if isinstance(value, int) and not isinstance(value, bool):
-            return -(2**31) <= value < 2**31
-        if not isinstance(value, str):
-            return False
-        if re.fullmatch(r'[+-]?\d+', value.strip()):
-            return -(2**31) <= int(value) < 2**31
-        names = {name.lower() for name in members}
-        return all(part.strip().lower() in names for part in value.split(','))
+            numeric = value
+        elif isinstance(value, str):
+            if re.fullmatch(r'[+-]?\d+', value.strip()):
+                numeric = int(value)
+            else:
+                names = {name.lower(): number for name, number in members.items()}
+                numeric = 0
+                for part in value.split(','):
+                    name = part.strip().lower()
+                    if name not in names:
+                        raise ValueError('unknown enum member')
+                    numeric |= names[name]
+        else:
+            raise ValueError('enum requires Int32 or member name')
+        if not -(2**31) <= numeric < 2**31:
+            raise ValueError('enum integer outside Int32')
+        return next((name for name, number in members.items() if number == numeric), numeric)
     if typename.startswith('List<'):
-        return value is None or isinstance(value, list) and all(valid_native_value(item, typename[5:-1]) for item in value)
+        if value is None:
+            return None
+        if not isinstance(value, list):
+            raise ValueError('expected list')
+        return [project_native_value(item, typename[5:-1]) for item in value]
     fields = NATIVE_SCHEMA['classes'].get(typename)
     if not fields or value is None:
-        return True
+        return deepcopy(value)
     if not isinstance(value, dict):
+        raise ValueError('expected declared object')
+    names = {name.lower(): name for name in fields}
+    out = {}
+    for supplied, item in value.items():
+        key = supplied if supplied in fields else names.get(supplied.lower())
+        if key is not None:
+            out[key] = project_native_value(item, fields[key])
+    return out
+
+
+def valid_native_value(value, typename='SkillFunctionInfo'):
+    try:
+        project_native_value(value, typename)
+        return True
+    except ValueError:
         return False
-    fields = {name.lower(): kind for name, kind in fields.items()}
-    return all(name.lower() not in fields or valid_native_value(item, fields[name.lower()]) for name, item in value.items())
+
+
+def display_configs(configs):
+    out = []
+    for config in configs:
+        if config['key'] == 'Fun':
+            try:
+                value = project_native_value(config['value'])
+            except ValueError:
+                continue
+            if value is not None:
+                out.append({**config, 'value': value})
+        elif config['key'] in NATIVE_SCHEMA['enums']['EProperty']:
+            out.append(deepcopy(config))
+    return out
 
 
 def walk(value):
@@ -49,7 +92,7 @@ def percentage(value):
 
 def damage_target(skill):
     raw = skill['raw']
-    if raw.get('SkillType') == 'Passive' or (raw.get('TargetCamp') or 'Enemy') != 'Enemy' or not float(raw.get('AttRate') or 0):
+    if raw.get('SkillType') == 'Passive' or (raw.get('TargetCamp') or 'Enemy') != 'Enemy' or not float(raw.get('Pow') or 0):
         return ''
     targets = {'': '一名敌人', 'One': '一名敌人', 'All': '全体敌人', 'RandomTwo': '两名敌人'}
     if raw.get('TargetTypeFun'):
@@ -104,7 +147,7 @@ def enrich(data, text):
 
     def references(configs):
         found = set()
-        eligible = [item for item in configs if item.get('key') != 'Fun' or valid_native_value(item['value'])] if isinstance(configs,list) and all(isinstance(item,dict) and 'key' in item for item in configs) else configs
+        eligible = display_configs(configs) if isinstance(configs,list) and all(isinstance(item,dict) and 'key' in item for item in configs) else configs
         for obj in walk(eligible):
             for field in REFERENCE_FIELDS:
                 value = obj.get(field, [])
@@ -127,6 +170,7 @@ def enrich(data, text):
     unresolved = []
     for sid, skill in skills.items():
         skill['damageTarget'] = damage_target(skill)
+        skill['displayConfigs'] = display_configs(skill['configs'])
         correction = corrections.get(sid)
         if correction and fingerprint('skill', skill['raw']) == correction['fingerprint'] and text(skill['raw']['Description']) == correction['clientDescription']:
             skill['clientDescription'] = correction['clientDescription']
@@ -152,6 +196,7 @@ def enrich(data, text):
             ids.update(skills[sid]['glossaryIds'])
         for kind in ('imprint', 'ascend'):
             for row in card[kind]:
+                row['displayConfigs'] = display_configs(row['configs'])
                 ids.update(references(row['configs']))
         card['glossaryIds'] = sorted(closure(ids) & glossary.keys())
     if unresolved:

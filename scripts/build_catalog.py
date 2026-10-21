@@ -105,7 +105,7 @@ def base_stats(row):
 
 
 def make_r_card(card):
-    item = item_rows[card['id']]
+    item = card.get('itemRaw') or item_rows[card['id']]
     tags = item['Tags'].split('~')
     base = not card['raw']['VersionControl'] and not item['VersionControl'] and 'NormalR' in tags
     skills = []
@@ -114,6 +114,9 @@ def make_r_card(card):
         skills.append({'id': sid, 'name': source['name'], 'description': source['description'], 'damageTarget': source['damageTarget'],
                        'hidden': sid in card.get('hiddenSkills', []),
                        'passive': source['raw']['SkillType'] == 'Passive',
+                       'displayConfigs': [
+                           {'field': x['field'], 'value': x['value'] if x['key']=='Fun' else {x['key']:x['value']}}
+                           for x in source['displayConfigs']],
                        'row': source['raw'], 'configs': [
                            {'field': x['field'], 'value': x['value'] if x['key']=='Fun' else {x['key']:x['value']}}
                            for x in source['configs']]})
@@ -130,10 +133,12 @@ def make_r_card(card):
     collect([skill['configs'] for skill in skills])
     art = r_art(card)
     stages = [{**row, 'text': row.get('description', ''),
-               'patches': [config['value'] for config in row.get('configs', [])]}
+               'displayPatches': [config['value'] if config['key'] == 'Fun' else {config['key']: config['value']} for config in row.get('displayConfigs', [])],
+               'patches': [config['value'] if config['key'] == 'Fun' else {config['key']: config['value']} for config in row.get('configs', [])]}
               for row in card['imprint']]
     ascends = [{**row, 'text': row.get('description', ''),
-                'patches': [config['value'] for config in row.get('configs', [])]}
+                'displayPatches': [config['value'] if config['key'] == 'Fun' else {config['key']: config['value']} for config in row.get('displayConfigs', [])],
+                'patches': [config['value'] if config['key'] == 'Fun' else {config['key']: config['value']} for config in row.get('configs', [])]}
                for row in card['ascend']]
     return {'id': card['id'], 'name': card['name'], 'rarity': 'R',
             'element': elements[card['element']], 'job': jobs[card['job']],

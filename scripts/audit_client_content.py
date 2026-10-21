@@ -6,8 +6,10 @@ from copy import deepcopy
 import csv
 import hashlib
 import json
+import math
 from pathlib import Path
 import re
+import struct
 import sys
 
 from embedded import extract
@@ -101,6 +103,11 @@ def audit_published(calculator, catalog):
         path = 'cards.' + cid
         text(card.get('name'), path + '.name')
         require(card['name'] == other['name'], path + '.name', '两站卡名不同')
+        item = card.get('itemRaw', {})
+        require(item.get('ID') == cid, path + '.itemRaw', '卡牌道具原行缺失或错配')
+        require(other.get('item_tags') == item.get('Tags', '').split('~'), path + '.item_tags', '图鉴道具标签与当前道具表不同')
+        require(other.get('version_gate') == (card['raw'].get('VersionControl') or item.get('VersionControl', '')),
+                path + '.version_gate', '图鉴版本门槛与当前原字段不同')
         require(card['skills'] == [skill['id'] for skill in other['skills']], path + '.skills',
                 '两站技能范围或顺序不同')
         require(card.get('glossaryIds', []) == sorted(set(card.get('glossaryIds', []))),
@@ -121,6 +128,8 @@ def audit_published(calculator, catalog):
             require(item.get('row') == expected['raw'], path + '.' + sid + '.row', '两站技能原字段不同')
             require(item.get('configs') == raw_config_view(expected['configs']),
                     path + '.' + sid + '.configs', '两站技能效果配置不同')
+            require(item.get('displayConfigs') == raw_config_view(expected.get('displayConfigs', [])),
+                    path + '.' + sid + '.displayConfigs', '两站有效配置展示不同')
         for kind in ('imprint', 'ascend'):
             source_stages = card[kind]
             target_stages = other[kind]
@@ -171,9 +180,12 @@ def audit_sources(calculator, catalog, tables, locale):
     json5, convert = local_dependencies()
     text = ClientText(locale, tables, convert)
     source = {name: read_table(tables, name) for name in
-              ('role', 'skill', 'status', 'roleimprint', 'roleascend', 'item')}
+              ('role', 'skill', 'status', 'roleimprint', 'roleascend', 'item', 'roleproperty')}
     maps = {name: {row['ID']: row for row in source[name]} for name in ('role', 'skill', 'status')}
     item_map = {row['ID']: row for row in source['item']}
+    property_rows = {}
+    for row in source['roleproperty']:
+        property_rows.setdefault(row['ID'], []).append(row)
     expected = deepcopy(calculator)
 
     def require(ok, path, detail):
@@ -228,6 +240,8 @@ def audit_sources(calculator, catalog, tables, locale):
         return found
 
     unresolved_names = []
+    checked_level_rows = 0
+    checked_display_rows = 0
     for kind in ('skills', 'statuses'):
         table, name_field = ('skill', 'NAME') if kind == 'skills' else ('status', 'Name')
         for identifier, published in calculator[kind].items():
@@ -259,8 +273,44 @@ def audit_sources(calculator, catalog, tables, locale):
         if raw is None:
             continue
         require(card['raw'] == raw, 'cards.' + cid + '.raw', '角色原字段不一致')
+        require(card.get('itemRaw') == item_map.get(cid), 'cards.' + cid + '.itemRaw', '卡牌道具原行与当前源表不同')
         require(card['skills'] == [value.split(':')[0] for value in raw['SkillIDs'].split('~') if value],
                 'cards.' + cid + '.skills', '技能槽与官方角色表不一致')
+        require(card.get('hiddenSkills') == [value.split(':')[0] for value in raw['SkillIDs'].split('~') if ':Hide' in value],
+                'cards.' + cid + '.hiddenSkills', '隐藏技能标记与原表不同')
+        require(card.get('ai') == (raw['AIs'].split('~') if raw['AIs'] else []),
+                'cards.' + cid + '.ai', '行动规则引用与原表不同')
+        originals = property_rows.get(raw['RolePropertyID'], [])
+        levels = {row['level']: row for row in card.get('levelStats', [])}
+        require(len(levels) == len(card.get('levelStats', [])) == len(originals),
+                'cards.' + cid + '.levelStats', '等级属性行缺失或重复')
+        cat_card = next((item for item in catalog['cards'] if item['id'] == cid), {})
+        display_levels = {int(row['level']): row for row in cat_card.get('stats', [])}
+        for base in originals:
+            level = int(base['LV'])
+            here = 'cards.' + cid + '.levelStats.' + str(level)
+            actual = levels.get(level)
+            require(actual is not None, here, '缺少原表等级')
+            if actual is None:
+                continue
+            require(actual.get('raw') == base, here + '.raw', '等级属性原行与源表不同')
+            expected_stats = {}
+            for key in ('HP', 'Attack', 'Defence', 'Speed', 'CriticalRate',
+                        'CriticalDamageRate', 'EffectHitRate', 'ResistanceRate', 'PinchRate'):
+                if base.get(key):
+                    multiplier = struct.unpack('<f', struct.pack('<f', float(raw[key]) if raw.get(key) else 1))[0]
+                    expected_stats[key] = float(base[key]) * multiplier
+            expected_stats['MaxHP'] = expected_stats.get('HP', 0)
+            require(actual.get('stats') == expected_stats, here + '.stats', '等级属性与原表及角色倍率不同')
+            checked_level_rows += 1
+            if level in display_levels:
+                displayed = display_levels[level]
+                for key, number in expected_stats.items():
+                    if key in ('HP', 'MaxHP', 'Attack', 'Defence', 'Speed'):
+                        number = struct.unpack('<f', struct.pack('<f', number))[0]
+                        number = round(number) if key in ('HP', 'MaxHP', 'Speed') else math.trunc(number)
+                    require(displayed.get(key) == number, here + '.display.' + key, '图鉴基础面板数值错误')
+                checked_display_rows += 1
         parsed_card_configs = configs(raw)
         require(card['configs'] == parsed_card_configs, 'cards.' + cid + '.configs',
                 '角色效果解析与官方原字段不一致')
@@ -291,7 +341,7 @@ def audit_sources(calculator, catalog, tables, locale):
         return result
     for sid, skill in expected['skills'].items():
         actual = calculator['skills'][sid]
-        for field in ('description', 'glossaryIds', 'damageTarget'):
+        for field in ('description', 'glossaryIds', 'damageTarget', 'displayConfigs'):
             require(actual.get(field) == skill.get(field), 'skills.' + sid + '.' + field,
                     '说明或术语闭包与原文链接及原效果不一致')
     for original, actual in zip(expected['cards'], calculator['cards']):
@@ -305,6 +355,8 @@ def audit_sources(calculator, catalog, tables, locale):
         sourceDescriptionEmptyStatusIds=sorted(row['ID'] for row in source['status'] if not row['Description']),
         approvedConfigCorrections=sorted(APPROVED_CONFIG_CORRECTIONS),
         inactiveSourceOrphanReferences=inactive_source_orphans,
+        checkedLevelRows=checked_level_rows,
+        checkedDisplayRows=checked_display_rows,
     )
     result['sources'] = {name: hashlib.sha256((tables / (name + '.txt')).read_bytes()).hexdigest()
                          for name in source}

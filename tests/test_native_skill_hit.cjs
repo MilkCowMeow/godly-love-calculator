@@ -3,7 +3,7 @@ const assert=require('node:assert/strict');
 const {T,data}=require('./load_simulation.cjs'),C=global.GLConfig,F=Math.fround;
 const future=data.skills.C03_SSR_014S2;
 assert.equal(future.raw.TargetCamp,'My');assert.ok(Number(future.raw.AttRate)>0);
-for(const [raw,expected]of [[{TargetCamp:'My',AttRate:'0.65'},false],[{TargetCamp:'Enemy',AttRate:'0.65'},true],[{TargetCamp:'',AttRate:'1'},true],[{TargetCamp:0,AttRate:'1'},false],[{TargetCamp:'Enemy',AttRate:'0'},false],[{TargetCamp:'Enemy',AttRate:'-1'},true]])assert.equal(C.isDamageHit({raw}),expected,'原生伤害命中由Enemy阵营与非零倍率共同决定');
+for(const [raw,expected]of [[{TargetCamp:'My',AttRate:'0.65',Pow:'1'},false],[{TargetCamp:'Enemy',AttRate:'0.65',Pow:'1'},true],[{TargetCamp:'',AttRate:'1',Pow:'1'},true],[{TargetCamp:0,AttRate:'1',Pow:'1'},false],[{TargetCamp:'Enemy',AttRate:'0',Pow:'0'},false],[{TargetCamp:'Enemy',AttRate:'-1',Pow:'1'},true],[{TargetCamp:'Enemy',AttRate:'0',Pow:'1'},true],[{TargetCamp:'Enemy',AttRate:'1',Pow:'0'},false],[{TargetCamp:'Enemy',AttRate:'1'},false]])assert.equal(C.isDamageHit({raw}),expected,'原生伤害命中由Enemy阵营与非零Pow决定');
 assert.equal(C.evaluateCondition({CheckFun:'IsDamageSkill'},{source:{},skill:future}).pass,false);
 assert.equal(C.evaluateCondition({CheckFun:'IsNoDamageSkill'},{source:{},skill:future}).pass,true);
 assert.equal(C.evaluateCondition({CheckFun:'IsDamageSkill'},{source:{},skill:{raw:{AttRate:1,TargetCamp:'Enemy'},damage:false}}).pass,false,'事件明确为NoHit时使用事件类型');

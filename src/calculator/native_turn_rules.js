@@ -15,6 +15,14 @@ function install(Simulation){
   return [...new Set(out.map(String))];
  };
  P.nativeAntiFun=function(u,number,name){const xs=this.nativePropertyList(u,'AntiFun');return xs.includes(String(number))||xs.includes(name);};
+ P.nativeMainCooldownSkills=function(u){
+  // SkillContainer.GetAllMainCoolDownSkills 0x234B7A8 skips index 0,
+  // then requires Active and a false static IsNormalSkill property (139).
+  return u.skills.slice(1).filter(id=>{
+   const skill=this.data.skills[id];if(!skill||!['',undefined,'Active',0,'0'].includes(skill.raw.SkillType))return false;
+   return !(skill.configs||[]).some(c=>c.key==='IsNormalSkill'&&['TRUE','true',true,1,'1'].includes(c.value));
+  });
+ };
  P.nativeSkillFlag=function(action,key){
   if(action.skillProperties&&Object.prototype.hasOwnProperty.call(action.skillProperties,key))return N(action.skillProperties[key]);
   const u=action.actor,rr=C.resolveSkill(u.card,action.skill.id,{imprint:u.imprint,ascend:0});

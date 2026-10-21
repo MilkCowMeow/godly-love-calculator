@@ -11,7 +11,7 @@ function install(S){const P=S.prototype,select0=P.select;
  P.context=function(owner,target,action=this.action,trigger='AfterSkill',status=null,event=null){
   target=target||owner;const actor=action?.actor||owner,skill=action?.skill||{id:'',raw:{}},inst=status||action?.status;
   const src=event&&Object.prototype.hasOwnProperty.call(event,'source')?event.source:action&&Object.prototype.hasOwnProperty.call(action,'triggerSource')?action.triggerSource:actor;
-  const ctx={nativeContext:true,source:owner,target,useFunRole:owner,selectedTarget:action?.selected||null,triggerSource:src,triggerTarget:event?.target||action?.hitTarget||target,auraSource:inst?.source?this.locate(inst.source):null,skill:{id:skill.id,raw:skill.raw,normal:!!action?.normal,noPinch:!!(action?.skillProperties?.NoPinch),damage:event?!!event.damage:N(skill.raw.AttRate)>0,targetType:skill.raw.TargetType||'One'},mainRound:this.nowRoundRole===owner,nowRoundRole:this.nowRoundRole,pinch:action?.kind==='pinch',counter:action?.kind==='counter',addition:['addition','continue'].includes(action?.kind),mainActionType:action?.actionType??(action?.main?0:({counter:1,pinch:2,addition:3,continue:7}[action?.kind]??5)),critical:action?.hitTypes?.[target.uid]==='critical'||action?.hitType==='critical',enemyCount:this.alive(1-owner.camp).length,allyCount:this.alive(owner.camp).length,fewEnemyCount:Math.max(0,4-this.alive(1-owner.camp).length),round:owner.nowRound,skillCooldowns:owner.cooldowns,skillUseCounts:owner.uses,allies:this.alive(owner.camp),enemies:this.alive(1-owner.camp),directTargets:action?.directTargets||[],randomUnit:this.random(),trigger,event,funId:action?.funId,sim:this,owner,buffInstance:inst};
+  const ctx={nativeContext:true,source:owner,target,useFunRole:owner,selectedTarget:action?.selected||null,triggerSource:src,triggerTarget:event?.target||action?.hitTarget||target,auraSource:inst?.source?this.locate(inst.source):null,skill:{id:skill.id,raw:skill.raw,normal:!!action?.normal,noPinch:!!(action?.skillProperties?.NoPinch),damage:event?!!event.damage:C.isDamageHit(skill),targetType:skill.raw.TargetType||'One'},mainRound:this.nowRoundRole===owner,nowRoundRole:this.nowRoundRole,pinch:action?.kind==='pinch',counter:action?.kind==='counter',addition:['addition','continue'].includes(action?.kind),mainActionType:action?.actionType??(action?.main?0:({counter:1,pinch:2,addition:3,continue:7}[action?.kind]??5)),critical:action?.hitTypes?.[target.uid]==='critical'||action?.hitType==='critical',enemyCount:this.alive(1-owner.camp).length,allyCount:this.alive(owner.camp).length,fewEnemyCount:Math.max(0,4-this.alive(1-owner.camp).length),round:owner.nowRound,skillCooldowns:owner.cooldowns,skillUseCounts:owner.uses,allies:this.alive(owner.camp),enemies:this.alive(1-owner.camp),directTargets:action?.directTargets||[],randomUnit:this.random(),trigger,event,funId:action?.funId,sim:this,owner,buffInstance:inst};
   ctx.nativeConditionCheck=(c,r)=>{const id=c.CheckID;if(!r&&['IsSameCamp','IsDiffCamp','IsSelf','IsNoSelf','CheckSkillCooldown','CheckSkillNoUse','AllyHaveDeBuff','AnyAllyHaveCoolDown'].includes(c.CheckFun))return false;switch(c.CheckFun){
    case'IsSameCamp':return r.camp===owner.camp;case'IsDiffCamp':return r.camp!==owner.camp;
    case'IsSelf':return r===owner;case'IsNoSelf':return r!==owner;
@@ -123,7 +123,7 @@ function install(S){const P=S.prototype,select0=P.select;
   return ev;
  };
  P.attack=function(source,target,action){
-  if(target.dead)return;let p=this.hitParams(source,target,action);p.conquerMultiplier=B.relation(p.sourceElement,p.targetElement,p).multiplier;const [type,multiplier]=this.rollHit(p);action.hitType=type;action.hitTypes=action.hitTypes||{};action.hitTypes[target.uid]=type;action.hitTarget=target;
+  if(target.dead||!C.isDamageHit(action.skill))return;let p=this.hitParams(source,target,action);p.conquerMultiplier=B.relation(p.sourceElement,p.targetElement,p).multiplier;const [type,multiplier]=this.rollHit(p);action.hitType=type;action.hitTypes=action.hitTypes||{};action.hitTypes[target.uid]=type;action.hitTarget=target;
   p=this.hitParams(source,target,action);p.conquerMultiplier=B.relation(p.sourceElement,p.targetElement,p).multiplier;
   const raw=B.settle({...p,shield:0,invincible:false,noDamage:false},multiplier),ev={damage:true,target,source,hpDiff:F(-raw.floatBeforeShield),splits:[]};
   this.trigger(target,'BeforeEvent',action,ev);this.trigger(source,'SourceBeforeEvent',action,ev);
@@ -180,7 +180,10 @@ function install(S){const P=S.prototype,select0=P.select;
      else if(fun==='ReSetSkillCoolDown'){const id=f.FID;if(this.data.skills[id])target.cooldowns[id]=N(this.data.skills[id].raw.CoolDown);else success=false;}
      else if(fun==='AddSkillCoolDown'||fun==='AddAllSkillCoolDown'){
       if(val>0&&this.effectResisted(owner,target,f,action,ctx))success=false;
-      else for(const id of fun==='AddSkillCoolDown'?[f.FID]:target.skills)if(id&&id!==target.normal)target.cooldowns[id]=Math.max(0,N(target.cooldowns[id])+Math.trunc(val));
+      else {
+       const ids=fun==='AddSkillCoolDown'?[f.FID||action?.skill?.id]:target.skills.filter(id=>id!==target.normal);success=false;
+       for(const id of ids)if(id&&target.skills.includes(id)){target.cooldowns[id]=Math.max(0,N(target.cooldowns[id])+Math.trunc(val));success=true;}
+      }
      }
      else if(fun==='AddAllBuffRound'||fun==='AddAllDeBuffRound'){
       const ty=fun==='AddAllBuffRound'?'Buff':'DeBuff';for(const s of target.statuses){const raw=this.data.statuses[s.id].raw;if(this.statusType(s)!==ty||!flag(raw.CanUpdateRound,true)||f.FIDs?.length&&!f.FIDs.includes(s.id)||f.IgnFIDs?.includes(s.id))continue;s.until+=Math.trunc(val);}this.refresh(target);
@@ -217,7 +220,7 @@ function install(S){const P=S.prototype,select0=P.select;
    const current=rr.functions.filter(f=>!f._property&&f._origin!==u.card.id&&f.Fun!=='ReplaceSkill'),phase=(name)=>{for(const f of current.filter(f=>(f.Trigger||'AfterSkill')===name).sort((a,b)=>N(a.ParamOrder)-N(b.ParamOrder)))this.execute(u,f,action,action.selected);this.trigger(u,name,action);};
    u.state='beforeSkill';phase('BeforeSkill');this.allTrigger('AnyOneBeforeSkill',action);action.skillProperties=this.skillProperties(u,action,action.selected);this.processNaturalFollowups(action,'beforeDamage');
    this.log('action',u,action.selected,action.skill.name,{skill:action.skill.id,kind:action.kind,ownTurn:u.mainCount+1});if(u.camp===0)this.row.members[u.slot].actions.push({skill:action.skill.id,name:action.skill.name,kind:action.kind,time:this.time,globalAction:this.actionNumber});
-   u.state='skilling';for(const target of action.directTargets)if(N(action.skill.raw.AttRate)>0)this.attack(u,target,action);
+   u.state='skilling';for(const target of action.directTargets)if(C.isDamageHit(action.skill))this.attack(u,target,action);
    u.state='afterSkill';phase('PreAfterSkill');phase('None');phase('AfterSkill');this.processNaturalFollowups(action,'afterDamage');
    for(const target of action.directTargets)this.trigger(target,'TargetAfterSkill',action);
    for(const other of this.units){if(other!==u&&other.camp===u.camp)this.trigger(other,'AnyAllyAfterSkill',action);if(other.camp!==u.camp)this.trigger(other,'AnyEnemyAfterSkill',action);if(action.main){if(other!==u&&other.camp===u.camp)this.trigger(other,'AnyAllyAfterMainSkill',action);if(other.camp!==u.camp)this.trigger(other,'AnyEnemyAfterMainSkill',action);}}

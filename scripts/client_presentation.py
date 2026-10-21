@@ -3,9 +3,34 @@ import json
 from pathlib import Path
 import re
 from client_text import fingerprint
+from embedded import extract
 
 STATUS_LINK = re.compile(r'\[([^\[\]:]+):+([^\[\]:]+):StatusFun\]')
 REFERENCE_FIELDS = {'FID', 'FIDs', 'CheckID', 'PropertyID', 'GroupID'}
+NATIVE_SCHEMA = extract((Path(__file__).resolve().parents[1] / 'src/calculator/config_engine.js').read_text('utf8'), 'NATIVE_FUNCTION_SCHEMA')
+
+
+def valid_native_value(value, typename='SkillFunctionInfo'):
+    """与运行引擎共用声明结构，词典只收录原生可装载函数的引用。"""
+    if typename in NATIVE_SCHEMA['enums']:
+        members = NATIVE_SCHEMA['enums'][typename]
+        if isinstance(value, int) and not isinstance(value, bool):
+            return -(2**31) <= value < 2**31
+        if not isinstance(value, str):
+            return False
+        if re.fullmatch(r'[+-]?\d+', value.strip()):
+            return -(2**31) <= int(value) < 2**31
+        names = {name.lower() for name in members}
+        return all(part.strip().lower() in names for part in value.split(','))
+    if typename.startswith('List<'):
+        return value is None or isinstance(value, list) and all(valid_native_value(item, typename[5:-1]) for item in value)
+    fields = NATIVE_SCHEMA['classes'].get(typename)
+    if not fields or value is None:
+        return True
+    if not isinstance(value, dict):
+        return False
+    fields = {name.lower(): kind for name, kind in fields.items()}
+    return all(name.lower() not in fields or valid_native_value(item, fields[name.lower()]) for name, item in value.items())
 
 
 def walk(value):
@@ -20,6 +45,22 @@ def walk(value):
 
 def percentage(value):
     return f'{float(value) * 100:g}%'
+
+
+def damage_target(skill):
+    raw = skill['raw']
+    if raw.get('SkillType') == 'Passive' or (raw.get('TargetCamp') or 'Enemy') != 'Enemy' or not float(raw.get('AttRate') or 0):
+        return ''
+    targets = {'': '一名敌人', 'One': '一名敌人', 'All': '全体敌人', 'RandomTwo': '两名敌人'}
+    if raw.get('TargetTypeFun'):
+        import json5
+        conditional = json5.loads(raw['TargetTypeFun'])
+        if conditional == {'TargetType': 'RandomTwo', 'Condition': {'CheckFun': 'CheckSkillNoUse', 'CheckID': skill['id'][:-1] + '2'}}:
+            return '通常一名敌人，终结技冷却中为两名敌人'
+        raise ValueError('需要补充条件选取范围的说明：' + skill['id'])
+    if raw.get('TargetType', '') not in targets:
+        raise ValueError('需要补充攻击选取范围的说明：' + skill['id'])
+    return targets[raw.get('TargetType', '')]
 
 
 def auxiliary_description(skill, statuses):
@@ -63,7 +104,8 @@ def enrich(data, text):
 
     def references(configs):
         found = set()
-        for obj in walk(configs):
+        eligible = [item for item in configs if item.get('key') != 'Fun' or valid_native_value(item['value'])] if isinstance(configs,list) and all(isinstance(item,dict) and 'key' in item for item in configs) else configs
+        for obj in walk(eligible):
             for field in REFERENCE_FIELDS:
                 value = obj.get(field, [])
                 for item in value if isinstance(value, list) else str(value).split('~'):
@@ -84,6 +126,7 @@ def enrich(data, text):
 
     unresolved = []
     for sid, skill in skills.items():
+        skill['damageTarget'] = damage_target(skill)
         correction = corrections.get(sid)
         if correction and fingerprint('skill', skill['raw']) == correction['fingerprint'] and text(skill['raw']['Description']) == correction['clientDescription']:
             skill['clientDescription'] = correction['clientDescription']
@@ -95,9 +138,12 @@ def enrich(data, text):
         ids = references(skill['configs'])
         for label, identifier in STATUS_LINK.findall(text.source(skill['raw'].get('Description', ''))):
             if identifier in glossary:
-                ids.add(identifier)
+                if skill.get('descriptionSource') != 'verifiedConfiguration' or label in skill['description'] or glossary[identifier]['name'] in skill['description']:
+                    ids.add(identifier)
             elif identifier != 'RandomAddStatus':
                 unresolved.append({'skill': sid, 'id': identifier, 'label': label})
+        if skill.get('descriptionSource') == 'verifiedConfiguration':
+            ids.update(identifier for identifier, definition in statuses.items() if len(definition['name']) >= 2 and definition['name'] in skill['description'] and identifier in glossary)
         skill['glossaryIds'] = sorted(closure(ids) & glossary.keys())
 
     for card in data['cards']:
@@ -105,7 +151,8 @@ def enrich(data, text):
         for sid in card['skills']:
             ids.update(skills[sid]['glossaryIds'])
         for kind in ('imprint', 'ascend'):
-            ids.update(references([row['configs'] for row in card[kind]]))
+            for row in card[kind]:
+                ids.update(references(row['configs']))
         card['glossaryIds'] = sorted(closure(ids) & glossary.keys())
     if unresolved:
         raise ValueError('客户端术语链接没有定义：' + repr(unresolved))

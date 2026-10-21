@@ -83,7 +83,7 @@ class MechanicsDocsTest(unittest.TestCase):
                 self.assertEqual(card['thumb'], other['calculatorThumb'])
             if card.get('thumb'):
                 self.assertIn(card['thumb'], assets)
-        self.assertEqual(sum(bool(c.get('thumb')) for c in self.data['cards'] if c['rarity'] == 'R'), 86)
+        self.assertEqual(sum(bool(c.get('thumb')) for c in self.data['cards'] if c['rarity'] == 'R'), 88)
 
 
 if __name__ == '__main__':

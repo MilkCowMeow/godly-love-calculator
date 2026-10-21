@@ -115,7 +115,7 @@ def audit_published(calculator, catalog):
             if sid not in skills:
                 continue
             expected = skills[sid]
-            for key in ('name', 'description'):
+            for key in ('name', 'description', 'damageTarget'):
                 require(item.get(key) == expected.get(key), path + '.' + sid + '.' + key,
                         '两站技能正文不同')
             require(item.get('row') == expected['raw'], path + '.' + sid + '.row', '两站技能原字段不同')
@@ -171,8 +171,9 @@ def audit_sources(calculator, catalog, tables, locale):
     json5, convert = local_dependencies()
     text = ClientText(locale, tables, convert)
     source = {name: read_table(tables, name) for name in
-              ('role', 'skill', 'status', 'roleimprint', 'roleascend')}
+              ('role', 'skill', 'status', 'roleimprint', 'roleascend', 'item')}
     maps = {name: {row['ID']: row for row in source[name]} for name in ('role', 'skill', 'status')}
+    item_map = {row['ID']: row for row in source['item']}
     expected = deepcopy(calculator)
 
     def require(ok, path, detail):
@@ -264,7 +265,7 @@ def audit_sources(calculator, catalog, tables, locale):
         require(card['configs'] == parsed_card_configs, 'cards.' + cid + '.configs',
                 '角色效果解析与官方原字段不一致')
         card['configs'] = parsed_card_configs
-        localized_name = text(raw['NAME'])
+        localized_name = text(raw['NAME']) or text(item_map.get(cid, {}).get('Name',''))
         if localized_name:
             require(card['name'] == localized_name, 'cards.' + cid + '.name', '卡名与中文原文不同')
         for kind, table in (('imprint', 'roleimprint'), ('ascend', 'roleascend')):
@@ -290,7 +291,7 @@ def audit_sources(calculator, catalog, tables, locale):
         return result
     for sid, skill in expected['skills'].items():
         actual = calculator['skills'][sid]
-        for field in ('description', 'glossaryIds'):
+        for field in ('description', 'glossaryIds', 'damageTarget'):
             require(actual.get(field) == skill.get(field), 'skills.' + sid + '.' + field,
                     '说明或术语闭包与原文链接及原效果不一致')
     for original, actual in zip(expected['cards'], calculator['cards']):

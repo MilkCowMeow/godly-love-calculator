@@ -1,6 +1,6 @@
 {
   "catalog": "catalog_014774",
-  "evidence": "evidence/full_content_audit_20261020.md",
+  "evidence": "evidence/catalog_recheck_20261021.md",
   "records": {
     "C02_SSR_012S2": {
       "fingerprint": "d9535eb28da01bb53fae8e63d617de3271280d0f56086881f92754d047a89e54",
@@ -56,6 +56,96 @@
       "fingerprint": "8204685145d709c16a79143db11aefeb108a448d7ba2d394b8cbe3d5b46b23eb",
       "clientDescription": "攻击敌人并恢复生命，穿透 30% 防御。以有利的属性进行攻击",
       "description": "攻击敌人并恢复生命，穿透30%防御。"
+    },
+    "C02_SR_006S1": {
+      "fingerprint": "01a865308c0461f2022c565309290907e526a3afbf9de85fa672a51f89fdc0fb",
+      "clientDescription": "攻击 2 名敌人并使自身行动值提升 12%",
+      "description": "攻击选定敌人并使自身行动值提升12%。"
+    },
+    "C03_SSR_015S1": {
+      "fingerprint": "74838306115bf13a532b6803e537162fc65ec569aa3f1e1ced23a601dc1b4b6f",
+      "clientDescription": "攻击 2 名敌人，自身行动值提升 6%、自身除外的成员行动值提升 3%",
+      "description": "攻击选定敌人，自身行动值提升6%，自身除外的全体我方成员行动值提升3%。"
+    },
+    "C04_SR_006S1": {
+      "fingerprint": "98dbf3dc38906041cae5afb40d158d174334b59d326e3151ec1f7b29b0bcfe22",
+      "clientDescription": "攻击 2 名敌人并以 50% 机率转移 1 个弱化状态",
+      "description": "攻击选定敌人，并以50%基础概率向其转移1个弱化状态。"
+    },
+    "C04_SSR_014S1": {
+      "fingerprint": "9f057612d691ebbeb7d14d1371f03df211d91c1cb2a13d7bf6cd86a1b8a7e828",
+      "clientDescription": "攻击 2 名敌人，并以 75% 机率造成浸毒( 2 回合)",
+      "description": "攻击选定敌人，并以75%基础概率使2名敌人浸毒（2回合）。"
+    },
+    "C03_SR_008S2": {
+      "fingerprint": "3ca5a3b50c2f9ac2add9f27c507747417f3147675bcda15df21913b9228111d8",
+      "clientDescription": "攻击全体敌人并以 75% 机率造成防御下降( 2 回合)",
+      "description": "攻击选定敌人，并以75%基础概率使全体敌人防御下降（2回合）。"
+    },
+    "C03_SR_009S2": {
+      "fingerprint": "a49d6d455ef28815f4e220cfd40a03f6d6fa1c43457ee8bef4297691acbde395",
+      "clientDescription": "攻击全体敌人并以 75% 机率解除 2 个强化状态后，造成枷锁( 2 回合)、2 个浸毒( 2 回合)",
+      "description": "攻击选定敌人，以75%基础概率解除全体敌人各2个强化状态后，使全体敌人附加枷锁（2回合）和2个浸毒（2回合）。"
+    },
+    "C03_SR_010S2": {
+      "fingerprint": "f72cd7a2b00fa56f41b05f0bc1f0cca404fad2de6ebe70b19804bd0a407b6c28",
+      "clientDescription": "攻击全体敌人并以 75% 机率造成速度下降( 2 回合)，全体成员附加速度提升( 2 回合)",
+      "description": "攻击选定敌人，以75%基础概率使全体敌人速度下降（2回合），全体我方成员附加速度提升（2回合）。"
+    },
+    "C04_SR_011S2": {
+      "fingerprint": "3c2bc05c6eba4431a04d848ac45167edbfcaaa10f15fae9e564f37060832ca1a",
+      "clientDescription": "攻击全体敌人并以 75% 机率解除 2 个强化状态后，以 75% 机率造成息声( 1 回合)",
+      "description": "攻击选定敌人，以75%基础概率解除全体敌人各2个强化状态后，以75%基础概率使全体敌人息声（1回合）。"
+    },
+    "C01_SR_007S4": {
+      "fingerprint": "1a19deedb2590d4ef23883f3acf715d7bae58ab1db69805d915b0e08cbf520d8",
+      "clientDescription": "受到攻击时以 20% 机率施展全体攻击",
+      "description": "受到攻击时，以20%基础概率使用战技反击攻击者。"
+    },
+    "C01_SR_006S3": {
+      "fingerprint": "ab01322b95ae6ffe09af759c8f3cdb023872c0ee99c06e759769db7049c74ada",
+      "clientDescription": "成员受到攻击后，若生命为 80% 以下时，对该成员附加护罩( 2 回合)、回冲( 2 回合)。每 4 回合只会发生 1 次",
+      "description": "当前客户端未配置可执行的被动效果。"
+    },
+    "C02_SR_007S3": {
+      "fingerprint": "8c750499e5f58e748460738c5692eb2aeb6c7ae6f1e9f9f98e37b890ed143cec",
+      "clientDescription": "成员受到攻击后，若生命为 80% 以下时，对该成员附加防御提升( 2 回合)。每 3 回合只会发生 1 次",
+      "description": "当前客户端未配置可执行的被动效果。"
+    },
+    "C02_SSR_004S3": {
+      "fingerprint": "6f6ba67a53cf0eace631b9c1042bad002321fd0e2d19014f4b456a0e5b1a3f8a",
+      "clientDescription": "免绝无法行动类型弱化状态\n成员受到攻击后，若拥有无法行动类型弱化状态时，则解除全体成员所有弱化状态。解除弱化状态效果每 4 回合只会发生 1 次",
+      "description": "免疫晕眩和静眠。敌方施放技能后，若任一我方成员处于晕眩或静眠，则解除全体我方成员全部弱化状态。每4回合触发1次。"
+    },
+    "C02_R_109S3": {
+      "fingerprint": "7d774454b262424db5fb4bf0c3aa6190e519dec20e6ffda5efa8aa919c987d0f",
+      "clientDescription": "任一成员死亡时，自身附加攻击提升( 2 回合)。每 3 回合只会发生 1 次",
+      "description": "其他角色死亡时，自身附加攻击提升（2回合）。每3回合触发1次。"
+    },
+    "C02_SSR_011S3": {
+      "fingerprint": "99f45a3c2403e2b348e15613926fe1fce507069848886a6821e23f7e9487a46f",
+      "clientDescription": "自身抵抗弱化状态的机率提升 35%\n自身除外的成员受到单一攻击时，自身行动值提升 15%",
+      "description": "自身除外的成员受到单体攻击时，自身行动值提升15%。"
+    },
+    "C03_SSR_011S3": {
+      "fingerprint": "cb7d495d07d06654f856e75c4d04eee67eb67975e173b20d6087091186067bc9",
+      "clientDescription": "自身抵抗弱化状态的机率提升 35%\n自身除外的成员死亡时，全体成员附加护罩( 2 回合)、免绝( 2 回合)。 4 回合只会发生 1 次",
+      "description": "自身除外的我方成员死亡时，全体我方成员附加护罩（2回合）和免绝（2回合）。每4回合触发1次。"
+    },
+    "C03_SSR_014S2": {
+      "fingerprint": "67ccbaa0d4b320f91d7b7530050367662a28186a0cd5988a0c634062b024af90",
+      "clientDescription": "全体成员的弱化状态减少 2 回合后，攻击全体敌人造成技能冷却时间增加 1 回合，全体成员行动值提升 10%",
+      "description": "全体我方成员的弱化状态减少2回合，行动值提升10%；敌人若拥有本技能，则其冷却时间增加1回合。"
+    },
+    "C04_SSR_015S2": {
+      "fingerprint": "537a01a2938e7be813090784704f0fce2871584f9857f95e2e0b0c1790f72589",
+      "clientDescription": "攻击敌人造成技能冷却时间增加 1 回合，全体成员行动值提升 10%、附加技能伤害无效 1 次",
+      "description": "攻击选定敌人，全体我方成员行动值提升10%，并附加技能伤害无效1次；目标若拥有本技能，则其冷却时间增加1回合。"
+    },
+    "C01_SR_008S2": {
+      "fingerprint": "b808f1772f276c2ee425fdfd3e8b2842f5124328f88ba3b8a689d30573bccf19",
+      "clientDescription": "解除全体成员所有弱化状态后附加暴击率提升( 2 回合)、「终结技」冷却时间减少 1 回合",
+      "description": "解除全体我方成员全部弱化状态，并附加暴击率提升（2回合）；自身终结技冷却时间减少1回合，其他我方成员若也持有本技能，其冷却时间同样减少1回合。"
     }
   }
 }

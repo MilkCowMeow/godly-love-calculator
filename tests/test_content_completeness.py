@@ -54,6 +54,22 @@ class PublishedContentCompletenessTests(unittest.TestCase):
         self.assertIn('行动值提高12%', skills['C01_SSR_010S3']['description'])
         self.assertIn('基础概率', skills['C04_SSR_003S3']['description'])
 
+    def test_attack_scope_and_inactive_function_terms(self):
+        skills = self.calculator['skills']
+        for identifier in ('C02_SR_006S1', 'C03_SSR_015S1', 'C04_SR_006S1',
+                           'C04_SSR_014S1', 'C03_SR_008S2', 'C03_SR_009S2',
+                           'C03_SR_010S2', 'C04_SR_011S2'):
+            self.assertEqual(skills[identifier]['damageTarget'], '一名敌人')
+            self.assertIn('选定敌人', skills[identifier]['description'])
+        self.assertEqual(skills['C03_SSR_014S2']['damageTarget'], '')
+        self.assertIn('终结技冷却中', skills['C04_SSR_009S1']['damageTarget'])
+        for identifier in ('C01_SR_006S3', 'C02_SR_007S3'):
+            self.assertIn('未配置可执行', skills[identifier]['description'])
+            self.assertEqual(skills[identifier]['glossaryIds'], [])
+        cards = {card['id']: card for card in self.calculator['cards']}
+        self.assertNotIn('Shield', cards['C01_SR_006']['glossaryIds'])
+        self.assertNotIn('Reflection', cards['C01_SR_006']['glossaryIds'])
+
     def test_s4_passive_is_resolved_from_enhance_skill(self):
         cards = {card['id']: card for card in self.calculator['cards']}
         for identifier in ('C01_SSR_010', 'C01_SSR_014', 'C02_SSR_001',

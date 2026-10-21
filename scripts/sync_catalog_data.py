@@ -13,6 +13,9 @@ from opencc import OpenCC
 from PIL import Image
 sc=OpenCC('t2s').convert
 page=(ROOT/'docs/catalog.html').read_text('utf8');data=extract(page,'DATA');assets=extract(page,'ASSETS');client=json.loads(args.calculator_data.read_text('utf8'));cards={c['id']:c for c in client['cards']}
+client_assets=extract((ROOT/'docs/index.html').read_text('utf8'),'ASSETS')
+for icon in list(client['elementIcons'].values())+list(client['jobIcons'].values()):
+ assets.setdefault(icon,client_assets[icon])
 def rows(name):
  with (args.tables/(name+'.txt')).open(encoding='utf-8-sig',newline='') as f:return list(csv.DictReader(f,delimiter='@',quoting=csv.QUOTE_NONE))
 tr=ClientText(args.locale,args.tables,sc)
@@ -31,14 +34,16 @@ def collect(v,out):
  elif isinstance(v,list):
   for x in v:collect(x,out)
 items={r['ID']:r for r in rows('item')}
+element_names={'None':'无属性','Fire':'红璇','Ice':'蓝澈','Earth':'绿琉','Ground':'黄曜','Light':'光','Dark':'暗'}
+job_names={'Defender':'守护','Warrior':'戒律','Medic':'祈祷','Vanguard':'审判'}
 for c in data['cards']:
  src=cards[c['id']];raw=src['raw'];wanted={int(x['level']) for x in c['stats']};statuses=set();skilldata=[]
  for sid in src['skills']:
   sk=client['skills'].get(sid)
   if sk is None:continue
   collect(sk['configs'],statuses)
-  skilldata.append({'id':sid,'name':sk['name'],'description':sk['description'],'hidden':sid in src['hiddenSkills'],'passive':sk['raw']['SkillType']=='Passive','row':sk['raw'],'configs':[{'field':x['field'],'value':x['value'] if x['key']=='Fun' else {x['key']:x['value']}} for x in sk['configs']]})
- c.update(name=src['name'],skills=skilldata,stats=[stats(x) for x in src['levelStats'] if x['level'] in wanted],statusIds=src['glossaryIds'],represents=raw['Represents'],imprint=[{**x,'text':x['description'],'patches':[z['value'] for z in x['configs']]} for x in src['imprint']],ascend=[{**x,'text':x['description'],'patches':[z['value'] for z in x['configs']]} for x in src['ascend']])
+  skilldata.append({'id':sid,'name':sk['name'],'description':sk['description'],'damageTarget':sk['damageTarget'],'hidden':sid in src['hiddenSkills'],'passive':sk['raw']['SkillType']=='Passive','row':sk['raw'],'configs':[{'field':x['field'],'value':x['value'] if x['key']=='Fun' else {x['key']:x['value']}} for x in sk['configs']]})
+ c.update(name=src['name'],rarity=src['rarity'],element=element_names[src['element']],job=job_names[src['job']],elementIcon=client['elementIcons'][src['element']],jobIcon=client['jobIcons'][src['job']],skills=skilldata,stats=[stats(x) for x in src['levelStats'] if x['level'] in wanted],statusIds=src['glossaryIds'],represents=raw['Represents'],imprint=[{**x,'text':x['description'],'patches':[z['value'] for z in x['configs']]} for x in src['imprint']],ascend=[{**x,'text':x['description'],'patches':[z['value'] for z in x['configs']]} for x in src['ascend']])
  item=items[c['id']];c['item_tags']=item['Tags'].split('~');c['version_gate']=raw['VersionControl'] or item['VersionControl']
  if c['rarity']=='R':c['availability']=src['availability'];c['availability_evidence']='角色与道具配置、常驻池标签已按当前资源目录核对。'
 data['glossary']=client['glossary']

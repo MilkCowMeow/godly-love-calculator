@@ -45,7 +45,7 @@ def r_art(card):
     if args.r_art_dir:
         from PIL import Image
         candidates = [args.r_art_dir / (card['id'] + suffix + '.png')
-                      for suffix in ['_M_icon', '_icon', '_S_icon']]
+                      for suffix in ['', '_M_icon', '_icon', '_S_icon']]
         candidates = [path for path in candidates if path.exists()]
         if candidates:
             def area(path):
@@ -60,6 +60,24 @@ def r_art(card):
             assets[key] = 'data:image/webp;base64,' + base64.b64encode(raw).decode()
             return key
     return old_card.get('art') or asset(card.get('thumb'))
+
+
+def r_thumbnail(card, art):
+    previous_thumb = previous.get(card['id'], {}).get('thumb')
+    if previous_thumb:
+        return previous_thumb
+    if args.r_art_dir:
+        from PIL import Image
+        path = args.r_art_dir / (card['id'] + '_M_icon.png')
+        if path.exists():
+            with Image.open(path) as image:
+                out = io.BytesIO()
+                image.convert('RGBA').save(out, 'WEBP', quality=94, method=4)
+            raw = out.getvalue()
+            key = hashlib.sha256(raw).hexdigest()[:16]
+            assets[key] = 'data:image/webp;base64,' + base64.b64encode(raw).decode()
+            return key
+    return art
 
 
 def calculator_thumb(card):
@@ -93,7 +111,7 @@ def make_r_card(card):
     skills = []
     for sid in card['skills']:
         source = client['skills'][sid]
-        skills.append({'id': sid, 'name': source['name'], 'description': source['description'],
+        skills.append({'id': sid, 'name': source['name'], 'description': source['description'], 'damageTarget': source['damageTarget'],
                        'hidden': sid in card.get('hiddenSkills', []),
                        'passive': source['raw']['SkillType'] == 'Passive',
                        'row': source['raw'], 'configs': [
@@ -124,7 +142,7 @@ def make_r_card(card):
                 if base else '客户端已配置此卡，但未取得对应的开放公告或常驻池标签。',
             'item_tags': tags, 'version_gate': item['VersionControl'] or card['raw']['VersionControl'],
             'limited_kind': '常驻 R 卡' if base else 'R 卡', 'related_activities': [],
-            'art': art, 'thumb': art, 'calculatorThumb': calculator_thumb(card), 'artNote': '',
+            'art': art, 'thumb': r_thumbnail(card, art), 'calculatorThumb': calculator_thumb(card), 'artNote': '',
             'elementIcon': asset(client['elementIcons'][card['element']]),
             'jobIcon': asset(client['jobIcons'][card['job']]),
             'stats': [base_stats(row) for row in card['levelStats'] if row['level'] in levels],

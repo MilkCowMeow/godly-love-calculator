@@ -78,4 +78,46 @@ assert.ok(C.configFunctions(validForce.configs,validForceID).some(f=>f.Trigger==
  assert.equal(sim.hitParams(owner,target,{actor:owner,selected:target,skill:validForce}).forceConquer,true,'正确Trigger字段仍触发强制克制');
 }
 assert.deepEqual(C.configFunctions([{key:'Fun',value:{Fun:'AddHP',Value:1,SubFuns:[{Fun:'ForceConquer'}]}}],'nested-invalid'),[],'嵌套非法枚举导致整条DynamicField丢弃');
+// 原生装载按声明类型解释枚举，Target与Who分别属于不同枚举。
+const invalidTargetIDs=['C01_SR_006S3','C02_SR_007S3'];
+for(const skillID of invalidTargetIDs){
+ const skill=data.skills[skillID],before=JSON.stringify(skill),bad=skill.configs.find(c=>c.field==='DynamicField1');
+ assert.equal(bad.value.Target,'TriggerTarget');
+ const parsed=C.loadNativeFunction(bad.value);
+ assert.equal(parsed.value,null);
+ assert.deepEqual(parsed.errors.map(e=>[e.path,e.type,e.value]),[['$.Target','ETargetType','TriggerTarget']]);
+ assert.deepEqual(C.configFunctions([bad],skillID),[],'原生拒绝整条效果，连同护罩/反击/重置冷却后续效果一起丢弃');
+ const nativeCard=data.cards.find(c=>c.skills.includes(skillID)),resolved=C.resolveSkill(nativeCard,skillID,{imprint:3});
+ assert.ok(!resolved.functions.some(f=>f._field==='DynamicField1'));
+ assert.equal(JSON.stringify(skill),before,'源Description及全部raw/configs保持原样');
+}
+const legalTyped={Fun:'AddHP',Target:'ParamTarget',ValueConvert:{Who:'TriggerTarget',Property:'MaxHP',Rate:.1},Condition:{Who:'TriggerTarget',CheckFun:'HaveBuff',CheckID:'TriggerTarget'}};
+assert.deepEqual(C.loadNativeFunction(legalTyped),{value:legalTyped,errors:[],ignored:[]},'合法Who.TriggerTarget、Target.ParamTarget及字符串CheckID均保留');
+const numericTyped=C.loadNativeFunction({Fun:3,Target:'42',ValueConvert:{Who:'6',Property:'MaxHP',Rate:.1}});
+assert.equal(numericTyped.errors.length,0);assert.equal(numericTyped.value.Fun,'AddHP');assert.equal(numericTyped.value.Target,'ParamTarget');assert.equal(numericTyped.value.ValueConvert.Who,'TriggerTarget');
+const caseTyped=C.loadNativeFunction({fun:'addhp',TARGET:'paramtarget',valueconvert:{who:'triggertarget',property:'DeBuffCount',Rate:.1}});
+assert.equal(caseTyped.errors.length,0);assert.deepEqual(caseTyped.value,{Fun:'AddHP',Target:'ParamTarget',ValueConvert:{Who:'TriggerTarget',Property:'DebuffCount',Rate:.1}},'字段和成员忽略大小写，输出原生规范名');
+const namedCombination=C.loadNativeFunction({Trigger:'BeforeSkill, BeforeRound',Fun:'No'});
+assert.equal(namedCombination.errors.length,0);assert.equal(namedCombination.value.Trigger,'AfterRound','Enum.Parse按位OR合法名字，即使枚举没有Flags标记');
+for(const invalid of [{Fun:null},{Target:''},{Trigger:'  '},{Fun:'UnknownNativeFunction'},{Condition:{Who:'ParamTarget'}},{ValueConvert:{Property:'UnknownProperty'}},{SelectInfo:{TargetType:'TriggerTarget'}}])assert.ok(C.loadNativeFunction(invalid).errors.length,'仅真实声明的枚举字段验证：'+JSON.stringify(invalid));
+const unknownFields={Fun:'AddHP',Value:1,Who:'NotADeclaredWho',CheckFun:'NotADeclaredCondition',Unknown:{Fun:'ForceConquer'},ValueConvert:{Property:'ValueOne',theValue:.08,CheckID:'TriggerTarget'}};
+const unknownBefore=JSON.stringify(unknownFields),projected=C.loadNativeFunction(unknownFields);
+assert.equal(projected.errors.length,0,'未知字段整体忽略，内部像Fun/Who的键不按其他类枚举误判');
+assert.deepEqual(projected.value,{Fun:'AddHP',Value:1,ValueConvert:{Property:'ValueOne'}});
+assert.equal(projected.ignored.length,5);assert.equal(JSON.stringify(unknownFields),unknownBefore);
+const customExtension={Fun:'AddHP',Target:'ParamTarget',Who:'CustomContext',ExtraCustom:{Fun:'ExtensionFunction'},Value:3};
+const customParsed=C.configFunctions([{key:'Fun',field:'CustomEffect0',value:customExtension}],'CUSTOM_keepS1')[0];
+assert.equal(customParsed.Who,'CustomContext');assert.deepEqual(customParsed.ExtraCustom,customExtension.ExtraCustom);assert.equal(customParsed._origin,'CUSTOM_keepS1');assert.equal(customParsed._field,'CustomEffect0');
+const invalidStatus=C.nativeStatusProperties({id:'typed-status',def:{raw:{},configs:[{key:'AttackFinalRate',value:.2},{key:'Fun',value:{Fun:'AddHP',Target:'TriggerTarget',Value:10}}]}});
+assert.equal(invalidStatus.functions.length,0);assert.equal(invalidStatus.properties.AttackFinalRate,Math.fround(.2),'状态装载同样拒绝非法函数，其他静态字段保留');
+const badOfficial=[];
+function scanOfficial(configs,label){for(const config of configs||[])if(config.key==='Fun'&&C.loadNativeFunction(config.value).errors.length)badOfficial.push(label+'.'+config.field);}
+for(const [identifier,skill]of Object.entries(data.skills))scanOfficial(skill.configs,'skill:'+identifier);
+for(const [identifier,status]of Object.entries(data.statuses))scanOfficial(status.configs,'status:'+identifier);
+for(const nativeCard of data.cards){scanOfficial(nativeCard.configs,'role:'+nativeCard.id);for(const kind of ['imprint','ascend'])for(const stage of nativeCard[kind]||[])scanOfficial(stage.configs,kind+':'+nativeCard.id+'@'+stage.LV);}
+assert.deepEqual(badOfficial.sort(),[
+ 'skill:C01_SR_006S3.DynamicField1','skill:C02_SR_007S3.DynamicField1',
+ 'skill:C02_SSR_013S1.DynamicField2','skill:C02_SSR_013S2.DynamicField3',
+ 'skill:C04_SSR_013S1.DynamicField2','skill:C04_SSR_013S2.DynamicField3',
+].sort(),'全量原卡、状态、升星及预置强化的非法枚举集合与原生独立扫描完全一致');
 console.log('通过：默认对象、双重上限、条件默认、分组乘区、明确ID补丁、异常字段、刻印被动解锁，以及全部角色技能配置可解释性遍历。',data.cards.length,Object.keys(data.skills).length);

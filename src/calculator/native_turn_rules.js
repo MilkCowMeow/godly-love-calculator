@@ -65,7 +65,7 @@ function install(Simulation){
    return;
   }
   if(action._nativeCounterChecked)return;action._nativeCounterChecked=true;
-  if(N(action.skill.raw.AttRate)<=0||this.nativeSkillFlag(action,'NoCounter')>0)return;
+  if(!C.isDamageHit(action.skill)||this.nativeSkillFlag(action,'NoCounter')>0)return;
   this._nativeCounterSources=this._nativeCounterSources||new Set();
   for(const q of this.queues)if(q.kind==='counter')this._nativeCounterSources.add(q.actor.uid);
   for(const target of action.directTargets||[]){

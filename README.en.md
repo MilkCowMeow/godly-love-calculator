@@ -35,7 +35,7 @@ Data synchronized on 20 October 2026 with `catalog_014774`: C02_SSR_006 heals fo
 | ↔️ Swap positions | Drag a card or its position handle to swap two slots, carrying levels, stars, stat overrides and per-round policies; touch and keyboard supported |
 | 📊 Round table | Per-member damage, row subtotals, cumulative damage, and team totals |
 | 🎬 Event log | Inspect skills, assists, counters, statuses, and damage in execution order |
-| 🎯 Target presets | Original enemy setups for Trial Floors 1–50, defaulting to Floor 50; an unlimited-HP training dummy |
+| 🎯 Target presets | Original Trial Floors 1–50, the final battle of the currently scheduled chronicle, and an unlimited-HP training dummy |
 | 🕹️ Action policies | Game AI, basic only, ultimate priority, or wait; optional per-row overrides |
 | 🎲 Random simulations | Reproducible single battles or means over 32/128/256 independent battles |
 | 💾 Team management | Local browser saves, JSON import/export, and CSV damage-table export |
@@ -55,6 +55,7 @@ Damage totals use post-shield calculated damage and retain overkill. Actual HP l
 ### 🎯 Targets
 
 - **Trial Floors 1–50:** use the small arrow beside the Trial button to select a floor. Each floor loads its original enemy levels, boss, companions, skills, and AI. Floor 50 is the default, retaining 《烟光迷离》 and 《最佳调味》. Companions can be disabled for a boss-only comparison. Saved teams and exported plans retain the selected floor.
+- **Current chronicle finale:** the middle option follows the included official event schedule. 《共奏心音》 S14 includes its level-80 monster boss, original skills, immunities, AI, attack stacking and entry effects. Bringing C02_SSR_006 promotes that card to level 80 for the battle while retaining its star rank. Ranks 0–5 grant the party 10%, 15%, 20%, 30%, 40% or 50% final attack/HP bonuses. Saved and exported teams preserve the exact scene ID for later replay. See [entry evidence](evidence/chronicle_scene_entry_20261021.md) and [random-target evidence](evidence/chronicle_targeting_20261021.md).
 - **Training dummy:** unlimited HP, no active attacks or newly applied effects, but it can receive statuses. Its reference maximum HP supports percentage-based skills while its HP ratio remains 100%. Speed controls its status-tick timing.
 
 ### 🧑‍🎨 Custom characters

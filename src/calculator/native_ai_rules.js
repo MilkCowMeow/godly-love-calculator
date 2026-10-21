@@ -20,14 +20,34 @@ function dead(u){return !!u.dead||u.hp<=0;}
 function install(S){
  const P=S.prototype,B=root.GLBattle,select0=P.select,skillTargets0=P.skillTargets;
  if(P._nativeAIInstalled)return;P._nativeAIInstalled=true;
+ P.nativeRandomTwoTargets=function(owner,setting,action=this.action){
+  if(!action?.selected)return [];
+  const state=action._nativeRandomTargets||(action._nativeRandomTargets={secondaryIDs:[]}),primary=action.selected;
+  // BattleAction.RandomTargetList persists across SkillFunctionParam clones.
+  // The cached path keeps dead targets and returns primary first (0x2305B30).
+  if(state.secondaryIDs.length){const secondary=this.locate(state.secondaryIDs[0]);return secondary?[primary,secondary]:[primary];}
+  const sc=setting.SelectInfo||setting;
+  const includeStealth=sc.IncludeStealth===undefined?true:flag(sc.IncludeStealth),includeInvincible=sc.IncludeInvincible===undefined?true:flag(sc.IncludeInvincible);
+  const all={...setting,SelectInfo:{...sc,TargetType:'All'}};
+  const candidates=select0.call(this,owner,all,action,primary).filter(r=>r!==primary&&!dead(r)&&(!r.props.HideOut||flag(sc.IncludeHideOut))&&(includeStealth||!r.props.Stealth)&&(includeInvincible||!r.props.Invincible)).sort((a,b)=>pos(a)-pos(b));
+  if(!candidates.length)return [primary];
+  const secondary=candidates[Math.min(candidates.length-1,Math.floor(this.random()*candidates.length))];
+  state.secondaryIDs.push(secondary.uid);
+  // A new secondary consumes one RandomInt and the initial pair is position-sorted.
+  return [primary,secondary].sort((a,b)=>pos(a)-pos(b));
+ };
  P.select=function(owner,setting={},action=this.action,defaultTarget=null){
   const sc=setting.SelectInfo||setting,type=sc.TargetType||sc.Target;
+  if(type==='RandomTwo')return this.nativeRandomTwoTargets(owner,setting,action);
   if(type!=='FrontRow'&&type!=='BackRow')return select0.call(this,owner,setting,action,defaultTarget);
   const all={...setting,SelectInfo:{...sc,TargetType:'All'}};
   return select0.call(this,owner,all,action,defaultTarget).filter(r=>!dead(r)&&pos(r)===(type==='FrontRow'?0:3)).slice(0,1);
  };
  P.skillTargets=function(owner,skill,chosen,action){
   if(!skill)return [];const raw=skill.raw,type=raw.TargetType||'One';
+  // Prepare the shared native Action state before trigger() shallow-copies it.
+  if(action&&!action._nativeRandomTargets)action._nativeRandomTargets={secondaryIDs:[]};
+  if(type==='RandomTwo')return this.nativeRandomTwoTargets(owner,{TargetCamp:raw.TargetCamp||'Enemy',TargetType:type,NoSelf:flag(raw.NoSelf)},action).filter(r=>!dead(r)&&!r.props.HideOut);
   if(!['One','OneWithDead','DeadOne','DeadOneOrLessHPRate','SkillSelect','ParamTarget'].includes(type))return skillTargets0.call(this,owner,skill,chosen,action);
   // 单体已由 AI 处理隐匿的三阶段重选。执行时不得再次抹掉合法 chosen。
   if(!chosen||chosen.props.HideOut||flag(raw.NoSelf)&&chosen===owner)return [];
@@ -111,7 +131,7 @@ function install(S){
   const score=r=>r.hp+(B.conquers(u.card.element,r.card.element)?-80000:0)+(B.conquers(r.card.element,u.card.element)?90000:0)+(r.props.Invincible?900000:0)+(r.props.Stealth?9000000:0);
   return [...xs].sort((a,b)=>score(a)-score(b))[0]||null;
  };
- P.nativeAIChoice=function(u,skill,selected){return {skill,selected,targets:skill&&selected?this.skillTargets(u,skill,selected,{actor:u,skill,selected}):[]};};
+ P.nativeAIChoice=function(u,skill,selected){return {skill,selected,targets:skill&&selected&&skill.raw.TargetType!=='RandomTwo'?this.skillTargets(u,skill,selected,{actor:u,skill,selected}):[]};};
  P.nativeAIFind=function(u,rules,preferred=null,index=null){for(const rule of rules){if(index!==null&&N(rule.SkillIndex)!==index)continue;const skill=this.data.skills[u.card.skillSlots[N(rule.SkillIndex)]];if(!skill||!this.canSkill(u,skill.id))continue;const a={actor:u,skill,actionType:5,kind:'system',normal:skill.id===u.normal,selected:null,directTargets:[]};if(!this.nativeAIConditions(u,rule,a))continue;const t=this.aiTarget(u,skill,rule,a,preferred);if(t)return {skill,selected:t};}return null;};
  P.choose=function(u){
   if(u.passiveDummy||dead(u))return {skill:null,targets:[]};

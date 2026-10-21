@@ -12,6 +12,15 @@ args=parser.parse_args()
 old=TARGET.read_text('utf8');data=extract(old,'DATA');assets=extract(old,'ASSETS')
 if args.data_json:data=json.loads(args.data_json.read_text('utf8'))
 trials=json.loads((SRC/'trials.json').read_text('utf8'))
+chronicles=json.loads((SRC/'chronicles.json').read_text('utf8'))
+if data.get('catalog')!=chronicles['catalog']:raise ValueError('纪事与玩家数据的资源目录版本不同')
+data['chronicles']=chronicles['chronicles']
+for stage in data['chronicles'].values():
+ for enemy in stage['enemies']:
+  if enemy.get('thumb'):
+   art=SRC/'assets'/(enemy['thumb'].split('/')[-1]+'.png')
+   if not art.is_file():raise ValueError('纪事敌方头像缺失：'+str(art))
+   assets[enemy['thumb']]='data:image/png;base64,'+base64.b64encode(art.read_bytes()).decode()
 if set(trials['trials'])!={str(i) for i in range(1,51)}:raise ValueError('试炼数据须完整覆盖1至50层')
 data['trials']=trials['trials']
 if data.get('catalog'):data['tower50']=trials['trials']['50']

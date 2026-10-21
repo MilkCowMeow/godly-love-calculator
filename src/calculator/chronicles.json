@@ -1,0 +1,1340 @@
+{
+  "catalog": "catalog_014774",
+  "sourceHashes": {
+    "scene.txt": "7e82519f54ea0b2d318b4b066252697ae4ef5a83b767185360246ce27f74ab62",
+    "chapter.txt": "84a54c58d54cea07c8ba65ba39231e0ef334ed991cf5f1bb773c773442aed446",
+    "activity.txt": "52a0aaa312b16bf5922c3c5f2f73296b5bfb47429614ce691f25ba9712edea1a",
+    "role.txt": "63a9eed0867b46f726ca93c6f0d49028c53707fba52946d21a9d56dfcbb79049",
+    "roleproperty.txt": "565576b694dc0cb11402caf789a84a9075306a565a9eb1c366d3d61337d13be1",
+    "skill.txt": "8602dca931a5ea68089b55db2af55c86a4a5516eed95bd111566ad9c3289d878",
+    "status.txt": "1a189bcaed30a18e4fa7f7022cdd5464c29c3bb296d62aa3267750140528d647",
+    "aiaction.txt": "4ac925f1f00ed9829a0010fc643c8be4f5879786e29efac8bd306a90a643edd6",
+    "locale/CHT": "55720bda7bd8a52f2a897afa15344f3575c763ce5f0d70e89688d649e04a2ab2",
+    "locale/CHS": "0a81719e0ce5fa24b63f984cd8b67824f0718a734c90ecdc0150735b3e6b3f52"
+  },
+  "chronicles": {
+    "C02_SSR_006_14": {
+      "catalog": "catalog_014774",
+      "id": "C02_SSR_006_14",
+      "activityId": "BranchC02_SSR_006",
+      "activityName": "共奏心音",
+      "name": "共奏心音 S14",
+      "chapterName": "共奏心音",
+      "sceneName": "",
+      "sceneNum": "S14",
+      "level": 80,
+      "serverBattle": true,
+      "openAt": "2026-10-20T00:00:00+08:00",
+      "openPrecision": "day",
+      "closeAt": "2026-11-03T14:00:00+08:00",
+      "availability": {
+        "id": "C02_SSR_006_14",
+        "openDate": "2026-10-20",
+        "openDescription": "活动开启后",
+        "closeAt": "2026-11-03T14:00:00+08:00",
+        "noticeId": 3617,
+        "noticeTitle": "限时纪事活动「共奏心音」正式开始！"
+      },
+      "scene": {
+        "Chapter": "BranchC02_SSR_006",
+        "ID": "C02_SSR_006_14",
+        "PreScene": "C02_SSR_006_13",
+        "ExtraScenes": "",
+        "EnterCount": "",
+        "DirectNextScene": "",
+        "IsPVP": "",
+        "IsStoryMainLine": "",
+        "StoryMainLineIcon": "",
+        "StoryMainLineIconPrefab": "",
+        "SceneIcon": "BG/Scene/BG_Scene[S0052_2_Scene]",
+        "MapPosition": "1",
+        "Name": "",
+        "SceneNum": "T_Scene_SceneNum_BranchC01_SSR_007_13",
+        "SceneBattleConditions": "",
+        "IsBoss": "TRUE",
+        "IsMovie": "",
+        "Exp": "",
+        "Energy": "8",
+        "EnterCost": "",
+        "RecommendedLevel": "80",
+        "RecommendedAttributes": "1",
+        "Land": "BG/BG001/S0052_2_Dialog",
+        "BG": "BG/BG001/S0052_2_Scene",
+        "BGM": "Sound/BGM/Battle9",
+        "ShortRewardItems": "",
+        "RewardItems": "",
+        "DropString": "AC02_SSR_006_120~AcEXPS14~AcGoldLS14",
+        "VIPExtraDrop": "",
+        "FirstDrop": "Dimond10~EXP100",
+        "FullStarDrop": "Dimond10",
+        "LV": "80",
+        "WaveInfoJsonString": "{Ms:[{M:\"MB004_1_C02_SSR_006\",Boss:true}]}",
+        "WaveInfo2JsonString": "",
+        "WaveInfo3JsonString": "",
+        "Condition1": "{Type:'PassScene'}",
+        "Condition2": "{Type:'Survival',Count:2}",
+        "Condition3": "{Type:'Survival',Count:3}",
+        "Condition4": "",
+        "NPCSupport1": "",
+        "NPCSupport2": "",
+        "RoleStatusInfo1": "{RoleIDs:[\"C02_SSR_006\"],Conditions:[{ID:\"Activity_Main\",Comparer:\"Gt\",Value1:0},{ID:\"ActivityBuff\",Comparer:\"Eq\",Value1:0},{ID:\"ActivityBuff_1\",Comparer:\"Eq\",Value1:1},{ID:\"ActivityBuff_2\",Comparer:\"Eq\",Value1:2},{ID:\"ActivityBuff_3\",Comparer:\"Eq\",Value1:3},{ID:\"ActivityBuff_4\",Comparer:\"Eq\",Value1:4},{ID:\"ActivityBuff_5\",Comparer:\"Eq\",Value1:5}]}",
+        "RoleStatusInfo2": "",
+        "MyCampTeam": "",
+        "Tag": "C02_SSR_006_Boss",
+        "DynamicField1": "",
+        "DynamicField2": "",
+        "DynamicField3": "",
+        "ActivityIDs": "",
+        "ServerBattle": "TRUE",
+        "TurnRole": ""
+      },
+      "chapter": {
+        "Episode": "BranchC02_SSR_006",
+        "Chapter": "",
+        "ID": "BranchC02_SSR_006",
+        "ActivityIDs": "",
+        "HardID": "",
+        "NormalID": "",
+        "Name": "T_Chapter_Name_BranchC02_SSR_006",
+        "Description": "",
+        "Element": "",
+        "Icon": "",
+        "BGImage": "Hero/C02_SSR_006/Img/C02_SSR_006",
+        "BGPrefab": "BG/BG002/S0126_Scene",
+        "StoreID": "ActivitySummonC02_SSR_006"
+      },
+      "activity": {
+        "ID": "BranchC02_SSR_006",
+        "Name": "共奏心音_活動",
+        "ShowName": "",
+        "Type": "SideStory",
+        "IsLimited": "",
+        "IsPersonal": "",
+        "RemainDay": "7",
+        "NeedRecord": "TRUE",
+        "DeleteDay": "90",
+        "BG": "",
+        "BGPrefab": "",
+        "LocalizationBanner": "Banner/C02/Pack001/BN_Activity_C02_SSR_006",
+        "LocalizationLogoBanner": "Banner/C02/Pack001/Logo_C02_SSR_006",
+        "SignInMailID": "",
+        "ContinuousMailID": "",
+        "DropID": "",
+        "StatusID": "",
+        "SummonArtifactID": "",
+        "RolePrefab": "Hero/C02_SSR_006/C02_SSR_006_Lobby",
+        "ActivityDialog": "",
+        "SceneServerStatusInfo1": "{IDs:[\"C02_SSR_006\"],Type:\"Role\",Conditions:[{ID:\"BranchSSRBonus1\",Comparer:\"Lt\",Value1:0},{ID:\"BranchSSRBonus2\",Comparer:\"Eq\",Value1:1},{ID:\"BranchSSRBonus3\",Comparer:\"Eq\",Value1:2},{ID:\"BranchSSRBonus4\",Comparer:\"Eq\",Value1:3},{ID:\"BranchSSRBonus5\",Comparer:\"Eq\",Value1:4},{ID:\"BranchSSRBonus6\",Comparer:\"Gt\",Value1:5}]}",
+        "SceneServerStatusInfo2": "",
+        "SceneServerStatusInfo3": "",
+        "SideStoryDropInfo": "",
+        "DynamicField1": "",
+        "DynamicField2": ""
+      },
+      "waves": [
+        {
+          "index": 1,
+          "field": "WaveInfoJsonString",
+          "raw": {
+            "Ms": [
+              {
+                "M": "MB004_1_C02_SSR_006",
+                "Boss": true
+              }
+            ]
+          },
+          "enemies": [
+            "MB004_1_C02_SSR_006"
+          ]
+        }
+      ],
+      "enemies": [
+        {
+          "id": "MB004_1_C02_SSR_006",
+          "name": "红莲金翅鸟",
+          "level": 80,
+          "element": "Fire",
+          "job": "Warrior",
+          "isBoss": true,
+          "campPosition": 0,
+          "waveIndex": 1,
+          "skills": [
+            "MB004_1_C02_SSR_006S1",
+            "MB004_1_C02_SSR_006S2",
+            "MB004_1_C02_SSR_006S3",
+            "Ac_AttackStack"
+          ],
+          "skillSlots": [
+            "MB004_1_C02_SSR_006S1",
+            "MB004_1_C02_SSR_006S2",
+            "MB004_1_C02_SSR_006S3",
+            "Ac_AttackStack"
+          ],
+          "hiddenSkills": [],
+          "thumb": "chronicle/MB004_1_icon",
+          "levelStats": [
+            {
+              "level": 80,
+              "stats": {
+                "HP": 30906.25137090683,
+                "Attack": 3827.9998898506165,
+                "Defence": 9439.9995803833,
+                "Speed": 3359.9998474121094,
+                "CriticalRate": 0.15,
+                "CriticalDamageRate": 1.3,
+                "EffectHitRate": 0.0,
+                "ResistanceRate": 0.1,
+                "PinchRate": 0.0,
+                "MaxHP": 30906.25137090683
+              },
+              "raw": {
+                "ID": "AcStory_Boss",
+                "LV": "80",
+                "HP": "28750",
+                "Attack": "3300",
+                "Defence": "8000",
+                "Speed": "3200",
+                "CriticalRate": "0.15",
+                "CriticalDamageRate": "1.3",
+                "EffectHitRate": "0",
+                "ResistanceRate": "0.1",
+                "PinchRate": "0",
+                "DynamicFiEld1": ""
+              }
+            }
+          ],
+          "stats": {
+            "HP": 30906,
+            "Attack": 3828,
+            "Defence": 9440,
+            "Speed": 3360,
+            "CriticalRate": 0.15000000596046448,
+            "CriticalDamageRate": 1.2999999523162842,
+            "EffectHitRate": 0.0,
+            "ResistanceRate": 0.10000000149011612,
+            "PinchRate": 0.0,
+            "MaxHP": 30906
+          },
+          "statsUnrounded": {
+            "HP": 30906.25137090683,
+            "Attack": 3827.9998898506165,
+            "Defence": 9439.9995803833,
+            "Speed": 3359.9998474121094,
+            "CriticalRate": 0.15,
+            "CriticalDamageRate": 1.3,
+            "EffectHitRate": 0.0,
+            "ResistanceRate": 0.1,
+            "PinchRate": 0.0,
+            "MaxHP": 30906.25137090683
+          },
+          "initialStatuses": [],
+          "configs": [
+            {
+              "key": "AntiList",
+              "value": "AntiSilence~AntiStun~AntiTaunt~AntiTargetTaunt~AntiSleep~AntiPoison",
+              "raw": "AntiList#AntiSilence~AntiStun~AntiTaunt~AntiTargetTaunt~AntiSleep~AntiPoison",
+              "field": "DynamicField2"
+            }
+          ],
+          "raw": {
+            "ID": "MB004_1_C02_SSR_006",
+            "Title": "",
+            "NAME": "T_Role_NAME_MB004_1_C02_SSR_006",
+            "RarityLV": "",
+            "Element": "Fire",
+            "Job": "Warrior",
+            "Represents": "",
+            "Constellation": "",
+            "Group": "",
+            "CupSize": "",
+            "Birthday": "",
+            "Height": "",
+            "Weight": "",
+            "IsHero": "",
+            "CanSell": "",
+            "ImprintGroup": "",
+            "SkillIDs": "MB004_1_C02_SSR_006S1~MB004_1_C02_SSR_006S2~MB004_1_C02_SSR_006S3~Ac_AttackStack",
+            "SPType": "",
+            "InitSP": "",
+            "HurtSP": "",
+            "SpineObject": "Hero/MB004_1/MB004_1_",
+            "PrototypeID": "",
+            "SoundLanguages": "",
+            "LobbyTouchSounds": "",
+            "SexTouchSounds": "",
+            "CounterSounds": "",
+            "HurtSounds": "",
+            "DeadSounds": "",
+            "ReadySounds": "",
+            "VictorySounds": "",
+            "DefeatSounds": "",
+            "SummonSounds": "",
+            "GiftSounds": "",
+            "Relvup1Sounds": "",
+            "Relvup2Sounds": "",
+            "Relvup3Sounds": "",
+            "Relvup4Sounds": "",
+            "Skill1Sounds": "",
+            "Skill2Sounds": "",
+            "Skill3Sounds": "",
+            "HeadB": "Hero/MB004_1/Img/MB004_1_Img[MB004_1_icon]",
+            "HeadS": "Hero/MB004_1/Img/MB004_1_Img[MB004_1_icon]",
+            "HeadM": "Hero/MB004_1/Img/MB004_1_Img[MB004_1_M_icon]",
+            "HeadL": "Hero/MB004_1/Img/MB004_1_Img[MB004_1_M_icon]",
+            "AIs": "M_S1Att_S2Att",
+            "TeamImprint": "",
+            "SelfImprint": "",
+            "ImprintPositions": "",
+            "MinProp.DynamicField1": "",
+            "MaxProp.DynamicField1": "",
+            "CutInPrefab": "",
+            "CutInSound": "",
+            "HP": "1.075",
+            "Attack": "1.16",
+            "Defence": "1.18",
+            "Speed": "1.05",
+            "CriticalRate": "1",
+            "CriticalDamageRate": "1",
+            "EffectHitRate": "0",
+            "ResistanceRate": "1",
+            "PinchRate": "0",
+            "DynamicField1": "",
+            "DynamicField2": "AntiList#AntiSilence~AntiStun~AntiTaunt~AntiTargetTaunt~AntiSleep~AntiPoison",
+            "DynamicField3": "",
+            "RolePropertyID": "AcStory_Boss",
+            "RoleUpgradeID": "",
+            "Description": "",
+            "VersionControl": ""
+          },
+          "ai": [
+            "M_S1Att_S2Att"
+          ],
+          "aiRules": [
+            {
+              "ID": "M_S1Att_S2Att",
+              "Priority": "2",
+              "Condition1": "",
+              "Condition2": "",
+              "Condition3": "",
+              "TargetSetting1": "{Type:\"FrontRow\",Rate:0.6}",
+              "TargetSetting2": "{Type:\"ConquerOKTarget\"}",
+              "TargetSetting3": "{Type:\"LessHPRate\"}",
+              "TargetSetting4": "",
+              "TargetSetting5": "",
+              "SkillIndex": "1"
+            },
+            {
+              "ID": "M_S1Att_S2Att",
+              "Priority": "1",
+              "Condition1": "",
+              "Condition2": "",
+              "Condition3": "",
+              "TargetSetting1": "{Type:\"FrontRow\",Rate:0.6}",
+              "TargetSetting2": "{Type:\"ConquerOKTarget\"}",
+              "TargetSetting3": "{Type:\"LessHPRate\"}",
+              "TargetSetting4": "",
+              "TargetSetting5": "",
+              "SkillIndex": "0"
+            }
+          ],
+          "imprint": [],
+          "ascend": []
+        }
+      ],
+      "skills": {
+        "MB004_1_C02_SSR_006S1": {
+          "id": "MB004_1_C02_SSR_006S1",
+          "name": "金色光耀",
+          "description": "攻击 2 名敌人造成血绽( 2 回合)",
+          "raw": {
+            "ID": "MB004_1_C02_SSR_006S1",
+            "NAME": "T_Skill_NAME_MB004_1_C02_SSR_006S1",
+            "Description": "T_Skill_Description_MB004_1_C02_SSR_006S1",
+            "Icon": "Icon/Skill[Skill_Debuff]",
+            "StartEffect": "Hero/MB004_1/Skill_Prefab/Emission_MB004_1_S1_",
+            "EndEffect": "",
+            "HitEffect": "Hero/MB004_1/Skill_Prefab/Skill_MB004_S1_",
+            "PerHitEffect": "Effect/Prefab_Hit/Hit_Red_",
+            "PerHitEffectDelayTime": "",
+            "CutIn": "",
+            "AnimationName": "",
+            "CutinSound": "",
+            "ConstSound": "Hero/MB004_1/Sound/MB004_S1",
+            "Sounds": "Hero/MB004_1/Sound/MB004_SK1_1~Hero/MB004_1/Sound/MB004_SK1_2",
+            "TargetTypeFun": "",
+            "SkillType": "",
+            "TargetType": "RandomTwo",
+            "TargetCamp": "",
+            "NoSelf": "",
+            "AttRate": "0.6",
+            "Pow": "1",
+            "CoolDown": "1",
+            "IsInitCoolDown": "",
+            "Soul": "",
+            "SkillSoulCost": "",
+            "SP": "",
+            "SoulSkillDescription": "",
+            "SoulSkillFunc": "",
+            "DynamicField1": "Fun#{Fun:\"AddStatus\",Target:\"RandomTwo\",FID:\"Bleed\",StatusRound:2,StatusValue:{Rate:0.15,Property:\"Attack\"}}",
+            "DynamicField2": "",
+            "DynamicField3": "",
+            "DynamicField4": "",
+            "DynamicField5": "",
+            "DynamicField6": "",
+            "PassiveProp.DynamicField1": "",
+            "PassiveProp.DynamicField2": "",
+            "PassiveProp.DynamicField3": "",
+            "TwinSkill": "",
+            "ReferanceSkillID": "",
+            "LevelSkillID": "",
+            "VersionControl": ""
+          },
+          "configs": [
+            {
+              "key": "Fun",
+              "value": {
+                "Fun": "AddStatus",
+                "Target": "RandomTwo",
+                "FID": "Bleed",
+                "StatusRound": 2,
+                "StatusValue": {
+                  "Rate": 0.15,
+                  "Property": "Attack"
+                }
+              },
+              "raw": "Fun#{Fun:\"AddStatus\",Target:\"RandomTwo\",FID:\"Bleed\",StatusRound:2,StatusValue:{Rate:0.15,Property:\"Attack\"}}",
+              "field": "DynamicField1"
+            }
+          ]
+        },
+        "MB004_1_C02_SSR_006S2": {
+          "id": "MB004_1_C02_SSR_006S2",
+          "name": "羽刃风暴",
+          "description": "攻击全体敌人造成静眠( 1 回合)，自身附加速度提升( 2 回合)",
+          "raw": {
+            "ID": "MB004_1_C02_SSR_006S2",
+            "NAME": "T_Skill_NAME_MB004_1_C02_SSR_006S2",
+            "Description": "T_Skill_Description_MB004_1_C02_SSR_006S2",
+            "Icon": "Icon/Skill[Skill_Ultimate_Debuff]",
+            "StartEffect": "Hero/MB004_1/Skill_Prefab/Emission_MB004_1_S2_",
+            "EndEffect": "",
+            "HitEffect": "Hero/MB004_1/Skill_Prefab/Skill_MB004_S2_",
+            "PerHitEffect": "Effect/Prefab_Hit/Hit_Red_",
+            "PerHitEffectDelayTime": "",
+            "CutIn": "",
+            "AnimationName": "",
+            "CutinSound": "",
+            "ConstSound": "Hero/MB004_1/Sound/MB004_S2",
+            "Sounds": "Hero/MB004_1/Sound/MB004_SK2_1~Hero/MB004_1/Sound/MB004_SK2_2",
+            "TargetTypeFun": "",
+            "SkillType": "",
+            "TargetType": "All",
+            "TargetCamp": "",
+            "NoSelf": "",
+            "AttRate": "0.4",
+            "Pow": "1",
+            "CoolDown": "3",
+            "IsInitCoolDown": "1",
+            "Soul": "",
+            "SkillSoulCost": "",
+            "SP": "",
+            "SoulSkillDescription": "",
+            "SoulSkillFunc": "",
+            "DynamicField1": "Fun#{Fun:\"AddStatus\",Target:\"All\",FID:\"Sleep\",StatusRound:1}",
+            "DynamicField2": "Fun#{Fun:\"AddStatus\",TargetCamp:\"My\",Target:\"Self\",FID:\"IncreaseSpeed\",StatusRound:2}",
+            "DynamicField3": "",
+            "DynamicField4": "",
+            "DynamicField5": "",
+            "DynamicField6": "",
+            "PassiveProp.DynamicField1": "",
+            "PassiveProp.DynamicField2": "",
+            "PassiveProp.DynamicField3": "",
+            "TwinSkill": "",
+            "ReferanceSkillID": "",
+            "LevelSkillID": "",
+            "VersionControl": ""
+          },
+          "configs": [
+            {
+              "key": "Fun",
+              "value": {
+                "Fun": "AddStatus",
+                "Target": "All",
+                "FID": "Sleep",
+                "StatusRound": 1
+              },
+              "raw": "Fun#{Fun:\"AddStatus\",Target:\"All\",FID:\"Sleep\",StatusRound:1}",
+              "field": "DynamicField1"
+            },
+            {
+              "key": "Fun",
+              "value": {
+                "Fun": "AddStatus",
+                "TargetCamp": "My",
+                "Target": "Self",
+                "FID": "IncreaseSpeed",
+                "StatusRound": 2
+              },
+              "raw": "Fun#{Fun:\"AddStatus\",TargetCamp:\"My\",Target:\"Self\",FID:\"IncreaseSpeed\",StatusRound:2}",
+              "field": "DynamicField2"
+            }
+          ]
+        },
+        "MB004_1_C02_SSR_006S3": {
+          "id": "MB004_1_C02_SSR_006S3",
+          "name": "【被动】金翼",
+          "description": "回合结束时，对随机敌人造成攻击下降( 1 回合)",
+          "raw": {
+            "ID": "MB004_1_C02_SSR_006S3",
+            "NAME": "T_Skill_NAME_MB004_1_C02_SSR_006S3",
+            "Description": "T_Skill_Description_MB004_1_C02_SSR_006S3",
+            "Icon": "Icon/Skill[Skill_Passive_Attack]",
+            "StartEffect": "",
+            "EndEffect": "",
+            "HitEffect": "",
+            "PerHitEffect": "",
+            "PerHitEffectDelayTime": "",
+            "CutIn": "",
+            "AnimationName": "",
+            "CutinSound": "",
+            "ConstSound": "",
+            "Sounds": "",
+            "TargetTypeFun": "",
+            "SkillType": "Passive",
+            "TargetType": "",
+            "TargetCamp": "",
+            "NoSelf": "",
+            "AttRate": "",
+            "Pow": "",
+            "CoolDown": "",
+            "IsInitCoolDown": "",
+            "Soul": "",
+            "SkillSoulCost": "",
+            "SP": "",
+            "SoulSkillDescription": "",
+            "SoulSkillFunc": "",
+            "DynamicField1": "Fun#{Trigger:\"AfterRound\",Fun:\"AddStatus\",Target:\"RandomOne\",FID:\"ReduceAttack\",StatusRound:1}",
+            "DynamicField2": "",
+            "DynamicField3": "",
+            "DynamicField4": "",
+            "DynamicField5": "",
+            "DynamicField6": "",
+            "PassiveProp.DynamicField1": "",
+            "PassiveProp.DynamicField2": "",
+            "PassiveProp.DynamicField3": "",
+            "TwinSkill": "",
+            "ReferanceSkillID": "",
+            "LevelSkillID": "",
+            "VersionControl": ""
+          },
+          "configs": [
+            {
+              "key": "Fun",
+              "value": {
+                "Trigger": "AfterRound",
+                "Fun": "AddStatus",
+                "Target": "RandomOne",
+                "FID": "ReduceAttack",
+                "StatusRound": 1
+              },
+              "raw": "Fun#{Trigger:\"AfterRound\",Fun:\"AddStatus\",Target:\"RandomOne\",FID:\"ReduceAttack\",StatusRound:1}",
+              "field": "DynamicField1"
+            }
+          ]
+        },
+        "Ac_AttackStack": {
+          "id": "Ac_AttackStack",
+          "name": "【被动】攻击爆发",
+          "description": "回合开始时，攻击重叠提升",
+          "raw": {
+            "ID": "Ac_AttackStack",
+            "NAME": "T_Skill_NAME_AttackStack",
+            "Description": "T_Skill_Description_AttackStack",
+            "Icon": "Icon/Skill[Skill_Passive_Attack]",
+            "StartEffect": "",
+            "EndEffect": "",
+            "HitEffect": "",
+            "PerHitEffect": "",
+            "PerHitEffectDelayTime": "",
+            "CutIn": "",
+            "AnimationName": "",
+            "CutinSound": "",
+            "ConstSound": "",
+            "Sounds": "",
+            "TargetTypeFun": "",
+            "SkillType": "Passive",
+            "TargetType": "",
+            "TargetCamp": "",
+            "NoSelf": "",
+            "AttRate": "",
+            "Pow": "",
+            "CoolDown": "",
+            "IsInitCoolDown": "",
+            "Soul": "",
+            "SkillSoulCost": "",
+            "SP": "",
+            "SoulSkillDescription": "",
+            "SoulSkillFunc": "",
+            "DynamicField1": "Fun#{Trigger:\"BeforeRound\",Fun:\"AddStatus\",TargetCamp:\"My\",Target:\"Self\",FID:\"Ac_AttackStack\"}",
+            "DynamicField2": "",
+            "DynamicField3": "",
+            "DynamicField4": "",
+            "DynamicField5": "",
+            "DynamicField6": "",
+            "PassiveProp.DynamicField1": "",
+            "PassiveProp.DynamicField2": "",
+            "PassiveProp.DynamicField3": "",
+            "TwinSkill": "",
+            "ReferanceSkillID": "",
+            "LevelSkillID": "",
+            "VersionControl": ""
+          },
+          "configs": [
+            {
+              "key": "Fun",
+              "value": {
+                "Trigger": "BeforeRound",
+                "Fun": "AddStatus",
+                "TargetCamp": "My",
+                "Target": "Self",
+                "FID": "Ac_AttackStack"
+              },
+              "raw": "Fun#{Trigger:\"BeforeRound\",Fun:\"AddStatus\",TargetCamp:\"My\",Target:\"Self\",FID:\"Ac_AttackStack\"}",
+              "field": "DynamicField1"
+            }
+          ]
+        }
+      },
+      "statuses": {
+        "Activity_Main": {
+          "id": "Activity_Main",
+          "name": "限定羁绊增益",
+          "description": "对应的纪事限定羁绊，于纪事关卡内会达到 80 级",
+          "raw": {
+            "ID": "Activity_Main",
+            "Name": "T_Status_Name_Activity_Main",
+            "Description": "T_Status_Description_Activity_Main",
+            "Icon": "Icon/Skill[Event_1]",
+            "Effect": "",
+            "HitEffect": "",
+            "AnimationName": "",
+            "Group": "Activity_Main",
+            "Level": "1",
+            "RoundCount": "-1",
+            "MaxStack": "",
+            "IsBuffType": "None",
+            "IsShowIcon": "",
+            "IsResident": "TRUE",
+            "IsReduceBeforeRound": "",
+            "HitRemove": "",
+            "HurtRemove": "",
+            "BeHitRemove": "",
+            "IsStackMultiplyProp": "",
+            "CanMerge": "",
+            "IsMergeProperty": "",
+            "IsValueMultiplyProp": "",
+            "CanUpdateRound": "",
+            "DeadResident": "",
+            "Value": "",
+            "DynamicField1": "",
+            "DynamicField2": "",
+            "DynamicField3": "",
+            "DynamicField4": "",
+            "DynamicField5": "",
+            "DynamicField6": "",
+            "VersionControl": ""
+          },
+          "configs": []
+        },
+        "ActivityBuff": {
+          "id": "ActivityBuff",
+          "name": "纪事增益",
+          "description": "攻击、生命提升 10%。不会受到针对强化状态的各种效果影响",
+          "raw": {
+            "ID": "ActivityBuff",
+            "Name": "T_Status_Name_ActivityBuff",
+            "Description": "T_Status_Description_ActivityBuff",
+            "Icon": "Icon/Skill[Event_2]",
+            "Effect": "",
+            "HitEffect": "",
+            "AnimationName": "",
+            "Group": "ActivityBuff",
+            "Level": "1",
+            "RoundCount": "-1",
+            "MaxStack": "",
+            "IsBuffType": "None",
+            "IsShowIcon": "",
+            "IsResident": "TRUE",
+            "IsReduceBeforeRound": "",
+            "HitRemove": "",
+            "HurtRemove": "",
+            "BeHitRemove": "",
+            "IsStackMultiplyProp": "",
+            "CanMerge": "",
+            "IsMergeProperty": "TRUE",
+            "IsValueMultiplyProp": "",
+            "CanUpdateRound": "",
+            "DeadResident": "",
+            "Value": "",
+            "DynamicField1": "AttackFinalRate#0.1",
+            "DynamicField2": "HPFinalRate#0.1",
+            "DynamicField3": "",
+            "DynamicField4": "",
+            "DynamicField5": "",
+            "DynamicField6": "",
+            "VersionControl": ""
+          },
+          "configs": [
+            {
+              "key": "AttackFinalRate",
+              "value": 0.1,
+              "raw": "AttackFinalRate#0.1",
+              "field": "DynamicField1"
+            },
+            {
+              "key": "HPFinalRate",
+              "value": 0.1,
+              "raw": "HPFinalRate#0.1",
+              "field": "DynamicField2"
+            }
+          ]
+        },
+        "ActivityBuff_1": {
+          "id": "ActivityBuff_1",
+          "name": "纪事增益 (1 星)",
+          "description": "攻击、生命提升 15%。不会受到针对强化状态的各种效果影响",
+          "raw": {
+            "ID": "ActivityBuff_1",
+            "Name": "T_Status_Name_ActivityBuff_1",
+            "Description": "T_Status_Description_ActivityBuff_1",
+            "Icon": "Icon/Skill[Event_2]",
+            "Effect": "",
+            "HitEffect": "",
+            "AnimationName": "",
+            "Group": "ActivityBuff",
+            "Level": "2",
+            "RoundCount": "-1",
+            "MaxStack": "",
+            "IsBuffType": "None",
+            "IsShowIcon": "",
+            "IsResident": "TRUE",
+            "IsReduceBeforeRound": "",
+            "HitRemove": "",
+            "HurtRemove": "",
+            "BeHitRemove": "",
+            "IsStackMultiplyProp": "",
+            "CanMerge": "",
+            "IsMergeProperty": "TRUE",
+            "IsValueMultiplyProp": "",
+            "CanUpdateRound": "",
+            "DeadResident": "",
+            "Value": "",
+            "DynamicField1": "AttackFinalRate#0.15",
+            "DynamicField2": "HPFinalRate#0.15",
+            "DynamicField3": "",
+            "DynamicField4": "",
+            "DynamicField5": "",
+            "DynamicField6": "",
+            "VersionControl": ""
+          },
+          "configs": [
+            {
+              "key": "AttackFinalRate",
+              "value": 0.15,
+              "raw": "AttackFinalRate#0.15",
+              "field": "DynamicField1"
+            },
+            {
+              "key": "HPFinalRate",
+              "value": 0.15,
+              "raw": "HPFinalRate#0.15",
+              "field": "DynamicField2"
+            }
+          ]
+        },
+        "ActivityBuff_2": {
+          "id": "ActivityBuff_2",
+          "name": "纪事增益 (2 星)",
+          "description": "攻击、生命提升 20%。不会受到针对强化状态的各种效果影响",
+          "raw": {
+            "ID": "ActivityBuff_2",
+            "Name": "T_Status_Name_ActivityBuff_2",
+            "Description": "T_Status_Description_ActivityBuff_2",
+            "Icon": "Icon/Skill[Event_2]",
+            "Effect": "",
+            "HitEffect": "",
+            "AnimationName": "",
+            "Group": "ActivityBuff",
+            "Level": "3",
+            "RoundCount": "-1",
+            "MaxStack": "",
+            "IsBuffType": "None",
+            "IsShowIcon": "",
+            "IsResident": "TRUE",
+            "IsReduceBeforeRound": "",
+            "HitRemove": "",
+            "HurtRemove": "",
+            "BeHitRemove": "",
+            "IsStackMultiplyProp": "",
+            "CanMerge": "",
+            "IsMergeProperty": "TRUE",
+            "IsValueMultiplyProp": "",
+            "CanUpdateRound": "",
+            "DeadResident": "",
+            "Value": "",
+            "DynamicField1": "AttackFinalRate#0.2",
+            "DynamicField2": "HPFinalRate#0.2",
+            "DynamicField3": "",
+            "DynamicField4": "",
+            "DynamicField5": "",
+            "DynamicField6": "",
+            "VersionControl": ""
+          },
+          "configs": [
+            {
+              "key": "AttackFinalRate",
+              "value": 0.2,
+              "raw": "AttackFinalRate#0.2",
+              "field": "DynamicField1"
+            },
+            {
+              "key": "HPFinalRate",
+              "value": 0.2,
+              "raw": "HPFinalRate#0.2",
+              "field": "DynamicField2"
+            }
+          ]
+        },
+        "ActivityBuff_3": {
+          "id": "ActivityBuff_3",
+          "name": "纪事增益 (3 星)",
+          "description": "攻击、生命提升 30%。不会受到针对强化状态的各种效果影响",
+          "raw": {
+            "ID": "ActivityBuff_3",
+            "Name": "T_Status_Name_ActivityBuff_3",
+            "Description": "T_Status_Description_ActivityBuff_3",
+            "Icon": "Icon/Skill[Event_2]",
+            "Effect": "",
+            "HitEffect": "",
+            "AnimationName": "",
+            "Group": "ActivityBuff",
+            "Level": "4",
+            "RoundCount": "-1",
+            "MaxStack": "",
+            "IsBuffType": "None",
+            "IsShowIcon": "",
+            "IsResident": "TRUE",
+            "IsReduceBeforeRound": "",
+            "HitRemove": "",
+            "HurtRemove": "",
+            "BeHitRemove": "",
+            "IsStackMultiplyProp": "",
+            "CanMerge": "",
+            "IsMergeProperty": "TRUE",
+            "IsValueMultiplyProp": "",
+            "CanUpdateRound": "",
+            "DeadResident": "",
+            "Value": "",
+            "DynamicField1": "AttackFinalRate#0.3",
+            "DynamicField2": "HPFinalRate#0.3",
+            "DynamicField3": "",
+            "DynamicField4": "",
+            "DynamicField5": "",
+            "DynamicField6": "",
+            "VersionControl": ""
+          },
+          "configs": [
+            {
+              "key": "AttackFinalRate",
+              "value": 0.3,
+              "raw": "AttackFinalRate#0.3",
+              "field": "DynamicField1"
+            },
+            {
+              "key": "HPFinalRate",
+              "value": 0.3,
+              "raw": "HPFinalRate#0.3",
+              "field": "DynamicField2"
+            }
+          ]
+        },
+        "ActivityBuff_4": {
+          "id": "ActivityBuff_4",
+          "name": "纪事增益 (4 星)",
+          "description": "攻击、生命提升 40%。不会受到针对强化状态的各种效果影响",
+          "raw": {
+            "ID": "ActivityBuff_4",
+            "Name": "T_Status_Name_ActivityBuff_4",
+            "Description": "T_Status_Description_ActivityBuff_4",
+            "Icon": "Icon/Skill[Event_2]",
+            "Effect": "",
+            "HitEffect": "",
+            "AnimationName": "",
+            "Group": "ActivityBuff",
+            "Level": "5",
+            "RoundCount": "-1",
+            "MaxStack": "",
+            "IsBuffType": "None",
+            "IsShowIcon": "",
+            "IsResident": "TRUE",
+            "IsReduceBeforeRound": "",
+            "HitRemove": "",
+            "HurtRemove": "",
+            "BeHitRemove": "",
+            "IsStackMultiplyProp": "",
+            "CanMerge": "",
+            "IsMergeProperty": "TRUE",
+            "IsValueMultiplyProp": "",
+            "CanUpdateRound": "",
+            "DeadResident": "",
+            "Value": "",
+            "DynamicField1": "AttackFinalRate#0.4",
+            "DynamicField2": "HPFinalRate#0.4",
+            "DynamicField3": "",
+            "DynamicField4": "",
+            "DynamicField5": "",
+            "DynamicField6": "",
+            "VersionControl": ""
+          },
+          "configs": [
+            {
+              "key": "AttackFinalRate",
+              "value": 0.4,
+              "raw": "AttackFinalRate#0.4",
+              "field": "DynamicField1"
+            },
+            {
+              "key": "HPFinalRate",
+              "value": 0.4,
+              "raw": "HPFinalRate#0.4",
+              "field": "DynamicField2"
+            }
+          ]
+        },
+        "ActivityBuff_5": {
+          "id": "ActivityBuff_5",
+          "name": "纪事增益 (5 星)",
+          "description": "攻击、生命提升 50%。不会受到针对强化状态的各种效果影响",
+          "raw": {
+            "ID": "ActivityBuff_5",
+            "Name": "T_Status_Name_ActivityBuff_5",
+            "Description": "T_Status_Description_ActivityBuff_5",
+            "Icon": "Icon/Skill[Event_2]",
+            "Effect": "",
+            "HitEffect": "",
+            "AnimationName": "",
+            "Group": "ActivityBuff",
+            "Level": "6",
+            "RoundCount": "-1",
+            "MaxStack": "",
+            "IsBuffType": "None",
+            "IsShowIcon": "",
+            "IsResident": "TRUE",
+            "IsReduceBeforeRound": "",
+            "HitRemove": "",
+            "HurtRemove": "",
+            "BeHitRemove": "",
+            "IsStackMultiplyProp": "",
+            "CanMerge": "",
+            "IsMergeProperty": "TRUE",
+            "IsValueMultiplyProp": "",
+            "CanUpdateRound": "",
+            "DeadResident": "",
+            "Value": "",
+            "DynamicField1": "AttackFinalRate#0.5",
+            "DynamicField2": "HPFinalRate#0.5",
+            "DynamicField3": "",
+            "DynamicField4": "",
+            "DynamicField5": "",
+            "DynamicField6": "",
+            "VersionControl": ""
+          },
+          "configs": [
+            {
+              "key": "AttackFinalRate",
+              "value": 0.5,
+              "raw": "AttackFinalRate#0.5",
+              "field": "DynamicField1"
+            },
+            {
+              "key": "HPFinalRate",
+              "value": 0.5,
+              "raw": "HPFinalRate#0.5",
+              "field": "DynamicField2"
+            }
+          ]
+        },
+        "Bleed": {
+          "id": "Bleed",
+          "name": "血绽",
+          "description": "回合开始时，依据施展者的攻击受到等比伤害",
+          "raw": {
+            "ID": "Bleed",
+            "Name": "T_Status_Name_Bleed",
+            "Description": "T_Status_Description_Burn",
+            "Icon": "Icon/Skill[Debuff_Bleed]",
+            "Effect": "Effect/Prefab_State/Bleed_Effect_",
+            "HitEffect": "Effect/Prefab_State/Bleed_Effect_",
+            "AnimationName": "",
+            "Group": "Bleed",
+            "Level": "1",
+            "RoundCount": "2",
+            "MaxStack": "",
+            "IsBuffType": "",
+            "IsShowIcon": "",
+            "IsResident": "",
+            "IsReduceBeforeRound": "TRUE",
+            "HitRemove": "",
+            "HurtRemove": "",
+            "BeHitRemove": "",
+            "IsStackMultiplyProp": "",
+            "CanMerge": "FALSE",
+            "IsMergeProperty": "",
+            "IsValueMultiplyProp": "",
+            "CanUpdateRound": "",
+            "DeadResident": "",
+            "Value": "",
+            "DynamicField1": "Fun#{Trigger:\"BuffRound\",Fun:\"BuffAttack\"}",
+            "DynamicField2": "Bleed#1",
+            "DynamicField3": "",
+            "DynamicField4": "",
+            "DynamicField5": "",
+            "DynamicField6": "ForFilter#1",
+            "VersionControl": ""
+          },
+          "configs": [
+            {
+              "key": "Fun",
+              "value": {
+                "Trigger": "BuffRound",
+                "Fun": "BuffAttack"
+              },
+              "raw": "Fun#{Trigger:\"BuffRound\",Fun:\"BuffAttack\"}",
+              "field": "DynamicField1"
+            },
+            {
+              "key": "Bleed",
+              "value": 1,
+              "raw": "Bleed#1",
+              "field": "DynamicField2"
+            },
+            {
+              "key": "ForFilter",
+              "value": 1,
+              "raw": "ForFilter#1",
+              "field": "DynamicField6"
+            }
+          ]
+        },
+        "Sleep": {
+          "id": "Sleep",
+          "name": "静眠",
+          "description": "无法行动，暴击抵抗及闪避下降 100%，受到攻击造成的伤害则会解除",
+          "raw": {
+            "ID": "Sleep",
+            "Name": "T_Status_Name_Sleep",
+            "Description": "T_Status_Description_Sleep",
+            "Icon": "Icon/Skill[Debuff_Sleep]",
+            "Effect": "Effect/Prefab_State/Sleep_Effect_",
+            "HitEffect": "",
+            "AnimationName": "Sleep",
+            "Group": "Sleep",
+            "Level": "1",
+            "RoundCount": "1",
+            "MaxStack": "",
+            "IsBuffType": "",
+            "IsShowIcon": "",
+            "IsResident": "",
+            "IsReduceBeforeRound": "",
+            "HitRemove": "",
+            "HurtRemove": "TRUE",
+            "BeHitRemove": "",
+            "IsStackMultiplyProp": "",
+            "CanMerge": "",
+            "IsMergeProperty": "",
+            "IsValueMultiplyProp": "",
+            "CanUpdateRound": "",
+            "DeadResident": "",
+            "Value": "",
+            "DynamicField1": "Sleep#1",
+            "DynamicField2": "DeCriticalRate#-1",
+            "DynamicField3": "DodgeRate#-1",
+            "DynamicField4": "",
+            "DynamicField5": "",
+            "DynamicField6": "ForFilter#1",
+            "VersionControl": ""
+          },
+          "configs": [
+            {
+              "key": "Sleep",
+              "value": 1,
+              "raw": "Sleep#1",
+              "field": "DynamicField1"
+            },
+            {
+              "key": "DeCriticalRate",
+              "value": -1,
+              "raw": "DeCriticalRate#-1",
+              "field": "DynamicField2"
+            },
+            {
+              "key": "DodgeRate",
+              "value": -1,
+              "raw": "DodgeRate#-1",
+              "field": "DynamicField3"
+            },
+            {
+              "key": "ForFilter",
+              "value": 1,
+              "raw": "ForFilter#1",
+              "field": "DynamicField6"
+            }
+          ]
+        },
+        "IncreaseSpeed": {
+          "id": "IncreaseSpeed",
+          "name": "速度提升",
+          "description": "速度提升 30%",
+          "raw": {
+            "ID": "IncreaseSpeed",
+            "Name": "T_Status_Name_IncreaseSpeed",
+            "Description": "T_Status_Description_IncreaseSpeed",
+            "Icon": "Icon/Skill[Buff_IncreaseSpeed]",
+            "Effect": "Effect/Prefab_Buff/IncreaseSpeed_",
+            "HitEffect": "",
+            "AnimationName": "",
+            "Group": "IncreaseSpd",
+            "Level": "1",
+            "RoundCount": "2",
+            "MaxStack": "",
+            "IsBuffType": "Buff",
+            "IsShowIcon": "",
+            "IsResident": "",
+            "IsReduceBeforeRound": "",
+            "HitRemove": "",
+            "HurtRemove": "",
+            "BeHitRemove": "",
+            "IsStackMultiplyProp": "",
+            "CanMerge": "",
+            "IsMergeProperty": "",
+            "IsValueMultiplyProp": "",
+            "CanUpdateRound": "",
+            "DeadResident": "",
+            "Value": "",
+            "DynamicField1": "SpeedFinalRate#0.3",
+            "DynamicField2": "",
+            "DynamicField3": "",
+            "DynamicField4": "",
+            "DynamicField5": "",
+            "DynamicField6": "ForFilter#1",
+            "VersionControl": ""
+          },
+          "configs": [
+            {
+              "key": "SpeedFinalRate",
+              "value": 0.3,
+              "raw": "SpeedFinalRate#0.3",
+              "field": "DynamicField1"
+            },
+            {
+              "key": "ForFilter",
+              "value": 1,
+              "raw": "ForFilter#1",
+              "field": "DynamicField6"
+            }
+          ]
+        },
+        "ReduceAttack": {
+          "id": "ReduceAttack",
+          "name": "攻击下降",
+          "description": "攻击下降 20%",
+          "raw": {
+            "ID": "ReduceAttack",
+            "Name": "T_Status_Name_ReduceAttack",
+            "Description": "T_Status_Description_ReduceAttack",
+            "Icon": "Icon/Skill[Debuff_DecreaseAttack]",
+            "Effect": "Effect/Prefab_Buff/ReduceAttack_",
+            "HitEffect": "",
+            "AnimationName": "",
+            "Group": "ReduceAttack",
+            "Level": "1",
+            "RoundCount": "2",
+            "MaxStack": "",
+            "IsBuffType": "",
+            "IsShowIcon": "",
+            "IsResident": "",
+            "IsReduceBeforeRound": "",
+            "HitRemove": "",
+            "HurtRemove": "",
+            "BeHitRemove": "",
+            "IsStackMultiplyProp": "",
+            "CanMerge": "",
+            "IsMergeProperty": "",
+            "IsValueMultiplyProp": "",
+            "CanUpdateRound": "",
+            "DeadResident": "",
+            "Value": "",
+            "DynamicField1": "AttackFinalRate#-0.2",
+            "DynamicField2": "",
+            "DynamicField3": "",
+            "DynamicField4": "",
+            "DynamicField5": "",
+            "DynamicField6": "ForFilter#1",
+            "VersionControl": ""
+          },
+          "configs": [
+            {
+              "key": "AttackFinalRate",
+              "value": -0.2,
+              "raw": "AttackFinalRate#-0.2",
+              "field": "DynamicField1"
+            },
+            {
+              "key": "ForFilter",
+              "value": 1,
+              "raw": "ForFilter#1",
+              "field": "DynamicField6"
+            }
+          ]
+        },
+        "Ac_AttackStack": {
+          "id": "Ac_AttackStack",
+          "name": "攻击提升",
+          "description": "",
+          "raw": {
+            "ID": "Ac_AttackStack",
+            "Name": "T_Status_Name_AddAttack",
+            "Description": "",
+            "Icon": "",
+            "Effect": "",
+            "HitEffect": "",
+            "AnimationName": "",
+            "Group": "AttackStack",
+            "Level": "1",
+            "RoundCount": "-1",
+            "MaxStack": "999",
+            "IsBuffType": "None",
+            "IsShowIcon": "FALSE",
+            "IsResident": "TRUE",
+            "IsReduceBeforeRound": "",
+            "HitRemove": "",
+            "HurtRemove": "",
+            "BeHitRemove": "",
+            "IsStackMultiplyProp": "",
+            "CanMerge": "",
+            "IsMergeProperty": "TRUE",
+            "IsValueMultiplyProp": "",
+            "CanUpdateRound": "",
+            "DeadResident": "",
+            "Value": "",
+            "DynamicField1": "AttackFinalRate#0.05",
+            "DynamicField2": "",
+            "DynamicField3": "",
+            "DynamicField4": "",
+            "DynamicField5": "",
+            "DynamicField6": "",
+            "VersionControl": ""
+          },
+          "configs": [
+            {
+              "key": "AttackFinalRate",
+              "value": 0.05,
+              "raw": "AttackFinalRate#0.05",
+              "field": "DynamicField1"
+            }
+          ]
+        }
+      },
+      "roleStatusInfos": [
+        {
+          "RoleIDs": [
+            "C02_SSR_006"
+          ],
+          "Conditions": [
+            {
+              "ID": "Activity_Main",
+              "Comparer": "Gt",
+              "Value1": 0
+            },
+            {
+              "ID": "ActivityBuff",
+              "Comparer": "Eq",
+              "Value1": 0
+            },
+            {
+              "ID": "ActivityBuff_1",
+              "Comparer": "Eq",
+              "Value1": 1
+            },
+            {
+              "ID": "ActivityBuff_2",
+              "Comparer": "Eq",
+              "Value1": 2
+            },
+            {
+              "ID": "ActivityBuff_3",
+              "Comparer": "Eq",
+              "Value1": 3
+            },
+            {
+              "ID": "ActivityBuff_4",
+              "Comparer": "Eq",
+              "Value1": 4
+            },
+            {
+              "ID": "ActivityBuff_5",
+              "Comparer": "Eq",
+              "Value1": 5
+            }
+          ]
+        }
+      ],
+      "sceneRules": [
+        {
+          "cardId": "C02_SSR_006",
+          "maxLevel": 80,
+          "promotionStatus": "Activity_Main",
+          "tiers": [
+            {
+              "imprint": 0,
+              "statusId": "ActivityBuff",
+              "attackRate": 0.1,
+              "hpRate": 0.1
+            },
+            {
+              "imprint": 1,
+              "statusId": "ActivityBuff_1",
+              "attackRate": 0.15,
+              "hpRate": 0.15
+            },
+            {
+              "imprint": 2,
+              "statusId": "ActivityBuff_2",
+              "attackRate": 0.2,
+              "hpRate": 0.2
+            },
+            {
+              "imprint": 3,
+              "statusId": "ActivityBuff_3",
+              "attackRate": 0.3,
+              "hpRate": 0.3
+            },
+            {
+              "imprint": 4,
+              "statusId": "ActivityBuff_4",
+              "attackRate": 0.4,
+              "hpRate": 0.4
+            },
+            {
+              "imprint": 5,
+              "statusId": "ActivityBuff_5",
+              "attackRate": 0.5,
+              "hpRate": 0.5
+            }
+          ]
+        }
+      ],
+      "unresolvedSkillIDs": []
+    }
+  }
+}

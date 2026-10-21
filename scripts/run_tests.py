@@ -12,6 +12,7 @@ subprocess.run([sys.executable,str(ROOT/'tests/test_native_projection.py')],chec
 subprocess.run([sys.executable,str(ROOT/'tests/test_status_presentation.py')],check=True)
 subprocess.run([sys.executable,str(ROOT/'tests/test_catalog_integrity.py')],check=True)
 subprocess.run([sys.executable,str(ROOT/'tests/test_catalog_labels.py')],check=True)
+subprocess.run([sys.executable,str(ROOT/'tests/test_chronicle_data.py')],check=True)
 for p in (ROOT/'src/calculator').glob('*.js'):shutil.copy2(p,TMP/p.name)
 for p in (ROOT/'tests').glob('*.cjs'):shutil.copy2(p,TMP/p.name)
 for p in (ROOT/'tests').glob('*.json'):shutil.copy2(p,TMP/p.name)
@@ -20,5 +21,5 @@ for name in ['calculator_data.json','simulation_data.json']:(TMP/name).write_tex
 (TMP/'catalog_data.json').write_text(json.dumps(extract((ROOT/'docs/catalog.html').read_text('utf8'),'DATA'),ensure_ascii=False),'utf8')
 shutil.copy2(ROOT/'src/catalog/app.js',TMP/'catalog_app.js')
 (TMP/'research').mkdir(exist_ok=True)
-for name in ['test_battle_core.cjs','test_config_engine.cjs','test_native_skill_hit.cjs','test_native_turn_rules.cjs','test_event_lifecycle.cjs','test_native_status_rules.cjs','test_native_complex_rules.cjs','test_native_ai_rules.cjs','test_random_status.cjs','test_timeline.cjs','test_trials.cjs','test_trial_details.cjs','test_trial_plan_inputs.cjs','test_live_client.cjs','test_custom_characters.cjs','test_combat_reporting.cjs','test_table_inputs.cjs','test_formation.cjs','test_catalog_controls.cjs','test_catalog_readers.cjs','test_mechanics_formulas.cjs','test_update_014774.cjs']:
+for name in ['test_battle_core.cjs','test_config_engine.cjs','test_native_skill_hit.cjs','test_native_turn_rules.cjs','test_event_lifecycle.cjs','test_native_status_rules.cjs','test_native_complex_rules.cjs','test_native_ai_rules.cjs','test_native_random_two.cjs','test_random_status.cjs','test_timeline.cjs','test_trials.cjs','test_trial_details.cjs','test_trial_plan_inputs.cjs','test_chronicle.cjs','test_live_client.cjs','test_custom_characters.cjs','test_combat_reporting.cjs','test_table_inputs.cjs','test_formation.cjs','test_catalog_controls.cjs','test_catalog_readers.cjs','test_mechanics_formulas.cjs','test_update_014774.cjs']:
  subprocess.run(['node',name],cwd=TMP,check=True)

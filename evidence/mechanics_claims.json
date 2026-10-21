@@ -664,6 +664,30 @@
           "requireKnown"
         ]
       }
+    ],
+    "chronicle": [
+      {
+        "file": "src/calculator/chronicles.json",
+        "anchors": [
+          "C02_SSR_006_14",
+          "MB004_1_C02_SSR_006",
+          "ActivityBuff_5"
+        ]
+      },
+      {
+        "file": "evidence/chronicle_scene_entry_20261021.md",
+        "anchors": [
+          "Activity_Main",
+          "HPFinalRate"
+        ]
+      },
+      {
+        "file": "tests/test_chronicle.cjs",
+        "anchors": [
+          "initial HP uses the final event-buffed maximum",
+          "scene promotion does not rewrite the saved cultivation plan"
+        ]
+      }
     ]
   },
   "catalog": "catalog_014774"

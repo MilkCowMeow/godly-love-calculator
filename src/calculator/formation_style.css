@@ -11,7 +11,8 @@
 .formation-target{background:var(--soft);box-shadow:inset 0 0 0 2px var(--gold)}
 .formation-keyboard-source{box-shadow:inset 0 0 0 2px var(--ink)}
 .formation-target::after{content:"交换至此";position:absolute;right:9px;bottom:7px;border-radius:3px;background:var(--ink);color:var(--accent-contrast,#fff);font:10px/1.6 var(--body);letter-spacing:.04em;padding:2px 6px;pointer-events:none;z-index:4}
-.formation-ghost.card-pick{position:fixed;left:0;top:0;z-index:1000;pointer-events:none;background:var(--white);border:1px solid var(--gold);border-radius:6px;padding:9px;box-shadow:0 18px 44px var(--shadow,#0003);opacity:.96;transform-origin:50% 50%;will-change:transform;overflow:hidden}
+.formation-ghost.card-pick{position:fixed;z-index:1000;pointer-events:none;background:var(--white);border:0;border-radius:5px;padding:0;outline:1px solid var(--gold);outline-offset:7px;box-shadow:0 18px 44px var(--shadow,#0003),0 0 0 7px var(--white);opacity:.96;will-change:transform;overflow:visible}
+.formation-ghost.card-pick,.formation-ghost.card-pick *,.formation-ghost.card-pick::before,.formation-ghost.card-pick::after{transition:none!important;animation:none!important}
 .formation-dragging,.formation-dragging *{cursor:grabbing!important;user-select:none!important;-webkit-user-select:none!important}
 .formation-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 @media(pointer:fine){.roster-cell .card-pick{cursor:grab;user-select:none;-webkit-user-select:none}.roster-cell .card-pick .chevron{cursor:pointer}}

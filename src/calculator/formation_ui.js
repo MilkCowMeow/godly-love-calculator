@@ -78,7 +78,7 @@
  function updatePointer(){
   if(!pointer?.active)return;
   const to=targetAt(pointer.x,pointer.y);pointer.to=to;mark(pointer.from,to);
-  if(ghost)ghost.style.transform=`translate(${pointer.x-pointer.offsetX}px,${pointer.y-pointer.offsetY}px) rotate(${to>=0&&to!==pointer.from?-.6:1}deg)`;
+  if(ghost)ghost.style.transform=`translate3d(${pointer.x-pointer.startX}px,${pointer.y-pointer.startY}px,0) rotate(${reduced.matches?0:to>=0&&to!==pointer.from?-.6:1}deg)`;
  }
  function autoScroll(time){
   frame=0;if(!pointer?.active)return;
@@ -97,8 +97,12 @@
   pointer.active=true;stopAnimations();
   const pick=cellList()[pointer.from]?.querySelector('.card-pick');
   if(!pick){endPointer();return;}
-  const rect=pick.getBoundingClientRect();pointer.offsetX=Math.min(rect.width-12,Math.max(12,pointer.startX-rect.left));pointer.offsetY=Math.min(rect.height-10,Math.max(10,pointer.startY-rect.top));
-  ghost=pick.cloneNode(true);ghost.classList.add('formation-ghost');ghost.setAttribute('aria-hidden','true');ghost.setAttribute('tabindex','-1');ghost.removeAttribute('data-pick');ghost.removeAttribute('aria-label');ghost.style.width=rect.width+'px';
+  const rect=pick.getBoundingClientRect();
+  ghost=pick.cloneNode(true);ghost.classList.remove('motion-seated');ghost.classList.add('formation-ghost');ghost.setAttribute('aria-hidden','true');ghost.setAttribute('tabindex','-1');ghost.removeAttribute('data-pick');ghost.removeAttribute('aria-label');
+  // 在插入文档前固定原卡坐标，随后只叠加指针位移；手柄位于卡片上方时也保留这个抓取关系。
+  Object.assign(ghost.style,{left:rect.left+'px',top:rect.top+'px',width:rect.width+'px',height:rect.height+'px',transform:'translate3d(0,0,0) rotate(0deg)',transformOrigin:`${pointer.startX-rect.left}px ${pointer.startY-rect.top}px`});
+  // 原卡正处于悬停微动时，预览沿用相同的子元素姿态，避免提起的一刻跳位。
+  for(const selector of ['.thumb','.chevron']){const source=pick.querySelector(selector),copy=ghost.querySelector(selector);if(source&&copy)copy.style.transform=getComputedStyle(source).transform;}
   document.body.append(ghost);document.body.classList.add('formation-dragging');
   try{row.setPointerCapture(pointer.id);}catch{}
   announce(`正在移动第${pointer.from+1}位${memberName(pointer.from)}，松开以交换站位。`);

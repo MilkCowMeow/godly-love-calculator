@@ -2230,6 +2230,36 @@
           "fingerprint": "ce25a6ee79f3c0d65aa6df7264c81e8af40a6e9a8ff1d0da530ea079536006a4"
         }
       ]
+    },
+    "T_Skill_Description_C04_SSR_004S1": {
+      "text": "攻击敌人并使自身行动值提升 12%。自身拥有强化状态时，效果为 2 倍",
+      "guards": [
+        {
+          "table": "skill",
+          "key": "C04_SSR_004S1",
+          "fingerprint": "bcf6d734b87ae292cabd1b3e71edc596b5ed877f6b2fb0d7734d9c025839e214"
+        }
+      ]
+    },
+    "T_Skill_Description_C04_SSR_004S2": {
+      "text": "全体成员附加[攻击提升:AddAttack:StatusFun]( 3 回合)、[速度提升:IncreaseSpeed:StatusFun]( 3 回合)后，自身行动值提升 40%",
+      "guards": [
+        {
+          "table": "skill",
+          "key": "C04_SSR_004S2",
+          "fingerprint": "1e9d0d1e175a05ef5fba85f92526492be5d83fe4e60cc9ba529dafeffca542bd"
+        }
+      ]
+    },
+    "T_Skill_Description_C04_SSR_004S3": {
+      "text": "自身回合施展「战技」后，若我方任一成员拥有弱化状态时，则解除全体成员 2 个弱化状态后，附加[护罩:Shield:StatusFun]( 2 回合)。每 4 回合只会发生 1 次",
+      "guards": [
+        {
+          "table": "skill",
+          "key": "C04_SSR_004S3",
+          "fingerprint": "5cb5bdf0d36c8cdb16df97b71a9f5a5be37a15b6cdf313b19beb7384ad9f7bc7"
+        }
+      ]
     }
   }
 }

@@ -8,6 +8,7 @@ import hashlib
 import io
 import math
 import struct
+import html as html_lib
 from embedded import extract
 from card_characters import assign_characters
 from web_analytics import inject_analytics
@@ -182,6 +183,12 @@ if args.font_dir:
         fonts += '@font-face{font-family:' + name + ';src:url(data:font/woff2;base64,' + base64.b64encode(out.getvalue()).decode() + ') format("woff2");font-display:swap;}\n'
 safe = lambda value: json.dumps(value, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/')
 html = (SRC / 'template.html').read_text('utf8')
+for token, value in {
+    'AS_OF': data['asof'].replace('-', '.'),
+    'CLIENT_VERSION': client['version'],
+    'RESOURCE_CATALOG': data['catalog'],
+}.items():
+    html = html.replace('{{' + token + '}}', html_lib.escape(value))
 for token, value in {
     'STYLE': fonts + (SRC / 'style.css').read_text('utf8') + (SRC / 'motion.css').read_text('utf8'),
     'DATA': 'const DATA=' + safe(data) + ';\nconst ASSETS=' + safe(assets) + ';',

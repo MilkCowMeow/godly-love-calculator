@@ -68,8 +68,10 @@ for event in data['events']:
   if belongs(raw,event['id']) and raw['OutList']!='TRUE':
    event['commodities'].append({**raw,'displayName':tr(raw['Name']) or data['items'].get(raw.get('ItemID',''),'') or raw['ID']})
 news=json.loads(args.news.read_text('utf8'))['data']['news'];notice=next(n for n in news if n['newsId']==3617)
-notice_id='news_3617';notice_record={'id':notice_id,'name':sc(notice['name']),'text':sc(notice['intro']).replace('·','').replace('・',''),'url':'https://game.ero-labs.services/api/v2/announcement/news?lang=zh&nowPage=1&count=20&hgameId=242&labelId=0'}
-data['notices']=[x for x in data['notices'] if x['id']!=notice_id]+[notice_record]
+notice_id='news_3617'
+news_records=[{'id':'news_'+str(n['newsId']),'name':sc(n['name']).strip(),'text':sc(n['intro']).replace('·','').replace('・',''),'url':'https://game.ero-labs.services/api/v2/announcement/news?lang=zh&nowPage=1&count=50&hgameId=242&labelId=0'} for n in news]
+fresh_ids={n['id'] for n in news_records}
+data['notices']=[x for x in data['notices'] if x['id'] not in fresh_ids]+news_records
 if args.banner:
  im=Image.open(args.banner).convert('RGB');buf=io.BytesIO();im.save(buf,'WEBP',quality=96,method=4);blob=buf.getvalue();key=hashlib.sha256(blob).hexdigest()[:16];assets[key]='data:image/webp;base64,'+base64.b64encode(blob).decode()
 else:

@@ -7,9 +7,9 @@ import json
 import sys
 
 from embedded import extract
+from audit_client_content import default_source_tables
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_TABLES = ROOT.parents[1] / '_工作目录/update_20261020/tables'
 
 
 def rows(path):
@@ -113,10 +113,11 @@ def audit(tables):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--tables', type=Path, default=DEFAULT_TABLES)
+    parser.add_argument('--tables', type=Path)
     parser.add_argument('--output', type=Path)
     args = parser.parse_args()
-    result = audit(args.tables)
+    tables = args.tables or default_source_tables(extract((ROOT / 'docs/index.html').read_text('utf8'), 'DATA'))
+    result = audit(tables)
     if args.output:
         args.output.parent.mkdir(parents=True, exist_ok=True)
         args.output.write_text(json.dumps(result, ensure_ascii=False, indent=2) + '\n', 'utf8')

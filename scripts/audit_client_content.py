@@ -19,6 +19,25 @@ EXPECTED_014774 = {
     'cards': 192, 'playerSkills': 583, 'librarySkills': 586,
     'statuses': 97, 'imprintRows': 960, 'ascendRows': 260,
 }
+EXPECTED_014866 = dict(EXPECTED_014774)
+EXPECTED_RELEASES = {
+    'catalog_014774': {
+        'asOf': '2026-10-20', 'counts': EXPECTED_014774,
+        'roleFields': {
+            'C04_SSR_004': {'VersionControl': ''},
+            'C02_R_004': {'GiftSounds': 'Hero/C02_R_002/Sound/C02_R_003_Lvup'},
+        },
+        'skillFields': {'C04_SSR_006S1': {'Description': 'T_Skill_Description_C02_SSR_009S1'}},
+    },
+    'catalog_014866': {
+        'asOf': '2026-10-23', 'counts': EXPECTED_014866,
+        'roleFields': {
+            'C04_SSR_004': {'VersionControl': 'Version_C04_SSR_004'},
+            'C02_R_004': {'GiftSounds': 'Hero/C02_R_003/Sound/C02_R_003_Lvup'},
+        },
+        'skillFields': {'C04_SSR_006S1': {'Description': 'T_Skill_Description_C04_SSR_006S1'}},
+    },
+}
 APPROVED_CONFIG_CORRECTIONS = {'C03_SSR_012S1'}
 RESIDUAL = re.compile(r'\b(?:T|UI)_[A-Za-z0-9_]+|[\[\]\ufffd]|<[^>]+>|\\n')
 
@@ -28,6 +47,14 @@ def load_published(root=ROOT):
         extract((root / 'docs/index.html').read_text('utf8'), 'DATA'),
         extract((root / 'docs/catalog.html').read_text('utf8'), 'DATA'),
     )
+
+
+def default_source_tables(calculator):
+    """默认原表随已核实的资源版本选择，避免新版检查读到历史快照。"""
+    release = EXPECTED_RELEASES.get(calculator.get('catalog'))
+    if release is None:
+        raise ValueError('资源目录缺少已核实的版本审计预期')
+    return ROOT.parents[1] / '_工作目录' / ('update_' + release['asOf'].replace('-', '')) / 'tables'
 
 
 def raw_config_view(configs):
@@ -71,9 +98,18 @@ def audit_published(calculator, catalog):
     require(cards.keys() == cat_cards.keys(), 'cards', '两站卡牌集合不同')
     require(calculator.get('catalog') == catalog.get('catalog'), 'catalog', '两站资源目录版本不同')
     require(calculator.get('asOf') == catalog.get('asof'), 'asOf', '两站数据日期不同')
-    if facts['catalog'] == 'catalog_014774':
-        for key, value in EXPECTED_014774.items():
+    release = EXPECTED_RELEASES.get(facts['catalog'])
+    require(release is not None, 'catalog', '资源目录缺少已核实的版本审计预期')
+    if release is not None:
+        for key, value in release['counts'].items():
             require(facts[key] == value, key, f'预期{value}，实际{facts[key]}')
+        require(calculator.get('asOf') == release['asOf'], 'asOf', '数据日期与已核实版本不同')
+        for kind, records in (('roleFields', cards), ('skillFields', skills)):
+            for identifier, fields in release[kind].items():
+                raw = records.get(identifier, {}).get('raw', {})
+                for field, value in fields.items():
+                    require(raw.get(field) == value, identifier + '.raw.' + field,
+                            '版本关键原字段与已核实更新不同')
     glossary = {row['id']: row for row in calculator.get('glossary', [])}
     cat_glossary = {row['id']: row for row in catalog.get('glossary', [])}
     require(bool(glossary), 'glossary', '共享词典为空')

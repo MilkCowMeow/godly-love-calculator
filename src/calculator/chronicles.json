@@ -1,20 +1,20 @@
 {
-  "catalog": "catalog_014774",
+  "catalog": "catalog_014866",
   "sourceHashes": {
     "scene.txt": "7e82519f54ea0b2d318b4b066252697ae4ef5a83b767185360246ce27f74ab62",
     "chapter.txt": "84a54c58d54cea07c8ba65ba39231e0ef334ed991cf5f1bb773c773442aed446",
     "activity.txt": "52a0aaa312b16bf5922c3c5f2f73296b5bfb47429614ce691f25ba9712edea1a",
-    "role.txt": "63a9eed0867b46f726ca93c6f0d49028c53707fba52946d21a9d56dfcbb79049",
+    "role.txt": "896886546ef2fcfdc8dbcdc9cdd076a1758301145ceaa29c47b3da1b60bd4135",
     "roleproperty.txt": "565576b694dc0cb11402caf789a84a9075306a565a9eb1c366d3d61337d13be1",
-    "skill.txt": "8602dca931a5ea68089b55db2af55c86a4a5516eed95bd111566ad9c3289d878",
+    "skill.txt": "8a9fc2b404f0d9395792befa96eeee967628683f228c58f438cb2e96463d58d0",
     "status.txt": "1a189bcaed30a18e4fa7f7022cdd5464c29c3bb296d62aa3267750140528d647",
     "aiaction.txt": "4ac925f1f00ed9829a0010fc643c8be4f5879786e29efac8bd306a90a643edd6",
-    "locale/CHT": "55720bda7bd8a52f2a897afa15344f3575c763ce5f0d70e89688d649e04a2ab2",
-    "locale/CHS": "0a81719e0ce5fa24b63f984cd8b67824f0718a734c90ecdc0150735b3e6b3f52"
+    "locale/CHT": "74f4e2b84518d38c98ef2e62e28a3269bb9a5b4f0bc00fb779f8eae863efcd8a",
+    "locale/CHS": "5ac874f2eb263ab9918b8a658b932e3350d4933aae81c4e9ac6889f743f4d2d3"
   },
   "chronicles": {
     "C02_SSR_006_14": {
-      "catalog": "catalog_014774",
+      "catalog": "catalog_014866",
       "id": "C02_SSR_006_14",
       "activityId": "BranchC02_SSR_006",
       "activityName": "共奏心音",

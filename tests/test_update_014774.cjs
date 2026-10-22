@@ -2,8 +2,25 @@
 const assert=require('node:assert/strict'),fs=require('node:fs');
 const {T,data}=require('./load_simulation.cjs'),B=global.GLBattle;
 const catalog=JSON.parse(fs.readFileSync(__dirname+'/catalog_data.json','utf8'));
-assert.equal(data.catalog,'catalog_014774');assert.equal(catalog.catalog,'catalog_014774');
-assert.equal(data.asOf,'2026-10-20');assert.equal(catalog.asof,'2026-10-20');
+const releases={
+ catalog_014774:{asOf:'2026-10-20',versionGate:'',gift:'Hero/C02_R_002/Sound/C02_R_003_Lvup',descriptionKey:'T_Skill_Description_C02_SSR_009S1'},
+ catalog_014866:{asOf:'2026-10-23',versionGate:'Version_C04_SSR_004',gift:'Hero/C02_R_003/Sound/C02_R_003_Lvup',descriptionKey:'T_Skill_Description_C04_SSR_006S1'}
+};
+const release=releases[data.catalog];assert.ok(release,'资源版本须有明确回归预期：'+data.catalog);
+assert.equal(catalog.catalog,data.catalog);
+assert.equal(data.asOf,release.asOf);assert.equal(catalog.asof,release.asOf);
+assert.equal(data.cards.length,192);assert.equal(catalog.cards.length,192);
+assert.equal(data.cards.reduce((count,card)=>count+card.skills.length,0),583);
+assert.equal(Object.keys(data.skills).length,586);assert.equal(Object.keys(data.statuses).length,97);
+assert.equal(data.cards.reduce((count,card)=>count+card.imprint.length,0),960);
+assert.equal(data.cards.reduce((count,card)=>count+card.ascend.length,0),260);
+assert.equal(data.cards.find(c=>c.id==='C04_SSR_004').raw.VersionControl,release.versionGate);
+assert.equal(data.cards.find(c=>c.id==='C02_R_004').raw.GiftSounds,release.gift);
+assert.equal(data.skills.C04_SSR_006S1.raw.Description,release.descriptionKey);
+for(const sid of ['C04_SSR_004S1','C04_SSR_004S2','C04_SSR_004S3']){
+ assert.ok(data.skills[sid].description,'指缝柔光删中文键后保留匹配配置的受保护原文：'+sid);
+ assert.equal(catalog.cards.find(c=>c.id==='C04_SSR_004').skills.find(s=>s.id===sid).description,data.skills[sid].description);
+}
 assert.equal(data.publicVariables.BuildinResistance,.1);
 assert.equal(data.cards.find(c=>c.id==='C02_SSR_006').availability,'current_announced');
 assert.equal(data.cards.find(c=>c.id==='C04_SSR_006').availability,'past_announced');
@@ -25,4 +42,4 @@ assert.equal(sim.effectResisted(owner,target,{Fun:'AddStatus',FID:'ReduceAttack'
 sim.data=data;target.props.IgnoreBuildinResist=1;assert.equal(sim.effectResisted(owner,target,{Fun:'AddStatus',FID:'ReduceAttack',IgnoreDodge:true},action,ctx),false);
 assert.ok(Math.abs(B.effectChance(.75,.2,.1)-.675)<1e-6);
 for(const c of data.cards){assert.ok(c.name&&!c.name.startsWith('T_'));const same=catalog.cards.find(x=>x.id===c.id);for(const sid of c.skills){if(!data.skills[sid])continue;assert.deepEqual(same.skills.find(s=>s.id===sid).row,data.skills[sid].raw,'全部卡牌的图鉴技能原表与计算器一致');}}
-console.log('通过：014774双站数据、共奏心音8%治疗/4回合冷却、内置抵抗数据驱动、50层敌方抗性、活动档期与192卡技能一致性。');
+console.log(`通过：${data.catalog}双站数据及版本变更、共奏心音8%治疗/4回合冷却、内置抵抗数据驱动、50层敌方抗性、活动档期与192卡技能一致性。`);

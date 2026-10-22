@@ -11,6 +11,7 @@ import unittest
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'scripts'))
 from embedded import extract
+from audit_client_content import default_source_tables
 
 
 class CatalogIntegrityTests(unittest.TestCase):
@@ -21,7 +22,7 @@ class CatalogIntegrityTests(unittest.TestCase):
         cls.cards = {card['id']: card for card in cls.data['cards']}
         cls.events = {event['id']: event for event in cls.data['events']}
         cls.native = {card['id']: card for card in cls.calculator['cards']}
-        cls.tables = Path(os.environ.get('GL_CLIENT_TABLES', ROOT.parents[1] / '_工作目录/update_20261020/tables'))
+        cls.tables = Path(os.environ.get('GL_CLIENT_TABLES') or default_source_tables(cls.calculator))
 
     def rows(self, name):
         path = self.tables / (name + '.txt')

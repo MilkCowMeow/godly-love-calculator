@@ -28,6 +28,14 @@ class BuildIntegrityTests(unittest.TestCase):
             self.assertEqual(missing_sources(self.pages[filename], paths), [], filename)
             self.assertNotRegex(self.pages[filename], r'/\*(?:ICON|STYLE|DATA|CORE|CONFIG|TIMELINE|MODULES|APP)\*/')
 
+    def test_catalog_edition_and_footer_match_embedded_data(self):
+        page = self.pages['catalog.html']
+        catalog = extract(page, 'DATA')
+        client = extract(self.pages['index.html'], 'DATA')
+        self.assertIn('资料核查 <b>' + catalog['asof'].replace('-', '.') + '</b>', page)
+        self.assertIn('资料版本 ' + client['version'] + ' / ' + catalog['catalog'] + ' /', page)
+        self.assertNotRegex(page, r'\{\{(?:AS_OF|CLIENT_VERSION|RESOURCE_CATALOG)\}\}')
+
     def test_worker_uses_the_same_current_battle_modules(self):
         worker = extract(self.pages['index.html'], 'SIM_WORKER_SOURCE')
         modules = ['battle_core.js', 'config_engine.js', 'timeline_engine.js',

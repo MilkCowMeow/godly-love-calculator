@@ -162,8 +162,9 @@ function install(S){const P=S.prototype,select0=P.select;
      else if(fun==='AddStatus'||fun==='RandomAddStatus'){
       const id=fun==='AddStatus'?f.FID:(f.FIDs||[])[Math.floor(this.random()*(f.FIDs||[]).length)],def=this.data.statuses[id];if(!def)throw new T.Incomplete('《'+owner.card.name+'》的 '+(f._origin||'技能')+' 引用状态 '+id+'，当前客户端没有该定义。');
       const ty=def.raw.IsBuffType||'DeBuff',anti='Anti'+id;
-      if(target.immuneList.includes(anti))success=false;
-      else if(ty==='DeBuff'&&this.effectResisted(owner,target,f,action,ctx))success=false;
+      // Native AddStatusToRole performs effect resistance before the specific Anti<status> check.
+      if(ty==='DeBuff'&&this.effectResisted(owner,target,f,action,ctx))success=false;
+      else if(target.immuneList.includes(anti))success=false;
       else {const v=f.StatusValue?this.value(f.StatusValue,ctx):val;success=this.addStatus(owner,target,id,f.StatusRound,v,action);if(success&&id==='Shield'&&owner.camp===0)this.row.members[owner.slot].shield+=v;}
      }
      else if(fun==='AddHP'||fun==='AddHPWithInjury')success=this.heal(owner,target,val,action,f,ctx);

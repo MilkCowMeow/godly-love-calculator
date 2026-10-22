@@ -1,0 +1,674 @@
+{
+  "schemaVersion": 1,
+  "scope": "014866客户端试炼第37层实测标量伤害公式与取整。命中倍率为已观察输入；状态、AI、行动次序和完整随机序列另行验证。",
+  "loggedPrecisionTolerance": 0.005,
+  "samples": [
+    {
+      "line": 759,
+      "hitMultiplier": 1.15,
+      "params": {
+        "attack": 2985.0,
+        "attRate": 1.08,
+        "constAttack": 0.0,
+        "attackPowerRate": 1.871,
+        "pow": 1.0,
+        "conditionMultiplier": 1.0,
+        "conquerMultiplier": 1.1,
+        "defence": 3470.0,
+        "defenceRate": 1.0,
+        "penetrations": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "defenceConstant": 2000.0
+      },
+      "expectedRaw": 2789.813,
+      "expectedInteger": 2790
+    },
+    {
+      "line": 812,
+      "hitMultiplier": 1.3,
+      "params": {
+        "attack": 2985.0,
+        "attRate": 1.08,
+        "constAttack": 0.0,
+        "attackPowerRate": 1.871,
+        "pow": 1.0,
+        "conditionMultiplier": 1.0,
+        "conquerMultiplier": 1.0,
+        "defence": 3804.0,
+        "defenceRate": 1.0,
+        "penetrations": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "defenceConstant": 2000.0
+      },
+      "expectedRaw": 2702.015,
+      "expectedInteger": 2702
+    },
+    {
+      "line": 865,
+      "hitMultiplier": 1.3,
+      "params": {
+        "attack": 2985.0,
+        "attRate": 1.08,
+        "constAttack": 0.0,
+        "attackPowerRate": 1.871,
+        "pow": 1.0,
+        "conditionMultiplier": 1.0,
+        "conquerMultiplier": 1.0,
+        "defence": 2275.0,
+        "defenceRate": 1.0,
+        "penetrations": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "defenceConstant": 2000.0
+      },
+      "expectedRaw": 3668.42,
+      "expectedInteger": 3668
+    },
+    {
+      "line": 946,
+      "hitMultiplier": 1.0,
+      "params": {
+        "attack": 2985.0,
+        "attRate": 1.08,
+        "constAttack": 0.0,
+        "attackPowerRate": 1.871,
+        "pow": 1.0,
+        "conditionMultiplier": 1.0,
+        "conquerMultiplier": 1.0,
+        "defence": 2464.0,
+        "defenceRate": 1.0,
+        "penetrations": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "defenceConstant": 2000.0
+      },
+      "expectedRaw": 2702.388,
+      "expectedInteger": 2702
+    },
+    {
+      "line": 1586,
+      "hitMultiplier": 1.0,
+      "params": {
+        "attack": 3906.0,
+        "attRate": 1.08,
+        "constAttack": 0.0,
+        "attackPowerRate": 1.871,
+        "pow": 1.0,
+        "conditionMultiplier": 1.03118,
+        "conquerMultiplier": 1.0,
+        "defence": 7735.0,
+        "defenceRate": 1.0,
+        "penetrations": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "defenceConstant": 2000.0
+      },
+      "expectedRaw": 1672.084,
+      "expectedInteger": 1672
+    },
+    {
+      "line": 1977,
+      "hitMultiplier": 0.75,
+      "params": {
+        "attack": 5303.0,
+        "attRate": 1.24,
+        "constAttack": 0.0,
+        "attackPowerRate": 1.871,
+        "pow": 1.0,
+        "conditionMultiplier": 1.0,
+        "conquerMultiplier": 1.0,
+        "defence": 7735.0,
+        "defenceRate": 1.0,
+        "penetrations": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "defenceConstant": 2000.0
+      },
+      "expectedRaw": 1895.712,
+      "expectedInteger": 1896
+    },
+    {
+      "line": 2491,
+      "hitMultiplier": 1.0,
+      "params": {
+        "attack": 3958.0,
+        "attRate": 1.8,
+        "constAttack": 0.0,
+        "attackPowerRate": 1.871,
+        "pow": 1.0,
+        "conditionMultiplier": 1.025535,
+        "conquerMultiplier": 1.0,
+        "defence": 7735.0,
+        "defenceRate": 1.0,
+        "penetrations": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "defenceConstant": 2000.0
+      },
+      "expectedRaw": 2808.451,
+      "expectedInteger": 2808
+    },
+    {
+      "line": 2866,
+      "hitMultiplier": 1.0,
+      "params": {
+        "attack": 5167.0,
+        "attRate": 1.08,
+        "constAttack": 0.0,
+        "attackPowerRate": 1.871,
+        "pow": 1.0,
+        "conditionMultiplier": 1.018404,
+        "conquerMultiplier": 1.0,
+        "defence": 7735.0,
+        "defenceRate": 1.0,
+        "penetrations": [
+          0.30000000000000004,
+          0.0,
+          0.0
+        ],
+        "defenceConstant": 2000.0
+      },
+      "expectedRaw": 2868.167,
+      "expectedInteger": 2868
+    },
+    {
+      "line": 3597,
+      "hitMultiplier": 1.0,
+      "params": {
+        "attack": 3127.0,
+        "attRate": 1.15,
+        "constAttack": 0.0,
+        "attackPowerRate": 1.871,
+        "pow": 1.0,
+        "conditionMultiplier": 1.0,
+        "conquerMultiplier": 1.0,
+        "defence": 2275.0,
+        "defenceRate": 1.0,
+        "penetrations": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "defenceConstant": 2000.0
+      },
+      "expectedRaw": 3147.7,
+      "expectedInteger": 3148
+    },
+    {
+      "line": 4041,
+      "hitMultiplier": 1.0,
+      "params": {
+        "attack": 4687.0,
+        "attRate": 0.8,
+        "constAttack": 0.0,
+        "attackPowerRate": 1.871,
+        "pow": 1.0,
+        "conditionMultiplier": 1.03118,
+        "conquerMultiplier": 1.0,
+        "defence": 7735.0,
+        "defenceRate": 1.0,
+        "penetrations": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "defenceConstant": 2000.0
+      },
+      "expectedRaw": 1486.234,
+      "expectedInteger": 1486
+    },
+    {
+      "line": 4450,
+      "hitMultiplier": 1.15,
+      "params": {
+        "attack": 3269.0,
+        "attRate": 1.15,
+        "constAttack": 0.0,
+        "attackPowerRate": 1.871,
+        "pow": 1.0,
+        "conditionMultiplier": 1.0,
+        "conquerMultiplier": 1.0,
+        "defence": 2275.0,
+        "defenceRate": 1.0,
+        "penetrations": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "defenceConstant": 2000.0
+      },
+      "expectedRaw": 3784.236,
+      "expectedInteger": 3784
+    },
+    {
+      "line": 4910,
+      "hitMultiplier": 1.0,
+      "params": {
+        "attack": 5303.0,
+        "attRate": 1.0,
+        "constAttack": 0.0,
+        "attackPowerRate": 1.871,
+        "pow": 1.0,
+        "conditionMultiplier": 1.0,
+        "conquerMultiplier": 1.0,
+        "defence": 7735.0,
+        "defenceRate": 1.0,
+        "penetrations": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "defenceConstant": 2000.0
+      },
+      "expectedRaw": 2038.4,
+      "expectedInteger": 2038
+    },
+    {
+      "line": 5420,
+      "hitMultiplier": 1.0,
+      "params": {
+        "attack": 3958.0,
+        "attRate": 0.8,
+        "constAttack": 0.0,
+        "attackPowerRate": 1.871,
+        "pow": 1.0,
+        "conditionMultiplier": 1.0,
+        "conquerMultiplier": 1.0,
+        "defence": 7735.0,
+        "defenceRate": 1.0,
+        "penetrations": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "defenceConstant": 2000.0
+      },
+      "expectedRaw": 1217.121,
+      "expectedInteger": 1217
+    },
+    {
+      "line": 5896,
+      "hitMultiplier": 1.3,
+      "params": {
+        "attack": 5167.0,
+        "attRate": 0.92,
+        "constAttack": 0.0,
+        "attackPowerRate": 1.871,
+        "pow": 1.0,
+        "conditionMultiplier": 1.0,
+        "conquerMultiplier": 1.0,
+        "defence": 7735.0,
+        "defenceRate": 1.0,
+        "penetrations": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "defenceConstant": 2000.0
+      },
+      "expectedRaw": 2375.404,
+      "expectedInteger": 2375
+    },
+    {
+      "line": 6736,
+      "hitMultiplier": 1.0,
+      "params": {
+        "attack": 3411.0,
+        "attRate": 1.15,
+        "constAttack": 0.0,
+        "attackPowerRate": 1.871,
+        "pow": 1.0,
+        "conditionMultiplier": 1.0,
+        "conquerMultiplier": 1.0,
+        "defence": 2730.0,
+        "defenceRate": 1.0,
+        "penetrations": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "defenceConstant": 2000.0
+      },
+      "expectedRaw": 3103.289,
+      "expectedInteger": 3103
+    },
+    {
+      "line": 7187,
+      "hitMultiplier": 1.0,
+      "params": {
+        "attack": 4687.0,
+        "attRate": 0.8,
+        "constAttack": 0.0,
+        "attackPowerRate": 1.871,
+        "pow": 1.0,
+        "conditionMultiplier": 1.03118,
+        "conquerMultiplier": 1.0,
+        "defence": 7735.0,
+        "defenceRate": 1.0,
+        "penetrations": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "defenceConstant": 2000.0
+      },
+      "expectedRaw": 1486.234,
+      "expectedInteger": 1486
+    },
+    {
+      "line": 7647,
+      "hitMultiplier": 0.75,
+      "params": {
+        "attack": 5303.0,
+        "attRate": 1.0,
+        "constAttack": 0.0,
+        "attackPowerRate": 1.871,
+        "pow": 1.0,
+        "conditionMultiplier": 1.0,
+        "conquerMultiplier": 1.0,
+        "defence": 7735.0,
+        "defenceRate": 1.0,
+        "penetrations": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "defenceConstant": 2000.0
+      },
+      "expectedRaw": 1528.8,
+      "expectedInteger": 1529
+    },
+    {
+      "line": 8238,
+      "hitMultiplier": 1.0,
+      "params": {
+        "attack": 3958.0,
+        "attRate": 0.8,
+        "constAttack": 0.0,
+        "attackPowerRate": 1.871,
+        "pow": 1.0,
+        "conditionMultiplier": 1.0,
+        "conquerMultiplier": 1.0,
+        "defence": 7735.0,
+        "defenceRate": 1.0,
+        "penetrations": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "defenceConstant": 2000.0
+      },
+      "expectedRaw": 1217.121,
+      "expectedInteger": 1217
+    },
+    {
+      "line": 8666,
+      "hitMultiplier": 0.75,
+      "params": {
+        "attack": 3553.0,
+        "attRate": 1.08,
+        "constAttack": 0.0,
+        "attackPowerRate": 1.871,
+        "pow": 1.0,
+        "conditionMultiplier": 1.0,
+        "conquerMultiplier": 1.1,
+        "defence": 4164.0,
+        "defenceRate": 1.0,
+        "penetrations": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "defenceConstant": 2000.0
+      },
+      "expectedRaw": 1921.826,
+      "expectedInteger": 1922
+    },
+    {
+      "line": 8747,
+      "hitMultiplier": 1.0,
+      "params": {
+        "attack": 3553.0,
+        "attRate": 1.08,
+        "constAttack": 0.0,
+        "attackPowerRate": 1.871,
+        "pow": 1.0,
+        "conditionMultiplier": 1.0,
+        "conquerMultiplier": 1.0,
+        "defence": 4564.0,
+        "defenceRate": 1.0,
+        "penetrations": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "defenceConstant": 2000.0
+      },
+      "expectedRaw": 2187.531,
+      "expectedInteger": 2188
+    },
+    {
+      "line": 8841,
+      "hitMultiplier": 1.0,
+      "params": {
+        "attack": 3553.0,
+        "attRate": 1.08,
+        "constAttack": 0.0,
+        "attackPowerRate": 1.871,
+        "pow": 1.0,
+        "conditionMultiplier": 1.0,
+        "conquerMultiplier": 1.0,
+        "defence": 2730.0,
+        "defenceRate": 1.0,
+        "penetrations": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "defenceConstant": 2000.0
+      },
+      "expectedRaw": 3035.719,
+      "expectedInteger": 3036
+    },
+    {
+      "line": 8893,
+      "hitMultiplier": 0.75,
+      "params": {
+        "attack": 3553.0,
+        "attRate": 1.08,
+        "constAttack": 0.0,
+        "attackPowerRate": 1.871,
+        "pow": 1.0,
+        "conditionMultiplier": 1.0,
+        "conquerMultiplier": 1.0,
+        "defence": 2957.0,
+        "defenceRate": 1.0,
+        "penetrations": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "defenceConstant": 2000.0
+      },
+      "expectedRaw": 2172.527,
+      "expectedInteger": 2173
+    },
+    {
+      "line": 9561,
+      "hitMultiplier": 1.15,
+      "params": {
+        "attack": 5167.0,
+        "attRate": 0.92,
+        "constAttack": 0.0,
+        "attackPowerRate": 1.871,
+        "pow": 1.0,
+        "conditionMultiplier": 1.0,
+        "conquerMultiplier": 1.0,
+        "defence": 7735.0,
+        "defenceRate": 1.0,
+        "penetrations": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "defenceConstant": 2000.0
+      },
+      "expectedRaw": 2101.319,
+      "expectedInteger": 2101
+    },
+    {
+      "line": 10135,
+      "hitMultiplier": 1.3,
+      "params": {
+        "attack": 3906.0,
+        "attRate": 0.8,
+        "constAttack": 0.0,
+        "attackPowerRate": 1.871,
+        "pow": 1.0,
+        "conditionMultiplier": 1.056255,
+        "conquerMultiplier": 1.0,
+        "defence": 7735.0,
+        "defenceRate": 1.0,
+        "penetrations": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "defenceConstant": 2000.0
+      },
+      "expectedRaw": 1649.309,
+      "expectedInteger": 1649
+    },
+    {
+      "line": 10611,
+      "hitMultiplier": 0.75,
+      "params": {
+        "attack": 5303.0,
+        "attRate": 1.0,
+        "constAttack": 0.0,
+        "attackPowerRate": 1.871,
+        "pow": 1.0,
+        "conditionMultiplier": 1.0,
+        "conquerMultiplier": 1.0,
+        "defence": 7735.0,
+        "defenceRate": 1.0,
+        "penetrations": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "defenceConstant": 2000.0
+      },
+      "expectedRaw": 1528.8,
+      "expectedInteger": 1529
+    },
+    {
+      "line": 11035,
+      "hitMultiplier": 1.0,
+      "params": {
+        "attack": 3696.0,
+        "attRate": 1.15,
+        "constAttack": 0.0,
+        "attackPowerRate": 1.871,
+        "pow": 1.0,
+        "conditionMultiplier": 1.0,
+        "conquerMultiplier": 1.1,
+        "defence": 3470.0,
+        "defenceRate": 1.0,
+        "penetrations": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "defenceConstant": 2000.0
+      },
+      "expectedRaw": 3198.446,
+      "expectedInteger": 3198
+    },
+    {
+      "line": 11459,
+      "hitMultiplier": 1.0,
+      "params": {
+        "attack": 3906.0,
+        "attRate": 1.08,
+        "constAttack": 0.0,
+        "attackPowerRate": 1.871,
+        "pow": 1.0,
+        "conditionMultiplier": 1.056255,
+        "conquerMultiplier": 1.0,
+        "defence": 7735.0,
+        "defenceRate": 1.0,
+        "penetrations": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "defenceConstant": 2000.0
+      },
+      "expectedRaw": 1712.744,
+      "expectedInteger": 1713
+    },
+    {
+      "line": 11982,
+      "hitMultiplier": 1.15,
+      "params": {
+        "attack": 5167.0,
+        "attRate": 0.92,
+        "constAttack": 0.0,
+        "attackPowerRate": 1.871,
+        "pow": 1.0,
+        "conditionMultiplier": 1.0,
+        "conquerMultiplier": 1.0,
+        "defence": 7735.0,
+        "defenceRate": 1.0,
+        "penetrations": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "defenceConstant": 2000.0
+      },
+      "expectedRaw": 2101.319,
+      "expectedInteger": 2101
+    },
+    {
+      "line": 12178,
+      "hitMultiplier": 1.0,
+      "params": {
+        "attack": 4687.0,
+        "attRate": 0.8,
+        "constAttack": 0.0,
+        "attackPowerRate": 1.871,
+        "pow": 1.0,
+        "conditionMultiplier": 1.056255,
+        "conquerMultiplier": 1.0,
+        "defence": 7735.0,
+        "defenceRate": 1.0,
+        "penetrations": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "defenceConstant": 2000.0
+      },
+      "expectedRaw": 1522.375,
+      "expectedInteger": 1522
+    }
+  ]
+}

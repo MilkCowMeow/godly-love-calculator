@@ -86,18 +86,18 @@ Definitions stay in the current browser. Exported team plans include the custom 
 
 | Item | Status |
 |---|---|
-| 📦 Client resource catalog | `catalog_014774`, paired native library `1.0.1.014517` |
-| 🗓️ Data reviewed | `2026-10-21`, data snapshot `2026-10-20` |
+| 📦 Client resource catalog | Website `catalog_014866`; native runs use `catalog_014774` with library `1.0.1.014517`; combat fields checked for parity |
+| 🗓️ Data reviewed | `2026-10-23`, data snapshot `2026-10-23` |
 | 🃏 Calculator dataset | 192 cards, 583 player skill references, 586 skill definitions, 97 statuses, 50 Trial floors |
 | 🧩 Unit checks | Scalar damage, configuration parsing, statuses, scheduling, complex effects, and AI |
 | 🔁 Continuous simulations | 300 cross-floor battles plus damage-total conservation checks |
 | 🖥️ Interface checks | Desktop, 390px mobile, cross-page navigation, and worker-based calculation |
 | 🎞️ Community video review | Key frames and old/new client configurations checked; [review notes in Chinese](evidence/community_video_review.md) |
-| 🎮 Native client comparison | MuMu Trial Floor 50: [15 damage samples plus stats, stacking, and DOT values checked](evidence/native_client_comparison.md), using a local data service |
+| 🎮 Native client comparison | Four additional original-client battles in MuMu using a local data service: Trial floors 37, 45 and 50, [151 damage samples, 51 positive healing requests and 33 shield applications checked](evidence/native_batch_20261023.md); the earlier 15-hit/stat audit remains in the [initial record](evidence/native_client_comparison.md) |
 
 **One explicit configuration correction:** on 2026-10-18, the unmodified APK and native dispatch confirmed that 《誓约束缚》's basic skill places the random-application function name in its status-ID field. Following the user's explicit choice, the calculator corrects this exact row to use the existing random-application function, preserving the source data, 75% base probability, four candidates and one-turn duration. The card can now be simulated; see the [audit and correction rationale](evidence/random_add_status_audit.md). This does not imply that the unmodified client behaves identically, or that a pre-release card has launched.
 
-Native-method/configuration audit summaries are in [`evidence/`](evidence/). This client comparison exposed and fixed stat-precision and early-rounding issues. Full character-by-character, turn-by-turn verification using an official-server account has not been completed.
+Native-method/configuration audit summaries are in [`evidence/`](evidence/). Original-client comparisons have exposed and fixed stat precision, premature rounding and Boss-retirement timing. Each validation record states its coverage and observed random-branch inputs.
 
 ## 🚀 Local Use & Development
 

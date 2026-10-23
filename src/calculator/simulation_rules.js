@@ -65,7 +65,7 @@ function install(S){const P=S.prototype,select0=P.select;
  };
  P.passiveTriggerFunctions=function(owner,trigger){return this.functions(owner).filter(f=>!f._property&&(f.Trigger||'AfterSkill')===trigger&&!(owner.props.IsSealPassive&&!f._status)).sort((a,b)=>N(a.ParamOrder)-N(b.ParamOrder));};
  P.trigger=function(owner,trigger,action=this.action,event=null){
-  if(owner.dead&&!['SelfDead','OtherDead','AfterRevive','PreSelfDead','AfterEvent'].includes(trigger))return;
+  if(owner.dead&&!['SelfDead','OtherDead','AfterRevive','PreSelfDead','AfterEvent'].includes(trigger)&&!event?.nativeEvent?.isSystemPunish)return;
   for(const f of this.passiveTriggerFunctions(owner,trigger)){const a={...(action||{}),_eventSource:event?event.source:action?.actor,_eventTarget:event?.target||action?.hitTarget};if(f._status)a.status=f._status;if(f._auraSource)a.status={source:f._auraSource};this.execute(owner,f,a,event?.target||action?.selected||owner,event);}
  };
  P.numeric=function(fs,ctx,keys){const projected=fs.filter(f=>keys.some(k=>f[k])).map(f=>{const o={Trigger:'AfterSkill',Condition:f.Condition,Conditions:f.Conditions,PreCond:f.PreCond,_origin:f._origin};for(const k of keys)if(f[k])o[k]=cleanVC(f[k]);return o;});const a=C.analyzeFunctions(projected,ctx);this.requireKnown(a.unsupported,'数值公式');return a;};

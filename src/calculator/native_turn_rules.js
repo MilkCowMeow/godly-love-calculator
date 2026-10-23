@@ -15,6 +15,36 @@ function install(Simulation){
   return [...new Set(out.map(String))];
  };
  P.nativeAntiFun=function(u,number,name){const xs=this.nativePropertyList(u,'AntiFun');return xs.includes(String(number))||xs.includes(name);};
+ P.processNativeBossDead=function(){
+  // BossRole 0x2301178 selects the first MonsterSetting.Boss. ProcessBossDead
+  // 0x223E200 retires its living non-Boss campmates after the complete action.
+  const boss=this.units.find(u=>u.isMonster&&u.isBoss);
+  if(!boss||boss.hp>=1)return 0;
+  const targets=this.units.filter(u=>u.camp===boss.camp&&!u.isBoss&&u.hp>=1);
+  if(!targets.length)return 0;
+  const previous=this.action,system={actor:null,skill:{id:'',raw:{AttRate:'0',Pow:'0'}},main:false,kind:'system',actionType:5,normal:false,selected:null,directTargets:[]};
+  this.action=system;
+  try{
+   for(const target of targets){
+    const removed=[...target.statuses],firstIsBuff=removed.length&&this.statusType(removed[0])==='Buff';
+    const remove=()=>{target.OldBuffCount=target.buffCount;target.statuses=target.statuses.filter(st=>!removed.includes(st));target.LastRemoveDebuffCount=removed.filter(st=>this.statusType(st)==='DeBuff').length;this.refresh(target);if(removed.length)this.log('status',null,target,'Boss退场移除状态',{removed:removed.map(st=>st.id),systemBossClear:true});};
+    if(typeof this.nativeStatusMutation==='function')this.nativeStatusMutation(null,target,system,{eventFun:firstIsBuff?'RemoveBuf':'RemoveDeBuf',eventFunValue:firstIsBuff?5:4,hitType:'RemoveBuff',removedStatuses:removed},remove);
+    else remove();
+    const shield=target.statuses.filter(st=>C.nativeStatusProperties({...st,def:this.data.statuses[st.id]}).flags.shield).reduce((total,st)=>total+N(st.value),0);
+    const punishment=F(-99999-Math.trunc(target.hp)-root.GLBattle.roundEven(shield));
+    target.dieOut=true;target.IsDieOut=true;target.hp=0;target.dead=true;this.refresh(target);
+    const event={damage:false,target,source:null,hpDiff:punishment,beforeHP:0,afterHP:0,nativeEvent:{eventFun:'No',hitType:'NoHit',ordinaryHit:false,damageHit:false,isSystemPunish:true,hpDiffValue:punishment}};
+    this.trigger(target,'BeforeEvent',system,event);
+    target.hp=0;target.dead=true;this.refresh(target);event.hpDiff=0;
+    this.trigger(target,'AfterEvent',system,event);
+    // The native event starts at HP=0, so IsEventToDead is false. Keep this
+    // separate from ordinary damage, SelfDead and OtherDeadAfter dispatch.
+    this._nativeProcessedDeaths=this._nativeProcessedDeaths||new Set();this._nativeProcessedDeaths.add(target.uid);
+    this.log('death',null,target,'Boss退场',{systemBossClear:true,isSystemPunish:true,hp:target.hp,actual:0});
+   }
+  }finally{this.action=previous;}
+  return targets.length;
+ };
  P.nativeMainCooldownSkills=function(u){
   // SkillContainer.GetAllMainCoolDownSkills 0x234B7A8 skips index 0,
   // then requires Active and a false static IsNormalSkill property (139).
@@ -129,7 +159,11 @@ function install(Simulation){
   if(typeof this.flushComplexDamage==='function')this.flushComplexDamage(generic);
   if(typeof this.processNativeDeaths==='function')this.processNativeDeaths();
   if(typeof this.flushRevives==='function')this.flushRevives(generic);
+  this.processNativeBossDead();
   if(this.queues.length)fail('回合开始阶段产生追加技能，独立原生上下文队列处理尚未核验');
+  // IsNextRoleActionStep 0x223F704 skips the main action and AfterRound when
+  // the before-round chain has already finished the wave.
+  if(!this.alive(0).length||!this.alive(1).length){this.result=this.alive(0).length?'victory':'defeat';this.action=null;return false;}
   let mainAction=null;
   if(u.dead||this.willPass(u))this.log('skip',u,u,u.dead?'回合开始伤害导致倒下':'控制状态跳过行动');
   else{
@@ -158,6 +192,7 @@ function install(Simulation){
   if(typeof this.flushRevives==='function')this.flushRevives(endAction);
   this.tickStatuses(u,{...endAction,statusPhase:'after'});
   if(this.queues.length)fail('回合结束阶段产生追加技能，原生阶段队列处理尚未核验');
+  this.processNativeBossDead();
   u.mainCount++;
   if(u.camp===0){this.rowActions.add(u.uid);this.row.mainActions++;}
   for(const other of this.units)this.refresh(other);

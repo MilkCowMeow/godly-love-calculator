@@ -15,6 +15,8 @@
 
 </div>
 
+Four additional battles in the original client cover Trial floors 37, 45 and 50. Conditional replays match 151 damage samples, 51 positive healing requests and 33 shield applications. Boss defeat now retires surviving non-Boss allies at the native phase, with early termination when the opening phase ends a wave. See the [validation record](evidence/native_batch_20261023.md).
+
 ## ✨ About
 
 An unofficial reference and calculation project for **Godly Love** (《神明恋爱放送中》). It combines a readable character/event catalog with a continuous-battle calculator implemented from the local client's configurations and native methods.

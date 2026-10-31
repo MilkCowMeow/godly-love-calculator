@@ -32,7 +32,7 @@ class BuildIntegrityTests(unittest.TestCase):
         page = self.pages['catalog.html']
         catalog = extract(page, 'DATA')
         client = extract(self.pages['index.html'], 'DATA')
-        self.assertIn('资料核查 <b>' + catalog['asof'].replace('-', '.') + '</b>', page)
+        self.assertIn('资料核查 <b>' + catalog.get('checkedAt', catalog['asof']).replace('-', '.') + '</b>', page)
         self.assertIn('资料版本 ' + client['version'] + ' / ' + catalog['catalog'] + ' /', page)
         self.assertNotRegex(page, r'\{\{(?:AS_OF|CLIENT_VERSION|RESOURCE_CATALOG)\}\}')
 

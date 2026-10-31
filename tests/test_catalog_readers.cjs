@@ -5,7 +5,7 @@ const nodes=new Map();
 const node=selector=>{if(!nodes.has(selector))nodes.set(selector,{innerHTML:'',textContent:'',value:'',checked:false,focus(){},addEventListener(){}});return nodes.get(selector);};
 const context=vm.createContext({DATA:data,ASSETS:new Proxy({}, {get:(_,key)=> 'qa-image:'+String(key)}),document:{querySelector:node,querySelectorAll:()=>[]}});
 const source=fs.readFileSync(__dirname+'/catalog_app.js','utf8');
-vm.runInContext(source.replace(/window\.addEventListener\('hashchange',route\);route\(\);\s*$/,'')+'\nthis.ui={renderCard,renderEvent,renderProfiles,esc,labelCard,eventName,rewards,commodityName,commodityPrice,commodityRewards};',context);
+vm.runInContext(source.replace(/window\.addEventListener\('hashchange',route\);route\(\);\s*$/,'')+'\nthis.ui={renderCard,renderEvent,renderProfiles,renderEvents,currentActivityLinks,dateFor,esc,labelCard,eventName,rewards,commodityName,commodityPrice,commodityRewards};',context);
 const {ui}=context;
 function readable(where){const html=node('#main').innerHTML;assert.ok(html.length>200,where);assert.doesNotMatch(html,/\bundefined\b|\bNaN\b|\bInfinity\b|T_Skill_Description_|状态说明未获取/,where);return html;}
 for(const card of data.cards){
@@ -45,4 +45,14 @@ assert.equal(ui.commodityName({displayName:'客户端中文商品名',ID:'Intern
 const prices=ui.commodityPrice({Price:'1',PriceItemID:'__QA_COIN1',Price2:'2',PriceItemID2:'__QA_COIN2',CurrencyIDs:'__QA_COIN1~__QA_COIN2'});
 assert.match(prices,/1 测试币一/);assert.match(prices,/2 测试币二/);assert.doesNotMatch(prices,/合计|二选一|同时支付/,'费用配置保留原字段，未推定组合支付规则');
 ui.renderProfiles();readable('profiles');
+if(data.checkedAt==='2026-10-31'){
+ const stage=data.events.find(e=>e.id==='ActivitySummonC01_SSR_001'),rain=data.events.find(e=>e.id==='ActivitySummonC03_SSR_001');
+ assert.equal(ui.dateFor(stage),'2026.10.27 活动开启后 — 11.10 05:00');
+ assert.match(ui.dateFor(rain),/10\.27 05:00（已结束）/);
+ const links=ui.currentActivityLinks();assert.match(links,/#event\/ActivitySummonC01_SSR_001/);assert.doesNotMatch(links,/#event\/ActivitySummonC03_SSR_001/);
+ ui.renderEvents();const html=readable('20261031-current-events');
+ const callout=html.match(/<div class="callout">([\s\S]*?)<\/div>/)[1];
+ assert.match(callout,/舞台新星/);assert.doesNotMatch(callout,/雨中细吻/);
+ ui.renderEvent(stage.id);assert.match(readable('20261031-stage-pickup'),/11\.10 05:00/);
+}
 console.log('通过：192张卡牌详情、120项活动详情及角色档案全部真实渲染函数无异常，卡名、技能引用、成长表和正文标记检查通过。');

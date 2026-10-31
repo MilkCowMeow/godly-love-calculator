@@ -6,6 +6,7 @@ subprocess.run([sys.executable,str(ROOT/'tests/test_card_characters.py')],check=
 subprocess.run([sys.executable,str(ROOT/'tests/test_mechanics_docs.py')],check=True)
 subprocess.run([sys.executable,str(ROOT/'tests/test_client_text.py')],check=True)
 subprocess.run([sys.executable,str(ROOT/'tests/test_content_completeness.py')],check=True)
+subprocess.run([sys.executable,str(ROOT/'tests/test_official_schedule.py')],check=True)
 subprocess.run([sys.executable,str(ROOT/'tests/test_catalog_assets.py')],check=True)
 subprocess.run([sys.executable,str(ROOT/'tests/test_build_integrity.py')],check=True)
 subprocess.run([sys.executable,str(ROOT/'tests/test_native_projection.py')],check=True)

@@ -13,6 +13,7 @@ import struct
 import sys
 
 from embedded import extract
+from official_schedule import audit_schedule, load_schedule
 
 ROOT = Path(__file__).resolve().parents[1]
 EXPECTED_014774 = {
@@ -188,6 +189,9 @@ def audit_published(calculator, catalog):
                             '解锁技能缺少有效说明')
                     if sid.endswith('S4'):
                         facts['enhanceSkillS4'].append(sid)
+    if calculator.get('catalog') == load_schedule()['catalog']:
+        errors.extend(audit_schedule(calculator, catalog))
+    facts['checkedAt'] = calculator.get('checkedAt', calculator.get('asOf'))
     return {'facts': facts, 'errors': errors}
 
 

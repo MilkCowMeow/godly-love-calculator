@@ -184,7 +184,7 @@ if args.font_dir:
 safe = lambda value: json.dumps(value, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/')
 html = (SRC / 'template.html').read_text('utf8')
 for token, value in {
-    'AS_OF': data['asof'].replace('-', '.'),
+    'AS_OF': data.get('checkedAt', data['asof']).replace('-', '.'),
     'CLIENT_VERSION': client['version'],
     'RESOURCE_CATALOG': data['catalog'],
 }.items():

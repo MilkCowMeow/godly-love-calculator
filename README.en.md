@@ -17,6 +17,8 @@
 
 Four additional battles in the original client cover Trial floors 37, 45 and 50. Conditional replays match 151 damage samples, 51 positive healing requests and 33 shield applications. Boss defeat now retires surviving non-Boss allies at the native phase, with early termination when the opening phase ends a wave. See the [validation record](evidence/native_batch_20261023.md).
 
+Reviewed on 2026-10-31: added the Stage New Star rate-up schedule and official banner, and returned Rainy Kiss to the permanent-card category after its rate-up ended. The public resource catalog is byte-identical to the previous snapshot. Both pages now keep the source snapshot date and the latest review date separately. See the [update record](evidence/news_update_20261031.md).
+
 ## ✨ About
 
 An unofficial reference and calculation project for **Godly Love** (《神明恋爱放送中》). It combines a readable character/event catalog with a continuous-battle calculator implemented from the local client's configurations and native methods.
@@ -87,7 +89,7 @@ Definitions stay in the current browser. Exported team plans include the custom 
 | Item | Status |
 |---|---|
 | 📦 Client resource catalog | Website `catalog_014866`; native runs use `catalog_014774` with library `1.0.1.014517`; combat fields checked for parity |
-| 🗓️ Data reviewed | `2026-10-23`, data snapshot `2026-10-23` |
+| 🗓️ Data reviewed | `2026-10-31`, client data snapshot `2026-10-23` |
 | 🃏 Calculator dataset | 192 cards, 583 player skill references, 586 skill definitions, 97 statuses, 50 Trial floors |
 | 🧩 Unit checks | Scalar damage, configuration parsing, statuses, scheduling, complex effects, and AI |
 | 🔁 Continuous simulations | 300 cross-floor battles plus damage-total conservation checks |

@@ -4,10 +4,12 @@ import argparse,base64,csv,hashlib,io,json,re,struct,sys
 from embedded import extract
 from client_text import ClientText
 from catalog_labels import apply_labels
+from official_schedule import apply_catalog
 ROOT=Path(__file__).resolve().parents[1]
 p=argparse.ArgumentParser(description=__doc__)
 for key in ['tables','locale','calculator-data','news','output']:p.add_argument('--'+key,required=True,type=Path)
 p.add_argument('--banner',type=Path,help='有新公告原图时传入；省略则保留当前已嵌入横幅')
+p.add_argument('--promotion-banner',type=Path,help='本轮舞台新星官方限时心选横幅')
 p.add_argument('--catalog',required=True);p.add_argument('--as-of',required=True);args=p.parse_args()
 sys.path.insert(0,r'D:\GodlyLove\_工作目录\角色活动图鉴\libs')
 from opencc import OpenCC
@@ -69,7 +71,7 @@ for event in data['events']:
    event['commodities'].append({**raw,'displayName':tr(raw['Name']) or data['items'].get(raw.get('ItemID',''),'') or raw['ID']})
 news=json.loads(args.news.read_text('utf8'))['data']['news'];notice=next(n for n in news if n['newsId']==3617)
 notice_id='news_3617'
-news_records=[{'id':'news_'+str(n['newsId']),'name':sc(n['name']).strip(),'text':sc(n['intro']).replace('·','').replace('・',''),'url':'https://game.ero-labs.services/api/v2/announcement/news?lang=zh&nowPage=1&count=50&hgameId=242&labelId=0'} for n in news]
+news_records=[{'id':'news_'+str(n['newsId']),'name':sc(n['name']).strip(),'text':sc(n['intro']).replace('·','').replace('・',''),'url':'https://game.ero-labs.global/zh/news.html?id='+str(n['newsId'])} for n in news]
 fresh_ids={n['id'] for n in news_records}
 data['notices']=[x for x in data['notices'] if x['id'] not in fresh_ids]+news_records
 if args.banner:
@@ -87,6 +89,17 @@ for c in data['cards']:
 data.update(asof=args.as_of,catalog=args.catalog,featuredCard='C02_SSR_006',featuredDescription='琴键之间，听见彼此同频的悸动。')
 data['eventDates']={'C04_SSR_006':'2026.10.06 活动开启后 — 10.20 14:00（已结束）','C01_SR_005':'2026.10.06 活动开启后 — 11.03 14:00','C03_SSR_001':'2026.10.13 活动开启后 — 10.27 05:00','C02_SSR_006':'2026.10.20 活动开启后 — 11.03 14:00'}
 data['currentEventIds']=['BranchC02_SSR_006','ActivitySummonC02_SSR_006','ActivitySignInC02_SSR_006','BattlePassC01_SR_005','ActivitySummonC03_SSR_001']
+apply_catalog(data)
+if args.promotion_banner:
+ im=Image.open(args.promotion_banner).convert('RGB');buf=io.BytesIO();im.save(buf,'WEBP',quality=96,method=4);blob=buf.getvalue();promotion_key=hashlib.sha256(blob).hexdigest()[:16];assets[promotion_key]='data:image/webp;base64,'+base64.b64encode(blob).decode()
+ promotion=next(e for e in data['events'] if e['id']=='ActivitySummonC01_SSR_001')
+ promotion.update(art=promotion_key,thumb=promotion_key,title='舞台新星 限时心选',summary=[
+  'SSR羁绊舞台新星限时心选概率提升，每次心选获得1枚心选之证，可在心选商店兑换道具。',
+  'SSR基础概率1%，综合概率含保底为2.1%；获得SSR时有50%概率为舞台新星。连续60次未获得SSR后，自第61次起每次较前一次增加10个百分点，最多第70次获得SSR。',
+  'SR基础概率7%，综合概率含保底为12%；每10次心选必定获得SR或更高稀有度羁绊。',
+  '同期三种特别礼盒价格为60、880、3680 ECoin，各限购5次。完整内容见官方公告。'])
+elif data.get('checkedAt')=='2026-10-31':
+ raise ValueError('本轮更新须通过--promotion-banner提供舞台新星官方横幅')
 apply_labels(data)
 args.output.write_text(json.dumps({'data':data,'assets':assets},ensure_ascii=False,separators=(',',':')),'utf8')
 print('catalog synchronized',len(data['cards']),'cards',len(data['events']),'events')

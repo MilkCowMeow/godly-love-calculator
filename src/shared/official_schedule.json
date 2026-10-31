@@ -1,0 +1,97 @@
+{
+  "schema": 1,
+  "catalog": "catalog_014866",
+  "sourceAsOf": "2026-10-23",
+  "checkedAt": "2026-10-31",
+  "catalogSHA256": "d708638b6d947031898d09b5b1df0a0ed8be93863ef1564c9b70a78b27987c3a",
+  "currentEventIds": [
+    "BranchC02_SSR_006",
+    "ActivitySummonC02_SSR_006",
+    "ActivitySignInC02_SSR_006",
+    "BattlePassC01_SR_005",
+    "ActivitySummonC01_SSR_001"
+  ],
+  "cards": {
+    "C01_SSR_001": {
+      "availability": "current_base",
+      "status": "常驻羁绊，当前限时UP",
+      "limited_kind": "常驻羁绊，当前限时UP",
+      "availability_evidence": "角色与道具配置含常驻池标签。官方10月27日公告开放舞台新星限时心选，至11月10日05:00（UTC+8）。"
+    },
+    "C03_SSR_001": {
+      "availability": "current_base",
+      "status": "基础常驻羁绊",
+      "limited_kind": "常驻池羁绊",
+      "availability_evidence": "角色与道具均无版本门槛，道具含NormalSSR与BasicSSR常驻标签。雨中细吻本次限时心选已于10月27日05:00（UTC+8）结束。"
+    },
+    "C02_SSR_006": {
+      "availability": "current_announced",
+      "status": "当前限定纪事",
+      "limited_kind": "纪事限定",
+      "availability_evidence": "官方10月20日共奏心音活动公告明确开放，档期至11月3日14:00（UTC+8）。"
+    },
+    "C04_SSR_006": {
+      "availability": "past_announced",
+      "status": "往期限定纪事",
+      "limited_kind": "往期纪事限定",
+      "availability_evidence": "官方公告的活动结束时间为2026年10月20日14:00（UTC+8）。"
+    }
+  },
+  "windows": [
+    {
+      "cardId": "C02_SSR_006",
+      "eventIds": ["BranchC02_SSR_006", "ActivitySummonC02_SSR_006", "ActivitySignInC02_SSR_006"],
+      "newsId": 3617,
+      "officialId": "news_3617",
+      "url": "https://game.ero-labs.global/zh/news.html?id=3617",
+      "openDate": "2026-10-20",
+      "openDescription": "活动开启后",
+      "closeAt": "2026-11-03T14:00:00+08:00",
+      "officialDates": "2026.10.20 活动开启后 — 11.03 14:00"
+    },
+    {
+      "cardId": "C01_SR_005",
+      "eventIds": ["BattlePassC01_SR_005"],
+      "newsId": 3571,
+      "officialId": "news_3571",
+      "url": "https://game.ero-labs.global/zh/news.html?id=3571",
+      "openDate": "2026-10-06",
+      "openDescription": "活动开启后",
+      "closeAt": "2026-11-03T14:00:00+08:00",
+      "officialDates": "2026.10.06 活动开启后 — 11.03 14:00"
+    },
+    {
+      "cardId": "C01_SSR_001",
+      "eventIds": ["ActivitySummonC01_SSR_001"],
+      "newsId": 3643,
+      "officialId": "news_3643",
+      "url": "https://game.ero-labs.global/zh/news.html?id=3643",
+      "openDate": "2026-10-27",
+      "openDescription": "活动开启后",
+      "closeAt": "2026-11-10T05:00:00+08:00",
+      "officialDates": "2026.10.27 活动开启后 — 11.10 05:00"
+    },
+    {
+      "cardId": "C03_SSR_001",
+      "eventIds": ["ActivitySummonC03_SSR_001"],
+      "newsId": 3598,
+      "officialId": "news_3598",
+      "url": "https://game.ero-labs.global/zh/news.html?id=3598",
+      "openDate": "2026-10-13",
+      "openDescription": "活动开启后",
+      "closeAt": "2026-10-27T05:00:00+08:00",
+      "officialDates": "2026.10.13 活动开启后 — 10.27 05:00（已结束）"
+    },
+    {
+      "cardId": "C04_SSR_006",
+      "eventIds": ["ActivitySignInC04_SSR_006", "ActivitySummonC04_SSR_006", "BranchC04_SSR_006"],
+      "newsId": 3572,
+      "officialId": "news_3572",
+      "url": "https://game.ero-labs.global/zh/news.html?id=3572",
+      "openDate": "2026-10-06",
+      "openDescription": "活动开启后",
+      "closeAt": "2026-10-20T14:00:00+08:00",
+      "officialDates": "2026.10.06 活动开启后 — 10.20 14:00（已结束）"
+    }
+  ]
+}

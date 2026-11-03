@@ -41,7 +41,7 @@ class PublishedContentCompletenessTests(unittest.TestCase):
         return calculator, catalog
 
     def test_every_known_release_has_strict_coverage_and_field_guards(self):
-        self.assertEqual(set(EXPECTED_RELEASES), {'catalog_014774', 'catalog_014866'})
+        self.assertEqual(set(EXPECTED_RELEASES), {'catalog_014774', 'catalog_014866', 'catalog_015084'})
         for identifier in EXPECTED_RELEASES:
             with self.subTest(catalog=identifier):
                 calculator, catalog = self.release_sample(identifier)
@@ -56,6 +56,31 @@ class PublishedContentCompletenessTests(unittest.TestCase):
                 report = audit_published(calculator, catalog)
                 self.assertTrue(any(error['path'] == 'C04_SSR_006S1.raw.Description'
                                     for error in report['errors']))
+
+    def test_new_source_placeholders_stay_separate_from_runnable_cards(self):
+        release = EXPECTED_RELEASES[self.calculator['catalog']]
+        incomplete = self.calculator.get('incompleteSourceCards', [])
+        self.assertEqual(len(incomplete), release.get('incompleteCards', 0))
+        self.assertEqual(len({row['id'] for row in incomplete}), len(incomplete))
+        runnable = {card['id'] for card in self.calculator['cards']}
+        for row in incomplete:
+            self.assertNotIn(row['id'], runnable)
+            self.assertTrue(row['missingSkillIDs'])
+            self.assertTrue(all(sid not in self.calculator['skills'] for sid in row['missingSkillIDs']))
+
+    def test_015084_skill_changes_keep_precise_source_values(self):
+        if self.calculator['catalog'] != 'catalog_015084':
+            self.skipTest('此项针对015084源字段')
+        skills = self.calculator['skills']
+        self.assertEqual(skills['C03_SSR_006S2']['raw']['AttRate'], '1.24')
+        self.assertEqual(skills['C02_SSR_001S1']['raw']['AttRate'], '1')
+        self.assertEqual(skills['C02_SSR_001S2']['raw']['AttRate'], '1.44')
+        passive = skills['C03_SSR_006S3']['configs']
+        revive = next(config['value'] for config in passive
+                      if config['key'] == 'Fun' and config['value'].get('Fun') == 'Revive')
+        self.assertEqual(revive['Trigger'], 'SelfDead')
+        self.assertEqual(revive['ValueConvert'], {'Rate': .5, 'Property': 'MaxHP'})
+        self.assertEqual(next(config['value'] for config in passive if config['key'] == 'AttackFinalRate'), .08)
 
     def test_unknown_release_requires_explicit_audit_expectations(self):
         calculator, catalog = deepcopy(self.calculator), deepcopy(self.catalog)
@@ -108,10 +133,18 @@ class PublishedContentCompletenessTests(unittest.TestCase):
     def test_attack_scope_and_inactive_function_terms(self):
         skills = self.calculator['skills']
         for identifier in ('C02_SR_006S1', 'C03_SSR_015S1', 'C04_SR_006S1',
-                           'C04_SSR_014S1', 'C03_SR_008S2', 'C03_SR_009S2',
+                           'C04_SSR_014S1', 'C03_SR_009S2',
                            'C03_SR_010S2', 'C04_SR_011S2'):
             self.assertEqual(skills[identifier]['damageTarget'], '一名敌人')
             self.assertIn('选定敌人', skills[identifier]['description'])
+        changed_scope = skills['C03_SR_008S2']
+        if self.calculator['catalog'] == 'catalog_015084':
+            self.assertEqual(changed_scope['raw']['TargetType'], 'All')
+            self.assertEqual(changed_scope['damageTarget'], '全体敌人')
+            self.assertIn('全体敌人', changed_scope['description'])
+        else:
+            self.assertEqual(changed_scope['damageTarget'], '一名敌人')
+            self.assertIn('选定敌人', changed_scope['description'])
         self.assertEqual(skills['C03_SSR_014S2']['damageTarget'], '')
         self.assertIn('终结技冷却中', skills['C04_SSR_009S1']['damageTarget'])
         for identifier in ('C01_SR_006S3', 'C02_SR_007S3'):

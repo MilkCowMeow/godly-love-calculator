@@ -10,6 +10,7 @@ p=argparse.ArgumentParser(description=__doc__)
 for key in ['tables','locale','calculator-data','news','output']:p.add_argument('--'+key,required=True,type=Path)
 p.add_argument('--banner',type=Path,help='有新公告原图时传入；省略则保留当前已嵌入横幅')
 p.add_argument('--promotion-banner',type=Path,help='本轮舞台新星官方限时心选横幅')
+p.add_argument('--event-banner',action='append',default=[],help='公告编号=已下载的官方横幅路径，可重复')
 p.add_argument('--catalog',required=True);p.add_argument('--as-of',required=True);args=p.parse_args()
 sys.path.insert(0,r'D:\GodlyLove\_工作目录\角色活动图鉴\libs')
 from opencc import OpenCC
@@ -60,7 +61,7 @@ data['dropLabels']={r['ShowRateName']:tr(r['ShowRateName']) for r in drop_rows i
 data['drops']={identifier:[r for r in drop_rows if r['DropID']==identifier] for identifier in dict.fromkeys(r['DropID'] for r in drop_rows)}
 for event in data['events']:
  # 同卡心选/签到与纪事分属不同活动；以Scene.Chapter直接归属关卡。
- event['scenes']=[{'id':raw['ID'],'chapter':raw['Chapter'],'name':tr(raw['Name']) or ('剧情关卡' if not any(raw.get(k) for k in ['WaveInfoJsonString','WaveInfo2JsonString','WaveInfo3JsonString']) else '战斗关卡'),'energy':raw['Energy'],'level':raw['RecommendedLevel'],'first_drop':raw['FirstDrop'],'reward':raw['RewardItems']} for raw in scene_rows if raw['Chapter']==event['id']]
+ event['scenes']=[{'id':raw['ID'],'chapter':raw['Chapter'],'name':tr(raw['Name']) or ('剧情关卡' if not any(raw.get(k) for k in ['WaveInfoJsonString','WaveInfo2JsonString','WaveInfo3JsonString']) else '战斗关卡'),'energy':raw['Energy'],'level':tr(raw.get('RecommendedLevelString',raw.get('RecommendedLevel',''))),'first_drop':raw['FirstDrop'],'reward':raw['RewardItems']} for raw in scene_rows if raw['Chapter']==event['id']]
  event_quests=[r for r in quest_rows if belongs(r,event['id'])]
  event_stores=[r for r in store_rows if belongs(r,event['id'])]
  event.update(quest_count=len(event_quests),questIds=[r['ID'] for r in event_quests],quest_names=[tr(r['Name']) for r in event_quests if tr(r['Name'])],storeIds=[r['ID'] for r in event_stores],stores=[tr(r['Name']) or r['ID'] for r in event_stores],sign_in_rows=[r for r in sign_rows if r['ActivityID']==event['id']],pass_rewards=[r for r in pass_rows if r['ActivityID']==event['id']])
@@ -100,6 +101,12 @@ if args.promotion_banner:
   '同期三种特别礼盒价格为60、880、3680 ECoin，各限购5次。完整内容见官方公告。'])
 elif data.get('checkedAt')=='2026-10-31':
  raise ValueError('本轮更新须通过--promotion-banner提供舞台新星官方横幅')
+for assignment in args.event_banner:
+ notice_id,banner_path=assignment.split('=',1)
+ im=Image.open(banner_path).convert('RGB');buf=io.BytesIO();im.save(buf,'WEBP',quality=96,method=4);blob=buf.getvalue();banner_key=hashlib.sha256(blob).hexdigest()[:16];assets[banner_key]='data:image/webp;base64,'+base64.b64encode(blob).decode()
+ matches=[e for e in data['events'] if e.get('officialId')==notice_id]
+ if not matches:raise ValueError('官方横幅未关联到活动：'+notice_id)
+ for e in matches:e.update(art=banner_key,thumb=banner_key)
 apply_labels(data)
 args.output.write_text(json.dumps({'data':data,'assets':assets},ensure_ascii=False,separators=(',',':')),'utf8')
 print('catalog synchronized',len(data['cards']),'cards',len(data['events']),'events')

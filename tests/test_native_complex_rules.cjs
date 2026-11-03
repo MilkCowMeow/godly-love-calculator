@@ -35,4 +35,70 @@ test('source death flag ignores instance multiplication and no marker means reta
 test('death cleanup retains only DeadResident and emits OtherDeadAfter once',()=>{const s=new Simulation(),d=s.unit('d',0,{dead:true,hp:0}),a=s.unit('a',0),e=s.unit('e',1,{dead:true,hp:0});s.data.statuses.B.raw.DeadResident='TRUE';d.statuses=[st('A'),st('B'),st('R')];s.trigger=function(owner,trigger){if(trigger==='OtherDeadAfter')assert.deepEqual(d.statuses.map(x=>x.id),['B']);this.calls.push(['trigger',owner.uid,trigger]);};assert.equal(s.processNativeDeaths({}),2);assert.deepEqual(d.statuses.map(x=>x.id),['B']);assert.deepEqual(s.calls,[['trigger','a','OtherDeadAfter'],['trigger','a','OtherDeadAfter']]);s.processNativeDeaths({});assert.equal(s.calls.length,2);});
 test('revival clears death dedup so a second death dispatches again',()=>{const s=new Simulation(),d=s.unit('d',0,{dead:true,hp:0}),a=s.unit('a',0);s.processNativeDeaths({});s.executeComplex(a,{Fun:'DirectRevive'}, {},d,null,{},30);d.hp=0;d.dead=true;s.processNativeDeaths({});assert.equal(s.calls.filter(x=>x[2]==='OtherDeadAfter').length,2);});
 test('unhandled functions remain available to main interpreter',()=>{const s=new Simulation();assert.deepEqual(s.executeComplex(null,{Fun:'AddHP'}),{handled:false,success:false});});
+
+// 015084 C01_SR_009S3: exercise the shipped configuration through the complete
+// selector, condition, continuation and status interpreter, with real statuses.
+const live=require('./load_simulation.cjs'),LiveConfig=global.GLConfig;
+function updatedTransferFixture(teammates=3){
+ const skillID='C01_SR_009S3',skill=live.data.skills[skillID],raw=skill.configs.find(c=>c.key==='Fun').value;
+ assert.equal(raw.Fun,'TransferBuffFrom');assert.equal(raw.Target,'Self');
+ assert.equal(raw.IsTransferBuffRemove,false);assert.equal(raw.Value,2);
+ assert.equal(raw.ContinueFun.Fun,'TransferBuffFrom');assert.equal(raw.ContinueFun.Target,'All');
+ assert.equal(raw.ContinueFun.TargetCamp,'My');assert.equal(raw.ContinueFun.NoSelf,true);
+ assert.equal(raw.ContinueFun.FromSelect.TargetType,'SkillDirectTargets');
+ const ids=['C01_SR_009',...['C01_R_001','C02_R_001','C03_R_001'].slice(0,teammates)];
+ const sim=new live.T.Simulation(live.data,{members:ids.map(cardId=>({cardId,level:60,imprint:3})),target:'dummy',dummy:{referenceHP:100000,defence:0,speed:1,resistance:0},rounds:1},1);
+ const owner=sim.units[0],donor=sim.alive(1)[0],allies=sim.alive(0).filter(u=>u!==owner);
+ // Scope this integration to the one real passive; unrelated card passives and
+ // opening states are excluded, while production execution remains unchanged.
+ for(const u of sim.units){u.global=[];u.statuses=[];sim.refresh(u);}
+ owner.global=LiveConfig.configFunctions(skill.configs,skillID);
+ owner.cooldowns[skillID]=0;sim.random=()=>.01;sim.nowRoundRole=owner;
+ for(const id of ['AddAttack','AddDefence','IncreaseSpeed'])assert.equal(sim.addStatus(donor,donor,id,3,0,null),true);
+ sim.events.length=0;
+ const action={actor:owner,skill:live.data.skills[owner.normal],selected:donor,directTargets:[donor],damage:0,main:true,normal:true,kind:'main',actionType:0};
+ return {sim,owner,donor,allies,action,fire(){sim.trigger(owner,'AfterSkill',action);}};
+}
+test('native removable counts use visible non-resident instances for both status types',()=>{
+ const {sim,owner,donor,action}=updatedTransferFixture(0);
+ const definitions={
+  visibleBuff:{IsBuffType:'Buff'},deadResidentBuff:{IsBuffType:'Buff',DeadResident:'TRUE',IsShowIcon:'TRUE'},
+  hiddenBuff:{IsBuffType:'Buff',IsShowIcon:'FALSE'},residentBuff:{IsBuffType:'Buff',IsResident:'TRUE'},
+  visibleDebuff:{IsBuffType:''},hiddenDebuff:{IsBuffType:'DeBuff',IsShowIcon:'FALSE'},
+  residentDebuff:{IsBuffType:'DeBuff',IsResident:'TRUE'},otherType:{IsBuffType:'None',IsShowIcon:'TRUE'}
+ };
+ sim.data={...sim.data,statuses:{...sim.data.statuses,...Object.fromEntries(Object.entries(definitions).map(([id,raw])=>[id,{raw,configs:[]}]))}};
+ donor.statuses=Object.keys(definitions).map(id=>({id,stack:99,value:999}));
+ const ctx=sim.context(owner,donor,action);
+ assert.equal(ctx.resolveProperty('CanRemoveBuffCount',donor),2);
+ assert.equal(ctx.resolveProperty('CanRemoveDebuffCount',donor),1);
+ donor.statuses[0].stack=0;donor.statuses[1].value=0;
+ assert.equal(ctx.resolveProperty('CanRemoveBuffCount',donor),2,'merged stack/value never multiply the count');
+ donor.statuses.push({id:'visibleBuff',stack:30});
+ assert.equal(ctx.resolveProperty('CanRemoveBuffCount',donor),3,'each distinct status instance contributes one');
+});
+test('015084 real C01_SR_009S3 copies to self then shares one removed pair with all teammates',()=>{
+ const {sim,owner,donor,allies,fire}=updatedTransferFixture();fire();
+ for(const u of [owner,...allies])assert.deepEqual(u.statuses.map(s=>s.id),['AddDefence','IncreaseSpeed'],u.uid);
+ assert.deepEqual(donor.statuses.map(s=>s.id),['AddAttack']);
+ const removals=sim.events.filter(e=>e.text==='转出状态');assert.equal(removals.length,1);
+ assert.equal(removals[0].target,donor.uid);assert.deepEqual(removals[0].removed,['AddDefence','IncreaseSpeed']);
+ const incoming=sim.events.filter(e=>e.text==='转入状态');assert.equal(incoming.length,4);
+ assert.ok(incoming.find(e=>e.target===owner.uid).n<removals[0].n,'self copy precedes donor removal');
+ for(const u of [owner,...allies])assert.ok(u.statuses.every(s=>s.source===owner.uid));
+});
+test('015084 real C01_SR_009S3 solo copy keeps the donor buffs without continuation recipients',()=>{
+ const {sim,owner,donor,fire}=updatedTransferFixture(0);fire();
+ assert.deepEqual(owner.statuses.map(s=>s.id),['AddDefence','IncreaseSpeed']);
+ assert.deepEqual(donor.statuses.map(s=>s.id),['AddAttack','AddDefence','IncreaseSpeed']);
+ assert.equal(sim.events.filter(e=>e.text==='转出状态').length,0);
+});
+test('015084 real C01_SR_009S3 recipient transfer immunity preserves the self copy and donor states',()=>{
+ const {sim,owner,donor,allies,fire}=updatedTransferFixture();
+ for(const u of allies)u.immuneList.push('AntiTransferBuff');fire();
+ assert.deepEqual(owner.statuses.map(s=>s.id),['AddDefence','IncreaseSpeed']);
+ for(const u of allies)assert.deepEqual(u.statuses,[]);
+ assert.deepEqual(donor.statuses.map(s=>s.id),['AddAttack','AddDefence','IncreaseSpeed']);
+ assert.equal(sim.events.filter(e=>e.text==='转出状态').length,0);
+});
 console.log('native complex rules: '+tests+' tests passed');

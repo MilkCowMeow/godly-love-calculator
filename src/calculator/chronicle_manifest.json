@@ -1,5 +1,5 @@
 {
-  "catalog": "catalog_014866",
+  "catalog": "catalog_015084",
   "stages": [
     {
       "id": "C02_SSR_006_14",
@@ -8,6 +8,14 @@
       "closeAt": "2026-11-03T14:00:00+08:00",
       "noticeId": 3617,
       "noticeTitle": "限时纪事活动「共奏心音」正式开始！"
+    },
+    {
+      "id": "C03_SSR_006_14",
+      "openDate": "2026-11-03",
+      "openDescription": "活动开启后",
+      "closeAt": "2026-11-17T14:00:00+08:00",
+      "noticeId": 3677,
+      "noticeTitle": "限时纪事活动「热汗缠绵」正式开始！"
     }
   ]
 }

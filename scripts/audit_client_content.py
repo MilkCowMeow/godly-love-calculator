@@ -38,6 +38,21 @@ EXPECTED_RELEASES = {
         },
         'skillFields': {'C04_SSR_006S1': {'Description': 'T_Skill_Description_C04_SSR_006S1'}},
     },
+    'catalog_015084': {
+        'asOf': '2026-11-03', 'counts': dict(EXPECTED_014774),
+        'incompleteCards': 80,
+        'roleFields': {
+            'C04_SSR_004': {'VersionControl': 'Version_C04_SSR_004'},
+            'C04_SSR_005': {'VersionControl': ''},
+            'C02_R_004': {'GiftSounds': 'Hero/C02_R_003/Sound/C02_R_003_Lvup'},
+        },
+        'skillFields': {
+            'C04_SSR_006S1': {'Description': 'T_Skill_Description_C04_SSR_006S1'},
+            'C03_SSR_006S2': {'AttRate': '1.24'},
+            'C02_SSR_001S1': {'AttRate': '1'},
+            'C02_SSR_001S2': {'AttRate': '1.44'},
+        },
+    },
 }
 APPROVED_CONFIG_CORRECTIONS = {'C03_SSR_012S1'}
 RESIDUAL = re.compile(r'\b(?:T|UI)_[A-Za-z0-9_]+|[\[\]\ufffd]|<[^>]+>|\\n')
@@ -227,13 +242,24 @@ def audit_sources(calculator, catalog, tables, locale):
     for row in source['roleproperty']:
         property_rows.setdefault(row['ID'], []).append(row)
     expected = deepcopy(calculator)
+    approved_corrections = APPROVED_CONFIG_CORRECTIONS if calculator.get('catalog') in ('catalog_014774', 'catalog_014866') else set()
 
     def require(ok, path, detail):
         if not ok:
             errors.append({'path': path, 'error': detail})
 
     player_ids = {identifier for identifier in maps['role'] if re.fullmatch(r'C\d+_(?:SSR|SR|R)_\d+', identifier)}
-    require(player_ids == {card['id'] for card in calculator['cards']}, 'cards.sourceCoverage',
+    incomplete = []
+    for identifier in sorted(player_ids):
+        raw = maps['role'][identifier]
+        declared = [part.split(':', 1)[0] for part in raw['SkillIDs'].split('~') if part]
+        if not raw['NAME'] and raw['VersionControl'] and declared and all(sid not in maps['skill'] for sid in declared):
+            incomplete.append({'id': identifier, 'versionGate': raw['VersionControl'], 'missingSkillIDs': declared})
+    release = EXPECTED_RELEASES.get(calculator.get('catalog'), {})
+    require(len(incomplete) == release.get('incompleteCards', 0), 'cards.sourcePrototypes', '未完成预置编号数量与已核验版本不同')
+    require(calculator.get('incompleteSourceCards', []) == incomplete, 'cards.sourcePrototypes', '未完成编号与缺失技能记录须逐项保留')
+    result['facts']['incompleteSourceCards'] = len(incomplete)
+    require(player_ids - {row['id'] for row in incomplete} == {card['id'] for card in calculator['cards']}, 'cards.sourceCoverage',
             '官方玩家卡集合与发布卡牌集合不同')
 
     inactive_source_orphans = []
@@ -303,7 +329,7 @@ def audit_sources(calculator, catalog, tables, locale):
             if translated_name or kind == 'statuses':
                 item['name'] = translated_name
             parsed = configs(raw)
-            if identifier not in APPROVED_CONFIG_CORRECTIONS:
+            if identifier not in approved_corrections:
                 require(published['configs'] == parsed, kind + '.' + identifier + '.configs', '解析效果与官方原字段不一致')
                 item['configs'] = parsed
     for card in expected['cards']:
@@ -393,7 +419,7 @@ def audit_sources(calculator, catalog, tables, locale):
         missingSourceTextKeys=sorted(text.missing),
         sourceMissingNameDefinitions=unresolved_names,
         sourceDescriptionEmptyStatusIds=sorted(row['ID'] for row in source['status'] if not row['Description']),
-        approvedConfigCorrections=sorted(APPROVED_CONFIG_CORRECTIONS),
+        approvedConfigCorrections=sorted(approved_corrections),
         inactiveSourceOrphanReferences=inactive_source_orphans,
         checkedLevelRows=checked_level_rows,
         checkedDisplayRows=checked_display_rows,

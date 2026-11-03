@@ -9,6 +9,7 @@ ROOT=Path(__file__).resolve().parents[1]
 parser=argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--tables',required=True,type=Path);parser.add_argument('--locale',required=True,type=Path)
 parser.add_argument('--catalog',required=True);parser.add_argument('--as-of',required=True)
+parser.add_argument('--version',help='已核验的客户端版本')
 parser.add_argument('--output',required=True,type=Path)
 args=parser.parse_args()
 sys.path.insert(0,r'D:\GodlyLove\_工作目录\角色活动图鉴\libs')
@@ -31,6 +32,15 @@ def configs(row,prefix='DynamicField'):
  return out
 roles={r['ID']:r for r in rows('role')};properties=rows('roleproperty')
 imprints=rows('roleimprint');ascends=rows('roleascend');skillrows={r['ID']:r for r in rows('skill')}
+known_cards={card['id'] for card in data['cards']}
+incomplete=[]
+for identifier,raw in roles.items():
+ if not re.fullmatch(r'C\d+_(?:SSR|SR|R)_\d+',identifier) or identifier in known_cards:continue
+ declared=[x.split(':',1)[0] for x in raw['SkillIDs'].split('~') if x]
+ if not raw['NAME'] and raw['VersionControl'] and declared and all(s not in skillrows for s in declared):
+  incomplete.append({'id':identifier,'versionGate':raw['VersionControl'],'missingSkillIDs':declared})
+ else:raise ValueError('新卡具备可用配置，须纳入图鉴与计算器：'+identifier)
+data['incompleteSourceCards']=sorted(incomplete,key=lambda row:row['id'])
 items={r['ID']:r for r in rows('item')};stat_fields=['HP','Attack','Defence','Speed','CriticalRate','CriticalDamageRate','EffectHitRate','ResistanceRate','PinchRate']
 f32=lambda v:struct.unpack('<f',struct.pack('<f',v))[0]
 def stage(table,rid):return [{**r,'description':tr(r['Description']),'configs':configs(r,'SkillProp.')} for r in table if r['RoleID']==rid]
@@ -66,6 +76,11 @@ for row in data['autoAI']:
  row['targets']=[json5.loads(row['TargetSetting'+str(i)]) for i in range(1,6) if row.get('TargetSetting'+str(i))]
 data['publicVariables']={r['ID']:float(r['VALUE']) if r['VALUE'] else r['SValue'] for r in rows('publicvariable')}
 data.update(roleProperties=properties,skillLevels=rows('skilllevel'),equipmentSets=rows('equipmentset'),catalog=args.catalog,asOf=args.as_of)
+if args.version:data['version']=args.version
+for family in ('elementIcons','jobIcons'):
+ for name in data[family]:
+  icon=ROOT/'src/calculator/assets/role_icons'/(name+'.png')
+  if icon.is_file():data[family][name]=hashlib.sha256(icon.read_bytes()).hexdigest()[:16]
 enrich(data,tr)
 apply_calculator(data)
 args.output.parent.mkdir(parents=True,exist_ok=True);args.output.write_text(json.dumps(data,ensure_ascii=False,separators=(',',':')),'utf8')

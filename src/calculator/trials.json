@@ -1,15 +1,15 @@
 {
   "version": "1.0.1.014517",
   "sourceHashes": {
-    "scene.txt": "7e82519f54ea0b2d318b4b066252697ae4ef5a83b767185360246ce27f74ab62",
-    "chapter.txt": "84a54c58d54cea07c8ba65ba39231e0ef334ed991cf5f1bb773c773442aed446",
-    "role.txt": "896886546ef2fcfdc8dbcdc9cdd076a1758301145ceaa29c47b3da1b60bd4135",
-    "roleproperty.txt": "565576b694dc0cb11402caf789a84a9075306a565a9eb1c366d3d61337d13be1",
-    "skill.txt": "8a9fc2b404f0d9395792befa96eeee967628683f228c58f438cb2e96463d58d0",
+    "scene.txt": "62748e4b2a438c23f37a0942db0284553c8aab05803e2bd47b0acc42a27f457e",
+    "chapter.txt": "5aedb60392a06575bf238948f6fc1d6d446240ae4aaf9c160d9f162909514baf",
+    "role.txt": "912f7f1803978a7d00267f841bb383218cb438898e995687e0909ca79886d5b6",
+    "roleproperty.txt": "3b56dd00bb1f494ac97520da099d603eab08f967f127cbb156bf22208ead54d8",
+    "skill.txt": "f6e3f6dada35307d5d603693e34dd680f4dc0a0acb4dd55173791962a224e352",
     "status.txt": "1a189bcaed30a18e4fa7f7022cdd5464c29c3bb296d62aa3267750140528d647",
     "aiaction.txt": "4ac925f1f00ed9829a0010fc643c8be4f5879786e29efac8bd306a90a643edd6",
-    "locale/CHT": "74f4e2b84518d38c98ef2e62e28a3269bb9a5b4f0bc00fb779f8eae863efcd8a",
-    "locale/CHS": "5ac874f2eb263ab9918b8a658b932e3350d4933aae81c4e9ac6889f743f4d2d3"
+    "locale/CHT": "980a1db1ed2617cd98551038d1216dfd9b2340a3fa949a956f755a63be258459",
+    "locale/CHS": "1075365ca48ee3799636a6ec06b883b6b22ac325aa0dfdda99031e67a8bd3273"
   },
   "trials": {
     "1": {
@@ -43,14 +43,14 @@
         "Exp": "",
         "Energy": "",
         "EnterCost": "{Items:[{StaticID:'4',Count:1}]}",
-        "RecommendedLevel": "18",
+        "RecommendedLevelString": "18",
         "RecommendedAttributes": "2",
         "Land": "BG/BG001/BG_Trial_Scene",
         "BG": "BG/BG001/BG_Trial_Scene",
         "BGM": "Sound/BGM/Battle9",
         "ShortRewardItems": "",
         "RewardItems": "",
-        "DropString": "",
+        "DropString": "Trial_1",
         "VIPExtraDrop": "",
         "FirstDrop": "Abyss001",
         "FullStarDrop": "",
@@ -694,7 +694,7 @@
         }
       },
       "unresolvedSkillIDs": [],
-      "catalog": "catalog_014866"
+      "catalog": "catalog_015084"
     },
     "2": {
       "version": "1.0.1.014517",
@@ -727,14 +727,14 @@
         "Exp": "",
         "Energy": "",
         "EnterCost": "{Items:[{StaticID:'4',Count:1}]}",
-        "RecommendedLevel": "20",
+        "RecommendedLevelString": "20",
         "RecommendedAttributes": "2",
         "Land": "BG/BG001/BG_Trial_Scene",
         "BG": "BG/BG001/BG_Trial_Scene",
         "BGM": "Sound/BGM/Battle9",
         "ShortRewardItems": "",
         "RewardItems": "",
-        "DropString": "",
+        "DropString": "Trial_2",
         "VIPExtraDrop": "",
         "FirstDrop": "Abyss001",
         "FullStarDrop": "",
@@ -1427,7 +1427,7 @@
         }
       },
       "unresolvedSkillIDs": [],
-      "catalog": "catalog_014866"
+      "catalog": "catalog_015084"
     },
     "3": {
       "version": "1.0.1.014517",
@@ -1460,14 +1460,14 @@
         "Exp": "",
         "Energy": "",
         "EnterCost": "{Items:[{StaticID:'4',Count:1}]}",
-        "RecommendedLevel": "22",
+        "RecommendedLevelString": "22",
         "RecommendedAttributes": "1",
         "Land": "BG/BG001/BG_Trial_Scene",
         "BG": "BG/BG001/BG_Trial_Scene",
         "BGM": "Sound/BGM/Battle9",
         "ShortRewardItems": "",
         "RewardItems": "",
-        "DropString": "",
+        "DropString": "Trial_3",
         "VIPExtraDrop": "",
         "FirstDrop": "Abyss001",
         "FullStarDrop": "",
@@ -2097,7 +2097,7 @@
         }
       },
       "unresolvedSkillIDs": [],
-      "catalog": "catalog_014866"
+      "catalog": "catalog_015084"
     },
     "4": {
       "version": "1.0.1.014517",
@@ -2130,14 +2130,14 @@
         "Exp": "",
         "Energy": "",
         "EnterCost": "{Items:[{StaticID:'4',Count:1}]}",
-        "RecommendedLevel": "24",
+        "RecommendedLevelString": "24",
         "RecommendedAttributes": "1",
         "Land": "BG/BG001/BG_Trial_Scene",
         "BG": "BG/BG001/BG_Trial_Scene",
         "BGM": "Sound/BGM/Battle9",
         "ShortRewardItems": "",
         "RewardItems": "",
-        "DropString": "",
+        "DropString": "Trial_4",
         "VIPExtraDrop": "",
         "FirstDrop": "Abyss001",
         "FullStarDrop": "",
@@ -2825,7 +2825,7 @@
         }
       },
       "unresolvedSkillIDs": [],
-      "catalog": "catalog_014866"
+      "catalog": "catalog_015084"
     },
     "5": {
       "version": "1.0.1.014517",
@@ -2858,14 +2858,14 @@
         "Exp": "",
         "Energy": "",
         "EnterCost": "{Items:[{StaticID:'4',Count:1}]}",
-        "RecommendedLevel": "26",
+        "RecommendedLevelString": "26",
         "RecommendedAttributes": "0",
         "Land": "BG/BG001/BG_Trial_Scene",
         "BG": "BG/BG001/BG_Trial_Scene",
         "BGM": "Sound/BGM/Battle9",
         "ShortRewardItems": "",
         "RewardItems": "",
-        "DropString": "",
+        "DropString": "Trial_5",
         "VIPExtraDrop": "",
         "FirstDrop": "Abyss005",
         "FullStarDrop": "",
@@ -3472,7 +3472,7 @@
         }
       },
       "unresolvedSkillIDs": [],
-      "catalog": "catalog_014866"
+      "catalog": "catalog_015084"
     },
     "6": {
       "version": "1.0.1.014517",
@@ -3505,14 +3505,14 @@
         "Exp": "",
         "Energy": "",
         "EnterCost": "{Items:[{StaticID:'4',Count:1}]}",
-        "RecommendedLevel": "28",
+        "RecommendedLevelString": "28",
         "RecommendedAttributes": "0",
         "Land": "BG/BG001/BG_Trial_Scene",
         "BG": "BG/BG001/BG_Trial_Scene",
         "BGM": "Sound/BGM/Battle9",
         "ShortRewardItems": "",
         "RewardItems": "",
-        "DropString": "",
+        "DropString": "Trial_6",
         "VIPExtraDrop": "",
         "FirstDrop": "Abyss001",
         "FullStarDrop": "",
@@ -4191,7 +4191,7 @@
         }
       },
       "unresolvedSkillIDs": [],
-      "catalog": "catalog_014866"
+      "catalog": "catalog_015084"
     },
     "7": {
       "version": "1.0.1.014517",
@@ -4224,14 +4224,14 @@
         "Exp": "",
         "Energy": "",
         "EnterCost": "{Items:[{StaticID:'4',Count:1}]}",
-        "RecommendedLevel": "30",
+        "RecommendedLevelString": "30",
         "RecommendedAttributes": "2",
         "Land": "BG/BG001/BG_Trial_Scene",
         "BG": "BG/BG001/BG_Trial_Scene",
         "BGM": "Sound/BGM/Battle9",
         "ShortRewardItems": "",
         "RewardItems": "",
-        "DropString": "",
+        "DropString": "Trial_7",
         "VIPExtraDrop": "",
         "FirstDrop": "Abyss001",
         "FullStarDrop": "",
@@ -5044,7 +5044,7 @@
         }
       },
       "unresolvedSkillIDs": [],
-      "catalog": "catalog_014866"
+      "catalog": "catalog_015084"
     },
     "8": {
       "version": "1.0.1.014517",
@@ -5077,14 +5077,14 @@
         "Exp": "",
         "Energy": "",
         "EnterCost": "{Items:[{StaticID:'4',Count:1}]}",
-        "RecommendedLevel": "32",
+        "RecommendedLevelString": "32",
         "RecommendedAttributes": "1",
         "Land": "BG/BG001/BG_Trial_Scene",
         "BG": "BG/BG001/BG_Trial_Scene",
         "BGM": "Sound/BGM/Battle9",
         "ShortRewardItems": "",
         "RewardItems": "",
-        "DropString": "",
+        "DropString": "Trial_8",
         "VIPExtraDrop": "",
         "FirstDrop": "Abyss001",
         "FullStarDrop": "",
@@ -5786,7 +5786,7 @@
         }
       },
       "unresolvedSkillIDs": [],
-      "catalog": "catalog_014866"
+      "catalog": "catalog_015084"
     },
     "9": {
       "version": "1.0.1.014517",
@@ -5819,14 +5819,14 @@
         "Exp": "",
         "Energy": "",
         "EnterCost": "{Items:[{StaticID:'4',Count:1}]}",
-        "RecommendedLevel": "34",
+        "RecommendedLevelString": "34",
         "RecommendedAttributes": "1",
         "Land": "BG/BG001/BG_Trial_Scene",
         "BG": "BG/BG001/BG_Trial_Scene",
         "BGM": "Sound/BGM/Battle9",
         "ShortRewardItems": "",
         "RewardItems": "",
-        "DropString": "",
+        "DropString": "Trial_9",
         "VIPExtraDrop": "",
         "FirstDrop": "Abyss001",
         "FullStarDrop": "",
@@ -6638,7 +6638,7 @@
         }
       },
       "unresolvedSkillIDs": [],
-      "catalog": "catalog_014866"
+      "catalog": "catalog_015084"
     },
     "10": {
       "version": "1.0.1.014517",
@@ -6671,14 +6671,14 @@
         "Exp": "",
         "Energy": "",
         "EnterCost": "{Items:[{StaticID:'4',Count:1}]}",
-        "RecommendedLevel": "36",
+        "RecommendedLevelString": "36",
         "RecommendedAttributes": "0",
         "Land": "BG/BG001/BG_Trial_Scene",
         "BG": "BG/BG001/BG_Trial_Scene",
         "BGM": "Sound/BGM/Battle9",
         "ShortRewardItems": "",
         "RewardItems": "",
-        "DropString": "",
+        "DropString": "Trial_10",
         "VIPExtraDrop": "",
         "FirstDrop": "Abyss010",
         "FullStarDrop": "",
@@ -7349,7 +7349,7 @@
         }
       },
       "unresolvedSkillIDs": [],
-      "catalog": "catalog_014866"
+      "catalog": "catalog_015084"
     },
     "11": {
       "version": "1.0.1.014517",
@@ -7382,14 +7382,14 @@
         "Exp": "",
         "Energy": "",
         "EnterCost": "{Items:[{StaticID:'4',Count:1}]}",
-        "RecommendedLevel": "38",
+        "RecommendedLevelString": "38",
         "RecommendedAttributes": "3",
         "Land": "BG/BG001/BG_Trial_Scene",
         "BG": "BG/BG001/BG_Trial_Scene",
         "BGM": "Sound/BGM/Battle9",
         "ShortRewardItems": "",
         "RewardItems": "",
-        "DropString": "",
+        "DropString": "Trial_11",
         "VIPExtraDrop": "",
         "FirstDrop": "Abyss001",
         "FullStarDrop": "",
@@ -8141,7 +8141,7 @@
         }
       },
       "unresolvedSkillIDs": [],
-      "catalog": "catalog_014866"
+      "catalog": "catalog_015084"
     },
     "12": {
       "version": "1.0.1.014517",
@@ -8174,14 +8174,14 @@
         "Exp": "",
         "Energy": "",
         "EnterCost": "{Items:[{StaticID:'4',Count:1}]}",
-        "RecommendedLevel": "40",
+        "RecommendedLevelString": "40",
         "RecommendedAttributes": "0",
         "Land": "BG/BG001/BG_Trial_Scene",
         "BG": "BG/BG001/BG_Trial_Scene",
         "BGM": "Sound/BGM/Battle9",
         "ShortRewardItems": "",
         "RewardItems": "",
-        "DropString": "",
+        "DropString": "Trial_12",
         "VIPExtraDrop": "",
         "FirstDrop": "Abyss001",
         "FullStarDrop": "",
@@ -8859,7 +8859,7 @@
         }
       },
       "unresolvedSkillIDs": [],
-      "catalog": "catalog_014866"
+      "catalog": "catalog_015084"
     },
     "13": {
       "version": "1.0.1.014517",
@@ -8892,14 +8892,14 @@
         "Exp": "",
         "Energy": "",
         "EnterCost": "{Items:[{StaticID:'4',Count:1}]}",
-        "RecommendedLevel": "42",
+        "RecommendedLevelString": "42",
         "RecommendedAttributes": "3",
         "Land": "BG/BG001/BG_Trial_Scene",
         "BG": "BG/BG001/BG_Trial_Scene",
         "BGM": "Sound/BGM/Battle9",
         "ShortRewardItems": "",
         "RewardItems": "",
-        "DropString": "",
+        "DropString": "Trial_13",
         "VIPExtraDrop": "",
         "FirstDrop": "Abyss001",
         "FullStarDrop": "",
@@ -9505,7 +9505,7 @@
         }
       },
       "unresolvedSkillIDs": [],
-      "catalog": "catalog_014866"
+      "catalog": "catalog_015084"
     },
     "14": {
       "version": "1.0.1.014517",
@@ -9538,14 +9538,14 @@
         "Exp": "",
         "Energy": "",
         "EnterCost": "{Items:[{StaticID:'4',Count:1}]}",
-        "RecommendedLevel": "44",
+        "RecommendedLevelString": "44",
         "RecommendedAttributes": "1",
         "Land": "BG/BG001/BG_Trial_Scene",
         "BG": "BG/BG001/BG_Trial_Scene",
         "BGM": "Sound/BGM/Battle9",
         "ShortRewardItems": "",
         "RewardItems": "",
-        "DropString": "",
+        "DropString": "Trial_14",
         "VIPExtraDrop": "",
         "FirstDrop": "Abyss001",
         "FullStarDrop": "",
@@ -9896,7 +9896,7 @@
             "TargetType": "All",
             "TargetCamp": "",
             "NoSelf": "",
-            "AttRate": "1.08",
+            "AttRate": "1.3",
             "Pow": "1",
             "CoolDown": "4",
             "IsInitCoolDown": "",
@@ -10247,7 +10247,7 @@
         }
       },
       "unresolvedSkillIDs": [],
-      "catalog": "catalog_014866"
+      "catalog": "catalog_015084"
     },
     "15": {
       "version": "1.0.1.014517",
@@ -10280,14 +10280,14 @@
         "Exp": "",
         "Energy": "",
         "EnterCost": "{Items:[{StaticID:'4',Count:1}]}",
-        "RecommendedLevel": "46",
+        "RecommendedLevelString": "46",
         "RecommendedAttributes": "0",
         "Land": "BG/BG001/BG_Trial_Scene",
         "BG": "BG/BG001/BG_Trial_Scene",
         "BGM": "Sound/BGM/Battle9",
         "ShortRewardItems": "",
         "RewardItems": "",
-        "DropString": "",
+        "DropString": "Trial_15",
         "VIPExtraDrop": "",
         "FirstDrop": "Abyss005",
         "FullStarDrop": "",
@@ -10955,7 +10955,7 @@
         }
       },
       "unresolvedSkillIDs": [],
-      "catalog": "catalog_014866"
+      "catalog": "catalog_015084"
     },
     "16": {
       "version": "1.0.1.014517",
@@ -10988,14 +10988,14 @@
         "Exp": "",
         "Energy": "",
         "EnterCost": "{Items:[{StaticID:'4',Count:1}]}",
-        "RecommendedLevel": "48",
+        "RecommendedLevelString": "48",
         "RecommendedAttributes": "1",
         "Land": "BG/BG001/BG_Trial_Scene",
         "BG": "BG/BG001/BG_Trial_Scene",
         "BGM": "Sound/BGM/Battle9",
         "ShortRewardItems": "",
         "RewardItems": "",
-        "DropString": "",
+        "DropString": "Trial_16",
         "VIPExtraDrop": "",
         "FirstDrop": "Abyss001",
         "FullStarDrop": "",
@@ -11757,7 +11757,7 @@
         }
       },
       "unresolvedSkillIDs": [],
-      "catalog": "catalog_014866"
+      "catalog": "catalog_015084"
     },
     "17": {
       "version": "1.0.1.014517",
@@ -11790,14 +11790,14 @@
         "Exp": "",
         "Energy": "",
         "EnterCost": "{Items:[{StaticID:'4',Count:1}]}",
-        "RecommendedLevel": "50",
+        "RecommendedLevelString": "50",
         "RecommendedAttributes": "3",
         "Land": "BG/BG001/BG_Trial_Scene",
         "BG": "BG/BG001/BG_Trial_Scene",
         "BGM": "Sound/BGM/Battle9",
         "ShortRewardItems": "",
         "RewardItems": "",
-        "DropString": "",
+        "DropString": "Trial_17",
         "VIPExtraDrop": "",
         "FirstDrop": "Abyss001",
         "FullStarDrop": "",
@@ -12522,7 +12522,7 @@
         }
       },
       "unresolvedSkillIDs": [],
-      "catalog": "catalog_014866"
+      "catalog": "catalog_015084"
     },
     "18": {
       "version": "1.0.1.014517",
@@ -12555,14 +12555,14 @@
         "Exp": "",
         "Energy": "",
         "EnterCost": "{Items:[{StaticID:'4',Count:1}]}",
-        "RecommendedLevel": "51",
+        "RecommendedLevelString": "51",
         "RecommendedAttributes": "2",
         "Land": "BG/BG001/BG_Trial_Scene",
         "BG": "BG/BG001/BG_Trial_Scene",
         "BGM": "Sound/BGM/Battle9",
         "ShortRewardItems": "",
         "RewardItems": "",
-        "DropString": "",
+        "DropString": "Trial_18",
         "VIPExtraDrop": "",
         "FirstDrop": "Abyss001",
         "FullStarDrop": "",
@@ -13248,7 +13248,7 @@
         }
       },
       "unresolvedSkillIDs": [],
-      "catalog": "catalog_014866"
+      "catalog": "catalog_015084"
     },
     "19": {
       "version": "1.0.1.014517",
@@ -13281,14 +13281,14 @@
         "Exp": "",
         "Energy": "",
         "EnterCost": "{Items:[{StaticID:'4',Count:1}]}",
-        "RecommendedLevel": "52",
+        "RecommendedLevelString": "52",
         "RecommendedAttributes": "3",
         "Land": "BG/BG001/BG_Trial_Scene",
         "BG": "BG/BG001/BG_Trial_Scene",
         "BGM": "Sound/BGM/Battle9",
         "ShortRewardItems": "",
         "RewardItems": "",
-        "DropString": "",
+        "DropString": "Trial_19",
         "VIPExtraDrop": "",
         "FirstDrop": "Abyss001",
         "FullStarDrop": "",
@@ -13993,7 +13993,7 @@
         }
       },
       "unresolvedSkillIDs": [],
-      "catalog": "catalog_014866"
+      "catalog": "catalog_015084"
     },
     "20": {
       "version": "1.0.1.014517",
@@ -14026,14 +14026,14 @@
         "Exp": "",
         "Energy": "",
         "EnterCost": "{Items:[{StaticID:'4',Count:1}]}",
-        "RecommendedLevel": "53",
+        "RecommendedLevelString": "53",
         "RecommendedAttributes": "0",
         "Land": "BG/BG001/BG_Trial_Scene",
         "BG": "BG/BG001/BG_Trial_Scene",
         "BGM": "Sound/BGM/Battle9",
         "ShortRewardItems": "",
         "RewardItems": "",
-        "DropString": "",
+        "DropString": "Trial_20",
         "VIPExtraDrop": "",
         "FirstDrop": "Abyss010",
         "FullStarDrop": "",
@@ -14783,7 +14783,7 @@
         }
       },
       "unresolvedSkillIDs": [],
-      "catalog": "catalog_014866"
+      "catalog": "catalog_015084"
     },
     "21": {
       "version": "1.0.1.014517",
@@ -14816,14 +14816,14 @@
         "Exp": "",
         "Energy": "",
         "EnterCost": "{Items:[{StaticID:'4',Count:1}]}",
-        "RecommendedLevel": "54",
+        "RecommendedLevelString": "54",
         "RecommendedAttributes": "1",
         "Land": "BG/BG001/BG_Trial_Scene",
         "BG": "BG/BG001/BG_Trial_Scene",
         "BGM": "Sound/BGM/Battle9",
         "ShortRewardItems": "",
         "RewardItems": "",
-        "DropString": "",
+        "DropString": "Trial_21",
         "VIPExtraDrop": "",
         "FirstDrop": "Abyss001",
         "FullStarDrop": "",
@@ -15625,7 +15625,7 @@
         }
       },
       "unresolvedSkillIDs": [],
-      "catalog": "catalog_014866"
+      "catalog": "catalog_015084"
     },
     "22": {
       "version": "1.0.1.014517",
@@ -15658,14 +15658,14 @@
         "Exp": "",
         "Energy": "",
         "EnterCost": "{Items:[{StaticID:'4',Count:1}]}",
-        "RecommendedLevel": "55",
+        "RecommendedLevelString": "55",
         "RecommendedAttributes": "2",
         "Land": "BG/BG001/BG_Trial_Scene",
         "BG": "BG/BG001/BG_Trial_Scene",
         "BGM": "Sound/BGM/Battle9",
         "ShortRewardItems": "",
         "RewardItems": "",
-        "DropString": "",
+        "DropString": "Trial_22",
         "VIPExtraDrop": "",
         "FirstDrop": "Abyss001",
         "FullStarDrop": "",
@@ -16706,7 +16706,7 @@
         }
       },
       "unresolvedSkillIDs": [],
-      "catalog": "catalog_014866"
+      "catalog": "catalog_015084"
     },
     "23": {
       "version": "1.0.1.014517",
@@ -16739,14 +16739,14 @@
         "Exp": "",
         "Energy": "",
         "EnterCost": "{Items:[{StaticID:'4',Count:1}]}",
-        "RecommendedLevel": "56",
+        "RecommendedLevelString": "56",
         "RecommendedAttributes": "0",
         "Land": "BG/BG001/BG_Trial_Scene",
         "BG": "BG/BG001/BG_Trial_Scene",
         "BGM": "Sound/BGM/Battle9",
         "ShortRewardItems": "",
         "RewardItems": "",
-        "DropString": "",
+        "DropString": "Trial_23",
         "VIPExtraDrop": "",
         "FirstDrop": "Abyss001",
         "FullStarDrop": "",
@@ -17425,7 +17425,7 @@
         }
       },
       "unresolvedSkillIDs": [],
-      "catalog": "catalog_014866"
+      "catalog": "catalog_015084"
     },
     "24": {
       "version": "1.0.1.014517",
@@ -17458,14 +17458,14 @@
         "Exp": "",
         "Energy": "",
         "EnterCost": "{Items:[{StaticID:'4',Count:1}]}",
-        "RecommendedLevel": "57",
+        "RecommendedLevelString": "57",
         "RecommendedAttributes": "0",
         "Land": "BG/BG001/BG_Trial_Scene",
         "BG": "BG/BG001/BG_Trial_Scene",
         "BGM": "Sound/BGM/Battle9",
         "ShortRewardItems": "",
         "RewardItems": "",
-        "DropString": "",
+        "DropString": "Trial_24",
         "VIPExtraDrop": "",
         "FirstDrop": "Abyss001",
         "FullStarDrop": "",
@@ -18719,7 +18719,7 @@
         }
       },
       "unresolvedSkillIDs": [],
-      "catalog": "catalog_014866"
+      "catalog": "catalog_015084"
     },
     "25": {
       "version": "1.0.1.014517",
@@ -18752,14 +18752,14 @@
         "Exp": "",
         "Energy": "",
         "EnterCost": "{Items:[{StaticID:'4',Count:1}]}",
-        "RecommendedLevel": "58",
+        "RecommendedLevelString": "58",
         "RecommendedAttributes": "1",
         "Land": "BG/BG001/BG_Trial_Scene",
         "BG": "BG/BG001/BG_Trial_Scene",
         "BGM": "Sound/BGM/Battle9",
         "ShortRewardItems": "",
         "RewardItems": "",
-        "DropString": "",
+        "DropString": "Trial_25",
         "VIPExtraDrop": "",
         "FirstDrop": "Abyss005",
         "FullStarDrop": "",
@@ -20161,7 +20161,7 @@
         }
       },
       "unresolvedSkillIDs": [],
-      "catalog": "catalog_014866"
+      "catalog": "catalog_015084"
     },
     "26": {
       "version": "1.0.1.014517",
@@ -20194,14 +20194,14 @@
         "Exp": "",
         "Energy": "",
         "EnterCost": "{Items:[{StaticID:'4',Count:1}]}",
-        "RecommendedLevel": "59",
+        "RecommendedLevelString": "59",
         "RecommendedAttributes": "1",
         "Land": "BG/BG001/BG_Trial_Scene",
         "BG": "BG/BG001/BG_Trial_Scene",
         "BGM": "Sound/BGM/Battle9",
         "ShortRewardItems": "",
         "RewardItems": "",
-        "DropString": "",
+        "DropString": "Trial_26",
         "VIPExtraDrop": "",
         "FirstDrop": "Abyss001",
         "FullStarDrop": "",
@@ -21550,7 +21550,7 @@
         }
       },
       "unresolvedSkillIDs": [],
-      "catalog": "catalog_014866"
+      "catalog": "catalog_015084"
     },
     "27": {
       "version": "1.0.1.014517",
@@ -21583,14 +21583,14 @@
         "Exp": "",
         "Energy": "",
         "EnterCost": "{Items:[{StaticID:'4',Count:1}]}",
-        "RecommendedLevel": "60",
+        "RecommendedLevelString": "60",
         "RecommendedAttributes": "2",
         "Land": "BG/BG001/BG_Trial_Scene",
         "BG": "BG/BG001/BG_Trial_Scene",
         "BGM": "Sound/BGM/Battle9",
         "ShortRewardItems": "",
         "RewardItems": "",
-        "DropString": "",
+        "DropString": "Trial_27",
         "VIPExtraDrop": "",
         "FirstDrop": "Abyss001",
         "FullStarDrop": "",
@@ -22265,7 +22265,7 @@
         }
       },
       "unresolvedSkillIDs": [],
-      "catalog": "catalog_014866"
+      "catalog": "catalog_015084"
     },
     "28": {
       "version": "1.0.1.014517",
@@ -22298,14 +22298,14 @@
         "Exp": "",
         "Energy": "",
         "EnterCost": "{Items:[{StaticID:'4',Count:1}]}",
-        "RecommendedLevel": "61",
+        "RecommendedLevelString": "61",
         "RecommendedAttributes": "2",
         "Land": "BG/BG001/BG_Trial_Scene",
         "BG": "BG/BG001/BG_Trial_Scene",
         "BGM": "Sound/BGM/Battle9",
         "ShortRewardItems": "",
         "RewardItems": "",
-        "DropString": "",
+        "DropString": "Trial_28",
         "VIPExtraDrop": "",
         "FirstDrop": "Abyss001",
         "FullStarDrop": "",
@@ -23552,7 +23552,7 @@
         }
       },
       "unresolvedSkillIDs": [],
-      "catalog": "catalog_014866"
+      "catalog": "catalog_015084"
     },
     "29": {
       "version": "1.0.1.014517",
@@ -23585,14 +23585,14 @@
         "Exp": "",
         "Energy": "",
         "EnterCost": "{Items:[{StaticID:'4',Count:1}]}",
-        "RecommendedLevel": "62",
+        "RecommendedLevelString": "62",
         "RecommendedAttributes": "3",
         "Land": "BG/BG001/BG_Trial_Scene",
         "BG": "BG/BG001/BG_Trial_Scene",
         "BGM": "Sound/BGM/Battle9",
         "ShortRewardItems": "",
         "RewardItems": "",
-        "DropString": "",
+        "DropString": "Trial_29",
         "VIPExtraDrop": "",
         "FirstDrop": "Abyss001",
         "FullStarDrop": "",
@@ -24265,7 +24265,7 @@
         }
       },
       "unresolvedSkillIDs": [],
-      "catalog": "catalog_014866"
+      "catalog": "catalog_015084"
     },
     "30": {
       "version": "1.0.1.014517",
@@ -24298,14 +24298,14 @@
         "Exp": "",
         "Energy": "",
         "EnterCost": "{Items:[{StaticID:'4',Count:1}]}",
-        "RecommendedLevel": "63",
+        "RecommendedLevelString": "63",
         "RecommendedAttributes": "3",
         "Land": "BG/BG001/BG_Trial_Scene",
         "BG": "BG/BG001/BG_Trial_Scene",
         "BGM": "Sound/BGM/Battle9",
         "ShortRewardItems": "",
         "RewardItems": "",
-        "DropString": "",
+        "DropString": "Trial_30",
         "VIPExtraDrop": "",
         "FirstDrop": "Abyss010",
         "FullStarDrop": "",
@@ -25395,7 +25395,7 @@
         }
       },
       "unresolvedSkillIDs": [],
-      "catalog": "catalog_014866"
+      "catalog": "catalog_015084"
     },
     "31": {
       "version": "1.0.1.014517",
@@ -25428,14 +25428,14 @@
         "Exp": "",
         "Energy": "",
         "EnterCost": "{Items:[{StaticID:'4',Count:1}]}",
-        "RecommendedLevel": "64",
+        "RecommendedLevelString": "64",
         "RecommendedAttributes": "1",
         "Land": "BG/BG001/BG_Trial_Scene",
         "BG": "BG/BG001/BG_Trial_Scene",
         "BGM": "Sound/BGM/Battle9",
         "ShortRewardItems": "",
         "RewardItems": "",
-        "DropString": "",
+        "DropString": "Trial_31",
         "VIPExtraDrop": "",
         "FirstDrop": "Abyss001",
         "FullStarDrop": "",
@@ -26175,7 +26175,7 @@
         }
       },
       "unresolvedSkillIDs": [],
-      "catalog": "catalog_014866"
+      "catalog": "catalog_015084"
     },
     "32": {
       "version": "1.0.1.014517",
@@ -26208,14 +26208,14 @@
         "Exp": "",
         "Energy": "",
         "EnterCost": "{Items:[{StaticID:'4',Count:1}]}",
-        "RecommendedLevel": "65",
+        "RecommendedLevelString": "65",
         "RecommendedAttributes": "0",
         "Land": "BG/BG001/BG_Trial_Scene",
         "BG": "BG/BG001/BG_Trial_Scene",
         "BGM": "Sound/BGM/Battle9",
         "ShortRewardItems": "",
         "RewardItems": "",
-        "DropString": "",
+        "DropString": "Trial_32",
         "VIPExtraDrop": "",
         "FirstDrop": "Abyss001",
         "FullStarDrop": "",
@@ -27068,7 +27068,7 @@
         }
       },
       "unresolvedSkillIDs": [],
-      "catalog": "catalog_014866"
+      "catalog": "catalog_015084"
     },
     "33": {
       "version": "1.0.1.014517",
@@ -27101,14 +27101,14 @@
         "Exp": "",
         "Energy": "",
         "EnterCost": "{Items:[{StaticID:'4',Count:1}]}",
-        "RecommendedLevel": "66",
+        "RecommendedLevelString": "66",
         "RecommendedAttributes": "3",
         "Land": "BG/BG001/BG_Trial_Scene",
         "BG": "BG/BG001/BG_Trial_Scene",
         "BGM": "Sound/BGM/Battle9",
         "ShortRewardItems": "",
         "RewardItems": "",
-        "DropString": "",
+        "DropString": "Trial_33",
         "VIPExtraDrop": "",
         "FirstDrop": "Abyss001",
         "FullStarDrop": "",
@@ -28483,7 +28483,7 @@
         }
       },
       "unresolvedSkillIDs": [],
-      "catalog": "catalog_014866"
+      "catalog": "catalog_015084"
     },
     "34": {
       "version": "1.0.1.014517",
@@ -28516,14 +28516,14 @@
         "Exp": "",
         "Energy": "",
         "EnterCost": "{Items:[{StaticID:'4',Count:1}]}",
-        "RecommendedLevel": "67",
+        "RecommendedLevelString": "67",
         "RecommendedAttributes": "2",
         "Land": "BG/BG001/BG_Trial_Scene",
         "BG": "BG/BG001/BG_Trial_Scene",
         "BGM": "Sound/BGM/Battle9",
         "ShortRewardItems": "",
         "RewardItems": "",
-        "DropString": "",
+        "DropString": "Trial_34",
         "VIPExtraDrop": "",
         "FirstDrop": "Abyss001",
         "FullStarDrop": "",
@@ -29359,7 +29359,7 @@
         }
       },
       "unresolvedSkillIDs": [],
-      "catalog": "catalog_014866"
+      "catalog": "catalog_015084"
     },
     "35": {
       "version": "1.0.1.014517",
@@ -29392,14 +29392,14 @@
         "Exp": "",
         "Energy": "",
         "EnterCost": "{Items:[{StaticID:'4',Count:1}]}",
-        "RecommendedLevel": "68",
+        "RecommendedLevelString": "68",
         "RecommendedAttributes": "1",
         "Land": "BG/BG001/BG_Trial_Scene",
         "BG": "BG/BG001/BG_Trial_Scene",
         "BGM": "Sound/BGM/Battle9",
         "ShortRewardItems": "",
         "RewardItems": "",
-        "DropString": "",
+        "DropString": "Trial_35",
         "VIPExtraDrop": "",
         "FirstDrop": "Abyss005",
         "FullStarDrop": "",
@@ -30625,7 +30625,7 @@
         }
       },
       "unresolvedSkillIDs": [],
-      "catalog": "catalog_014866"
+      "catalog": "catalog_015084"
     },
     "36": {
       "version": "1.0.1.014517",
@@ -30658,14 +30658,14 @@
         "Exp": "",
         "Energy": "",
         "EnterCost": "{Items:[{StaticID:'4',Count:1}]}",
-        "RecommendedLevel": "69",
+        "RecommendedLevelString": "69",
         "RecommendedAttributes": "3",
         "Land": "BG/BG001/BG_Trial_Scene",
         "BG": "BG/BG001/BG_Trial_Scene",
         "BGM": "Sound/BGM/Battle9",
         "ShortRewardItems": "",
         "RewardItems": "",
-        "DropString": "",
+        "DropString": "Trial_36",
         "VIPExtraDrop": "",
         "FirstDrop": "Abyss001",
         "FullStarDrop": "",
@@ -32099,7 +32099,7 @@
         }
       },
       "unresolvedSkillIDs": [],
-      "catalog": "catalog_014866"
+      "catalog": "catalog_015084"
     },
     "37": {
       "version": "1.0.1.014517",
@@ -32132,14 +32132,14 @@
         "Exp": "",
         "Energy": "",
         "EnterCost": "{Items:[{StaticID:'4',Count:1}]}",
-        "RecommendedLevel": "70",
+        "RecommendedLevelString": "70",
         "RecommendedAttributes": "1",
         "Land": "BG/BG001/BG_Trial_Scene",
         "BG": "BG/BG001/BG_Trial_Scene",
         "BGM": "Sound/BGM/Battle9",
         "ShortRewardItems": "",
         "RewardItems": "",
-        "DropString": "",
+        "DropString": "Trial_37",
         "VIPExtraDrop": "",
         "FirstDrop": "Abyss001",
         "FullStarDrop": "",
@@ -32756,7 +32756,7 @@
         }
       },
       "unresolvedSkillIDs": [],
-      "catalog": "catalog_014866"
+      "catalog": "catalog_015084"
     },
     "38": {
       "version": "1.0.1.014517",
@@ -32789,14 +32789,14 @@
         "Exp": "",
         "Energy": "",
         "EnterCost": "{Items:[{StaticID:'4',Count:1}]}",
-        "RecommendedLevel": "71",
+        "RecommendedLevelString": "71",
         "RecommendedAttributes": "2",
         "Land": "BG/BG001/BG_Trial_Scene",
         "BG": "BG/BG001/BG_Trial_Scene",
         "BGM": "Sound/BGM/Battle9",
         "ShortRewardItems": "",
         "RewardItems": "",
-        "DropString": "",
+        "DropString": "Trial_38",
         "VIPExtraDrop": "",
         "FirstDrop": "Abyss001",
         "FullStarDrop": "",
@@ -34147,7 +34147,7 @@
         }
       },
       "unresolvedSkillIDs": [],
-      "catalog": "catalog_014866"
+      "catalog": "catalog_015084"
     },
     "39": {
       "version": "1.0.1.014517",
@@ -34180,14 +34180,14 @@
         "Exp": "",
         "Energy": "",
         "EnterCost": "{Items:[{StaticID:'4',Count:1}]}",
-        "RecommendedLevel": "72",
+        "RecommendedLevelString": "72",
         "RecommendedAttributes": "3",
         "Land": "BG/BG001/BG_Trial_Scene",
         "BG": "BG/BG001/BG_Trial_Scene",
         "BGM": "Sound/BGM/Battle9",
         "ShortRewardItems": "",
         "RewardItems": "",
-        "DropString": "",
+        "DropString": "Trial_39",
         "VIPExtraDrop": "",
         "FirstDrop": "Abyss001",
         "FullStarDrop": "",
@@ -34927,7 +34927,7 @@
         }
       },
       "unresolvedSkillIDs": [],
-      "catalog": "catalog_014866"
+      "catalog": "catalog_015084"
     },
     "40": {
       "version": "1.0.1.014517",
@@ -34960,14 +34960,14 @@
         "Exp": "",
         "Energy": "",
         "EnterCost": "{Items:[{StaticID:'4',Count:1}]}",
-        "RecommendedLevel": "73",
+        "RecommendedLevelString": "73",
         "RecommendedAttributes": "1",
         "Land": "BG/BG001/BG_Trial_Scene",
         "BG": "BG/BG001/BG_Trial_Scene",
         "BGM": "Sound/BGM/Battle9",
         "ShortRewardItems": "",
         "RewardItems": "",
-        "DropString": "",
+        "DropString": "Trial_40",
         "VIPExtraDrop": "",
         "FirstDrop": "Abyss010",
         "FullStarDrop": "",
@@ -35663,7 +35663,7 @@
         }
       },
       "unresolvedSkillIDs": [],
-      "catalog": "catalog_014866"
+      "catalog": "catalog_015084"
     },
     "41": {
       "version": "1.0.1.014517",
@@ -35696,14 +35696,14 @@
         "Exp": "",
         "Energy": "",
         "EnterCost": "{Items:[{StaticID:'4',Count:1}]}",
-        "RecommendedLevel": "74",
+        "RecommendedLevelString": "74",
         "RecommendedAttributes": "2",
         "Land": "BG/BG001/BG_Trial_Scene",
         "BG": "BG/BG001/BG_Trial_Scene",
         "BGM": "Sound/BGM/Battle9",
         "ShortRewardItems": "",
         "RewardItems": "",
-        "DropString": "",
+        "DropString": "Trial_41",
         "VIPExtraDrop": "",
         "FirstDrop": "Abyss001",
         "FullStarDrop": "",
@@ -36546,7 +36546,7 @@
         }
       },
       "unresolvedSkillIDs": [],
-      "catalog": "catalog_014866"
+      "catalog": "catalog_015084"
     },
     "42": {
       "version": "1.0.1.014517",
@@ -36579,14 +36579,14 @@
         "Exp": "",
         "Energy": "",
         "EnterCost": "{Items:[{StaticID:'4',Count:1}]}",
-        "RecommendedLevel": "75",
+        "RecommendedLevelString": "75",
         "RecommendedAttributes": "0",
         "Land": "BG/BG001/BG_Trial_Scene",
         "BG": "BG/BG001/BG_Trial_Scene",
         "BGM": "Sound/BGM/Battle9",
         "ShortRewardItems": "",
         "RewardItems": "",
-        "DropString": "",
+        "DropString": "Trial_42",
         "VIPExtraDrop": "",
         "FirstDrop": "Abyss001",
         "FullStarDrop": "",
@@ -37347,7 +37347,7 @@
       "unresolvedSkillIDs": [
         "C04_SR_003S4"
       ],
-      "catalog": "catalog_014866"
+      "catalog": "catalog_015084"
     },
     "43": {
       "version": "1.0.1.014517",
@@ -37380,14 +37380,14 @@
         "Exp": "",
         "Energy": "",
         "EnterCost": "{Items:[{StaticID:'4',Count:1}]}",
-        "RecommendedLevel": "76",
+        "RecommendedLevelString": "76",
         "RecommendedAttributes": "1",
         "Land": "BG/BG001/BG_Trial_Scene",
         "BG": "BG/BG001/BG_Trial_Scene",
         "BGM": "Sound/BGM/Battle9",
         "ShortRewardItems": "",
         "RewardItems": "",
-        "DropString": "",
+        "DropString": "Trial_43",
         "VIPExtraDrop": "",
         "FirstDrop": "Abyss001",
         "FullStarDrop": "",
@@ -38269,7 +38269,7 @@
         }
       },
       "unresolvedSkillIDs": [],
-      "catalog": "catalog_014866"
+      "catalog": "catalog_015084"
     },
     "44": {
       "version": "1.0.1.014517",
@@ -38302,14 +38302,14 @@
         "Exp": "",
         "Energy": "",
         "EnterCost": "{Items:[{StaticID:'4',Count:1}]}",
-        "RecommendedLevel": "77",
+        "RecommendedLevelString": "77",
         "RecommendedAttributes": "2",
         "Land": "BG/BG001/BG_Trial_Scene",
         "BG": "BG/BG001/BG_Trial_Scene",
         "BGM": "Sound/BGM/Battle9",
         "ShortRewardItems": "",
         "RewardItems": "",
-        "DropString": "",
+        "DropString": "Trial_44",
         "VIPExtraDrop": "",
         "FirstDrop": "Abyss001",
         "FullStarDrop": "",
@@ -38849,7 +38849,7 @@
             "TargetType": "",
             "TargetCamp": "",
             "NoSelf": "",
-            "AttRate": "1.08",
+            "AttRate": "1.44",
             "Pow": "1",
             "CoolDown": "4",
             "IsInitCoolDown": "",
@@ -39620,7 +39620,7 @@
         }
       },
       "unresolvedSkillIDs": [],
-      "catalog": "catalog_014866"
+      "catalog": "catalog_015084"
     },
     "45": {
       "version": "1.0.1.014517",
@@ -39653,14 +39653,14 @@
         "Exp": "",
         "Energy": "",
         "EnterCost": "{Items:[{StaticID:'4',Count:1}]}",
-        "RecommendedLevel": "78",
+        "RecommendedLevelString": "78",
         "RecommendedAttributes": "3",
         "Land": "BG/BG001/BG_Trial_Scene",
         "BG": "BG/BG001/BG_Trial_Scene",
         "BGM": "Sound/BGM/Battle9",
         "ShortRewardItems": "",
         "RewardItems": "",
-        "DropString": "",
+        "DropString": "Trial_45",
         "VIPExtraDrop": "",
         "FirstDrop": "Abyss005",
         "FullStarDrop": "",
@@ -41000,7 +41000,7 @@
         }
       },
       "unresolvedSkillIDs": [],
-      "catalog": "catalog_014866"
+      "catalog": "catalog_015084"
     },
     "46": {
       "version": "1.0.1.014517",
@@ -41033,14 +41033,14 @@
         "Exp": "",
         "Energy": "",
         "EnterCost": "{Items:[{StaticID:'4',Count:1}]}",
-        "RecommendedLevel": "79",
+        "RecommendedLevelString": "79",
         "RecommendedAttributes": "0",
         "Land": "BG/BG001/BG_Trial_Scene",
         "BG": "BG/BG001/BG_Trial_Scene",
         "BGM": "Sound/BGM/Battle9",
         "ShortRewardItems": "",
         "RewardItems": "",
-        "DropString": "",
+        "DropString": "Trial_46",
         "VIPExtraDrop": "",
         "FirstDrop": "Abyss001",
         "FullStarDrop": "",
@@ -41982,7 +41982,7 @@
         }
       },
       "unresolvedSkillIDs": [],
-      "catalog": "catalog_014866"
+      "catalog": "catalog_015084"
     },
     "47": {
       "version": "1.0.1.014517",
@@ -42015,14 +42015,14 @@
         "Exp": "",
         "Energy": "",
         "EnterCost": "{Items:[{StaticID:'4',Count:1}]}",
-        "RecommendedLevel": "80",
+        "RecommendedLevelString": "80",
         "RecommendedAttributes": "3",
         "Land": "BG/BG001/BG_Trial_Scene",
         "BG": "BG/BG001/BG_Trial_Scene",
         "BGM": "Sound/BGM/Battle9",
         "ShortRewardItems": "",
         "RewardItems": "",
-        "DropString": "",
+        "DropString": "Trial_47",
         "VIPExtraDrop": "",
         "FirstDrop": "Abyss001",
         "FullStarDrop": "",
@@ -42744,7 +42744,7 @@
         }
       },
       "unresolvedSkillIDs": [],
-      "catalog": "catalog_014866"
+      "catalog": "catalog_015084"
     },
     "48": {
       "version": "1.0.1.014517",
@@ -42777,14 +42777,14 @@
         "Exp": "",
         "Energy": "",
         "EnterCost": "{Items:[{StaticID:'4',Count:1}]}",
-        "RecommendedLevel": "80",
+        "RecommendedLevelString": "80",
         "RecommendedAttributes": "1",
         "Land": "BG/BG001/BG_Trial_Scene",
         "BG": "BG/BG001/BG_Trial_Scene",
         "BGM": "Sound/BGM/Battle9",
         "ShortRewardItems": "",
         "RewardItems": "",
-        "DropString": "",
+        "DropString": "Trial_48",
         "VIPExtraDrop": "",
         "FirstDrop": "Abyss001",
         "FullStarDrop": "",
@@ -43064,7 +43064,7 @@
             "TargetType": "",
             "TargetCamp": "",
             "NoSelf": "",
-            "AttRate": "0.8",
+            "AttRate": "1",
             "Pow": "1",
             "CoolDown": "1",
             "IsInitCoolDown": "",
@@ -43135,7 +43135,7 @@
             "TargetType": "",
             "TargetCamp": "",
             "NoSelf": "",
-            "AttRate": "1.08",
+            "AttRate": "1.44",
             "Pow": "1",
             "CoolDown": "4",
             "IsInitCoolDown": "",
@@ -43717,7 +43717,7 @@
         }
       },
       "unresolvedSkillIDs": [],
-      "catalog": "catalog_014866"
+      "catalog": "catalog_015084"
     },
     "49": {
       "version": "1.0.1.014517",
@@ -43750,14 +43750,14 @@
         "Exp": "",
         "Energy": "",
         "EnterCost": "{Items:[{StaticID:'4',Count:1}]}",
-        "RecommendedLevel": "80",
+        "RecommendedLevelString": "80",
         "RecommendedAttributes": "0",
         "Land": "BG/BG001/BG_Trial_Scene",
         "BG": "BG/BG001/BG_Trial_Scene",
         "BGM": "Sound/BGM/Battle9",
         "ShortRewardItems": "",
         "RewardItems": "",
-        "DropString": "",
+        "DropString": "Trial_49",
         "VIPExtraDrop": "",
         "FirstDrop": "Abyss001",
         "FullStarDrop": "",
@@ -44461,7 +44461,7 @@
         }
       },
       "unresolvedSkillIDs": [],
-      "catalog": "catalog_014866"
+      "catalog": "catalog_015084"
     },
     "50": {
       "version": "1.0.1.014517",
@@ -44494,14 +44494,14 @@
         "Exp": "",
         "Energy": "",
         "EnterCost": "{Items:[{StaticID:'4',Count:1}]}",
-        "RecommendedLevel": "80",
+        "RecommendedLevelString": "80",
         "RecommendedAttributes": "2",
         "Land": "BG/BG001/BG_Trial_Scene",
         "BG": "BG/BG001/BG_Trial_Scene",
         "BGM": "Sound/BGM/Battle9",
         "ShortRewardItems": "",
         "RewardItems": "",
-        "DropString": "",
+        "DropString": "Trial_50",
         "VIPExtraDrop": "",
         "FirstDrop": "Abyss010",
         "FullStarDrop": "",
@@ -45815,7 +45815,7 @@
       "unresolvedSkillIDs": [
         "C04_SR_003S4"
       ],
-      "catalog": "catalog_014866"
+      "catalog": "catalog_015084"
     }
   },
   "skills": {
@@ -50940,7 +50940,7 @@
         "TargetType": "",
         "TargetCamp": "",
         "NoSelf": "",
-        "AttRate": "0.8",
+        "AttRate": "1",
         "Pow": "1",
         "CoolDown": "1",
         "IsInitCoolDown": "",
@@ -51011,7 +51011,7 @@
         "TargetType": "",
         "TargetCamp": "",
         "NoSelf": "",
-        "AttRate": "1.08",
+        "AttRate": "1.44",
         "Pow": "1",
         "CoolDown": "4",
         "IsInitCoolDown": "",
@@ -51375,7 +51375,7 @@
         "TargetType": "",
         "TargetCamp": "",
         "NoSelf": "",
-        "AttRate": "1.08",
+        "AttRate": "1.44",
         "Pow": "1",
         "CoolDown": "4",
         "IsInitCoolDown": "",
@@ -56327,7 +56327,7 @@
         "TargetType": "All",
         "TargetCamp": "",
         "NoSelf": "",
-        "AttRate": "1.08",
+        "AttRate": "1.3",
         "Pow": "1",
         "CoolDown": "4",
         "IsInitCoolDown": "",
@@ -59536,5 +59536,5 @@
   "unresolvedSkillIDs": [
     "C04_SR_003S4"
   ],
-  "catalog": "catalog_014866"
+  "catalog": "catalog_015084"
 }

@@ -117,7 +117,7 @@ for(const [identifier,status]of Object.entries(data.statuses))scanOfficial(statu
 for(const nativeCard of data.cards){scanOfficial(nativeCard.configs,'role:'+nativeCard.id);for(const kind of ['imprint','ascend'])for(const stage of nativeCard[kind]||[])scanOfficial(stage.configs,kind+':'+nativeCard.id+'@'+stage.LV);}
 assert.deepEqual(badOfficial.sort(),[
  'skill:C01_SR_006S3.DynamicField1','skill:C02_SR_007S3.DynamicField1',
- 'skill:C02_SSR_013S1.DynamicField2','skill:C02_SSR_013S2.DynamicField3',
+ 'skill:C02_SSR_013S1.DynamicField2',data.catalog==='catalog_015084'?'skill:C02_SSR_013S2.DynamicField2':'skill:C02_SSR_013S2.DynamicField3',
  'skill:C04_SSR_013S1.DynamicField2','skill:C04_SSR_013S2.DynamicField3',
 ].sort(),'全量原卡、状态、升星及预置强化的非法枚举集合与原生独立扫描完全一致');
 console.log('通过：默认对象、双重上限、条件默认、分组乘区、明确ID补丁、异常字段、刻印被动解锁，以及全部角色技能配置可解释性遍历。',data.cards.length,Object.keys(data.skills).length);

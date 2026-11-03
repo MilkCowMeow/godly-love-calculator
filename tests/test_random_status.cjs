@@ -10,7 +10,12 @@ assert.equal(fun.Rate,.75);assert.equal(fun.StatusRound,1);
 assert.deepEqual(fun.FIDs,['Silence','Unhealable','ReduceAttack','ReduceDef']);
 assert.equal(JSON.stringify(data.skills[id]),raw,'correction must not modify the original client row');
 
-// The exception only applies to this exact row and this exact client version.
+// Keep the historical malformed-row correction bounded while exercising the
+// current official RandomAddStatus configuration above and in the battles below.
+const legacy=structuredClone(data);legacy.version='1.0.1.014517';
+legacy.skills[id].configs[0].field='DynamicField1';
+legacy.skills[id].configs[0].value={Fun:'AddStatus',Rate:.75,FID:'RandomAddStatus',FIDs:['Silence','Unhealable','ReduceAttack','ReduceDef'],StatusRound:1};
+C.setData(legacy);assert.equal(resolve().Fun,'RandomAddStatus');
 for(const change of [
  d=>{d.version='1.0.1.next';},
  d=>{d.statuses.RandomAddStatus={id:'RandomAddStatus',raw:{ID:'RandomAddStatus'},configs:[]};},
@@ -19,10 +24,10 @@ for(const change of [
  d=>{d.skills[id].configs[0].value.FIDs[0]='DifferentStatus';},
  d=>{d.skills[id].configs[0].value.IgnoreResist=1;}
 ]){
- const other=structuredClone(data);change(other);C.setData(other);assert.equal(resolve().Fun,'AddStatus');
+ const other=structuredClone(legacy);change(other);C.setData(other);assert.equal(resolve().Fun,'AddStatus');
 }
-const elsewhere=structuredClone(data),otherID='DifferentSkill';
-elsewhere.skills[otherID]={...structuredClone(data.skills[id]),id:otherID};
+const elsewhere=structuredClone(legacy),otherID='DifferentSkill';
+elsewhere.skills[otherID]={...structuredClone(legacy.skills[id]),id:otherID};
 C.setData(elsewhere);assert.equal(C.resolveSkill({...card,skills:[otherID]},otherID).functions[0].Fun,'AddStatus');C.setData(data);
 
 const member=imprint=>({cardId:card.id,level:80,imprint,mode:'auto',overrides:{}});

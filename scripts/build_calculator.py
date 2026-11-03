@@ -11,6 +11,14 @@ parser.add_argument('--data-json',type=Path,help='本轮从原始客户端表生
 args=parser.parse_args()
 old=TARGET.read_text('utf8');data=extract(old,'DATA');assets=extract(old,'ASSETS')
 if args.data_json:data=json.loads(args.data_json.read_text('utf8'))
+for family in ('elementIcons','jobIcons'):
+ for name,key in data[family].items():
+  icon=SRC/'assets/role_icons'/(name+'.png')
+  if icon.is_file():
+   import hashlib
+   blob=icon.read_bytes()
+   if hashlib.sha256(blob).hexdigest()[:16]!=key:raise ValueError('图标数据与原始PNG不一致：'+name)
+   assets[key]='data:image/png;base64,'+base64.b64encode(blob).decode()
 trials=json.loads((SRC/'trials.json').read_text('utf8'))
 chronicles=json.loads((SRC/'chronicles.json').read_text('utf8'))
 if data.get('catalog')!=chronicles['catalog']:raise ValueError('纪事与玩家数据的资源目录版本不同')

@@ -4,11 +4,13 @@ const {T,data}=require('./load_simulation.cjs'),B=global.GLBattle;
 const catalog=JSON.parse(fs.readFileSync(__dirname+'/catalog_data.json','utf8'));
 const releases={
  catalog_014774:{asOf:'2026-10-20',versionGate:'',gift:'Hero/C02_R_002/Sound/C02_R_003_Lvup',descriptionKey:'T_Skill_Description_C02_SSR_009S1'},
- catalog_014866:{asOf:'2026-10-23',versionGate:'Version_C04_SSR_004',gift:'Hero/C02_R_003/Sound/C02_R_003_Lvup',descriptionKey:'T_Skill_Description_C04_SSR_006S1'}
+ catalog_014866:{asOf:'2026-10-23',versionGate:'Version_C04_SSR_004',gift:'Hero/C02_R_003/Sound/C02_R_003_Lvup',descriptionKey:'T_Skill_Description_C04_SSR_006S1'},
+ catalog_015084:{asOf:'2026-11-03',checkedAt:'2026-11-03',versionGate:'Version_C04_SSR_004',gift:'Hero/C02_R_003/Sound/C02_R_003_Lvup',descriptionKey:'T_Skill_Description_C04_SSR_006S1'}
 };
 const release=releases[data.catalog];assert.ok(release,'资源版本须有明确回归预期：'+data.catalog);
 assert.equal(catalog.catalog,data.catalog);
 assert.equal(data.asOf,release.asOf);assert.equal(catalog.asof,release.asOf);
+if(release.checkedAt){assert.equal(data.checkedAt,release.checkedAt);assert.equal(catalog.checkedAt,release.checkedAt);}
 assert.equal(data.cards.length,192);assert.equal(catalog.cards.length,192);
 assert.equal(data.cards.reduce((count,card)=>count+card.skills.length,0),583);
 assert.equal(Object.keys(data.skills).length,586);assert.equal(Object.keys(data.statuses).length,97);
@@ -22,16 +24,28 @@ for(const sid of ['C04_SSR_004S1','C04_SSR_004S2','C04_SSR_004S3']){
  assert.equal(catalog.cards.find(c=>c.id==='C04_SSR_004').skills.find(s=>s.id===sid).description,data.skills[sid].description);
 }
 assert.equal(data.publicVariables.BuildinResistance,.1);
-assert.equal(data.cards.find(c=>c.id==='C02_SSR_006').availability,'current_announced');
+const newRelease=data.catalog==='catalog_015084',currentCard=newRelease?'C03_SSR_006':'C02_SSR_006';
+assert.equal(data.cards.find(c=>c.id===currentCard).availability,'current_announced');
+if(newRelease)assert.equal(data.cards.find(c=>c.id==='C02_SSR_006').availability,'past_announced');
 assert.equal(data.cards.find(c=>c.id==='C04_SSR_006').availability,'past_announced');
 for(const id of catalog.currentEventIds)assert.ok(catalog.events.some(e=>e.id===id),'当前活动编号须能解析：'+id);
 for(const sk of Object.values(data.skills))assert.doesNotMatch(sk.description,/\[[^\]]+:[^\]]+:[^\]]+\]/,'技能说明须清理客户端链接标记');
 for(const sk of Object.values(data.skills))assert.ok(!sk.name.startsWith('T_'),'缺少名称文本的辅助技能保留已知名称');
 assert.equal(data.skills.C02_SSR_006S2.raw.CoolDown,'4');
 const heal=data.skills.C02_SSR_006S1.configs.find(c=>c.key==='Fun'&&c.value.Fun==='AddHP');assert.equal(heal.value.ValueConvert.Rate,.08);
-const paired=catalog.cards.find(c=>c.id==='C02_SSR_006');assert.equal(paired.availability,'current_announced');assert.equal(paired.skills.find(s=>s.id==='C02_SSR_006S2').row.CoolDown,'4');assert.equal(paired.skills.find(s=>s.id==='C02_SSR_006S1').configs.find(c=>c.value.Fun==='AddHP').value.ValueConvert.Rate,.08);
-assert.match(catalog.eventDates.C02_SSR_006,/11\.03 14:00/);assert.equal(catalog.featuredCard,'C02_SSR_006');assert.equal(catalog.cards.find(c=>c.id==='C04_SSR_006').availability,'past_announced');
+const paired=catalog.cards.find(c=>c.id==='C02_SSR_006');assert.equal(paired.availability,newRelease?'past_announced':'current_announced');assert.equal(paired.skills.find(s=>s.id==='C02_SSR_006S2').row.CoolDown,'4');assert.equal(paired.skills.find(s=>s.id==='C02_SSR_006S1').configs.find(c=>c.value.Fun==='AddHP').value.ValueConvert.Rate,.08);
+assert.match(catalog.eventDates.C02_SSR_006,/11\.03 14:00/);assert.equal(catalog.featuredCard,currentCard);assert.equal(catalog.cards.find(c=>c.id==='C04_SSR_006').availability,'past_announced');
 assert.ok(catalog.events.find(e=>e.id==='BranchC02_SSR_006').officialId);assert.ok(catalog.notices.some(n=>n.id==='news_3617'&&n.text.includes('2026年11月3日 14:00')));
+if(newRelease){
+ assert.equal(data.skills.C03_SSR_006S2.raw.AttRate,'1.24');assert.equal(data.skills.C02_SSR_001S1.raw.AttRate,'1');assert.equal(data.skills.C02_SSR_001S2.raw.AttRate,'1.44');
+ const passive=data.skills.C03_SSR_006S3.configs,revive=passive.find(c=>c.key==='Fun'&&c.value.Fun==='Revive').value;
+ assert.equal(revive.Trigger,'SelfDead');assert.deepEqual(revive.ValueConvert,{Rate:.5,Property:'MaxHP'});assert.equal(passive.find(c=>c.key==='AttackFinalRate').value,.08);
+ assert.equal(catalog.cards.find(c=>c.id===currentCard).availability,'current_announced');assert.match(catalog.eventDates[currentCard],/11\.17 14:00/);
+ for(const id of ['BranchC03_SSR_006','ActivitySummonC03_SSR_006','ActivitySignInC03_SSR_006'])assert.ok(catalog.currentEventIds.includes(id),id+'已开放');
+ assert.ok(!catalog.currentEventIds.includes('BranchC02_SSR_006'));assert.ok(catalog.notices.some(n=>n.id==='news_3677'&&/2026年11月17日\s*14:00/.test(n.text)));
+ assert.equal(data.incompleteSourceCards.length,80);assert.equal(new Set(data.incompleteSourceCards.map(c=>c.id)).size,80);
+ for(const row of data.incompleteSourceCards){assert.ok(!data.cards.some(c=>c.id===row.id));assert.ok(row.missingSkillIDs.length);assert.ok(row.missingSkillIDs.every(id=>!data.skills[id]));}
+}
 for(let floor=1;floor<=50;floor++)for(const e of data.trials[floor].enemies){assert.equal(e.stats.ResistanceRate,Math.fround(e.isBoss?.1:.05));}
 assert.deepEqual(data.trials[50].enemies,data.tower50.enemies,'兼容50层入口与新试炼目录一致');
 const sim=new T.Simulation(data,{members:[{cardId:'C01_SSR_001',level:80,imprint:0}],target:'dummy',dummy:{referenceHP:100000,defence:0,speed:1,resistance:0},rounds:1},1),owner=sim.units[0],target=sim.units[1];owner.stats.EffectHitRate=0;target.stats.ResistanceRate=0;

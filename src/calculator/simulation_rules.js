@@ -28,6 +28,12 @@ function install(S){const P=S.prototype,select0=P.select;
   ctx.resolveProperty=(prop,r,id)=>{if(!r)return 0;switch(prop){
    case'Attack':case'Defence':case'Speed':return r.runtimeStats?.[prop]??r.stats[prop];
    case'Round':return r.nowRound;case'NowTime':return r.progress;
+   case'CanRemoveBuffCount':case'CanRemoveDebuffCount':{
+    // 014986 GetCanRemoveBuffCount 0x23B6674 / predicate 0x23BA67C:
+    // count visible, non-resident instances; stack/value and DeadResident do not filter.
+    const type=prop==='CanRemoveBuffCount'?'Buff':'DeBuff';
+    return r.statuses.filter(s=>{const def=this.data.statuses?.[s.id]||s.def;if(!def)throw new T.Incomplete('可移除状态数量缺少定义：'+s.id);const raw=def.raw||def;return (raw.IsBuffType||'DeBuff')===type&&flag(raw.IsShowIcon,true)&&!flag(raw.IsResident);}).length;
+   }
    case'EventHPDiff':return event?.hpDiff||0;
    case'BuffValue':return id?(r.statuses.find(s=>s.id===id)?.value||0):(inst?.value||0);
    case'BuffAllRoundByID':return r.statuses.filter(s=>s.id===id).reduce((a,s)=>a+(this._nativeStatusRound?this._nativeStatusRound(r,s):s.rounds||0),0);

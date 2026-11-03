@@ -1,5 +1,5 @@
 {
-  "note": "补充当前中文表缺失且关联配置未变的历史中文；当前中文优先，指纹变化即停止回退。",
+  "note": "当前中文优先；缺失说明经历史中文与当前原始配置逐条核对，行为变化按当前配置修订，精确配置指纹变化即停止回退。",
   "sourceHashes": {
     "current/skill.txt": "8602dca931a5ea68089b55db2af55c86a4a5516eed95bd111566ad9c3289d878",
     "previous/skill.txt": "7dd1f02b53b3e5767ac872ce708198b7d365315cfbe2e760bc65204a3de591d1",
@@ -18,7 +18,11 @@
     "current/CHT": "55720bda7bd8a52f2a897afa15344f3575c763ce5f0d70e89688d649e04a2ab2",
     "current/CHS": "0a81719e0ce5fa24b63f984cd8b67824f0718a734c90ecdc0150735b3e6b3f52",
     "previous/CHT": "931ccd666cfdac0bc52e33568251b377b8c0dcc3156b72dad02d4b1542d667d1",
-    "previous/CHS": "f083863358d4be7f8c372e1f40c0d846573efb420a4de8d4944e01d77c2f0d38"
+    "previous/CHS": "f083863358d4be7f8c372e1f40c0d846573efb420a4de8d4944e01d77c2f0d38",
+    "verified/catalog_015084/skill.txt": "f6e3f6dada35307d5d603693e34dd680f4dc0a0acb4dd55173791962a224e352",
+    "verified/catalog_015084/CHS": "1075365ca48ee3799636a6ec06b883b6b22ac325aa0dfdda99031e67a8bd3273",
+    "verified/catalog_015084/CHT": "980a1db1ed2617cd98551038d1216dfd9b2340a3fa949a956f755a63be258459",
+    "verified/catalog_015084/ENG": "45b02babac871d91cb5e1c52ec4b6b78fe6e5fb273aa6edd0c40fb18dc44270f"
   },
   "records": {
     "T_Skill_Description_C01_R_008S1": {
@@ -112,7 +116,7 @@
         {
           "table": "skill",
           "key": "C01_R_109S2",
-          "fingerprint": "1d460322106038cbf808e3a928e2d93ec97c410afccc7d10d8255c23164c33ee"
+          "fingerprint": "9a2708a5214208d5a2d961d483217c8e4e135f08f92d0a3376b870d133520143"
         }
       ]
     },
@@ -237,12 +241,12 @@
       ]
     },
     "T_Skill_Description_C01_SR_009S3": {
-      "text": "自身回合施展「战技」时，若敌人拥有强化状态，则窃取敌人 2 个强化状态附加于全体成员。每 5 回合只会发生 1 次",
+      "text": "自身回合施展「战技」后，若目标拥有可解除的强化状态，先复制目标至多 2 个强化状态给自身，再夺取目标至多 2 个强化状态并赋予其他成员。每 5 回合最多触发 1 次。",
       "guards": [
         {
           "table": "skill",
           "key": "C01_SR_009S3",
-          "fingerprint": "41825e50dc97f97cf8e393eab1b8b77fb9b91aa010876b38357bef781ff6a331"
+          "fingerprint": "c3e6c3b189f8f0eebb705828a5e092983dfcb68aaa81d08629ae6f0bf5b351d5"
         }
       ]
     },
@@ -912,12 +916,12 @@
       ]
     },
     "T_Skill_Description_C02_SSR_011S2": {
-      "text": "攻击敌人并以 75% 机率解除 2 个强化状态后，以 35% 机率造成[晕眩:Stun:StatusFun]( 1 回合)，全体成员附加[防禦提升:AddDefence:StatusFun]( 2 回合)",
+      "text": "攻击敌人并以 75% 机率解除 2 个强化状态后，以 35% 机率造成[晕眩:Stun:StatusFun]( 1 回合)，全体成员附加[防御提升:AddDefence:StatusFun]( 2 回合)",
       "guards": [
         {
           "table": "skill",
           "key": "C02_SSR_011S2",
-          "fingerprint": "11a561cf9e238df2202ee5963e83a9979453e58a5f851f3f376bb13f3fd74d0c"
+          "fingerprint": "e7444fd0c5a0668fe5e5691af4f51b51746f613a959c6ff0c093095bf7309130"
         }
       ]
     },
@@ -962,32 +966,32 @@
       ]
     },
     "T_Skill_Description_C02_SSR_013S1": {
-      "text": "攻击敌人并使自身行动值提升 12%。以有利属性进行攻击",
+      "text": "攻击敌人，使生命比例最低的成员附加[护罩:Shield:StatusFun]( 1 回合)，护罩值为自身生命上限的 9%。以有利属性进行攻击。",
       "guards": [
         {
           "table": "skill",
           "key": "C02_SSR_013S1",
-          "fingerprint": "aa024858cdb9bc6a449c667c293c79b0102d370dee39741f0caee701010771e2"
+          "fingerprint": "05244923229a8e4ba7abe8f18e5dfe0965ae4f4069658529a95cf981e159feaa"
         }
       ]
     },
     "T_Skill_Description_C02_SSR_013S2": {
-      "text": "攻击敌人并以 75% 机率造成[防禦下降:ReduceDef:StatusFun]( 2 回合)，[穿透:Penetrate:StatusFun] 30% 防禦。以有利属性进行攻击",
+      "text": "攻击敌人并以 75% 概率造成[攻击下降:ReduceAttack:StatusFun]( 2 回合)。以有利属性进行攻击。",
       "guards": [
         {
           "table": "skill",
           "key": "C02_SSR_013S2",
-          "fingerprint": "94e215afa768f3191690facb13c7d8a1ff536597281cd4141f1b5a57e806b98a"
+          "fingerprint": "b5b21d45fecb211a43080781dfeeb9e32a5adceee16fd8fd82cd90d353a2ddcc"
         }
       ]
     },
     "T_Skill_Description_C02_SSR_013S3": {
-      "text": "自身生命为 50% 以上时，攻击提升 25%，50% 以下时，防禦提升 25%",
+      "text": "自身生命比例为 50% 及以上时，最终攻击提升 25%；低于 50% 时，最终防御提升 25%。",
       "guards": [
         {
           "table": "skill",
           "key": "C02_SSR_013S3",
-          "fingerprint": "8817a57ed7d5806e45bb65f4f40bd7ebc2a29bed94c62586e4093b55c73311aa"
+          "fingerprint": "422e88560c0491a18a58d1808f89eb31054e7159ce9e488679448be4c85ae680"
         }
       ]
     },
@@ -1242,12 +1246,12 @@
       ]
     },
     "T_Skill_Description_C03_SR_008S2": {
-      "text": "攻击全体敌人并以 75% 机率造成[防禦下降:ReduceDef:StatusFun]( 2 回合)",
+      "text": "攻击全体敌人并造成[嘲弄:Taunt:StatusFun]( 1 回合)，以 75% 概率造成[防御下降:ReduceDef:StatusFun]( 2 回合)。",
       "guards": [
         {
           "table": "skill",
           "key": "C03_SR_008S2",
-          "fingerprint": "3ca5a3b50c2f9ac2add9f27c507747417f3147675bcda15df21913b9228111d8"
+          "fingerprint": "7d1758a516eb5006a5b370374e010487d101d5525cbcdb4f07faec4d1f5b917a"
         }
       ]
     },
@@ -1517,7 +1521,7 @@
         {
           "table": "skill",
           "key": "C03_SSR_012S1",
-          "fingerprint": "38fbe7d2563ed6bc40e20173d1cb900e664422031ab88ac825b56e76d43c512b"
+          "fingerprint": "cd92566eb96731f8e3eb006c81527066ab0e75449890ee9e2370985d9028793d"
         }
       ]
     },
@@ -2258,6 +2262,181 @@
           "table": "skill",
           "key": "C04_SSR_004S3",
           "fingerprint": "5cb5bdf0d36c8cdb16df97b71a9f5a5be37a15b6cdf313b19beb7384ad9f7bc7"
+        }
+      ]
+    },
+    "T_Skill_Description_C01_SSR_007S2": {
+      "text": "恢复全体成员生命并附加[护罩:Shield:StatusFun]( 2 回合)、[免绝:Immune:StatusFun]( 2 回合)",
+      "guards": [
+        {
+          "table": "skill",
+          "key": "C01_SSR_007S2",
+          "fingerprint": "7426b0298b6c7b199c4264356b1dd9bf1e5b91f38b7112577140e9e0a94e7a83"
+        }
+      ]
+    },
+    "T_Skill_Description_C01_SSR_007S3": {
+      "text": "自身回合施展「战技」后，若我方任一成员生命为 80% 以下时，使生命比例最低的 2 名成员恢复生命。每 3 回合只会发生 1 次",
+      "guards": [
+        {
+          "table": "skill",
+          "key": "C01_SSR_007S3",
+          "fingerprint": "bff1a84cd2e663f93b11ac539228ed2dc5f83ebc0d090acd8cbdb77d599c2360"
+        }
+      ]
+    },
+    "T_Skill_Description_C01_SSR_008S1": {
+      "text": "攻击敌人并恢复生命，以 75% 机率造成[嘲弄:Taunt:StatusFun]( 1 回合)",
+      "guards": [
+        {
+          "table": "skill",
+          "key": "C01_SSR_008S1",
+          "fingerprint": "edea5cad0716fa59debedb3974e11abd43a5c5cbdbe706a953888317a6f16ff2"
+        }
+      ]
+    },
+    "T_Skill_Description_C01_SSR_008S2": {
+      "text": "攻击敌人并恢复生命，[穿透:Penetrate:StatusFun] 30% 防御",
+      "guards": [
+        {
+          "table": "skill",
+          "key": "C01_SSR_008S2",
+          "fingerprint": "28c57d00b8b6976227e774d51ef578945cd9329ce40cad34c9a896db80fbc90d"
+        }
+      ]
+    },
+    "T_Skill_Description_C01_SSR_008S3": {
+      "text": "生命提升 15%<br>受到攻击时使自身「终结技」冷却时间减少 1 回合。每 2 回合只会发生 1 次",
+      "guards": [
+        {
+          "table": "skill",
+          "key": "C01_SSR_008S3",
+          "fingerprint": "835d4f014ab89e79cae09f8d1e5f91834013778ebe944ea04f5a1edb1922a314"
+        }
+      ]
+    },
+    "T_Skill_Description_C02_SSR_007S1": {
+      "text": "攻击敌人，恢复生命比例最低成员相当于自身生命上限 8% 的生命，并以 30% 概率使自身除外的一名随机成员发动[夹击:AddPinchSkill:StatusFun]。",
+      "guards": [
+        {
+          "table": "skill",
+          "key": "C02_SSR_007S1",
+          "fingerprint": "56a6ec14af132f6579ab797e9cf621a6052f719edc5f0d7e8714f79fb24e537b"
+        }
+      ]
+    },
+    "T_Skill_Description_C02_SSR_007S2": {
+      "text": "解除全体成员所有弱化状态后，攻击全体敌人造成行动值下降 10%",
+      "guards": [
+        {
+          "table": "skill",
+          "key": "C02_SSR_007S2",
+          "fingerprint": "12c571e020c9315cd2cabc7db5290223e6b3591ecef09dc0ee241c58ac18f37d"
+        }
+      ]
+    },
+    "T_Skill_Description_C02_SSR_007S3": {
+      "text": "敌人施展非攻击技能后，解除全体成员各 1 个弱化状态，并使生命比例最低的成员附加[护罩:Shield:StatusFun]( 2 回合)，护罩值为自身生命上限的 22%。每 3 回合最多触发 1 次。",
+      "guards": [
+        {
+          "table": "skill",
+          "key": "C02_SSR_007S3",
+          "fingerprint": "b839ebfaf3c0656127122b36084d0061c784a0c76429e79a9ff348fc6cfe4ae1"
+        }
+      ]
+    },
+    "T_Skill_Description_C03_SSR_007S1": {
+      "text": "攻击敌人并以 20% 机率造成[晕眩:Stun:StatusFun]( 1 回合)。伤害根据目标丧失的生命比例等比提升",
+      "guards": [
+        {
+          "table": "skill",
+          "key": "C03_SSR_007S1",
+          "fingerprint": "b359e67802e4613937dcf9170e57ce925e0e9d70de873aad974695653eb5f14b"
+        }
+      ]
+    },
+    "T_Skill_Description_C03_SSR_007S2": {
+      "text": "攻击全体敌人并以 75% 机率造成[息声:Silence:StatusFun]( 1 回合)、全体成员附加[防御提升:AddDefence:StatusFun]( 2 回合)。伤害根据目标丧失的生命比例等比提升",
+      "guards": [
+        {
+          "table": "skill",
+          "key": "C03_SSR_007S2",
+          "fingerprint": "5baff54cab76996dd12eb1a8449056e48f6d86518d0fe4b8b62cabb4e420e560"
+        }
+      ]
+    },
+    "T_Skill_Description_C03_SSR_007S3": {
+      "text": "自身回合施展「战技」时，自身防御及攻击提升 5%，最多重叠 4 次<br>敌人施展非攻击技能时，自身附加[技能伤害无效:SkillNullifier:StatusFun] 1 次。技能伤害无效效果每 3 回合只会发生 1 次",
+      "guards": [
+        {
+          "table": "skill",
+          "key": "C03_SSR_007S3",
+          "fingerprint": "2f3eb891bcd3ea661e970a615b4ee1983cff0c151f664d95c402b920f3d96517"
+        }
+      ]
+    },
+    "T_Skill_Description_C03_SSR_015S3": {
+      "text": "攻击提升 15%<br>自身除外的成员受到攻击时，以 15% 机率发动反击",
+      "guards": [
+        {
+          "table": "skill",
+          "key": "C03_SSR_015S3",
+          "fingerprint": "19d7971bf89a815bc5e4eaf8cf968df2b5de958e939ea8ed6b0c717fcc9759ff"
+        },
+        {
+          "table": "skill",
+          "key": "C04_SSR_007S3",
+          "fingerprint": "714a6ab58902e13362a0b9fa333a79b505578868e60d68796f357affa6bff652"
+        }
+      ]
+    },
+    "T_Skill_Description_C04_SSR_007S1": {
+      "text": "攻击敌人并以 20% 机率造成[晕眩:Stun:StatusFun]( 1 回合)，自身行动值提升 12%",
+      "guards": [
+        {
+          "table": "skill",
+          "key": "C04_SSR_007S1",
+          "fingerprint": "db4441e07f6bcfc2b056735b17d8ce9b8eac18cb93cd08a1a04dc037f668d574"
+        }
+      ]
+    },
+    "T_Skill_Description_C04_SSR_007S2": {
+      "text": "攻击敌人并使自身行动值提升 20%，[穿透:Penetrate:StatusFun] 30% 防御。目标拥有[晕眩:Stun:StatusFun]状态时，改为穿透 50% 防御。消灭敌人时，此技能不会进入冷却",
+      "guards": [
+        {
+          "table": "skill",
+          "key": "C04_SSR_007S2",
+          "fingerprint": "8d16686635bf8ad7e7ea203bbd5651855b3ee44e032637ba6b53542620b31320"
+        }
+      ]
+    },
+    "T_Skill_Description_C04_SSR_009S1": {
+      "text": "攻击敌人并以 75% 机率造成[浸毒:Poison:StatusFun]( 2 回合)。此攻击不会被反击。若「终结技」处于冷却状态时，改为攻击 2 名敌人",
+      "guards": [
+        {
+          "table": "skill",
+          "key": "C04_SSR_009S1",
+          "fingerprint": "5463a400470e7efbfe4c923c71219849f1b6ac4e12b775f00951a0414b137a35"
+        }
+      ]
+    },
+    "T_Skill_Description_C04_SSR_009S2": {
+      "text": "攻击敌人并以 35% 机率造成[晕眩:Stun:StatusFun]( 1 回合)。消灭敌人时，使剩余所有敌人行动值下降 20%。伤害根据目标的弱化状态数量等比提升",
+      "guards": [
+        {
+          "table": "skill",
+          "key": "C04_SSR_009S2",
+          "fingerprint": "aea85d801abd22783c8f3bcb822a4fb87130d94fda1f9f71248f7518b1f66e13"
+        }
+      ]
+    },
+    "T_Skill_Description_C04_SSR_009S3": {
+      "text": "战斗中持续拥有[潜影 (无法解除):C04_SSR_009_1:StatusFun]状态。<br>任一成员或敌人死亡时，自身的攻击、防御提升 4%，最多重叠 4 次",
+      "guards": [
+        {
+          "table": "skill",
+          "key": "C04_SSR_009S3",
+          "fingerprint": "d6d9d6dedc2557964ef67c4926e30912a1a1f7209f3f91adc7b1440a9a822c25"
         }
       ]
     }

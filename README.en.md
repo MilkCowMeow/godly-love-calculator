@@ -17,6 +17,8 @@
 
 Four additional battles in the original client cover Trial floors 37, 45 and 50. Conditional replays match 151 damage samples, 51 positive healing requests and 33 shield applications. Boss defeat now retires surviving non-Boss allies at the native phase, with early termination when the opening phase ends a wave. See the [validation record](evidence/native_batch_20261023.md).
 
+Updated on 2026-11-03: client `1.1.0.014986`, catalog `catalog_015084`. Added the new 《热汗缠绵》 chronicle and 《春雨寄情》 pass, switched the current chronicle encounter, and synchronized skills, stats, official icons and guarded Chinese descriptions. The existing MuMu installation, catalog and role/skill bundles were checked against official bytes. See the [release record](evidence/client_update_015084.md).
+
 Reviewed on 2026-10-31: added the Stage New Star rate-up schedule and official banner, and returned Rainy Kiss to the permanent-card category after its rate-up ended. The public resource catalog is byte-identical to the previous snapshot. Both pages now keep the source snapshot date and the latest review date separately. See the [update record](evidence/news_update_20261031.md).
 
 ## ✨ About
@@ -59,7 +61,7 @@ Damage totals use post-shield calculated damage and retain overkill. Actual HP l
 ### 🎯 Targets
 
 - **Trial Floors 1–50:** use the small arrow beside the Trial button to select a floor. Each floor loads its original enemy levels, boss, companions, skills, and AI. Floor 50 is the default, retaining 《烟光迷离》 and 《最佳调味》. Companions can be disabled for a boss-only comparison. Saved teams and exported plans retain the selected floor.
-- **Current chronicle finale:** the middle option follows the included official event schedule. 《共奏心音》 S14 includes its level-80 monster boss, original skills, immunities, AI, attack stacking and entry effects. Bringing C02_SSR_006 promotes that card to level 80 for the battle while retaining its star rank. Ranks 0–5 grant the party 10%, 15%, 20%, 30%, 40% or 50% final attack/HP bonuses. Saved and exported teams preserve the exact scene ID for later replay. See [entry evidence](evidence/chronicle_scene_entry_20261021.md) and [random-target evidence](evidence/chronicle_targeting_20261021.md).
+- **Current chronicle finale:** the middle option follows the official schedule and uses the Boss and minion of 《热汗缠绵》 S14 with their original skills, immunities, AI and scene effects. Bringing C03_SSR_006 promotes that card to level 80 while retaining its star rank. Ranks 0–5 grant the party 10%, 15%, 20%, 30%, 40% or 50% final attack/HP bonuses. Explicit older scene IDs remain replayable; clicking the chronicle option switches back to the current event. See the [current update](evidence/client_update_015084.md) and [historical entry evidence](evidence/chronicle_scene_entry_20261021.md).
 - **Training dummy:** unlimited HP, no active attacks or newly applied effects, but it can receive statuses. Its reference maximum HP supports percentage-based skills while its HP ratio remains 100%. Speed controls its status-tick timing.
 
 ### 🧑‍🎨 Custom characters
@@ -88,8 +90,8 @@ Definitions stay in the current browser. Exported team plans include the custom 
 
 | Item | Status |
 |---|---|
-| 📦 Client resource catalog | Website `catalog_014866`; native runs use `catalog_014774` with library `1.0.1.014517`; combat fields checked for parity |
-| 🗓️ Data reviewed | `2026-10-31`, client data snapshot `2026-10-23` |
+| 📦 Client resource catalog | Website and the current MuMu client use `catalog_015084`, client `1.1.0.014986`; historical battle records retain their original versions |
+| 🗓️ Data reviewed | `2026-11-03`, client data snapshot `2026-11-03` |
 | 🃏 Calculator dataset | 192 cards, 583 player skill references, 586 skill definitions, 97 statuses, 50 Trial floors |
 | 🧩 Unit checks | Scalar damage, configuration parsing, statuses, scheduling, complex effects, and AI |
 | 🔁 Continuous simulations | 300 cross-floor battles plus damage-total conservation checks |
@@ -97,7 +99,7 @@ Definitions stay in the current browser. Exported team plans include the custom 
 | 🎞️ Community video review | Key frames and old/new client configurations checked; [review notes in Chinese](evidence/community_video_review.md) |
 | 🎮 Native client comparison | Four additional original-client battles in MuMu using a local data service: Trial floors 37, 45 and 50, [151 damage samples, 51 positive healing requests and 33 shield applications checked](evidence/native_batch_20261023.md); the earlier 15-hit/stat audit remains in the [initial record](evidence/native_client_comparison.md) |
 
-**One explicit configuration correction:** on 2026-10-18, the unmodified APK and native dispatch confirmed that 《誓约束缚》's basic skill places the random-application function name in its status-ID field. Following the user's explicit choice, the calculator corrects this exact row to use the existing random-application function, preserving the source data, 75% base probability, four candidates and one-turn duration. The card can now be simulated; see the [audit and correction rationale](evidence/random_add_status_audit.md). The correction applies to the exact matching configuration in the website. Release status follows the actual event schedule.
+**One explicit configuration correction:** on 2026-10-18, the unmodified APK and native dispatch confirmed that 《誓约束缚》's basic skill places the random-application function name in its status-ID field. Following the user's explicit choice, the calculator corrects this exact row to use the existing random-application function, preserving the source data, 75% base probability, four candidates and one-turn duration. The card can now be simulated; see the [audit and correction rationale](evidence/random_add_status_audit.md). This correction belongs to earlier website versions. Official catalog 015084 fixes the row to use RandomAddStatus; the current website adopts that official configuration directly. Release status follows the actual event schedule.
 
 Native-method/configuration audit summaries are in [`evidence/`](evidence/). Original-client comparisons have exposed and fixed stat precision, premature rounding and Boss-retirement timing. Each validation record states its coverage and observed random-branch inputs.
 

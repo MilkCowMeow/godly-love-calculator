@@ -55,4 +55,12 @@ if(data.checkedAt==='2026-10-31'){
  assert.match(callout,/舞台新星/);assert.doesNotMatch(callout,/雨中细吻/);
  ui.renderEvent(stage.id);assert.match(readable('20261031-stage-pickup'),/11\.10 05:00/);
 }
+if(data.checkedAt==='2026-11-11'){
+ const previous=data.events.find(e=>e.id==='ActivitySummonC01_SSR_001'),active=data.events.find(e=>e.id==='ActivitySummonC02_SSR_001');
+ assert.equal(ui.dateFor(previous),'2026.10.27 活动开启后 — 11.10 05:00（已结束）');
+ assert.equal(ui.dateFor(active),'2026.11.10 活动开启后 — 11.24 05:00');
+ const links=ui.currentActivityLinks();assert.match(links,/#event\/ActivitySummonC02_SSR_001/);assert.doesNotMatch(links,/#event\/ActivitySummonC01_SSR_001/);
+ ui.renderEvent(active.id);const html=readable('20261111-current-pickup');
+ assert.match(html,/护你无惧 限时心选/);assert.match(html,/11\.24 05:00/);assert.match(html,/news\.html\?id=3701/);assert.match(html,/50%概率/);
+}
 console.log('通过：192张卡牌详情、120项活动详情及角色档案全部真实渲染函数无异常，卡名、技能引用、成长表和正文标记检查通过。');

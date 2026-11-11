@@ -19,6 +19,8 @@ Four additional battles in the original client cover Trial floors 37, 45 and 50.
 
 Updated on 2026-11-03: client `1.1.0.014986`, catalog `catalog_015084`. Added the new 《热汗缠绵》 chronicle and 《春雨寄情》 pass, switched the current chronicle encounter, and synchronized skills, stats, official icons and guarded Chinese descriptions. The existing MuMu installation, catalog and role/skill bundles were checked against official bytes. See the [release record](evidence/client_update_015084.md).
 
+Reviewed on 2026-11-11: added the 《护你无惧》 rate-up schedule and official banner, and archived the ended 《舞台新星》 rate-up. See the [announcement review](evidence/news_update_20261111.md).
+
 Reviewed on 2026-10-31: added the Stage New Star rate-up schedule and official banner, and returned Rainy Kiss to the permanent-card category after its rate-up ended. The public resource catalog is byte-identical to the previous snapshot. Both pages now keep the source snapshot date and the latest review date separately. See the [update record](evidence/news_update_20261031.md).
 
 ## ✨ About
@@ -91,7 +93,7 @@ Definitions stay in the current browser. Exported team plans include the custom 
 | Item | Status |
 |---|---|
 | 📦 Client resource catalog | Website and the current MuMu client use `catalog_015084`, client `1.1.0.014986`; historical battle records retain their original versions |
-| 🗓️ Data reviewed | `2026-11-03`, client data snapshot `2026-11-03` |
+| 🗓️ Data reviewed | `2026-11-11`, client data snapshot `2026-11-03` |
 | 🃏 Calculator dataset | 192 cards, 583 player skill references, 586 skill definitions, 97 statuses, 50 Trial floors |
 | 🧩 Unit checks | Scalar damage, configuration parsing, statuses, scheduling, complex effects, and AI |
 | 🔁 Continuous simulations | 300 cross-floor battles plus damage-total conservation checks |

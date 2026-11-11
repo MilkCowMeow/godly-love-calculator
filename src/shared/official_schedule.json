@@ -2,21 +2,27 @@
   "schema": 1,
   "catalog": "catalog_015084",
   "sourceAsOf": "2026-11-03",
-  "checkedAt": "2026-11-03",
+  "checkedAt": "2026-11-11",
   "catalogSHA256": "664d6e9f6fd6344f1d7235620ff20628aa1d72b100b78ccc85e2e4c138e02b38",
   "currentEventIds": [
     "BranchC03_SSR_006",
     "ActivitySummonC03_SSR_006",
     "ActivitySignInC03_SSR_006",
     "BattlePassC04_SR_004",
-    "ActivitySummonC01_SSR_001"
+    "ActivitySummonC02_SSR_001"
   ],
   "cards": {
     "C01_SSR_001": {
       "availability": "current_base",
+      "status": "基础常驻羁绊",
+      "limited_kind": "常驻池羁绊",
+      "availability_evidence": "角色与道具配置含常驻池标签。舞台新星本轮限时心选已于11月10日05:00（UTC+8）结束。"
+    },
+    "C02_SSR_001": {
+      "availability": "current_base",
       "status": "常驻羁绊，当前限时UP",
       "limited_kind": "常驻羁绊，当前限时UP",
-      "availability_evidence": "角色与道具配置含常驻池标签。官方10月27日公告开放舞台新星限时心选，至11月10日05:00（UTC+8）。"
+      "availability_evidence": "角色与道具配置含常驻池标签。官方11月10日公告开放护你无惧限时心选，至11月24日05:00（UTC+8）。"
     },
     "C03_SSR_001": {
       "availability": "current_base",
@@ -101,7 +107,20 @@
       "openDate": "2026-10-27",
       "openDescription": "活动开启后",
       "closeAt": "2026-11-10T05:00:00+08:00",
-      "officialDates": "2026.10.27 活动开启后 — 11.10 05:00"
+      "officialDates": "2026.10.27 活动开启后 — 11.10 05:00（已结束）"
+    },
+    {
+      "cardId": "C02_SSR_001",
+      "eventIds": [
+        "ActivitySummonC02_SSR_001"
+      ],
+      "newsId": 3701,
+      "officialId": "news_3701",
+      "url": "https://game.ero-labs.global/zh/news.html?id=3701",
+      "openDate": "2026-11-10",
+      "openDescription": "活动开启后",
+      "closeAt": "2026-11-24T05:00:00+08:00",
+      "officialDates": "2026.11.10 活动开启后 — 11.24 05:00"
     },
     {
       "cardId": "C03_SSR_001",
@@ -160,7 +179,7 @@
       "officialDates": "2026.11.03 活动开启后 — 12.01 14:00"
     }
   ],
-  "checkedAtTime": "2026-11-03T23:30:01+08:00",
+  "checkedAtTime": "2026-11-11T23:22:59+08:00",
   "featuredCard": "C03_SSR_006",
   "featuredDescription": "限时纪事热汗缠绵，开放至11月17日14:00。"
 }

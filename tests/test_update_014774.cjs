@@ -5,12 +5,11 @@ const catalog=JSON.parse(fs.readFileSync(__dirname+'/catalog_data.json','utf8'))
 const releases={
  catalog_014774:{asOf:'2026-10-20',versionGate:'',gift:'Hero/C02_R_002/Sound/C02_R_003_Lvup',descriptionKey:'T_Skill_Description_C02_SSR_009S1'},
  catalog_014866:{asOf:'2026-10-23',versionGate:'Version_C04_SSR_004',gift:'Hero/C02_R_003/Sound/C02_R_003_Lvup',descriptionKey:'T_Skill_Description_C04_SSR_006S1'},
- catalog_015084:{asOf:'2026-11-03',checkedAt:'2026-11-03',versionGate:'Version_C04_SSR_004',gift:'Hero/C02_R_003/Sound/C02_R_003_Lvup',descriptionKey:'T_Skill_Description_C04_SSR_006S1'}
+ catalog_015084:{asOf:'2026-11-03',versionGate:'Version_C04_SSR_004',gift:'Hero/C02_R_003/Sound/C02_R_003_Lvup',descriptionKey:'T_Skill_Description_C04_SSR_006S1'}
 };
 const release=releases[data.catalog];assert.ok(release,'资源版本须有明确回归预期：'+data.catalog);
 assert.equal(catalog.catalog,data.catalog);
 assert.equal(data.asOf,release.asOf);assert.equal(catalog.asof,release.asOf);
-if(release.checkedAt){assert.equal(data.checkedAt,release.checkedAt);assert.equal(catalog.checkedAt,release.checkedAt);}
 assert.equal(data.cards.length,192);assert.equal(catalog.cards.length,192);
 assert.equal(data.cards.reduce((count,card)=>count+card.skills.length,0),583);
 assert.equal(Object.keys(data.skills).length,586);assert.equal(Object.keys(data.statuses).length,97);

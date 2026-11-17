@@ -49,14 +49,21 @@ def load_schedule():
         raise ValueError('官方日程含重复活动编号')
     expected = set()
     for window in schedule['windows']:
-        if window['officialId'] != 'news_' + str(window['newsId']):
-            raise ValueError('官方新闻编号关联错误')
-        if window['url'] != 'https://game.ero-labs.global/zh/news.html?id=' + str(window['newsId']):
-            raise ValueError('官方新闻链接关联错误')
+        if 'newsId' in window:
+            if window['officialId'] != 'news_' + str(window['newsId']):
+                raise ValueError('官方新闻编号关联错误')
+            if window['url'] != 'https://game.ero-labs.global/zh/news.html?id=' + str(window['newsId']):
+                raise ValueError('官方新闻链接关联错误')
+        elif (window['officialId'] != 'social_' + window['cardId']
+              or not re.fullmatch(r'https://x\.com/KamiKoi_(?:/status/\d+)?', window['url'])
+              or not window.get('noticeName') or not window.get('noticeText')):
+            raise ValueError('官方社交公告缺少可核对的来源')
         if window['openDescription'] != '活动开启后' or 'openAt' in window:
             raise ValueError('本批公告开放钟点须保留原始日期口径')
         if date.fromisoformat(window['openDate']) >= datetime.fromisoformat(window['closeAt']).astimezone(UTC8).date():
             raise ValueError('活动时间窗为空')
+        if set(window.get('eventDetails', {})) - set(window['eventIds']):
+            raise ValueError('公告活动说明使用了未关联的活动编号')
         if window_status(window, schedule.get('checkedAtTime', schedule['checkedAt'])) == 'current':
             expected.update(window['eventIds'])
     if len(schedule['currentEventIds']) != len(set(schedule['currentEventIds'])) or set(schedule['currentEventIds']) != expected:
@@ -107,14 +114,26 @@ def apply_catalog(data):
     notices = {str(notice['id']): notice for notice in data.get('notices', [])}
     for window in schedule['windows']:
         state = window_status(window, schedule.get('checkedAtTime', schedule['checkedAt']))
+        if 'newsId' not in window:
+            identifier = window['officialId']
+            content = {'id': identifier, 'name': window['noticeName'], 'text': window['noticeText'], 'url': window['url']}
+            if identifier in notices:
+                notices[identifier].update(content)
+            else:
+                data.setdefault('notices', []).append(content)
         for identifier in window['eventIds']:
             event = events[identifier]
             if event.get('card') != window['cardId']:
                 raise ValueError('官方日程活动与卡牌关联错误：' + identifier)
-            event.update({key: window[key] for key in ('officialId', 'newsId', 'openDate', 'openDescription', 'closeAt', 'officialDates')})
+            event.update({key: window[key] for key in ('officialId', 'openDate', 'openDescription', 'closeAt', 'officialDates')})
+            if 'newsId' in window:
+                event['newsId'] = window['newsId']
+            else:
+                event.pop('newsId', None)
             event['status'] = state
             event.pop('openAt', None)
-        if window['officialId'] in notices:
+            event.update(deepcopy(window.get('eventDetails', {}).get(identifier, {})))
+        if 'newsId' in window and window['officialId'] in notices:
             notices[window['officialId']].update(url=window['url'], newsId=window['newsId'])
     uncovered = audit_announced_events(data.get('notices', []), data['cards'], schedule)
     if uncovered:
@@ -151,6 +170,11 @@ def audit_announced_events(news, cards=None, schedule=None):
         url = urlsplit(str(notice.get('url', '')))
         identifier = notice.get('newsId')
         raw_id = str(notice.get('id', ''))
+        if raw_id.startswith('social_'):
+            if not any(window['officialId'] == raw_id and window['url'] == notice.get('url')
+                       for window in schedule['windows'] if 'newsId' not in window):
+                errors.append({'path': 'announcements.' + raw_id, 'error': '官方社交公告缺少对应档期'})
+            continue
         if identifier is None and raw_id.startswith('news_'):
             identifier = raw_id[5:]
         if identifier is None and url.path.endswith('bannerContent'):
@@ -231,13 +255,14 @@ def audit_schedule(calculator, catalog):
         require(catalog.get('eventDates', {}).get(window['cardId']) == window['officialDates'], 'catalog.eventDates.' + window['cardId'], '活动档期与已核验公告不同')
         for identifier in window['eventIds']:
             event = events.get(identifier, {})
-            expected = {key: window[key] for key in ('officialId', 'newsId', 'openDate', 'openDescription', 'closeAt', 'officialDates')}
+            expected = {key: window.get(key) for key in ('officialId', 'newsId', 'openDate', 'openDescription', 'closeAt', 'officialDates')}
             expected.update(card=window['cardId'], status=window_status(window, schedule.get('checkedAtTime', schedule['checkedAt'])))
+            expected.update(window.get('eventDetails', {}).get(identifier, {}))
             for key, value in expected.items():
                 require(event.get(key) == value, 'catalog.events.' + identifier + '.' + key, '活动档期或公告关联与清单不同')
             require('openAt' not in event, 'catalog.events.' + identifier + '.openAt', '公告的开始钟点未提供，应保留开放日期')
         notice = notices.get(window['officialId'], {})
         require(bool(notice), 'catalog.notices.' + window['officialId'], '对应官方公告缺失')
-        require(notice.get('url') == window['url'] and notice.get('newsId') == window['newsId'], 'catalog.notices.' + window['officialId'], '官方新闻阅读链接或编号不同')
+        require(notice.get('url') == window['url'] and notice.get('newsId') == window.get('newsId'), 'catalog.notices.' + window['officialId'], '官方新闻阅读链接或编号不同')
     errors.extend(audit_announced_events(catalog.get('notices', []), catalog['cards'], schedule))
     return errors

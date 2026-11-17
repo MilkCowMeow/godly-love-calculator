@@ -48,6 +48,23 @@ EXPECTED_RELEASES = {
         },
         'skillFields': {
             'C04_SSR_006S1': {'Description': 'T_Skill_Description_C04_SSR_006S1'},
+            'C04_R_100S3': {'Description': 'T_Skill_Description_C04_R_100S3'},
+            'C03_SSR_006S2': {'AttRate': '1.24'},
+            'C02_SSR_001S1': {'AttRate': '1'},
+            'C02_SSR_001S2': {'AttRate': '1.44'},
+        },
+    },
+    'catalog_015480': {
+        'asOf': '2026-11-17', 'counts': dict(EXPECTED_014774),
+        'incompleteCards': 80,
+        'roleFields': {
+            'C04_SSR_004': {'VersionControl': 'Version_C04_SSR_004'},
+            'C04_SSR_005': {'VersionControl': ''},
+            'C02_R_004': {'GiftSounds': 'Hero/C02_R_003/Sound/C02_R_003_Lvup'},
+        },
+        'skillFields': {
+            'C04_SSR_006S1': {'Description': 'T_Skill_Description_C04_SSR_006S1'},
+            'C04_R_100S3': {'Description': 'T_Skill_Description_C01_SR_003S3'},
             'C03_SSR_006S2': {'AttRate': '1.24'},
             'C02_SSR_001S1': {'AttRate': '1'},
             'C02_SSR_001S2': {'AttRate': '1.44'},

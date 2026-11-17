@@ -5,7 +5,8 @@ const catalog=JSON.parse(fs.readFileSync(__dirname+'/catalog_data.json','utf8'))
 const releases={
  catalog_014774:{asOf:'2026-10-20',versionGate:'',gift:'Hero/C02_R_002/Sound/C02_R_003_Lvup',descriptionKey:'T_Skill_Description_C02_SSR_009S1'},
  catalog_014866:{asOf:'2026-10-23',versionGate:'Version_C04_SSR_004',gift:'Hero/C02_R_003/Sound/C02_R_003_Lvup',descriptionKey:'T_Skill_Description_C04_SSR_006S1'},
- catalog_015084:{asOf:'2026-11-03',versionGate:'Version_C04_SSR_004',gift:'Hero/C02_R_003/Sound/C02_R_003_Lvup',descriptionKey:'T_Skill_Description_C04_SSR_006S1'}
+ catalog_015084:{asOf:'2026-11-03',versionGate:'Version_C04_SSR_004',gift:'Hero/C02_R_003/Sound/C02_R_003_Lvup',descriptionKey:'T_Skill_Description_C04_SSR_006S1'},
+ catalog_015480:{asOf:'2026-11-17',versionGate:'Version_C04_SSR_004',gift:'Hero/C02_R_003/Sound/C02_R_003_Lvup',descriptionKey:'T_Skill_Description_C04_SSR_006S1'}
 };
 const release=releases[data.catalog];assert.ok(release,'资源版本须有明确回归预期：'+data.catalog);
 assert.equal(catalog.catalog,data.catalog);
@@ -23,27 +24,47 @@ for(const sid of ['C04_SSR_004S1','C04_SSR_004S2','C04_SSR_004S3']){
  assert.equal(catalog.cards.find(c=>c.id==='C04_SSR_004').skills.find(s=>s.id===sid).description,data.skills[sid].description);
 }
 assert.equal(data.publicVariables.BuildinResistance,.1);
-const newRelease=data.catalog==='catalog_015084',currentCard=newRelease?'C03_SSR_006':'C02_SSR_006';
-assert.equal(data.cards.find(c=>c.id===currentCard).availability,'current_announced');
-if(newRelease)assert.equal(data.cards.find(c=>c.id==='C02_SSR_006').availability,'past_announced');
+const afterNovember3=['catalog_015084','catalog_015480'].includes(data.catalog),november17=data.catalog==='catalog_015480';
+const featuredCard=november17?'C01_SSR_007':afterNovember3?'C03_SSR_006':'C02_SSR_006';
+if(!november17)assert.equal(data.cards.find(c=>c.id===featuredCard).availability,'current_announced');
+if(afterNovember3)assert.equal(data.cards.find(c=>c.id==='C02_SSR_006').availability,'past_announced');
 assert.equal(data.cards.find(c=>c.id==='C04_SSR_006').availability,'past_announced');
 for(const id of catalog.currentEventIds)assert.ok(catalog.events.some(e=>e.id===id),'当前活动编号须能解析：'+id);
 for(const sk of Object.values(data.skills))assert.doesNotMatch(sk.description,/\[[^\]]+:[^\]]+:[^\]]+\]/,'技能说明须清理客户端链接标记');
 for(const sk of Object.values(data.skills))assert.ok(!sk.name.startsWith('T_'),'缺少名称文本的辅助技能保留已知名称');
 assert.equal(data.skills.C02_SSR_006S2.raw.CoolDown,'4');
 const heal=data.skills.C02_SSR_006S1.configs.find(c=>c.key==='Fun'&&c.value.Fun==='AddHP');assert.equal(heal.value.ValueConvert.Rate,.08);
-const paired=catalog.cards.find(c=>c.id==='C02_SSR_006');assert.equal(paired.availability,newRelease?'past_announced':'current_announced');assert.equal(paired.skills.find(s=>s.id==='C02_SSR_006S2').row.CoolDown,'4');assert.equal(paired.skills.find(s=>s.id==='C02_SSR_006S1').configs.find(c=>c.value.Fun==='AddHP').value.ValueConvert.Rate,.08);
-assert.match(catalog.eventDates.C02_SSR_006,/11\.03 14:00/);assert.equal(catalog.featuredCard,currentCard);assert.equal(catalog.cards.find(c=>c.id==='C04_SSR_006').availability,'past_announced');
+const paired=catalog.cards.find(c=>c.id==='C02_SSR_006');assert.equal(paired.availability,afterNovember3?'past_announced':'current_announced');assert.equal(paired.skills.find(s=>s.id==='C02_SSR_006S2').row.CoolDown,'4');assert.equal(paired.skills.find(s=>s.id==='C02_SSR_006S1').configs.find(c=>c.value.Fun==='AddHP').value.ValueConvert.Rate,.08);
+assert.match(catalog.eventDates.C02_SSR_006,/11\.03 14:00/);assert.equal(catalog.featuredCard,featuredCard);assert.equal(catalog.cards.find(c=>c.id==='C04_SSR_006').availability,'past_announced');
 assert.ok(catalog.events.find(e=>e.id==='BranchC02_SSR_006').officialId);assert.ok(catalog.notices.some(n=>n.id==='news_3617'&&n.text.includes('2026年11月3日 14:00')));
-if(newRelease){
+const chronicleIds=cid=>['Branch','ActivitySummon','ActivitySignIn'].map(prefix=>prefix+cid);
+if(afterNovember3){
  assert.equal(data.skills.C03_SSR_006S2.raw.AttRate,'1.24');assert.equal(data.skills.C02_SSR_001S1.raw.AttRate,'1');assert.equal(data.skills.C02_SSR_001S2.raw.AttRate,'1.44');
  const passive=data.skills.C03_SSR_006S3.configs,revive=passive.find(c=>c.key==='Fun'&&c.value.Fun==='Revive').value;
  assert.equal(revive.Trigger,'SelfDead');assert.deepEqual(revive.ValueConvert,{Rate:.5,Property:'MaxHP'});assert.equal(passive.find(c=>c.key==='AttackFinalRate').value,.08);
- assert.equal(catalog.cards.find(c=>c.id===currentCard).availability,'current_announced');assert.match(catalog.eventDates[currentCard],/11\.17 14:00/);
- for(const id of ['BranchC03_SSR_006','ActivitySummonC03_SSR_006','ActivitySignInC03_SSR_006'])assert.ok(catalog.currentEventIds.includes(id),id+'已开放');
+ assert.equal(catalog.cards.find(c=>c.id==='C03_SSR_006').availability,november17?'past_announced':'current_announced');assert.match(catalog.eventDates.C03_SSR_006,/11\.17 14:00/);
+ for(const id of chronicleIds('C03_SSR_006'))assert.equal(catalog.currentEventIds.includes(id),!november17,id+'开放状态');
  assert.ok(!catalog.currentEventIds.includes('BranchC02_SSR_006'));assert.ok(catalog.notices.some(n=>n.id==='news_3677'&&/2026年11月17日\s*14:00/.test(n.text)));
  assert.equal(data.incompleteSourceCards.length,80);assert.equal(new Set(data.incompleteSourceCards.map(c=>c.id)).size,80);
  for(const row of data.incompleteSourceCards){assert.ok(!data.cards.some(c=>c.id===row.id));assert.ok(row.missingSkillIDs.length);assert.ok(row.missingSkillIDs.every(id=>!data.skills[id]));}
+}
+if(november17){
+ assert.equal(data.skills.C04_R_100S3.raw.Description,'T_Skill_Description_C01_SR_003S3');
+ assert.equal(data.cards.find(c=>c.id==='C03_SSR_006').availability,'past_announced');
+ const card=catalog.cards.find(c=>c.id===featuredCard),branch=catalog.events.find(e=>e.id==='Branch'+featuredCard);
+ const open=branch.status==='current';
+ assert.ok(open||branch.status==='future','纪事状态须明确区分已经开放与维护待开');
+ assert.equal(card.availability,open?'current_announced':'future_candidate');
+ assert.equal(data.cards.find(c=>c.id===featuredCard).availability,card.availability);
+ assert.match(catalog.eventDates[featuredCard],/11\.17.*12\.01 14:00/);
+ for(const id of chronicleIds(featuredCard)){
+  const event=catalog.events.find(e=>e.id===id);
+  assert.equal(event.status,branch.status,id+'与主纪事开放状态同步');
+  assert.equal(event.closeAt,'2026-12-01T14:00:00+08:00');
+  assert.equal(event.officialId,branch.officialId,id+'与主纪事关联同一公告');
+  assert.equal(catalog.currentEventIds.includes(id),open,id+'当前活动集合与开放状态同步');
+ }
+ assert.ok(catalog.notices.some(n=>n.id===branch.officialId),'旧时美好应附官方预告或正式公告');
 }
 for(let floor=1;floor<=50;floor++)for(const e of data.trials[floor].enemies){assert.equal(e.stats.ResistanceRate,Math.fround(e.isBoss?.1:.05));}
 assert.deepEqual(data.trials[50].enemies,data.tower50.enemies,'兼容50层入口与新试炼目录一致');

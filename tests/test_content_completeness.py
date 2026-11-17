@@ -3,6 +3,7 @@ from copy import deepcopy
 from pathlib import Path
 import sys
 import unittest
+from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'scripts'))
@@ -41,7 +42,12 @@ class PublishedContentCompletenessTests(unittest.TestCase):
         return calculator, catalog
 
     def test_every_known_release_has_strict_coverage_and_field_guards(self):
-        self.assertEqual(set(EXPECTED_RELEASES), {'catalog_014774', 'catalog_014866', 'catalog_015084'})
+        self.assertEqual(set(EXPECTED_RELEASES),
+                         {'catalog_014774', 'catalog_014866', 'catalog_015084', 'catalog_015480'})
+        # 这里为每个版本构造字段样本；实际发布页的日程仍由完整正文测试核对。
+        schedule_audit = patch('audit_client_content.audit_schedule', return_value=[])
+        self.addCleanup(schedule_audit.stop)
+        schedule_audit.start()
         for identifier in EXPECTED_RELEASES:
             with self.subTest(catalog=identifier):
                 calculator, catalog = self.release_sample(identifier)
@@ -69,8 +75,8 @@ class PublishedContentCompletenessTests(unittest.TestCase):
             self.assertTrue(all(sid not in self.calculator['skills'] for sid in row['missingSkillIDs']))
 
     def test_015084_skill_changes_keep_precise_source_values(self):
-        if self.calculator['catalog'] != 'catalog_015084':
-            self.skipTest('此项针对015084源字段')
+        if self.calculator['catalog'] not in {'catalog_015084', 'catalog_015480'}:
+            self.skipTest('此项针对015084开始采用的技能配置')
         skills = self.calculator['skills']
         self.assertEqual(skills['C03_SSR_006S2']['raw']['AttRate'], '1.24')
         self.assertEqual(skills['C02_SSR_001S1']['raw']['AttRate'], '1')
@@ -81,6 +87,16 @@ class PublishedContentCompletenessTests(unittest.TestCase):
         self.assertEqual(revive['Trigger'], 'SelfDead')
         self.assertEqual(revive['ValueConvert'], {'Rate': .5, 'Property': 'MaxHP'})
         self.assertEqual(next(config['value'] for config in passive if config['key'] == 'AttackFinalRate'), .08)
+
+    def test_015480_uses_current_shared_skill_description_key(self):
+        if self.calculator['catalog'] != 'catalog_015480':
+            self.skipTest('此项针对015480更换的说明键')
+        skills = self.calculator['skills']
+        self.assertEqual(skills['C04_R_100S3']['raw']['Description'], 'T_Skill_Description_C01_SR_003S3')
+        self.assertTrue(skills['C04_R_100S3']['description'])
+        card = next(card for card in self.catalog['cards'] if card['id'] == 'C04_R_100')
+        card_skill = next(skill for skill in card['skills'] if skill['id'] == 'C04_R_100S3')
+        self.assertEqual(card_skill['description'], skills['C04_R_100S3']['description'])
 
     def test_unknown_release_requires_explicit_audit_expectations(self):
         calculator, catalog = deepcopy(self.calculator), deepcopy(self.catalog)
@@ -138,7 +154,7 @@ class PublishedContentCompletenessTests(unittest.TestCase):
             self.assertEqual(skills[identifier]['damageTarget'], '一名敌人')
             self.assertIn('选定敌人', skills[identifier]['description'])
         changed_scope = skills['C03_SR_008S2']
-        if self.calculator['catalog'] == 'catalog_015084':
+        if self.calculator['catalog'] in {'catalog_015084', 'catalog_015480'}:
             self.assertEqual(changed_scope['raw']['TargetType'], 'All')
             self.assertEqual(changed_scope['damageTarget'], '全体敌人')
             self.assertIn('全体敌人', changed_scope['description'])

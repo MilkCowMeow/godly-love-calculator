@@ -34,7 +34,7 @@ class ChronicleDataTests(unittest.TestCase):
         self.assertIn(stage['enemies'][0]['thumb'], extract((ROOT / 'docs/index.html').read_text('utf8'), 'ASSETS'))
         self.assertEqual([tier['hpRate'] for tier in stage['sceneRules'][0]['tiers']], [.1, .15, .2, .3, .4, .5])
 
-    def test_all_announced_stage_closures_and_heat_original_enemies(self):
+    def test_all_announced_stage_closures_and_original_enemies(self):
         self.assertEqual(self.snapshot['catalog'], self.data['catalog'])
         self.assertEqual(self.snapshot['catalog'], self.manifest['catalog'])
         self.assertEqual(set(self.snapshot['chronicles']), {row['id'] for row in self.manifest['stages']})
@@ -48,18 +48,34 @@ class ChronicleDataTests(unittest.TestCase):
                 self.assertTrue(set(enemy['skills']) <= set(stage['skills']))
             self.assertEqual([tier['hpRate'] for tier in stage['sceneRules'][0]['tiers']], [.1, .15, .2, .3, .4, .5])
             self.assertEqual([tier['attackRate'] for tier in stage['sceneRules'][0]['tiers']], [.1, .15, .2, .3, .4, .5])
-        if self.snapshot['catalog'] == 'catalog_015084':
-            self.assertEqual(set(self.snapshot['chronicles']), {'C02_SSR_006_14', 'C03_SSR_006_14'})
-            heat = self.snapshot['chronicles']['C03_SSR_006_14']
-            self.assertEqual(heat['activityName'], '热汗缠绵')
-            self.assertEqual(heat['scene']['Chapter'], 'BranchC03_SSR_006')
-            self.assertEqual([enemy['id'] for enemy in heat['enemies']], ['MB003_2_C03_SSR_006', 'EM016_2_C03_SSR_006'])
-            self.assertEqual([enemy['isBoss'] for enemy in heat['enemies']], [True, False])
-            self.assertEqual([[enemy['stats'][key] for key in ('MaxHP', 'Attack', 'Defence', 'Speed')]
-                              for enemy in heat['enemies']], [[23000, 1815, 7200, 3520], [13125, 3342, 3300, 2310]])
-            self.assertEqual(heat['sceneRules'][0]['cardId'], 'C03_SSR_006')
-            self.assertEqual(heat['sceneRules'][0]['maxLevel'], 80)
-            self.assertEqual(set(heat['skills']), {'IceMB003_C03_SSR_006S1', 'IceMB003S2', 'IceMB003_C03_SSR_006S3', 'Ac_AttackStack', 'M011S1', 'M011S2'})
+        self.assertEqual(self.snapshot['catalog'], 'catalog_015480')
+        self.assertEqual(set(self.snapshot['chronicles']), {'C02_SSR_006_14', 'C03_SSR_006_14', 'C01_SSR_007_14'})
+        heat = self.snapshot['chronicles']['C03_SSR_006_14']
+        self.assertEqual(heat['activityName'], '热汗缠绵')
+        self.assertEqual(heat['scene']['Chapter'], 'BranchC03_SSR_006')
+        self.assertEqual([enemy['id'] for enemy in heat['enemies']], ['MB003_2_C03_SSR_006', 'EM016_2_C03_SSR_006'])
+        self.assertEqual([enemy['isBoss'] for enemy in heat['enemies']], [True, False])
+        self.assertEqual([[enemy['stats'][key] for key in ('MaxHP', 'Attack', 'Defence', 'Speed')]
+                          for enemy in heat['enemies']], [[23000, 1815, 7200, 3520], [13125, 3342, 3300, 2310]])
+        self.assertEqual(heat['sceneRules'][0]['cardId'], 'C03_SSR_006')
+        self.assertEqual(heat['sceneRules'][0]['maxLevel'], 80)
+        self.assertEqual(set(heat['skills']), {'IceMB003_C03_SSR_006S1', 'IceMB003S2', 'IceMB003_C03_SSR_006S3', 'Ac_AttackStack', 'M011S1', 'M011S2'})
+        nostalgia = self.snapshot['chronicles']['C01_SSR_007_14']
+        self.assertEqual(nostalgia['activityName'], '旧时美好')
+        self.assertEqual(nostalgia['scene']['Chapter'], 'BranchC01_SSR_007')
+        self.assertTrue(nostalgia['serverBattle'])
+        boss, = nostalgia['enemies']
+        self.assertEqual((boss['id'], boss['level'], boss['isBoss'], boss['thumb']),
+                         ('MB006_4_C01_SSR_007', 80, True, 'chronicle/MB006_4_icon'))
+        self.assertEqual([boss['stats'][key] for key in ('MaxHP', 'Attack', 'Defence', 'Speed')],
+                         [30906, 3630, 9440, 3360])
+        self.assertEqual(boss['ai'], ['M_S1Att_S2Att'])
+        self.assertEqual({row['SkillIndex'] for row in boss['aiRules']}, {'0', '1'})
+        self.assertEqual(set(nostalgia['skills']), {'IceMB006S1', 'IceMB006S2', 'MB006_4_C01_SSR_007S3', 'Ac_AttackStack'})
+        basic, ultimate = (nostalgia['skills'][key]['raw'] for key in ('IceMB006S1', 'IceMB006S2'))
+        self.assertEqual((basic['TargetType'], basic['AttRate'], ultimate['AttRate'], ultimate['CoolDown']),
+                         ('RandomTwo', '0.72', '1.8', '2'))
+        self.assertEqual(nostalgia['sceneRules'][0]['cardId'], 'C01_SSR_007')
 
     def test_official_period(self):
         catalog = extract((ROOT / 'docs/catalog.html').read_text('utf8'), 'DATA')
@@ -72,12 +88,15 @@ class ChronicleDataTests(unittest.TestCase):
             self.assertEqual(stage['closeAt'], schedule['closeAt'])
             self.assertEqual(stage['openPrecision'], 'day')
             self.assertEqual(stage['openAt'][:10], schedule['openDate'])
-            self.assertEqual(stage['availability']['noticeId'], schedule['noticeId'])
-        if self.snapshot['catalog'] == 'catalog_015084':
-            heat = self.snapshot['chronicles']['C03_SSR_006_14']
-            self.assertEqual(heat['closeAt'], '2026-11-17T14:00:00+08:00')
-            heat_notice = next(row for row in catalog['notices'] if row['id'] == 'news_3677')
-            self.assertRegex(heat_notice['text'], r'2026年11月17日\s*14:00')
+            self.assertEqual(stage['availability'], schedule)
+        heat = self.snapshot['chronicles']['C03_SSR_006_14']
+        self.assertEqual(heat['closeAt'], '2026-11-17T14:00:00+08:00')
+        heat_notice = next(row for row in catalog['notices'] if row['id'] == 'news_3677')
+        self.assertRegex(heat_notice['text'], r'2026年11月17日\s*14:00')
+        nostalgia = self.snapshot['chronicles']['C01_SSR_007_14']
+        self.assertEqual(nostalgia['closeAt'], '2026-12-01T14:00:00+08:00')
+        self.assertEqual(nostalgia['availability']['openDate'], '2026-11-17')
+        self.assertEqual(nostalgia['availability']['openDescription'], '活动开启后')
 
     def test_rebuild_from_client_tables_when_available(self):
         tables, locale = os.getenv('GL_CLIENT_TABLES'), os.getenv('GL_CLIENT_LOCALE')

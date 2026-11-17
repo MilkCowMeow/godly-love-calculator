@@ -9,6 +9,7 @@ assert.equal(stage.activityName,'共奏心音');assert.equal(stage.sceneNum,'S14
 assert.equal(T.currentChronicle(data,'2026-10-21T00:00:00+08:00').id,stageID);
 assert.equal(T.currentChronicle(data,'2026-10-19T23:59:59+08:00'),null);
 const heatID='C03_SSR_006_14',heat=data.chronicles[heatID];
+const nostalgiaID='C01_SSR_007_14',nostalgia=data.chronicles[nostalgiaID];
 if(heat){
  // openAt carries the existing day-precision representation. These probes
  // check candidate ordering, while actual opening text stays "活动开启后".
@@ -17,9 +18,11 @@ if(heat){
  assert.equal(T.currentChronicle(data,'2026-11-03T13:59:59+08:00').id,heatID,'same-day candidates prefer the latest openDate');
  assert.equal(T.currentChronicle(data,'2026-11-03T14:00:00+08:00').id,heatID);
  assert.equal(T.currentChronicle(data,'2026-11-03T23:30:00+08:00').id,heatID);
- assert.equal(T.currentChronicle(data,'2026-11-17T13:59:59+08:00').id,heatID);
- assert.equal(T.currentChronicle(data,'2026-11-17T14:00:00+08:00'),null);
- assert.equal(T.currentChronicle(data,'2026-11-17T06:00:00+00:00'),null,'closing boundary uses the same instant in UTC');
+ assert.equal(T.currentChronicle(data,'2026-11-16T23:59:59+08:00').id,heatID);
+ const heatOnly={chronicles:{[heatID]:heat}};
+ assert.equal(T.currentChronicle(heatOnly,'2026-11-17T13:59:59+08:00').id,heatID);
+ assert.equal(T.currentChronicle(heatOnly,'2026-11-17T14:00:00+08:00'),null);
+ assert.equal(T.currentChronicle(heatOnly,'2026-11-17T06:00:00+00:00'),null,'closing boundary uses the same instant in UTC');
 }else{
  assert.equal(T.currentChronicle(data,'2026-11-03T13:59:59+08:00').id,stageID);
  assert.equal(T.currentChronicle(data,'2026-11-03T14:00:00+08:00'),null);
@@ -31,6 +34,13 @@ assert.equal(T.run(data,{...plan,chronicleStage:'missing'},1).ok,false);
 assert.equal(T.resolveEncounter(data,{target:'tower50',trialFloor:17}).floor,17);
 assert.equal(T.encounterData(data,{target:'dummy'}),data);
 assert.equal(data.skills.Ac_AttackStack,undefined,'event closure stays separate from the shared player skill library');
+
+assert.equal(nostalgia.activityName,'旧时美好');assert.equal(nostalgia.sceneNum,'S14');
+const checkAt='2026-11-17T16:00:00+08:00';
+assert.equal(nostalgia.openPrecision,'day');
+assert.equal(T.currentChronicle(data,checkAt).id,nostalgiaID);
+assert.equal(T.currentChronicle(data,'2026-12-01T13:59:59+08:00').id,nostalgiaID);
+assert.equal(T.currentChronicle(data,'2026-12-01T14:00:00+08:00'),null,'the official ending instant remains exclusive');
 
 const rates=[.1,.15,.2,.3,.4,.5];
 for(let stars=0;stars<=5;stars++){
@@ -108,12 +118,41 @@ if(heat){
  }
 }
 
+const nostalgiaPlan={...structuredClone(plan),chronicleStage:nostalgiaID};nostalgiaPlan.members[0]=member('C01_SSR_007');
+assert.equal(T.resolveChronicle(data,nostalgiaPlan),nostalgia);
+for(let stars=0;stars<=5;stars++){
+ const p=structuredClone(nostalgiaPlan);p.members[0].level=1;p.members[0].imprint=stars;
+ const before=JSON.stringify(p),sim=new T.Simulation(data,p,47),players=sim.units.filter(u=>u.camp===0),enemies=sim.units.filter(u=>u.camp===1);
+ assert.equal(JSON.stringify(p),before);assert.equal(players[0].level,80);assert.equal(players[0].imprint,stars);
+ assert.deepEqual(players.slice(1).map(u=>u.level),[60,60,60]);
+ assert.deepEqual(enemies.map(u=>u.card.id),['MB006_4_C01_SSR_007']);
+ assert.deepEqual(['MaxHP','Attack','Defence','Speed'].map(k=>enemies[0].base[k]),[30906,3630,9440,3360]);
+ assert.deepEqual(enemies[0].card.ai,['M_S1Att_S2Att']);
+ for(const unit of players){
+  const buff=unit.statuses.find(s=>/^ActivityBuff/.test(s.id));assert.ok(buff);
+  const props=GLConfig.nativeStatusProperties({...buff,def:sim.data.statuses[buff.id]}).properties;
+  assert.equal(props.AttackFinalRate,Math.fround(rates[stars]));assert.equal(props.HPFinalRate,Math.fround(rates[stars]));
+  assert.equal(unit.statuses.filter(s=>s.id==='Activity_Main').length,unit.slot===0?1:0);
+ }
+}
+for(const imprint of [0,3,5])for(const seed of [1,17,20261117]){
+ const p=structuredClone(nostalgiaPlan);p.members[0].imprint=imprint;
+ const result=T.run(data,p,seed);combats++;assert.equal(result.ok,true,result.error);assert.ok(Number.isFinite(result.total));
+ assert.deepEqual(result.enemies.map(e=>e.id),['MB006_4_C01_SSR_007']);
+ assert.ok(result.events.some(e=>e.status==='Ac_AttackStack'));
+ assert.deepEqual(T.run(data,p,seed),result);
+}
+
 // Import/export and old presets use the actual page functions.
-const context=vm.createContext({Date,DATA:data,ASSETS:{},GLTimeline:T,GLConfig:{setData(){}},GLCustomUI:{prepareImport:p=>({plan:p,cards:new Map(data.cards.map(c=>[c.id,c]))}),commitImport(){}},document:{}});
+const stageButton={};
+class ChronicleDate extends Date{static now(){return new Date(checkAt).getTime();}}
+const tableTimeline={...T,currentChronicle:(data,at=checkAt)=>T.currentChronicle(data,at)};
+const context=vm.createContext({Date:ChronicleDate,DATA:data,ASSETS:{},GLTimeline:tableTimeline,GLConfig:{setData(){}},GLCustomUI:{prepareImport:p=>({plan:p,cards:new Map(data.cards.map(c=>[c.id,c]))}),commitImport(){}},document:{querySelector:s=>s==='#chronicle-target'?stageButton:null}});
 vm.runInContext(fs.readFileSync(__dirname+'/table_app.js','utf8').replace(/\binit\(\);\s*$/,'')+`
 controls=roster=targetPanel=dirty=setTrialMenu=()=>{};
 this.importPlan=raw=>{applyPlan(raw);return JSON.parse(JSON.stringify(plan));};
 this.targetLabel=targetLabel;this.chroniclePeriod=chroniclePeriod;
+this.renderChronicleChoice=renderChronicleChoice;
 this.selectTarget=(kind,at)=>({changed:selectEncounterTarget(kind,at),plan:JSON.parse(JSON.stringify(plan))});
 `,context);
 const imported=context.importPlan(plan);assert.equal(imported.target,'chronicle');assert.equal(imported.chronicleStage,stageID);
@@ -125,5 +164,16 @@ if(heat){const importedHeat=context.importPlan({...plan,chronicleStage:heatID});
  context.importPlan(plan);const switched=context.selectTarget('chronicle','2026-11-04T12:00:00+08:00');assert.equal(switched.changed,true,'点击已选纪事可从历史关卡切至当前关卡');assert.equal(switched.plan.chronicleStage,heatID);assert.equal(switched.plan.target,'chronicle');assert.equal(context.selectTarget('chronicle','2026-11-04T12:00:00+08:00').changed,false,'同一当前纪事保持幂等');
  const replay=context.importPlan(plan);assert.equal(replay.chronicleStage,stageID,'显式历史方案仍保留旧关卡');
 }
+const importedNostalgia=context.importPlan(nostalgiaPlan);assert.equal(importedNostalgia.chronicleStage,nostalgiaID);
+assert.match(context.targetLabel(importedNostalgia),/旧时美好/);assert.match(context.chroniclePeriod(nostalgia),/活动开启后/);
+assert.doesNotMatch(context.chroniclePeriod(nostalgia),/00:00/);
+context.importPlan({...plan,target:'dummy'});
+context.renderChronicleChoice();
+assert.equal(stageButton.disabled,false);assert.equal(stageButton.textContent,'旧时美好');
+assert.match(stageButton.title,/活动开启后/);assert.doesNotMatch(stageButton.title,/00:00/);
+const current=context.selectTarget('chronicle',checkAt);
+assert.equal(current.changed,true);assert.equal(current.plan.chronicleStage,nostalgiaID);
+assert.equal(context.targetLabel(current.plan),'旧时美好 末关');
+assert.equal(context.selectTarget('chronicle',checkAt).changed,false);
 assert.throws(()=>context.importPlan({...plan,target:'unknown'}),/对手类型/);
 console.log(`通过：纪事档期、原始Boss、0～5星场内增益与80级提升、手填覆盖、HP初始化、${combats}组战斗、场景隔离及方案往返。`);

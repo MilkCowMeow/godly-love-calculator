@@ -1,5 +1,5 @@
 {
-  "catalog": "catalog_015084",
+  "catalog": "catalog_015480",
   "stages": [
     {
       "id": "C02_SSR_006_14",
@@ -16,6 +16,14 @@
       "closeAt": "2026-11-17T14:00:00+08:00",
       "noticeId": 3677,
       "noticeTitle": "限时纪事活动「热汗缠绵」正式开始！"
+    },
+    {
+      "id": "C01_SSR_007_14",
+      "openDate": "2026-11-17",
+      "openDescription": "活动开启后",
+      "closeAt": "2026-12-01T14:00:00+08:00",
+      "officialId": "social_C01_SSR_007",
+      "noticeURL": "https://x.com/KamiKoi_"
     }
   ]
 }

@@ -120,7 +120,7 @@ class AnnouncedEventCoverageTests(unittest.TestCase):
 
     def test_new_announcement_for_existing_card_requires_its_own_window(self):
         schedule, cards, news = self.sample()
-        news.append({'newsId': max(window['newsId'] for window in schedule['windows']) + 100,
+        news.append({'newsId': max(window.get('newsId', 0) for window in schedule['windows']) + 100,
                      'name': 'SSR羁绊「测试羁绊」限时概率提升！'})
         errors = audit_announced_events(news, cards, schedule)
         self.assertEqual(len(errors), 1)
@@ -137,7 +137,7 @@ class AnnouncedEventCoverageTests(unittest.TestCase):
 
     def test_future_announcement_requires_a_complete_future_window(self):
         schedule, cards, _ = self.sample()
-        identifier = max(window['newsId'] for window in schedule['windows']) + 101
+        identifier = max(window.get('newsId', 0) for window in schedule['windows']) + 101
         news = [{'newsId': identifier, 'name': '通行证「测试羁绊」即将开启！'}]
         self.assertTrue(audit_announced_events(news, cards, schedule))
         open_day = date.fromisoformat(schedule['checkedAt']) + timedelta(days=7)
@@ -154,7 +154,7 @@ class AnnouncedEventCoverageTests(unittest.TestCase):
         identifier = news[0]['newsId']
         wrong = deepcopy(schedule)
         for window in wrong['windows']:
-            if window['newsId'] == identifier:
+            if window.get('newsId') == identifier:
                 window['cardId'] = '__WrongCard'
         self.assertTrue(audit_announced_events(news, cards, wrong))
         self.assertTrue(audit_announced_events([{'newsId': identifier, 'name': '通行证「测试羁绊」正式开始！'}], cards,

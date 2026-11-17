@@ -106,7 +106,7 @@ class CatalogIntegrityTests(unittest.TestCase):
         self.assertEqual(dict(source), self.data['drops'])
         direct = [row for event in self.events.values() for row in event['commodities']
                   if row.get('ItemID') and row.get('ItemCount') and not row.get('Drops')]
-        expected_direct = {'catalog_014774': 75, 'catalog_014866': 75, 'catalog_015084': 102}
+        expected_direct = {'catalog_014774': 75, 'catalog_014866': 75, 'catalog_015084': 102, 'catalog_015480': 102}
         self.assertIn(self.calculator['catalog'], expected_direct)
         self.assertEqual(len(direct), expected_direct[self.calculator['catalog']])
         paired = [row for event in self.events.values() for row in event['commodities']

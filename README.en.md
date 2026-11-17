@@ -17,6 +17,8 @@
 
 Four additional battles in the original client cover Trial floors 37, 45 and 50. Conditional replays match 151 damage samples, 51 positive healing requests and 33 shield applications. Boss defeat now retires surviving non-Boss allies at the native phase, with early termination when the opening phase ends a wave. See the [validation record](evidence/native_batch_20261023.md).
 
+Updated on 2026-11-17 to `catalog_015480`. The catalog includes the 《旧时美好》 chronicle schedule, card art and three event banners. The calculator includes the final battle with its original boss configuration. See the [release record](evidence/client_update_015480.md).
+
 Updated on 2026-11-03: client `1.1.0.014986`, catalog `catalog_015084`. Added the new 《热汗缠绵》 chronicle and 《春雨寄情》 pass, switched the current chronicle encounter, and synchronized skills, stats, official icons and guarded Chinese descriptions. The existing MuMu installation, catalog and role/skill bundles were checked against official bytes. See the [release record](evidence/client_update_015084.md).
 
 Reviewed on 2026-11-11: added the 《护你无惧》 rate-up schedule and official banner, and archived the ended 《舞台新星》 rate-up. See the [announcement review](evidence/news_update_20261111.md).
@@ -92,8 +94,8 @@ Definitions stay in the current browser. Exported team plans include the custom 
 
 | Item | Status |
 |---|---|
-| 📦 Client resource catalog | Website and the current MuMu client use `catalog_015084`, client `1.1.0.014986`; historical battle records retain their original versions |
-| 🗓️ Data reviewed | `2026-11-11`, client data snapshot `2026-11-03` |
+| 📦 Client resource catalog | `catalog_015480`, Android package `1.1.0.014986`. Historical battle records cite their original versions |
+| 🗓️ Data reviewed | `2026-11-17`, client data snapshot `2026-11-17` |
 | 🃏 Calculator dataset | 192 cards, 583 player skill references, 586 skill definitions, 97 statuses, 50 Trial floors |
 | 🧩 Unit checks | Scalar damage, configuration parsing, statuses, scheduling, complex effects, and AI |
 | 🔁 Continuous simulations | 300 cross-floor battles plus damage-total conservation checks |
